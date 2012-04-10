@@ -1,1 +1,33 @@
-This repository is still empty. Just testing for now.
+== LICENSE ==
+
+All parts of CVM are licensed under the WTFPL. Other licenses may apply to libraries or components that were incorporated from other projects.
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+                    Version 2, December 2004 
+
+ Copyright (C) 2004 Sam Hocevar <sam@hocevar.net> 
+
+ Everyone is permitted to copy and distribute verbatim or modified 
+ copies of this license document, and changing it is allowed as long 
+ as the name is changed. 
+
+            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE 
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION 
+
+  0. You just DO WHAT THE FUCK YOU WANT TO. 
+
+
+
+== USING SHADOW SOURCE FILES ==
+
+Shadow source files are saved JSON objects from the multi-layer CSS3 shadow generator at http://haless.cryto.net/shadow/. To edit a shadow, simply load the string in the applicable text file into the shadow generator, and after editing save the shadow configuration and generate new CSS code.
+
+
+== DIRECTORY STRUCTURE ==
+
+repository root
+|-design/			The first design proposal for the user frontend
+| |- css/			CSS files for the design proposal
+| `- images/			Images for the design proposal
+`-graphics/			Original source files for images (.xcf, .svg, ...) and CSS3 shadows (.txt).
+
