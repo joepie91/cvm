@@ -1,0 +1,155 @@
+html, body
+{
+	font-family: 'Open Sans', sans-serif;
+	background-color: #E4EAEA;
+}
+
+h1, h2, h3, h4, h5
+{
+	margin: 0px;
+	color: #343352;
+}
+
+h1
+{
+	margin-bottom: 7px;
+}
+
+h2
+{
+	margin-top: 8px;
+}
+
+h3
+{
+	font-size: 20px;
+}
+
+p
+{
+	margin: 5px 0px;
+}
+
+.clear
+{
+	clear: both;
+}
+
+.wrapper
+{
+	width: 900px;
+	margin: 0px auto;
+}
+
+.header
+{
+	font-size: 40px;
+	font-weight: bold;
+}
+
+.main
+{
+	position: relative;
+	background-color: #F1F1F1;
+	padding: 9px 13px;
+	border: 2px solid #817F9D;
+	padding-left: 225px;
+	min-height: 400px;
+}
+
+.sidebar
+{
+	position: absolute;
+	top: 16px;
+	left: 8px;
+	width: 200px;
+	background-color: #DCDCDC;
+}
+
+.sidebar a.button
+{
+	display: block;
+	padding: 5px 8px;
+	text-decoration: none;
+	color: #343352;
+	font-size: 18px;
+	font-weight: bold;
+	padding-left: 30px;
+	background-repeat: no-repeat;
+	background-position: 8px 10px;
+}
+
+.sidebar a.button:hover
+{
+	background-color: #CDCCDE;
+}
+
+#button_overview
+{
+	background-image: url(../images/icon_overview.png);
+}
+
+#button_statistics
+{
+	background-image: url(../images/icon_statistics.png);
+}
+
+#button_webshell
+{
+	background-image: url(../images/icon_webshell.png);
+}
+
+#button_ip
+{
+	background-image: url(../images/icon_ip.png);
+}
+
+#button_reinstall
+{
+	background-image: url(../images/icon_reinstall.png);
+}
+
+.quota-item
+{
+	float: left;
+	width: 182px;
+	padding: 6px;
+	margin-right: 12px;
+}
+
+.quota-bar
+{
+	position: relative;
+	border: 1px solid #343352;
+	width: 100%;
+	height: 18px;
+}
+
+.quota-bar-inner
+{
+	background-color: #12005E;
+	height: 100%;
+}
+
+.quota-bar-label
+{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	font-size: 13px;
+	font-weight: bold;
+	color: white;
+	padding-left: 5px;
+	text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+	-webkit-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+	-moz-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+	-o-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+	-ms-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+}
+
+.quota-item.wide
+{
+	width: 285px;
+}
