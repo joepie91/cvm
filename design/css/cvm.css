@@ -17,7 +17,7 @@ h1
 
 h2
 {
-	margin-top: 8px;
+	margin-top: 9px;
 }
 
 h3
@@ -113,8 +113,8 @@ p
 {
 	float: left;
 	width: 182px;
-	padding: 6px;
-	margin-right: 12px;
+	margin-right: 24px;
+	margin-bottom: 10px;
 }
 
 .quota-bar
@@ -152,4 +152,9 @@ p
 .quota-item.wide
 {
 	width: 285px;
+}
+
+.quota
+{
+	margin-bottom: 19px;
 }
