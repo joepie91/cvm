@@ -17,7 +17,7 @@ h1
 
 h2
 {
-	margin-top: 9px;
+	margin-bottom: 9px;
 }
 
 h3
@@ -28,6 +28,21 @@ h3
 p
 {
 	margin: 5px 0px;
+}
+
+table
+{
+	
+}
+
+th
+{
+	text-align: left;
+}
+
+table.vpsinfo td
+{
+	padding: 2px 13px;
 }
 
 .clear
@@ -109,11 +124,21 @@ p
 	background-image: url(../images/icon_reinstall.png);
 }
 
+#button_backup
+{
+	background-image: url(../images/icon_backup.png);
+}
+
+#button_api
+{
+	background-image: url(../images/icon_api.png);
+}
+
 .quota-item
 {
 	float: left;
-	width: 182px;
-	margin-right: 24px;
+	width: 203px;
+	margin-right: 23px;
 	margin-bottom: 10px;
 }
 
@@ -151,10 +176,75 @@ p
 
 .quota-item.wide
 {
-	width: 285px;
+	width: 316px;
+}
+
+.quota-item.last
+{
+	margin-right: 0px;
 }
 
 .quota
 {
 	margin-bottom: 19px;
+}
+
+.infobox
+{
+	border: 1px solid #B0B0B0;
+	background-color: #EDEDED;
+	padding: 6px 9px;
+}
+
+.controlbox
+{
+	margin-bottom: 23px;
+}
+
+.controlbutton
+{
+	border: 2px solid #343352;
+	font-size: 24px;
+	color: #343352;
+	text-align: center;
+	font-weight: bold;
+	float: left;
+	text-decoration: none;
+	padding: 9px;
+	margin-right: 12px;
+	width: 189px;
+}
+
+.controlbutton.last
+{
+	margin-right: 0px;
+}
+
+.controlbutton img
+{
+	display: block;
+	margin: 0px auto;
+}
+
+.controlbutton:hover
+{
+	background-color: #CDD0E1;
+}
+
+.online
+{
+	color: #078812;
+	font-weight: bold;
+}
+
+.offline
+{
+	color: #A7101C;
+	font-weight: bold;
+}
+
+.suspended
+{
+	color: #5B5F6B;
+	font-weight: bold;
 }

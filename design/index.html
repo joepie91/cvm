@@ -16,12 +16,14 @@
 					<a class="button" id="button_overview" href="#">Overview</a>
 					<a class="button" id="button_statistics" href="#">Statistics</a>
 					<a class="button" id="button_reinstall" href="#">Reinstall</a>
+					<a class="button" id="button_backup" href="#">Backups</a>
 					<a class="button" id="button_webshell" href="#">WebShell</a>
 					<a class="button" id="button_ip" href="#">IP Allocation</a>
+					<a class="button" id="button_api" href="#">API</a>
 				</div>
 				<h1>Overview</h1>
 				
-				<h2>Consolidated traffic example</h2>
+				<!-- <h2>Consolidated traffic example</h2> -->
 				<div class="quota">
 					<div class="quota-item">
 						<h3>Disk space</h3>
@@ -37,7 +39,7 @@
 							<div class="quota-bar-label">241/1024MB</div>
 						</div>
 					</div>
-					<div class="quota-item">
+					<div class="quota-item last">
 						<h3>Traffic</h3>
 						<div class="quota-bar">
 							<div class="quota-bar-inner" style="width: 8%;"></div>
@@ -47,6 +49,69 @@
 					<div class="clear"></div>
 				</div>
 				
+				<div class="controlbox">
+					<a class="controlbutton" href="#">
+						<img src="images/button_start.png">
+						Start VPS
+					</a>
+					<a class="controlbutton" href="#">
+						<img src="images/button_restart.png">
+						Restart VPS
+					</a>
+					<a class="controlbutton last" href="#">
+						<img src="images/button_stop.png">
+						Stop VPS
+					</a>
+					<div class="clear"></div>
+				</div>
+				
+				<div class="infobox">
+					<h2>VPS configuration</h2>
+					<table class="vpsinfo">
+						<tr>
+							<th>Status</th>
+							<td><span class="online">Running</span> <span class="offline">Stopped</span> <span class="suspended">Suspended</span> </td>
+						</tr>
+						<tr>
+							<th>Server location</th>
+							<td>Atlanta, US</td>
+						</tr>
+						<tr>
+							<th>Operating system</th>
+							<td>Debian 6 x64</td>
+						</tr>
+						<tr>
+							<th>IPv4 Addresses</th>
+							<td>98.142.213.226, 204.12.235.84</td>
+						</tr>
+						<tr>
+							<th>IPv6 Addresses</th>
+							<td>2607:f7a0:1:1::24:6</td>
+						</tr>
+						<tr>
+							<th>Guaranteed RAM</th>
+							<td>768MB</td>
+						</tr>
+						<tr>
+							<th>Burstable RAM</th>
+							<td>1024MB</td>
+						</tr>
+						<tr>
+							<th>Disk space</th>
+							<td>100GB</td>
+						</tr>
+						<tr>
+							<th>Traffic</th>
+							<td>1000GB</td>
+						</tr>
+						<tr>
+							<th>Bandwidth</th>
+							<td>100mbps</td>
+						</tr>
+					</table>
+				</div>
+				
+				<!--
 				<h2>Separate inbound/outbound example</h2>
 				<div class="quota">
 					<div class="quota-item wide">
@@ -56,7 +121,7 @@
 							<div class="quota-bar-label">55/100GB</div>
 						</div>
 					</div>
-					<div class="quota-item wide">
+					<div class="quota-item wide last">
 						<h3>RAM</h3>
 						<div class="quota-bar">
 							<div class="quota-bar-inner" style="width: 24%;"></div>
@@ -70,7 +135,7 @@
 							<div class="quota-bar-label">80/1000GB</div>
 						</div>
 					</div>
-					<div class="quota-item wide">
+					<div class="quota-item wide last">
 						<h3>Outbound traffic</h3>
 						<div class="quota-bar">
 							<div class="quota-bar-inner" style="width: 14%;"></div>
@@ -96,7 +161,7 @@
 							<div class="quota-bar-label">241/1024MB</div>
 						</div>
 					</div>
-					<div class="quota-item">
+					<div class="quota-item last">
 						<h3>Swap</h3>
 						<div class="quota-bar">
 							<div class="quota-bar-inner" style="width: 3%;"></div>
@@ -110,7 +175,7 @@
 							<div class="quota-bar-label">80/1000GB</div>
 						</div>
 					</div>
-					<div class="quota-item wide">
+					<div class="quota-item wide last">
 						<h3>Outbound traffic</h3>
 						<div class="quota-bar">
 							<div class="quota-bar-inner" style="width: 14%;"></div>
@@ -118,7 +183,9 @@
 						</div>
 					</div>
 					<div class="clear"></div>
-				</div>
+				</div>-->
+				
+				
 			</div>
 		</div>
 	</body>
