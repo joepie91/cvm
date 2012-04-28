@@ -134,6 +134,11 @@ table.vpsinfo td
 	background-image: url(../images/icon_api.png);
 }
 
+#button_alerts
+{
+	background-image: url(../images/icon_alerts.png);
+}
+
 .quota-item
 {
 	float: left;
