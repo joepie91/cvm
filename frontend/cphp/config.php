@@ -14,7 +14,7 @@
 if($_CPHP !== true) { die(); }
 
 $cphp_class_map = array(
-	'user'						=> "User"
+	'user'	=> "User"
 );
 
 $cphp_locale_name = "english";
@@ -27,7 +27,7 @@ $cphp_usersettings[CPHP_SETTING_TIMEZONE] = "Europe/Amsterdam";
  * up on your server to use these. Compression requires zlib. */
 $cphp_memcache_enabled 		= true;			// Whether to user memcache.
 $cphp_memcache_server		= "localhost";	// The hostname of the memcached
-$cphp_memcache_port			= 11211;		// The port number of memcached
+$cphp_memcache_port		= 11211;		// The port number of memcached
 $cphp_memcache_compressed	= true;			// Whether to compress memcache objects
 
 $cphp_mysql_enabled = true;
