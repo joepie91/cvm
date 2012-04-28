@@ -14,7 +14,9 @@
 if($_CPHP !== true) { die(); }
 
 $cphp_class_map = array(
-	'user'	=> "User"
+	'user'		=> "User",
+	'node'		=> "Node",
+	'container'	=> "Container",
 );
 
 $cphp_locale_name = "english";
