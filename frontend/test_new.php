@@ -11,7 +11,6 @@
  * licensing text.
  */
 
-$_CPHP = true;
-require("cphp/base.php");
-require("classes/class.controller.php");
+require("includes/include.base.php");
+
 ?>
