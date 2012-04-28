@@ -15,7 +15,7 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 class Controller extends CPHPBaseClass
 {
-	
+	public $connection = null;
 }
 
 ?>
