@@ -206,6 +206,25 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function AddIp($ip)
+	{
+		$command = shrink_command("vzctl set {$this->sInternalId}
+			--ipadd {$ip}
+			--save
+		");
+		
+		$result = $this->sNode->ssh->RunCommand($command, false);
+		
+		if($result->returncode == 0)
+		{
+			return true;
+		}
+		else
+		{
+			throw new ContainerIpAddException($result->stderr, $result->returncode, $this->sInternalId);
+		}
+	}
+	
 	public function EnableTunTap()
 	{
 		// TODO: Finish EnableTunTap function, check whether tun module is available on host

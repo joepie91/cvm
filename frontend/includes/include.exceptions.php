@@ -41,4 +41,5 @@ class ContainerCreateException extends ContainerException {}
 class ContainerConfigureException extends ContainerException {}
 class ContainerStartException extends ContainerException {}
 class ContainerStopException extends ContainerException {}
+class ContainerIpAddException extends ContainerException {}
 ?>
