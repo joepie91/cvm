@@ -104,6 +104,7 @@ class Container extends CPHPDatabaseRecordClass
 			$sShmPages = $sLockedPages * 64;
 			$sOomGuarPages = $this->sGuaranteedRam * 400;
 			$sTcpSock = $this->sGuaranteedRam * 3;
+			$sOtherSock = $this->sGuaranteedRam * 3;
 			$sFLock = (int)($this->sGuaranteedRam * 0.6);
 			$sFLockLimit = (int)($sFLock * 1.1);
 			$sTcpSndBuf = (int)($this->sGuaranteedRam * 20000);
@@ -141,7 +142,7 @@ class Container extends CPHPDatabaseRecordClass
 				--tcprcvbuf {$sTcpRcvBuf}:{$sTcpRcvBufLimit}
 				--othersockbuf {$sOtherBuf}:{$sOtherBufLimit}
 				--dgramrcvbuf {$sDgramBuf}:{$sDgramBuf}
-				--numothersock {$sTcpSock}:{$sTcpSock}
+				--numothersock {$sOtherSock}:{$sOtherSock}
 				--numfile {$sNumFile}:{$sNumFile}
 				--dcachesize {$sDCache}:{$sDCacheLimit}
 				--numiptent 128:128
