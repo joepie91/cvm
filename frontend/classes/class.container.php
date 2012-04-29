@@ -15,7 +15,30 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 class Container extends CPHPDatabaseRecordClass
 {
+	public $table_name = "containers";
+	public $fill_query = "SELECT * FROM containers WHERE `Id` = '%d'";
+	public $verify_query = "SELECT * FROM containers WHERE `Id` = '%d'";
 	
+	public $prototype = array(
+		'string' => array(
+			'Hostname'		=> "Hostname",
+			'InternalId'		=> "InternalId"
+		),
+		'numeric' => array(
+			'NodeId'		=> "NodeId",
+			'TemplateId'		=> "TemplateId"
+			'VirtualizationType'	=> "VirtualizationType",
+			'DiskSpace'		=> "DiskSpace",
+			'GuaranteedRam'		=> "GuaranteedRam",
+			'BurstableRam'		=> "BurstableRam"
+		),
+		'node' => array(
+			'Node'			=> "NodeId"
+		),
+		'template' => array(
+			'Template'		=> "TemplateId"
+		)
+	);
 }
 
 ?>
