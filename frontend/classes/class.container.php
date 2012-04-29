@@ -32,7 +32,8 @@ class Container extends CPHPDatabaseRecordClass
 			'DiskSpace'		=> "DiskSpace",
 			'GuaranteedRam'		=> "GuaranteedRam",
 			'BurstableRam'		=> "BurstableRam",
-			'CpuCount'		=> "CpuCount"
+			'CpuCount'		=> "CpuCount",
+			'Status'		=> "Status"
 		),
 		'node' => array(
 			'Node'			=> "NodeId"
