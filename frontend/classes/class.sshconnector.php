@@ -33,7 +33,7 @@ class SshConnector extends CPHPBaseClass
 			try
 			{
 				$this->Connect();
-				$this->DoCommand($command);
+				return $this->DoCommand($command);
 			}
 			catch (SshConnectException $e)
 			{
@@ -50,7 +50,7 @@ class SshConnector extends CPHPBaseClass
 		{
 			try
 			{
-				$this->DoCommand($command);
+				return $this->DoCommand($command);
 			}
 			catch (SshCommandException $e)
 			{
@@ -100,7 +100,12 @@ class SshConnector extends CPHPBaseClass
 	private function DoCommand($command)
 	{
 		$stream = ssh2_exec($this->connection, $command);
-		var_dump($stream);
+		stream_set_blocking($stream, true);
+		
+		$returndata = stream_get_contents($stream);
+		
+		fclose($stream);
+		return $returndata;
 	}
 }
 
