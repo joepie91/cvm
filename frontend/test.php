@@ -16,6 +16,6 @@ $settings['master_pubkey'] = "/etc/cvm/key.pub";
 var_dump($sNode->sDiskFree, $sNode->sDiskUsed, $sNode->sRealHostname);*/
 
 $sContainer = new Container(1);
-var_dump($sContainer);
+pretty_dump($sContainer);
 
 ?>

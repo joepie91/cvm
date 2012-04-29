@@ -99,8 +99,10 @@ function pretty_dump($input)
 {
 	ob_start();
 	var_dump($input);
-	$output = nl2br(ob_get_clean());
-	return $output;
+	$output = ob_get_contents();
+	ob_end_clean();
+	$output = nl2br(str_replace(" ", "&nbsp;&nbsp;&nbsp;", $output));
+	echo($output);
 }
 
 /*function is_empty($variable)
