@@ -23,6 +23,14 @@ elseif($_GET['action'] == "bw")
 	$values = split_whitespace($lines[0]);
 	pretty_dump($values);
 }
+elseif($_GET['action'] == "ip")
+{
+	$sContainer->AddIp($_GET['ip']);
+}
+else
+{
+	echo("idk");
+}
 
 echo("Done!");
 ?>

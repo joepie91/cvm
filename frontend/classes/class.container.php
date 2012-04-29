@@ -225,6 +225,25 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function RemoveIp($ip)
+	{
+		$command = shrink_command("vzctl set {$this->sInternalId}
+			--ipdel {$ip}
+			--save
+		");
+		
+		$result = $this->sNode->ssh->RunCommand($command, false);
+		
+		if($result->returncode == 0)
+		{
+			return true;
+		}
+		else
+		{
+			throw new ContainerIpRemoveException($result->stderr, $result->returncode, $this->sInternalId);
+		}
+	}
+	
 	public function EnableTunTap()
 	{
 		// TODO: Finish EnableTunTap function, check whether tun module is available on host
