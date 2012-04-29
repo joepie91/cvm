@@ -41,8 +41,7 @@ class SshConnector extends CPHPBaseClass
 		}
 		catch (SshCommandException $e)
 		{
-			$error = $e->getMessage();
-			throw new SshCommandException($error);
+			throw new SshCommandException($e->getMessage());
 		}
 		catch (SshConnectException $e)
 		{
@@ -51,8 +50,7 @@ class SshConnector extends CPHPBaseClass
 		}
 		catch (SshExitException $e)
 		{
-			$error = $e->getMessage();
-			throw new SshExitException($error);
+			throw new SshExitException($e->getMessage(), $e->getCode());
 		}
 	}
 	
