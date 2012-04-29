@@ -95,6 +95,14 @@ function clean_array($arr)
 	return $result;
 }
 
+function pretty_dump($input)
+{
+	ob_start();
+	var_dump($input);
+	$output = nl2br(ob_get_clean());
+	return $output;
+}
+
 /*function is_empty($variable)
 {
 	return (trim($variable) == "");
