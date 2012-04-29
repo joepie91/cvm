@@ -136,6 +136,12 @@ class Container extends CPHPDatabaseRecordClass
 			throw new ContainerStartException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
+	
+	public function EnableTunTap()
+	{
+		// TODO: Finish EnableTunTap function, check whether tun module is available on host
+		$command = "vzctl set {$this->sInternalId} --devnodes net/tun:rw --save";
+	}
 }
 
 ?>
