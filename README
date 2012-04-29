@@ -12,8 +12,15 @@ Shadow source files are saved JSON objects from the multi-layer CSS3 shadow gene
 == DIRECTORY STRUCTURE ==
 
 repository root
-|-design/			The first design proposal for the user frontend
-| |- css/			CSS files for the design proposal
-| `- images/			Images for the design proposal
-`-graphics/			Original source files for images (.xcf, .svg, ...) and CSS3 shadows (.txt).
-
+|- design/			The first design proposal for the user frontend
+|  |- css/			CSS files for the design proposal
+|  `- images/			Images for the design proposal
+`- graphics/			Original source files for images (.xcf, .svg, ...) and CSS3 shadows (.txt).
+`- frontend/			Code for the frontend (this is the actual panel)
+|  |- classes/			Contains all class definitions
+|  |- cphp/			Contains the CPHP framework
+|  |  ` components/		Contains additional CPHP components
+|  |- includes/			Contains all included/required files for the frontend
+|  |- locales/			Contains all CPHP locale files
+|  `- templates/		Contains all CPHP template files
+`- runhelper/			This directory contains the runhelper script for the slave nodes
