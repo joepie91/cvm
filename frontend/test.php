@@ -13,11 +13,18 @@ $settings['master_privkey'] = "/etc/cvm/key";
 $settings['master_pubkey'] = "/etc/cvm/key.pub";
 
 $sNode = new Node(1);
-var_dump($sNode->sRealHostname);
-var_dump($sNode->sRealHostname);
-var_dump($sNode->sRealHostname);
-var_dump($sNode->sRealHostname);
-var_dump($sNode->sRealHostname);
-var_dump($sNode->sRealHostname);
 
+try
+{
+	var_dump($sNode->sRealHostname);
+	var_dump($sNode->sRealHostname);
+	var_dump($sNode->sRealHostname);
+	var_dump($sNode->sRealHostname);
+	var_dump($sNode->sRealHostname);
+	var_dump($sNode->sRealHostname);
+}
+catch (Exception $e)
+{
+	echo("An exception occurred.");
+}
 ?>
