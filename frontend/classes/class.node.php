@@ -66,6 +66,12 @@ class Node extends CPHPDatabaseRecordClass
 			case "sRealHostname":
 				return $this->GetHostname();
 				break;
+			case "sDiskFree":
+				return $this->GetDiskFree();
+				break;
+			case "sDiskUsed":
+				return $this->GetDiskUsed();
+				break;
 			default:
 				return null;
 				break;
@@ -75,6 +81,45 @@ class Node extends CPHPDatabaseRecordClass
 	public function GetHostname()
 	{
 		return $this->ssh->RunCommandCached("hostname", true)->stdout;
+	}
+	
+	public function GetDiskFree()
+	{
+		$disk = $this->GetDisk();
+		return $disk['free'];
+	}
+	
+	public function GetDiskUsed()
+	{
+		$disk = $this->GetDisk();
+		return $disk['used'];
+	}
+	
+	public function GetDisk()
+	{
+		$result = $this->ssh->RunCommandCached("df -l -x tmpfs", true);
+		$lines = explode("\n", $result->stdout);
+		array_shift($lines);
+		
+		$total_free = 0;
+		$total_used = 0;
+		
+		foreach($lines as $disk)
+		{
+			$disk = trim($disk);
+			
+			if(!empty($disk))
+			{
+				$values = split_whitespace($disk);
+				$total_free += (int)$values[3] / 1024;
+				$total_used += (int)$values[2] / 1024;
+			}
+		}
+		
+		return array(
+			'free'	=> $total_free,
+			'used'	=> $total_used
+		);
 	}
 }
 
