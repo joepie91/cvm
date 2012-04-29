@@ -142,6 +142,7 @@ class Container extends CPHPDatabaseRecordClass
 		$command = "vzctl stop {$this->sInternalId}";
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
+		// vzctl is retarded enough to return exit status 0 when the command fails because the container isn't running, so we'll have to check the stderr for specific error string(s) as well. come on guys, it's 2012.
 		if($result->returncode == 0 && strpos($result->stderr, "Unable to stop") === false)
 		{
 			$this->uStatus = CVM_STATUS_STOPPED;
