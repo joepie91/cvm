@@ -109,6 +109,8 @@ class SshConnector extends CPHPBaseClass
 		
 		$returndata = json_decode(stream_get_contents($stream));
 		
+		$returndata->stderr = trim($returndata->stderr);
+		
 		fclose($stream);
 		
 		if($returndata->returncode != 0 && $throw_exception === true)
