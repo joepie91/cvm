@@ -13,7 +13,7 @@ pr.wait()
 obj = {
 	'stdout': data[0],
 	'stderr': data[1],
-	'return': pr.returncode
+	'returncode': pr.returncode
 }
 
 print json.dumps(obj)

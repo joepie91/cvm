@@ -103,6 +103,11 @@ class SshConnector extends CPHPBaseClass
 		
 		fclose($stream);
 		
+		if($returndata->returncode != 0 && $throw_exception === true)
+		{
+			throw new SshExitException("Non-zero exit code returned: {$returndata->stderr}", $returndata->returncode);
+		}
+		
 		return $returndata;
 	}
 }
