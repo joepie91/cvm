@@ -14,4 +14,5 @@
 class SshConnectException extends Exception {}
 class SshAuthException extends Exception {}
 class SshCommandException extends Exception {}
+class SshExitException extends Exception {}
 ?>
