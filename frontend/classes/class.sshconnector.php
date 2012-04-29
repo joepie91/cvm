@@ -22,8 +22,8 @@ class SshConnector extends CPHPBaseClass
 	public $host = "localhost";
 	public $port = 22;
 	public $user = "root";
-	public $key = "/etc/cvm/key";
-	public $pubkey = "/etc/cvm/key.pub";
+	public $key = "";
+	public $pubkey = "";
 	public $keytype = "ssh-rsa";
 	
 	public function RunCommand($command)
@@ -64,7 +64,7 @@ class SshConnector extends CPHPBaseClass
 	{
 		$options = array(
 			'hostkey' => $this->keytype
-		)
+		);
 		
 		if($this->connection = ssh2_connect($this->host, $this->port, $options))
 		{
@@ -97,9 +97,10 @@ class SshConnector extends CPHPBaseClass
 		return false;
 	}
 	
-	private function DoCommand()
+	private function DoCommand($command)
 	{
-		
+		$stream = ssh2_exec($this->connection, $command);
+		echo($stream);
 	}
 }
 
