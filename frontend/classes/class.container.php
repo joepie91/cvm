@@ -37,7 +37,10 @@ class Container extends CPHPDatabaseRecordClass
 			'IncomingTrafficUsed'	=> "IncomingTrafficUsed",
 			'IncomingTrafficLast'	=> "IncomingTrafficLast",
 			'OutgoingTrafficUsed'	=> "OutgoingTrafficUsed",
-			'OutgoingTrafficLast'	=> "OutgoingTrafficLast"
+			'OutgoingTrafficLast'	=> "OutgoingTrafficLast",
+			'IncomingTrafficLimit'	=> "IncomingTrafficLimit",
+			'OutgoingTrafficLimit'	=> "OutgoingTrafficLimit",
+			'TotalTrafficLimit'	=> "TotalTrafficLimit"
 		),
 		'node' => array(
 			'Node'			=> "NodeId"
@@ -66,6 +69,11 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function GetBandwidthUsed()
+	{
+		return ($this->sOutgoingTrafficUsed + $this->IncomingTrafficUsed) / (1024 * 1024);
+	}
+	
 	public function Deploy()
 	{
 		$sGuaranteedRamPages = $this->sGuaranteedRam * 256;
@@ -85,6 +93,9 @@ class Container extends CPHPDatabaseRecordClass
 		{
 			// TODO: set sensible values depending on container resource configuration
 			// http://wiki.openvz.org/UBC_consistency_check
+			// http://wiki.openvz.org/UBC_parameter_units
+			// http://wiki.openvz.org/UBC_configuration_examples
+			// http://wiki.openvz.org/UBC_parameters_table
 			
 			$this->uStatus = CVM_STATUS_CREATED;
 			$this->InsertIntoDatabase();
