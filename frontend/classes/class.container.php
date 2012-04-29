@@ -99,6 +99,38 @@ class Container extends CPHPDatabaseRecordClass
 				--avnumproc 180:180
 				--save
 			");
+			
+			/* 
+			This may be useful if we turn out to have a kernel that supports vswap
+			
+			$command = shrink_command("vzctl set {$this->sInternalId}
+				--onboot yes
+				--setmode restart
+				--hostname {$this->sHostname}
+				--nameserver 8.8.8.8
+				--nameserver 8.8.4.4
+				--numproc {$this->sCpuCount}
+				--quotatime 0
+				--diskspace {$this->sDiskSpace}M:{$this->sDiskSpace}M
+				--userpasswd root:{$sRootPassword}
+				--numtcpsock 360:360
+				--numflock 188:206
+				--numpty 16:16
+				--numsiginfo 256:256
+				--tcpsndbuf 1720320:2703360
+				--tcprcvbuf 1720320:2703360
+				--othersockbuf 1126080:2097152
+				--dgramrcvbuf 262144:262144
+				--numothersock 360:360
+				--numfile 9312:9312
+				--dcachesize 3409920:3624960
+				--numiptent 128:128
+				--diskinodes 200000:220000
+				--avnumproc 180:180
+				--ram {$this->sGuaranteedRam}
+				--swap {$this->sBurstableRam}
+				--save
+			");*/
 
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
