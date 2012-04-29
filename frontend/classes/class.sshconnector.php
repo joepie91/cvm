@@ -28,37 +28,31 @@ class SshConnector extends CPHPBaseClass
 	
 	public $helper = "~/runhelper";
 	
-	public function RunCommand($command)
+	public function RunCommand($command, $throw_exception)
 	{
-		if($this->connected == false && $this->authenticated == false)
+		try
 		{
-			try
+			if($this->connected == false && $this->authenticated == false)
 			{
 				$this->Connect();
-				return $this->DoCommand($command);
 			}
-			catch (SshConnectException $e)
-			{
-				$error = $e->getMessage();
-				throw new SshCommandException("Could not run command {$command}: Failed to connect: {$error}");
-			}
-			catch (SshCommandException $e)
-			{
-				$error = $e->getMessage();
-				throw new SshCommandException($error);
-			}
+			
+			return $this->DoCommand($command, $throw_exception);
 		}
-		else
+		catch (SshCommandException $e)
 		{
-			try
-			{
-				return $this->DoCommand($command);
-			}
-			catch (SshCommandException $e)
-			{
-				$error = $e->getMessage();
-				throw new SshCommandException($error);
-			}
+			$error = $e->getMessage();
+			throw new SshCommandException($error);
+		}
+		catch (SshConnectException $e)
+		{
+			$error = $e->getMessage();
+			throw new SshCommandException("Could not run command {$command}: Failed to connect: {$error}");
+		}
+		catch (SshExitException $e)
+		{
+			$error = $e->getMessage();
+			throw new SshExitException($error);
 		}
 	}
 	
@@ -99,7 +93,7 @@ class SshConnector extends CPHPBaseClass
 		return false;
 	}
 	
-	private function DoCommand($command)
+	private function DoCommand($command, $throw_exception)
 	{
 		$command = str_replace("'", "\'", $command);
 		$command = "{$this->helper} '{$command}'";
