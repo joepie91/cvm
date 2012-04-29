@@ -21,6 +21,7 @@ class SshConnector extends CPHPBaseClass
 	
 	public $host = "localhost";
 	public $port = 22;
+	public $user = "root";
 	public $key = "/etc/cvm/key";
 	public $pubkey = "/etc/cvm/key.pub";
 	public $keytype = "ssh-rsa";
@@ -67,12 +68,33 @@ class SshConnector extends CPHPBaseClass
 		
 		if($this->connection = ssh2_connect($this->host, $this->port, $options))
 		{
-			if(ssh2_auth_pubkey_file())
+			$this->connected = true;
+			
+			if(empty($this->passphrase))
+			{
+				$result = ssh2_auth_pubkey_file($this->user, $this->pubkey, $this->key);
+			}
+			else
+			{
+				$result = ssh2_auth_pubkey_file($this->user, $this->pubkey, $this->key, $this->passphrase);
+			}
+			
+			if($result === true)
+			{
+				$this->authenticated = true;
+				return true;
+			}
+			else
+			{
+				throw new SshAuthException("Could not connect to {$this->host}:{$this->port}: Key authentication failed");
+			}
 		}
 		else
 		{
 			throw new SshConnectException("Could not connect to {$this->host}:{$this->port}: {$error}");
 		}
+		
+		return false;
 	}
 	
 	private function DoCommand()
