@@ -74,7 +74,7 @@ class Node extends CPHPDatabaseRecordClass
 	
 	public function GetHostname()
 	{
-		return $this->ssh->RunCommandCached("hostname2", true)->stdout;
+		return $this->ssh->RunCommandCached("hostname", true)->stdout;
 	}
 }
 
