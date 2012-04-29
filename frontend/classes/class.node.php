@@ -35,6 +35,11 @@ class Node extends CPHPDatabaseRecordClass
 	);
 	
 	public $ssh = null;
+	
+	public function GetNodes()
+	{
+		var_dump($this->ssh->RunCommand("vzlist -a"));
+	}
 }
 
 ?>
