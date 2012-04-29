@@ -41,18 +41,10 @@ class SshConnector extends CPHPBaseClass
 			
 			return $this->DoCommand($command, $throw_exception);
 		}
-		catch (SshCommandException $e)
-		{
-			throw new SshCommandException($e->getMessage());
-		}
 		catch (SshConnectException $e)
 		{
 			$error = $e->getMessage();
 			throw new SshCommandException("Could not run command {$command}: Failed to connect: {$error}");
-		}
-		catch (SshExitException $e)
-		{
-			throw new SshExitException($e->getMessage(), $e->getCode());
 		}
 	}
 	
