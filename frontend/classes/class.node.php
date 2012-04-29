@@ -21,17 +21,18 @@ class Node extends CPHPDatabaseRecordClass
 	
 	public $prototype = array(
 		'string' => array(
-			'Name'		=> "Name",
-			'Hostname'	=> "Hostname",
-			'PrivateKey'	=> "CustomPrivateKey",
-			'PublicKey'	=> "CustomPublicKey",
-			'User'		=> "User"
+			'Name'			=> "Name",
+			'Hostname'		=> "Hostname",
+			'PhysicalLocation'	=> "PhysicalLocation",
+			'PrivateKey'		=> "CustomPrivateKey",
+			'PublicKey'		=> "CustomPublicKey",
+			'User'			=> "User"
 		),
 		'numeric' => array(
-			'Port'		=> "Port"
+			'Port'			=> "Port"
 		),
 		'boolean' => array(
-			'HasCustomKey'	=> "HasCustomKey"
+			'HasCustomKey'		=> "HasCustomKey"
 		)
 	);
 	
