@@ -33,7 +33,11 @@ class Container extends CPHPDatabaseRecordClass
 			'GuaranteedRam'		=> "GuaranteedRam",
 			'BurstableRam'		=> "BurstableRam",
 			'CpuCount'		=> "CpuCount",
-			'Status'		=> "Status"
+			'Status'		=> "Status",
+			'IncomingTrafficUsed'	=> "IncomingTrafficUsed",
+			'IncomingTrafficLast'	=> "IncomingTrafficLast",
+			'OutgoingTrafficUsed'	=> "OutgoingTrafficUsed",
+			'OutgoingTrafficLast'	=> "OutgoingTrafficLast"
 		),
 		'node' => array(
 			'Node'			=> "NodeId"
@@ -241,6 +245,44 @@ class Container extends CPHPDatabaseRecordClass
 		else
 		{
 			throw new ContainerIpRemoveException($result->stderr, $result->returncode, $this->sInternalId);
+		}
+	}
+	
+	public function UpdateTraffic()
+	{
+		$result = $this->sNode->ssh->RunCommand("vzctl exec {$this->sInternalId} cat /proc/net/dev | grep venet0", false);
+		
+		if($result->returncode == 0)
+		{
+			$lines = split_lines($result->stdout);
+			$values = split_whitespace($lines[0]);
+			
+			$uIncoming = $values[1];
+			$uOutgoing = $values[9];
+			
+			if($uIncoming < (int)$this->sIncomingTrafficLast || $uOutgoing < (int)$this->sOutgoingTrafficLast)
+			{
+				// the counter has reset (wrap-around, reboot, etc.)
+				$uNewIncoming = $uIncoming;
+				$uNewOutgoing = $uOutgoing;
+			}
+			else
+			{
+				$uNewIncoming = $uIncoming - $this->sIncomingTrafficLast;
+				$uNewOutgoing = $uOutgoing - $this->sOutgoingTrafficLast;
+			}
+			
+			$this->uIncomingTrafficUsed = $this->sIncomingTrafficUsed + $uNewIncoming;
+			$this->uOutgoingTrafficUsed = $this->sOutgoingTrafficUsed + $uNewOutgoing;
+			
+			$this->uIncomingTrafficLast = $uIncoming;
+			$this->uOutgoingTrafficLast = $uOutgoing;
+			
+			$this->InsertIntoDatabase();
+		}
+		else
+		{
+			throw new ContainerTrafficRetrieveException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 	

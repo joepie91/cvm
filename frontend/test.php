@@ -17,11 +17,7 @@ elseif($_GET['action'] == "stop")
 }
 elseif($_GET['action'] == "bw")
 {
-	$result = $sContainer->sNode->ssh->RunCommand("vzctl exec {$sContainer->sInternalId} cat /proc/net/dev | grep venet0", false);
-	$lines = split_lines($result->stdout);
-	
-	$values = split_whitespace($lines[0]);
-	pretty_dump($values);
+	$sContainer->UpdateTraffic();
 }
 elseif($_GET['action'] == "ip")
 {
