@@ -13,6 +13,7 @@
 
 $_CPHP = true;
 require("cphp/base.php");
+require("include.exceptions.php");
 require("classes/class.controller.php");
 require("classes/class.container.php");
 require("classes/class.node.php");
