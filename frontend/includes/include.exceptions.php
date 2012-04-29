@@ -13,8 +13,32 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
+// SshConnector-related exceptions
 class SshConnectException extends Exception {}
 class SshAuthException extends Exception {}
 class SshCommandException extends Exception {}
 class SshExitException extends Exception {}
+
+// Container-related exceptions
+class ContainerException extends Exception
+{
+	private $id = "";
+	
+	public function __construct($message = "", $code = 0, $id = "", $previous = null)
+	{
+		$this->id = $id;
+		
+		parent::__construct($message, $code, $previous);
+	}
+	
+	public function getId()
+	{
+		return $this->id;
+	}
+}
+
+class ContainerCreateException extends ContainerException {}
+class ContainerConfigureException extends ContainerException {}
+class ContainerStartException extends ContainerException {}
+class ContainerStopException extends ContainerException {}
 ?>
