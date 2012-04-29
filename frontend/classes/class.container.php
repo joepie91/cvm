@@ -43,6 +43,25 @@ class Container extends CPHPDatabaseRecordClass
 		)
 	);
 	
+	public function __get($name)
+	{
+		switch($name)
+		{
+			case "sRamUsed":
+				return $this->GetRamUsed();
+				break;
+			case "sDiskUsed":
+				return $this->GetDiskUsed();
+				break;
+			case "sBandwidthUsed":
+				return $this->GetBandwidthUsed();
+				break;
+			default:
+				return null;
+				break;
+		}
+	}
+	
 	public function Deploy()
 	{
 		$sGuaranteedRamPages = $this->sGuaranteedRam * 256;

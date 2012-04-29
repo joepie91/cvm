@@ -15,6 +15,12 @@ elseif($_GET['action'] == "stop")
 {
 	$sContainer->Stop();
 }
+elseif($_GET['action'] == "bw")
+{
+	$result = $sContainer->sNode->ssh->RunCommand("vzctl exec {$sContainer->sInternalId} cat /proc/net/dev", false);
+	$values = split_whitespace($result->stdout);
+	pretty_dump($values[1], $values[9]);
+}
 
 echo("Done!");
 ?>
