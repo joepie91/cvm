@@ -16,8 +16,8 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 class Node extends CPHPDatabaseRecordClass
 {
 	public $table_name = "nodes";
-	public $fill_query = "SELECT * FROM {$table_name} WHERE `Id` = '%d'";
-	public $verify_query = "SELECT * FROM {$table_name} WHERE `Id` = '%d'";
+	public $fill_query = "SELECT * FROM {$this->table_name} WHERE `Id` = '%d'";
+	public $verify_query = "SELECT * FROM {$this->table_name} WHERE `Id` = '%d'";
 	
 	public $prototype = array(
 		'string' => array(
