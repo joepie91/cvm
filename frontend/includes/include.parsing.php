@@ -18,6 +18,18 @@ function split_whitespace($input)
 	return preg_split("/\s+/", $input);
 }
 
+function split_lines($input)
+{
+	$lines = explode("/n", $input);
+	
+	foreach($lines as &$line)
+	{
+		$line = trim($line);
+	}
+	
+	return $lines;
+}
+
 function shrink_command($command)
 {
 	$command = preg_replace("/(\t+|\n)/", " ", $command);
