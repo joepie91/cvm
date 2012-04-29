@@ -98,6 +98,22 @@ class Container extends CPHPDatabaseRecordClass
 			$this->uStatus = CVM_STATUS_CREATED;
 			$this->InsertIntoDatabase();
 			
+			$sKMemSize = $this->sGuaranteedRam * 250;
+			$sKMemSizeLimit = (int)($sKMemSize * 1.1);
+			$sLockedPages = (int)($this->sGuaranteedRam * 1.5);
+			$sShmPages = $sLockedPages * 64;
+			$sOomGuarPages = $this->sGuaranteedRam * 400;
+			$sTcpSock = $this->sGuaranteedRam * 3;
+			$sFLock = (int)($this->sGuaranteedRam * 0.6);
+			$sFLockLimit = (int)($sFLock * 1.1);
+			$sTcpBuf = (int)($this->sGuaranteedRam * 20000);
+			$sTcpLimit = (int)($sTcpBuf * 2);
+			$sDgramBuf = (int)($sTcpBuf / 40);
+			$sNumFile = $this->sGuaranteedRam * 32;
+			$sDCache = $this->sGuaranteedRam * 16000;
+			$sDCacheLimit = (int)($sDCache * 1.1);
+			$sAvgProc = (int)($this->sGuaranteedRam * 1.5);
+			
 			$command = shrink_command("vzctl set {$this->sInternalId}
 				--onboot yes
 				--setmode restart
@@ -110,25 +126,25 @@ class Container extends CPHPDatabaseRecordClass
 				--quotatime 0
 				--diskspace {$this->sDiskSpace}M:{$this->sDiskSpace}M
 				--userpasswd root:{$sRootPassword}
-				--kmemsize 14372700:14790164
-				--lockedpages 256:256
-				--shmpages 21504:21504
+				--kmemsize {$sKMemSize}:{$sKMemSizeLimit}
+				--lockedpages {$sLockedPages}:{$sLockedPages}
+				--shmpages {$sShmPages}:{$sShmPages}
 				--physpages 0:unlimited
-				--oomguarpages 26112:unlimited
-				--numtcpsock 360:360
-				--numflock 188:206
-				--numpty 16:16
-				--numsiginfo 256:256
-				--tcpsndbuf 1720320:2703360
-				--tcprcvbuf 1720320:2703360
-				--othersockbuf 1126080:2097152
-				--dgramrcvbuf 262144:262144
-				--numothersock 360:360
-				--numfile 9312:9312
-				--dcachesize 3409920:3624960
+				--oomguarpages {$sOomGuarPages}:unlimited
+				--numtcpsock {$sTcpSock}:{$sTcpSock}
+				--numflock {$sFLock}:{$sFLockLimit}
+				--numpty 32:32
+				--numsiginfo 512:512
+				--tcpsndbuf {$sTcpBuf}:{$sTcpBufLimit}
+				--tcprcvbuf {$sTcpBuf}:{$sTcpBufLimit}
+				--othersockbuf {$sTcpBuf}:{$sTcpBufLimit}
+				--dgramrcvbuf {$sDgramBuf}:{$sDgramBuf}
+				--numothersock {$sTcpSock}:{$sTcpSock}
+				--numfile {$sNumFile}:{$sNumFile}
+				--dcachesize {$sDCache}:{$sDCacheLimit}
 				--numiptent 128:128
 				--diskinodes 200000:220000
-				--avnumproc 180:180
+				--avnumproc {$sAvgProc}:{$sAvgProc}
 				--save
 			");
 			
@@ -163,7 +179,7 @@ class Container extends CPHPDatabaseRecordClass
 				--swap {$this->sBurstableRam}
 				--save
 			");*/
-
+			
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
 			if($result->returncode == 0)
