@@ -181,8 +181,8 @@ class Container extends CPHPDatabaseRecordClass
 				--numiptent 128:128
 				--diskinodes 200000:220000
 				--avnumproc 180:180
-				--ram {$this->sGuaranteedRam}
-				--swap {$this->sBurstableRam}
+				--ram {$this->sGuaranteedRam}M
+				--swap {$this->sBurstableRam}M
 				--save
 			");*/
 			
