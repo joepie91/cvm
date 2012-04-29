@@ -14,4 +14,7 @@
 $_CPHP = true;
 require("cphp/base.php");
 require("classes/class.controller.php");
+require("classes/class.container.php");
+require("classes/class.node.php");
+require("classes/class.sshconnector.php");
 ?>

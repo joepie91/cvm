@@ -15,7 +15,70 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 class SshConnector extends CPHPBaseClass
 {
+	public $connected = false;
+	public $authenticated = false;
+	public $connection = null;
 	
+	public $host = "localhost";
+	public $port = 22;
+	public $key = "/etc/cvm/key";
+	public $pubkey = "/etc/cvm/key.pub";
+	public $keytype = "ssh-rsa";
+	
+	public function RunCommand($command)
+	{
+		if($this->connected == false && $this->authenticated == false)
+		{
+			try
+			{
+				$this->Connect();
+				$this->DoCommand($command);
+			}
+			catch (SshConnectException $e)
+			{
+				$error = $e->getMessage();
+				throw new SshCommandException("Could not run command {$command}: Failed to connect: {$error}");
+			}
+			catch (SshCommandException $e)
+			{
+				$error = $e->getMessage();
+				throw new SshCommandException($error);
+			}
+		}
+		else
+		{
+			try
+			{
+				$this->DoCommand($command);
+			}
+			catch (SshCommandException $e)
+			{
+				$error = $e->getMessage();
+				throw new SshCommandException($error);
+			}
+		}
+	}
+	
+	public function Connect()
+	{
+		$options = array(
+			'hostkey' => $this->keytype
+		)
+		
+		if($this->connection = ssh2_connect($this->host, $this->port, $options))
+		{
+			if(ssh2_auth_pubkey_file())
+		}
+		else
+		{
+			throw new SshConnectException("Could not connect to {$this->host}:{$this->port}: {$error}");
+		}
+	}
+	
+	private function DoCommand()
+	{
+		
+	}
 }
 
 ?>
