@@ -11,6 +11,8 @@
  * licensing text.
  */
 
+if(!isset($_CVM)) { die("Unauthorized."); }
+
 function split_whitespace($input)
 {
 	return preg_split("/\s+/", $input);

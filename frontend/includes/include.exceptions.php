@@ -11,6 +11,8 @@
  * licensing text.
  */
 
+if(!isset($_CVM)) { die("Unauthorized."); }
+
 class SshConnectException extends Exception {}
 class SshAuthException extends Exception {}
 class SshCommandException extends Exception {}

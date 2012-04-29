@@ -11,6 +11,8 @@
  * licensing text.
  */
 
+if(!isset($_CVM)) { die("Unauthorized."); }
+
 $_CPHP = true;
 require("cphp/base.php");
 require("include.exceptions.php");
