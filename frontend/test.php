@@ -12,7 +12,10 @@ var_dump($ssh->RunCommand("df -h", true));*/
 $settings['master_privkey'] = "/etc/cvm/key";
 $settings['master_pubkey'] = "/etc/cvm/key.pub";
 
-$sNode = new Node(1);
-var_dump($sNode->sDiskFree, $sNode->sDiskUsed, $sNode->sRealHostname);
+/*$sNode = new Node(1);
+var_dump($sNode->sDiskFree, $sNode->sDiskUsed, $sNode->sRealHostname);*/
+
+$sContainer = new Container(1);
+var_dump($sContainer);
 
 ?>

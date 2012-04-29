@@ -26,7 +26,7 @@ class Container extends CPHPDatabaseRecordClass
 		),
 		'numeric' => array(
 			'NodeId'		=> "NodeId",
-			'TemplateId'		=> "TemplateId"
+			'TemplateId'		=> "TemplateId",
 			'VirtualizationType'	=> "VirtualizationType",
 			'DiskSpace'		=> "DiskSpace",
 			'GuaranteedRam'		=> "GuaranteedRam",

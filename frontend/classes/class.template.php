@@ -27,7 +27,7 @@ class Template extends CPHPDatabaseRecordClass
 		),
 		'boolean' => array(
 			'IsSupported'		=> "Supported",
-			'IsAvailable'		=> "Available"
+			'IsAvailable'		=> "Available",
 			'IsOutdated'		=> "Outdated"
 		)
 	);
