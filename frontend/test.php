@@ -16,8 +16,13 @@ $settings['master_pubkey'] = "/etc/cvm/key.pub";
 var_dump($sNode->sDiskFree, $sNode->sDiskUsed, $sNode->sRealHostname);*/
 
 $sContainer = new Container(1);
-$sContainer->Deploy();
+// $sContainer->Deploy();
 // returncode 127 = failed (CT ID missing?)
-pretty_dump($sContainer);
+
+$sContainer->Start();
+
+echo("Done!");
+
+//pretty_dump($sContainer);
 
 ?>

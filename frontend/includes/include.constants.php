@@ -11,14 +11,16 @@
  * licensing text.
  */
 
-$_CPHP = true;
-require("cphp/base.php");
-require("include.exceptions.php");
-require("include.constants.php");
-require("include.parsing.php");
-require("classes/class.controller.php");
-require("classes/class.container.php");
-require("classes/class.node.php");
-require("classes/class.template.php");
-require("classes/class.sshconnector.php");
+if(!isset($_CVM)) { die("Unauthorized."); }
+
+define("CVM_VIRTUALIZATION_OPENVZ",			1	);
+
+define("CVM_STATUS_BLANK",				1	);
+define("CVM_STATUS_CREATED",				2	);
+define("CVM_STATUS_CONFIGURED",				3	);
+define("CVM_STATUS_STARTED",				4	);
+define("CVM_STATUS_STOPPED",				5	);
+define("CVM_STATUS_SUSPENDED",				6	);
+define("CVM_STATUS_TERMINATED",				7	);
+
 ?>

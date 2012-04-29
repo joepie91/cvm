@@ -112,6 +112,21 @@ class Container extends CPHPDatabaseRecordClass
 			// TODO: throw exception for failed container creation
 		}
 	}
+	
+	public function Start()
+	{
+		$command = "vzctl start {$this->sInternalId}";
+		$result = $this->sNode->ssh->RunCommand($command, false);
+		
+		if($result->returncode == 0)
+		{
+			return true;
+		}
+		else
+		{
+			// TODO: throw exception for failed container start
+		}
+	}
 }
 
 ?>
