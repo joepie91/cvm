@@ -398,5 +398,5 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 	
 	// Define events
 	
-	public function EventConstructed() { }
+	protected function EventConstructed() { }
 }

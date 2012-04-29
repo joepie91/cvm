@@ -24,7 +24,8 @@ class Node extends CPHPDatabaseRecordClass
 			'Name'		=> "Name",
 			'Hostname'	=> "Hostname",
 			'PrivateKey'	=> "CustomPrivateKey",
-			'PublicKey'	=> "CustomPublicKey"
+			'PublicKey'	=> "CustomPublicKey",
+			'User'		=> "User"
 		),
 		'numeric' => array(
 			'Port'		=> "Port"
@@ -36,7 +37,29 @@ class Node extends CPHPDatabaseRecordClass
 	
 	public $ssh = null;
 	
-	public function GetNodes()
+	protected function EventConstructed()
+	{
+		global $settings;
+		
+		$this->ssh = new SshConnector();
+		
+		$this->ssh->host = $this->sHostname;
+		$this->ssh->port = $this->sPort;
+		$this->ssh->user = $this->sUser;
+		
+		if($this->HasCustomKey === true)
+		{
+			$this->ssh->key = $this->sPrivateKey;
+			$this->ssh->pubkey = $this->sPublicKey;
+		}
+		else
+		{
+			$this->ssh->key = $settings['master_privkey'];
+			$this->ssh->pubkey = $settings['master_pubkey'];
+		}
+	}
+	
+	public function GetContainers()
 	{
 		var_dump($this->ssh->RunCommand("vzlist -a"));
 	}
