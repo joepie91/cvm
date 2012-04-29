@@ -26,6 +26,8 @@ class SshConnector extends CPHPBaseClass
 	public $pubkey = "";
 	public $keytype = "ssh-rsa";
 	
+	public $helper = "~/runhelper";
+	
 	public function RunCommand($command)
 	{
 		if($this->connected == false && $this->authenticated == false)
@@ -99,12 +101,16 @@ class SshConnector extends CPHPBaseClass
 	
 	private function DoCommand($command)
 	{
+		$command = str_replace("'", "\'", $command);
+		$command = "{$this->helper} '{$command}'";
+		
 		$stream = ssh2_exec($this->connection, $command);
 		stream_set_blocking($stream, true);
 		
-		$returndata = stream_get_contents($stream);
+		$returndata = json_decode(stream_get_contents($stream));
 		
 		fclose($stream);
+		
 		return $returndata;
 	}
 }

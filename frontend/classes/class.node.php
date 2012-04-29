@@ -15,7 +15,7 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 class Node extends CPHPDatabaseRecordClass
 {
-	
+	public $ssh = null;
 }
 
 ?>

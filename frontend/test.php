@@ -7,5 +7,5 @@ $ssh->host = "cvm-vz.cryto.net";
 $ssh->key = "/etc/cvm/key";
 $ssh->pubkey = "/etc/cvm/key.pub";
 
-var_dump($ssh->RunCommand("df -h"));
+var_dump($ssh->RunCommand("cp derp2 derp"));
 ?>
