@@ -4,6 +4,7 @@ require("includes/include.base.php");
 
 $settings['master_privkey'] = "/etc/cvm/key";
 $settings['master_pubkey'] = "/etc/cvm/key.pub";
+$settings['salt'] = "kAU0qM";
 
 if($_GET['action'] == "deploy")
 {
@@ -30,6 +31,12 @@ else
 	elseif($_GET['action'] == "ip")
 	{
 		$sContainer->AddIp($_GET['ip']);
+	}
+	elseif($_GET['action'] == "user")
+	{
+		$sUser = new User(1);
+		
+		pretty_dump($sUser);
 	}
 	else
 	{
