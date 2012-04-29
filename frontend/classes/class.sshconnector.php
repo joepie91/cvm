@@ -28,6 +28,8 @@ class SshConnector extends CPHPBaseClass
 	
 	public $helper = "~/runhelper";
 	
+	private $cache = "";
+	
 	public function RunCommand($command, $throw_exception)
 	{
 		try
@@ -51,6 +53,20 @@ class SshConnector extends CPHPBaseClass
 		catch (SshExitException $e)
 		{
 			throw new SshExitException($e->getMessage(), $e->getCode());
+		}
+	}
+	
+	public function RunCommandCached($command, $throw_exception)
+	{
+		if(!isset($this->cache[$command]))
+		{
+			$result = $this->RunCommand($command, $throw_exception);
+			$this->cache[$command] = $result;
+			return $result;
+		}
+		else
+		{
+			return $this->cache[$command];
 		}
 	}
 	

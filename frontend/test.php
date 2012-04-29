@@ -13,5 +13,10 @@ $settings['master_privkey'] = "/etc/cvm/key";
 $settings['master_pubkey'] = "/etc/cvm/key.pub";
 
 $sNode = new Node(1);
-var_dump($sNode->GetContainers());
+var_dump($sNode->sRealHostname);
+var_dump($sNode->sRealHostname);
+var_dump($sNode->sRealHostname);
+var_dump($sNode->sRealHostname);
+var_dump($sNode->sRealHostname);
+var_dump($sNode->sRealHostname);
 ?>

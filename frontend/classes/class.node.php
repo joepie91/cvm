@@ -59,9 +59,22 @@ class Node extends CPHPDatabaseRecordClass
 		}
 	}
 	
-	public function GetContainers()
+	public function __get($name)
 	{
-		var_dump($this->ssh->RunCommand("vzlist -a"));
+		switch($name)
+		{
+			case "sRealHostname":
+				return $this->GetHostname();
+				break;
+			default:
+				return null;
+				break;
+		}
+	}
+	
+	public function GetHostname()
+	{
+		return $this->ssh->RunCommandCached("hostname")->stdout;
 	}
 }
 
