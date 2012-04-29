@@ -17,6 +17,7 @@ $cphp_class_map = array(
 	'user'		=> "User",
 	'node'		=> "Node",
 	'container'	=> "Container",
+	'template'	=> "Template"
 );
 
 $cphp_locale_name = "english";
