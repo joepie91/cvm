@@ -106,7 +106,9 @@ class Container extends CPHPDatabaseRecordClass
 			$sTcpSock = $this->sGuaranteedRam * 3;
 			$sFLock = (int)($this->sGuaranteedRam * 0.6);
 			$sFLockLimit = (int)($sFLock * 1.1);
-			$sTcpBuf = (int)($this->sGuaranteedRam * 20000);
+			$sTcpSndBuf = (int)($this->sGuaranteedRam * 20000);
+			$sTcpRcvBuf = (int)($this->sGuaranteedRam * 20000);
+			$sOtherBuf = (int)($this->sGuaranteedRam * 20000);
 			$sTcpLimit = (int)($sTcpBuf * 2);
 			$sDgramBuf = (int)($sTcpBuf / 40);
 			$sNumFile = $this->sGuaranteedRam * 32;
@@ -135,9 +137,9 @@ class Container extends CPHPDatabaseRecordClass
 				--numflock {$sFLock}:{$sFLockLimit}
 				--numpty 32:32
 				--numsiginfo 512:512
-				--tcpsndbuf {$sTcpBuf}:{$sTcpBufLimit}
-				--tcprcvbuf {$sTcpBuf}:{$sTcpBufLimit}
-				--othersockbuf {$sTcpBuf}:{$sTcpBufLimit}
+				--tcpsndbuf {$sTcpSndBuf}:{$sTcpSndBufLimit}
+				--tcprcvbuf {$sTcpRcvBuf}:{$sTcpRcvBufLimit}
+				--othersockbuf {$sOtherBuf}:{$sOtherBufLimit}
 				--dgramrcvbuf {$sDgramBuf}:{$sDgramBuf}
 				--numothersock {$sTcpSock}:{$sTcpSock}
 				--numfile {$sNumFile}:{$sNumFile}
