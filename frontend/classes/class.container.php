@@ -63,6 +63,9 @@ class Container extends CPHPDatabaseRecordClass
 			// TODO: set sensible values depending on container resource configuration
 			// http://wiki.openvz.org/UBC_consistency_check
 			
+			$this->uStatus = CVM_STATUS_CREATED;
+			$this->InsertIntoDatabase();
+			
 			$command = shrink_command("vzctl set {$this->sInternalId}
 				--onboot yes
 				--setmode restart
@@ -101,6 +104,9 @@ class Container extends CPHPDatabaseRecordClass
 			
 			if($result->returncode == 0)
 			{
+				$this->uStatus = CVM_STATUS_CONFIGURED;
+				$this->InsertIntoDatabase();
+				
 				return true;
 			}
 			else
@@ -121,6 +127,8 @@ class Container extends CPHPDatabaseRecordClass
 		
 		if($result->returncode == 0)
 		{
+			$this->uStatus = CVM_STATUS_STARTED;
+			$this->InsertIntoDatabase();
 			return true;
 		}
 		else
