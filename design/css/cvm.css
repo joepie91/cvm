@@ -236,6 +236,13 @@ table.vpsinfo td
 	background-color: #CDD0E1;
 }
 
+.controlbutton.disabled, .constrolbutton.disabled:hover
+{
+	border: 2px solid #737379;
+	background-color: #9B9B9B;
+	cursor: default;
+}
+
 .online
 {
 	color: #078812;
