@@ -29,6 +29,7 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 	public function __construct($uDataSource, $uCommunityId = 0)
 	{
 		$this->ConstructDataset($uDataSource, $uCommunityId);
+		$this->EventConstructed();
 	}
 	
 	public function ConstructDataset($uDataSource, $uCommunityId = 0)
@@ -394,4 +395,8 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 		
 		return $this->DoRenderInternalTemplate();
 	}
+	
+	// Define events
+	
+	public function EventConstructed() { }
 }
