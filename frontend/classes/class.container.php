@@ -22,7 +22,8 @@ class Container extends CPHPDatabaseRecordClass
 	public $prototype = array(
 		'string' => array(
 			'Hostname'		=> "Hostname",
-			'InternalId'		=> "InternalId"
+			'InternalId'		=> "InternalId",
+			'RootPassword'		=> "RootPassword"
 		),
 		'numeric' => array(
 			'NodeId'		=> "NodeId",
@@ -30,7 +31,8 @@ class Container extends CPHPDatabaseRecordClass
 			'VirtualizationType'	=> "VirtualizationType",
 			'DiskSpace'		=> "DiskSpace",
 			'GuaranteedRam'		=> "GuaranteedRam",
-			'BurstableRam'		=> "BurstableRam"
+			'BurstableRam'		=> "BurstableRam",
+			'CpuCount'		=> "CpuCount"
 		),
 		'node' => array(
 			'Node'			=> "NodeId"
@@ -39,6 +41,77 @@ class Container extends CPHPDatabaseRecordClass
 			'Template'		=> "TemplateId"
 		)
 	);
+	
+	public function Deploy()
+	{
+		$sGuaranteedRamPages = $this->sGuaranteedRam * 256;
+		$sBurstableRamPages = $this->sBurstableRam * 256;
+		$sRootPassword = random_string(20);
+		
+		$this->uRootPassword = $sRootPassword;
+		$this->InsertIntoDatabase();
+		
+		$command = shrink_command("vzctl create {$this->sInternalId}
+			--ostemplate {$this->sTemplate->sTemplateName}
+		");
+		
+		$result = $this->sNode->ssh->RunCommand($command, false);
+
+		if($result->returncode == 0)
+		{
+			// TODO: set sensible values depending on container resource configuration
+			// http://wiki.openvz.org/UBC_consistency_check
+			
+			$command = shrink_command("vzctl set {$this->sInternalId}
+				--onboot yes
+				--setmode restart
+				--hostname {$this->sHostname}
+				--nameserver 8.8.8.8
+				--nameserver 8.8.4.4
+				--numproc {$this->sCpuCount}
+				--vmguarpages {$sGuaranteedRamPages}:unlimited
+				--privvmpages {$sBurstableRamPages}:{$sBurstableRamPages}
+				--quotatime 0
+				--diskspace {$this->sDiskSpace}M:{$this->sDiskSpace}M
+				--userpasswd root:{$sRootPassword}
+				--kmemsize 14372700:14790164
+				--lockedpages 256:256
+				--shmpages 21504:21504
+				--physpages 0:unlimited
+				--oomguarpages 26112:unlimited
+				--numtcpsock 360:360
+				--numflock 188:206
+				--numpty 16:16
+				--numsiginfo 256:256
+				--tcpsndbuf 1720320:2703360
+				--tcprcvbuf 1720320:2703360
+				--othersockbuf 1126080:2097152
+				--dgramrcvbuf 262144:262144
+				--numothersock 360:360
+				--numfile 9312:9312
+				--dcachesize 3409920:3624960
+				--numiptent 128:128
+				--diskinodes 200000:220000
+				--avnumproc 180:180
+				--save
+			");
+
+			$result = $this->sNode->ssh->RunCommand($command, false);
+			
+			if($result->returncode == 0)
+			{
+				return true;
+			}
+			else
+			{
+				// TODO: Throw exception for failed container configuration
+			}
+		}
+		else
+		{
+			// TODO: throw exception for failed container creation
+		}
+	}
 }
 
 ?>

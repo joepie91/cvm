@@ -16,4 +16,11 @@ function split_whitespace($input)
 	return preg_split("/\s+/", $input);
 }
 
+function shrink_command($command)
+{
+	$command = preg_replace("/(\t+|\n)/", " ", $command);
+	$command = str_replace("/r", "", $command);
+	return $command;
+}
+
 ?>
