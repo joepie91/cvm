@@ -5,27 +5,36 @@ require("includes/include.base.php");
 $settings['master_privkey'] = "/etc/cvm/key";
 $settings['master_pubkey'] = "/etc/cvm/key.pub";
 
-$sContainer = new Container(1);
-
-if($_GET['action'] == "start")
+if($_GET['action'] == "deploy")
 {
-	$sContainer->Start();
-}
-elseif($_GET['action'] == "stop")
-{
-	$sContainer->Stop();
-}
-elseif($_GET['action'] == "bw")
-{
-	$sContainer->UpdateTraffic();
-}
-elseif($_GET['action'] == "ip")
-{
-	$sContainer->AddIp($_GET['ip']);
+	$sContainer = new Container(2);
+	
+	$sContainer->Deploy();
 }
 else
 {
-	echo("idk");
+	$sContainer = new Container(1);
+
+	if($_GET['action'] == "start")
+	{
+		$sContainer->Start();
+	}
+	elseif($_GET['action'] == "stop")
+	{
+		$sContainer->Stop();
+	}
+	elseif($_GET['action'] == "bw")
+	{
+		$sContainer->UpdateTraffic();
+	}
+	elseif($_GET['action'] == "ip")
+	{
+		$sContainer->AddIp($_GET['ip']);
+	}
+	else
+	{
+		echo("idk");
+	}
 }
 
 echo("Done!");

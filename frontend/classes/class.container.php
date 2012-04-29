@@ -76,8 +76,6 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function Deploy()
 	{
-		$sGuaranteedRamPages = $this->sGuaranteedRam * 256;
-		$sBurstableRamPages = $this->sBurstableRam * 256;
 		$sRootPassword = random_string(20);
 		
 		$this->uRootPassword = $sRootPassword;
@@ -107,8 +105,8 @@ class Container extends CPHPDatabaseRecordClass
 				--nameserver 8.8.8.8
 				--nameserver 8.8.4.4
 				--numproc {$this->sCpuCount}
-				--vmguarpages {$sGuaranteedRamPages}:unlimited
-				--privvmpages {$sBurstableRamPages}:{$sBurstableRamPages}
+				--vmguarpages {$this->sGuaranteedRam}M:unlimited
+				--privvmpages {$this->sBurstableRam}M:{$this->sBurstableRam}M
 				--quotatime 0
 				--diskspace {$this->sDiskSpace}M:{$this->sDiskSpace}M
 				--userpasswd root:{$sRootPassword}
