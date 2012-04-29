@@ -120,4 +120,13 @@ class Templater
 			Throw new Exception("No template loaded.");
 		}
 	}
+	
+	public static function InlineRender($templatename, $localize = array(), $compile = array())
+	{
+		$template = new Templater();
+		$template->Load($templatename);
+		$template->Localize($localize);
+		$template->Compile($compile);
+		return $template->Render();
+	}
 }

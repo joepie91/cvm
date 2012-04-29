@@ -8,10 +8,7 @@ $settings['salt'] = "kAU0qM";
 
 $sContainer = new Container(1);
 
-$template_main = new Templater();
-$template_main->Load("main");
-$template_main->Localize($locale->strings);
-$template_main->Compile(array(
+echo(Templater::InlineRender("main", $locale->strings, array(
 	'server-location'	=> $sContainer->sNode->sPhysicalLocation,
 	'operating-system'	=> $sContainer->sTemplate->sName,
 	'guaranteed-ram'	=> "{$sContainer->sGuaranteedRam}MB",
@@ -19,7 +16,6 @@ $template_main->Compile(array(
 	'disk-space'		=> "{$sContainer->sDiskSpace}MB",
 	'total-traffic-limit'	=> "{$sContainer->sTotalTrafficLimit} bytes",
 	'bandwidth-limit'	=> "100mbit",
-));
-$template_main->Output();
+)));
 
 ?>
