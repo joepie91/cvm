@@ -137,6 +137,23 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function Stop()
+	{
+		$command = "vzctl stop {$this->sInternalId}";
+		$result = $this->sNode->ssh->RunCommand($command, false);
+		
+		if($result->returncode == 0 && strpos($result->stderr, "Unable to stop") === false)
+		{
+			$this->uStatus = CVM_STATUS_STOPPED;
+			$this->InsertIntoDatabase();
+			return true;
+		}
+		else
+		{
+			throw new ContainerStopException($result->stderr, $result->returncode, $this->sInternalId);
+		}
+	}
+	
 	public function EnableTunTap()
 	{
 		// TODO: Finish EnableTunTap function, check whether tun module is available on host

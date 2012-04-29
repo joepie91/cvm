@@ -7,7 +7,18 @@ $settings['master_pubkey'] = "/etc/cvm/key.pub";
 
 $sContainer = new Container(1);
 
-$sContainer->Start();
+if($_GET['action'] == "start")
+{
+	$sContainer->Start();
+}
+elseif($_GET['action'] == "stop")
+{
+	$sContainer->Stop();
+}
 
 echo("Done!");
 ?>
+<br><br>
+<a href="?action=start">Start</a><br>
+<a href="?action=stop">Stop</a><br>
+
