@@ -111,12 +111,12 @@ class Container extends CPHPDatabaseRecordClass
 			}
 			else
 			{
-				// TODO: Throw exception for failed container configuration
+				throw new ContainerConfigureException($result->stderr, $result->returncode, $this->sInternalId);
 			}
 		}
 		else
 		{
-			// TODO: throw exception for failed container creation
+			throw new ContainerCreateException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 	
@@ -133,7 +133,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			// TODO: throw exception for failed container start
+			throw new ContainerStartException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 }
