@@ -68,6 +68,14 @@ table.vpsinfo td
 	font-weight: bold;
 }
 
+.userbox
+{
+	font-size: 16px;
+	font-weight: normal;
+	float: right;
+	margin-top: 46px;
+}
+
 .main
 {
 	position: relative;
@@ -265,6 +273,12 @@ table.vpsinfo td
 {
 	color: #5B5F6B;
 	font-weight: bold;
+}
+
+.footer
+{
+	font-size: 14px;
+	margin-top: 4px;
 }
 
 
