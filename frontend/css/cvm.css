@@ -255,8 +255,61 @@ table.vpsinfo td
 	font-weight: bold;
 }
 
-.suspended
+.suspended, .unknown
 {
 	color: #5B5F6B;
 	font-weight: bold;
+}
+
+
+/* CPHPErrorHandler styles */
+
+.errorhandler
+{
+	margin: 10px 0px;
+	padding: 8px 10px;
+	padding-left: 46px;
+	background-position: 8px 6px;
+	background-repeat: no-repeat;
+	min-height: 24px;
+}
+
+.errorhandler .error-title
+{
+	font-weight: bold;
+	font-size: 120%;
+}
+
+.errorhandler.error-error
+{
+	background-color: #FCCBC9;
+	border: 1px solid red;
+	background-image: url(../images/errorhandler_error.png);
+}
+
+.errorhandler.error-info
+{
+	background-color: #C9F6FC;
+	border: 1px solid blue;
+	background-image: url(../images/errorhandler_info.png);
+}
+
+.errorhandler.error-warning
+{
+	background-color: #FBFCC9;
+	border: 1px solid #C5BA00;
+	background-image: url(../images/errorhandler_warning.png);
+}
+
+.errorhandler.error-success
+{
+	background-color: #DEFCC9;
+	border: 1px solid #4CC500;
+	background-image: url(../images/errorhandler_success.png);
+}
+
+.errorhandler ul
+{
+	margin: 0px;
+	padding-left: 24px;
 }

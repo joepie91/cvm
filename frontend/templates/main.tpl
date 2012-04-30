@@ -23,6 +23,9 @@
 					<a class="button" id="button_alerts" href="#">Alerts</a>
 					<a class="button" id="button_api" href="#">API</a>
 				</div>
+				
+				<%?error>
+				
 				<h1>Overview</h1>
 				
 				<!-- <h2>Consolidated traffic example</h2> -->
@@ -72,7 +75,7 @@
 					<table class="vpsinfo">
 						<tr>
 							<th>Status</th>
-							<td><span class="online">Running</span> <span class="offline">Stopped</span> <span class="suspended">Suspended</span> </td>
+							<td><%?status></td>
 						</tr>
 						<tr>
 							<th>Server location</th>

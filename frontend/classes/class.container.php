@@ -63,6 +63,12 @@ class Container extends CPHPDatabaseRecordClass
 			case "sBandwidthUsed":
 				return $this->GetBandwidthUsed();
 				break;
+			case "sStatus":
+				return (int)$this->GetStatus();
+				break;
+			case "sStatusText":
+				return $this->GetStatusText();
+				break;
 			default:
 				return null;
 				break;
@@ -72,6 +78,47 @@ class Container extends CPHPDatabaseRecordClass
 	public function GetBandwidthUsed()
 	{
 		return ($this->sOutgoingTrafficUsed + $this->IncomingTrafficUsed) / (1024 * 1024);
+	}
+	
+	public function GetStatus()
+	{
+		$command = "vzctl status {$this->sInternalId}";
+		
+		$result = $this->sNode->ssh->RunCommandCached($command, false);
+		
+		if($result->returncode == 0)
+		{
+			$values = split_whitespace($result->stdout);
+			
+			if($values[4] == "running")
+			{
+				return CVM_STATUS_STARTED;
+			}
+			else
+			{
+				return CVM_STATUS_STOPPED;
+			}
+		}
+	}
+	
+	public function GetStatusText()
+	{
+		if($this->GetStatus() == CVM_STATUS_STARTED)
+		{
+			return "running";
+		}
+		elseif($this->GetStatus() == CVM_STATUS_STOPPED)
+		{
+			return "stopped";
+		}
+		elseif($this->GetStatus() == CVM_STATUS_SUSPENDED)
+		{
+			return "suspended";
+		}
+		else
+		{
+			return "unknown";
+		}
 	}
 	
 	public function Deploy($conf = array())
