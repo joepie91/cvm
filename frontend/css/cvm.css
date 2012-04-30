@@ -50,6 +50,12 @@ table.vpsinfo td
 	clear: both;
 }
 
+.preload
+{
+	width: 1px;
+	height: 1px;
+}
+
 .wrapper
 {
 	width: 900px;

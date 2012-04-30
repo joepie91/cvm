@@ -117,5 +117,6 @@
 				</div>
 			</div>
 		</div>
+		<img class="preload" src="images/loading.gif">
 	</body>
 </html>

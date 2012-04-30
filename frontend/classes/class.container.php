@@ -103,15 +103,24 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetStatusText()
 	{
-		if($this->GetStatus() == CVM_STATUS_STARTED)
+		if(isset($this->sStatus))
+		{
+			$status = $this->sStatus;
+		}
+		else
+		{
+			$status = $this->GetStatus();
+		}
+		
+		if($status == CVM_STATUS_STARTED)
 		{
 			return "running";
 		}
-		elseif($this->GetStatus() == CVM_STATUS_STOPPED)
+		elseif($status == CVM_STATUS_STOPPED)
 		{
 			return "stopped";
 		}
-		elseif($this->GetStatus() == CVM_STATUS_SUSPENDED)
+		elseif($status == CVM_STATUS_SUSPENDED)
 		{
 			return "suspended";
 		}

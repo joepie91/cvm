@@ -16,6 +16,7 @@ if($_GET['action'] == "start")
 		try
 		{
 			$sContainer->Start();
+			$sContainer->sStatus = CVM_STATUS_STARTED;
 			
 			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container started", "Your container was successfully started.");
 			$sError .= $err->Render();
@@ -39,6 +40,7 @@ elseif($_GET['action'] == "stop")
 		try
 		{
 			$sContainer->Stop();
+			$sContainer->sStatus = CVM_STATUS_STOPPED;
 			
 			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container stopped", "Your container was successfully stopped.");
 			$sError .= $err->Render();
@@ -69,6 +71,7 @@ elseif($_GET['action'] == "restart")
 		}
 		
 		$sContainer->Start();
+		$sContainer->sStatus = CVM_STATUS_STARTED;
 		
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container restarted", "Your container was successfully restarted.");
 		$sError .= $err->Render();
