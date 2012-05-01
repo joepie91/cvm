@@ -308,6 +308,8 @@ class Container extends CPHPDatabaseRecordClass
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
+		pretty_dump($result);
+		
 		if($result->returncode == 0)
 		{
 			return true;

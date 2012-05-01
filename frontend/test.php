@@ -32,6 +32,10 @@ else
 	{
 		$sContainer->AddIp($_GET['ip']);
 	}
+	elseif($_GET['action'] == "delip")
+	{
+		$sContainer->RemoveIp($_GET['ip']);
+	}
 	elseif($_GET['action'] == "user")
 	{
 		$sUser = new User(1);

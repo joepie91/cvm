@@ -269,9 +269,15 @@ table.vpsinfo td
 	font-weight: bold;
 }
 
-.suspended, .unknown
+.suspended
 {
 	color: #5B5F6B;
+	font-weight: bold;
+}
+
+.unknown
+{
+	color: black;
 	font-weight: bold;
 }
 
