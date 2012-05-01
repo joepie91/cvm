@@ -11,18 +11,8 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
-
-$_CPHP = true;
-require("cphp/base.php");
-require("include.config.php");
-require("include.exceptions.php");
-require("include.constants.php");
-require("include.parsing.php");
-require("classes/class.user.php");
-require("classes/class.controller.php");
-require("classes/class.container.php");
-require("classes/class.node.php");
-require("classes/class.template.php");
-require("classes/class.sshconnector.php");
+$settings['master_privkey'] = "/etc/cvm/key";
+$settings['master_pubkey'] = "/etc/cvm/key.pub";
+$settings['salt'] = "kAU0qM";
+ 
 ?>

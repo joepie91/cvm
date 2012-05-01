@@ -10,7 +10,7 @@ $(function(){
 				return false;
 			});
 			
-			$(this).children('.button-icon').addClass('running')[0].src = "images/loading.gif";
+			$(this).children('.button-icon').addClass('running')[0].src = "/images/loading.gif";
 			command_running = true;
 		}
 	});

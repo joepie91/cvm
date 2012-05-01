@@ -63,8 +63,8 @@ class Container extends CPHPDatabaseRecordClass
 			case "sBandwidthUsed":
 				return $this->GetBandwidthUsed();
 				break;
-			case "sStatus":
-				return (int)$this->GetStatus();
+			case "sCurrentStatus":
+				return (int)$this->GetCurrentStatus();
 				break;
 			case "sStatusText":
 				return $this->GetStatusText();
@@ -80,7 +80,7 @@ class Container extends CPHPDatabaseRecordClass
 		return ($this->sOutgoingTrafficUsed + $this->IncomingTrafficUsed) / (1024 * 1024);
 	}
 	
-	public function GetStatus()
+	public function GetCurrentStatus()
 	{
 		$command = "vzctl status {$this->sInternalId}";
 		
@@ -103,15 +103,8 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetStatusText()
 	{
-		if(isset($this->sStatus))
-		{
-			$status = $this->sStatus;
-		}
-		else
-		{
-			$status = $this->GetStatus();
-		}
-		
+		$status = $this->sCurrentStatus;
+	
 		if($status == CVM_STATUS_STARTED)
 		{
 			return "running";
