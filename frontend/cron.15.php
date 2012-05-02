@@ -20,19 +20,19 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 	{
 		$sContainer = new Container($row);
 		
-		//try
-		//{
+		try
+		{
 			$sContainer->UpdateTraffic();
-		//}
-		//catch (ContainerTrafficRetrieveException $e)
-		/*{
+		}
+		catch (ContainerTrafficRetrieveException $e)
+		{
 			if($sContainer->sCurrentStatus == CVM_STATUS_STARTED)
 			{
 				// This is not supposed to fail, as the container is running.
 				// Something shady going on.
 				// TODO: Log exception
 			}
-		}*/
+		}
 	}
 }
 ?>
