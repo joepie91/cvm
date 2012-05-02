@@ -8,13 +8,13 @@ $settings['salt'] = "kAU0qM";
 
 if($_GET['action'] == "deploy")
 {
-	$sContainer = new Container(2);
+	$sContainer = new Container(3);
 	
 	$sContainer->Deploy();
 }
 else
 {
-	$sContainer = new Container(1);
+	$sContainer = new Container(3);
 
 	if($_GET['action'] == "start")
 	{

@@ -134,10 +134,10 @@ class Container extends CPHPDatabaseRecordClass
 			--ostemplate {$this->sTemplate->sTemplateName}
 		");
 		
-		//$result = $this->sNode->ssh->RunCommand($command, false);
+		$result = $this->sNode->ssh->RunCommand($command, false);
 		$result->returncode = 0;
 
-		if($result->returncode == 0)
+		if($result->returncode == 0 && strpos($result->stderr, "ERROR") === false)
 		{
 			// TODO: set sensible defaults depending on container resource configuration
 			// http://wiki.openvz.org/UBC_consistency_check
@@ -148,18 +148,18 @@ class Container extends CPHPDatabaseRecordClass
 			$this->uStatus = CVM_STATUS_CREATED;
 			$this->InsertIntoDatabase();
 			
-			$sKMemSize = (isset($conf['sKMemSize'])) 		? $conf['sKMemSize'] : 		$this->sGuaranteedRam * 250;
+			$sKMemSize = (isset($conf['sKMemSize'])) 		? $conf['sKMemSize'] : 		$this->sGuaranteedRam * 65000;
 			$sKMemSizeLimit = (isset($conf['sKMemSizeLimit'])) 	? $conf['sKMemSizeLimit'] : 	(int)($sKMemSize * 1.1);
 			$sLockedPages = (isset($conf['sLockedPages'])) 		? $conf['sLockedPages'] : 	(int)($this->sGuaranteedRam * 1.5);
 			$sShmPages = (isset($conf['sShmPages'])) 		? $conf['sShmPages'] : 		$sLockedPages * 64;
-			$sOomGuarPages = (isset($conf['sOomGuarPages'])) 	? $conf['sOomGuarPages'] : 	$this->sGuaranteedRam * 400;
+			$sOomGuarPages = (isset($conf['sOomGuarPages'])) 	? $conf['sOomGuarPages'] : 	$this->sGuaranteedRam * 140;
 			$sTcpSock = (isset($conf['sTcpSock'])) 			? $conf['sTcpSock'] : 		$this->sGuaranteedRam * 3;
 			$sOtherSock = (isset($conf['sOtherSock'])) 		? $conf['sOtherSock'] : 	$this->sGuaranteedRam * 3;
 			$sFLock = (isset($conf['sFLock'])) 			? $conf['sFLock'] : 		(int)($this->sGuaranteedRam * 0.6);
 			$sFLockLimit = (isset($conf['sFLockLimit'])) 		? $conf['sFLockLimit'] : 	(int)($sFLock * 1.1);
-			$sTcpSndBuf = (isset($conf['sTcpSndBuf'])) 		? $conf['sTcpSndBuf'] : 	(int)($this->sGuaranteedRam * 20000);
-			$sTcpRcvBuf = (isset($conf['sTcpRcvBuf'])) 		? $conf['sTcpRcvBuf'] : 	(int)($this->sGuaranteedRam * 20000);
-			$sOtherBuf = (isset($conf['sOtherBuf'])) 		? $conf['sOtherBuf'] : 		(int)($this->sGuaranteedRam * 20000);
+			$sTcpSndBuf = (isset($conf['sTcpSndBuf'])) 		? $conf['sTcpSndBuf'] : 	(int)($this->sGuaranteedRam * 10000);
+			$sTcpRcvBuf = (isset($conf['sTcpRcvBuf'])) 		? $conf['sTcpRcvBuf'] : 	(int)($this->sGuaranteedRam * 10000);
+			$sOtherBuf = (isset($conf['sOtherBuf'])) 		? $conf['sOtherBuf'] : 		(int)($this->sGuaranteedRam * 10000);
 			$sOtherBufLimit = (isset($conf['sOtherBufLimit'])) 	? $conf['sOtherBufLimit'] : 	(int)($sTcpSndBuf * 2);
 			$sTcpSndBufLimit = (isset($conf['sTcpSndBufLimit'])) 	? $conf['sTcpSndBufLimit'] : 	(int)($sTcpSndBuf * 2);
 			$sTcpRcvBufLimit = (isset($conf['sTcpRcvBufLimit'])) 	? $conf['sTcpRcvBufLimit'] : 	(int)($sTcpRcvBuf * 2);
@@ -167,7 +167,7 @@ class Container extends CPHPDatabaseRecordClass
 			$sNumFile = (isset($conf['sNumFile'])) 			? $conf['sNumFile'] : 		$this->sGuaranteedRam * 32;
 			$sDCache = (isset($conf['sDCache'])) 			? $conf['sDCache'] : 		$this->sGuaranteedRam * 16000;
 			$sDCacheLimit = (isset($conf['sDCacheLimit'])) 		? $conf['sDCacheLimit'] : 	(int)($sDCache * 1.1);
-			$sAvgProc = (isset($conf['sAvgProc'])) 			? $conf['sAvgProc'] : 		(int)($this->sGuaranteedRam * 1.5);
+			$sAvgProc = (isset($conf['sAvgProc'])) 			? $conf['sAvgProc'] : 		(int)($this->sGuaranteedRam);
 			
 			$command = shrink_command("vzctl set {$this->sInternalId}
 				--onboot yes
@@ -235,9 +235,7 @@ class Container extends CPHPDatabaseRecordClass
 				--save
 			");*/
 			
-			pretty_dump($command);
-			
-			//$result = $this->sNode->ssh->RunCommand($command, false);
+			$result = $this->sNode->ssh->RunCommand($command, false);
 			
 			if($result->returncode == 0)
 			{
@@ -339,7 +337,7 @@ class Container extends CPHPDatabaseRecordClass
 		if($result->returncode == 0)
 		{
 			$lines = split_lines($result->stdout);
-			$values = split_whitespace($lines[0]);
+			$values = split_whitespace(str_replace(":", " ", $lines[0]));
 			
 			$uIncoming = $values[1];
 			$uOutgoing = $values[9];

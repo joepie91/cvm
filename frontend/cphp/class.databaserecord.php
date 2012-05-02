@@ -345,6 +345,8 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 					$this->sId = mysql_insert_id();
 				}
 				
+				$this->PurgeCache();
+				
 				return $result;
 			}
 			else
