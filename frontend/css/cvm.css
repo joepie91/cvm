@@ -124,7 +124,7 @@ table.vpslist tr:hover
 	text-align: right;
 }
 
-.userbox a
+.userbox a, .userbox a:active
 {
 	display: block;
 	float: left;
@@ -165,7 +165,7 @@ table.vpslist tr:hover
 	background-color: #DCDCDC;
 }
 
-.sidebar a.button
+.sidebar a.sidebutton
 {
 	display: block;
 	padding: 5px 8px;
@@ -178,7 +178,7 @@ table.vpslist tr:hover
 	background-position: 8px 10px;
 }
 
-.sidebar a.button:hover
+.sidebar a.sidebutton:hover
 {
 	background-color: #CDCCDE;
 }
