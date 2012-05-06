@@ -30,7 +30,7 @@ else
 	$sLoggedIn = false;
 }
 
-$sMainContents = "";
+$sMainContents = "hai";
 $sMainClass = "";
 $sPageTitle = "";
 
