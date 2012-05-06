@@ -10,7 +10,7 @@
 	</tr>
 	<%foreach container in containers>
 		<tr>
-			<td>
+			<td class="container-status">
 				<%if container[status] == running>
 					<img src="/images/icon_online.png" alt="Running">
 				<%/if><%if container[status] == stopped>
@@ -31,9 +31,18 @@
 					KVM
 				<%/if>
 			</td>
-			<td><%?container[node]> (<%?container[node-hostname]>)</td>
-			<td><%?container[diskspace]></td>
-			<td><%?container[guaranteed-ram]></td>
+			<td>
+				<span class="nodename"><%?container[node]></span>
+				<span class="hostname">(<%?container[node-hostname]>)</span>
+			</td>
+			<td>
+				<%?container[diskspace]>
+				<span class="unit"><%?container[diskspace-unit]></span>
+			</td>
+			<td>
+				<%?container[guaranteed-ram]>
+				<span class="unit"><%?container[guaranteed-ram-unit]></span>
+			</td>
 			<td><%?container[template]></td>
 		</tr>
 	<%/foreach>

@@ -32,12 +32,28 @@ p
 
 table
 {
-	
+	font-size: 15px;
+	border-spacing: 0px;
+	width: 100%;
 }
 
 th
 {
 	text-align: left;
+	background-color: #12005E;
+	color: white;
+	padding: 3px 4px;
+}
+
+td
+{
+	vertical-align: top;
+	padding: 4px 4px 0px 4px;
+}
+
+td.container-status img
+{
+	margin-top: 3px;
 }
 
 table.vpsinfo td
@@ -291,6 +307,21 @@ table.vpsinfo td
 	margin-top: 4px;
 }
 
+.nodename
+{
+	font-size: 14px;
+}
+
+.hostname
+{
+	font-size: 13px;
+	color: gray;
+}
+
+.unit
+{
+	color: gray;
+}
 
 /* CPHPErrorHandler styles */
 

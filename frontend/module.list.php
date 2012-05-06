@@ -27,8 +27,10 @@ if($sLoggedIn === true)
 			'node'			=> $sContainer->sNode->sName,
 			'node-hostname'		=> $sContainer->sNode->sHostname,
 			'template'		=> $sContainer->sTemplate->sName,
-			'diskspace'		=> $sContainer->sDiskSpace,
+			'diskspace'		=> number_format($sContainer->sDiskSpace / 1024),
+			'diskspace-unit'	=> "GB",
 			'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
+			'guaranteed-ram-unit'	=> "MB",
 			'status'		=> $sContainer->sStatusText,
 			'virtualization-type'	=> $sContainer->sVirtualizationType
 		);
