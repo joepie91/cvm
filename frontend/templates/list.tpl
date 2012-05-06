@@ -1,15 +1,24 @@
 <table>
 	<tr>
+		<th></th>
 		<th>Hostname</th>
 		<th>Platform</th>
 		<th>Node</th>
 		<th>Disk space</th>
 		<th>RAM</th>
 		<th>Template</th>
-		<th>Status</th>
 	</tr>
 	<%foreach container in containers>
 		<tr>
+			<td>
+				<%if container[status] == running>
+					<img src="/images/icon_online.png" alt="Running">
+				<%/if><%if container[status] == stopped>
+					<img src="/images/icon_offline.png" alt="Stopped">
+				<%/if><%if container[status] == suspended>
+					<img src="/images/icon_suspended.png" alt="Suspended">
+				<%/if>
+			</td>
 			<td><%?container[hostname]></td>
 			<td>
 				<%if container[virtualization-type] == 1>
@@ -26,17 +35,6 @@
 			<td><%?container[diskspace]></td>
 			<td><%?container[guaranteed-ram]></td>
 			<td><%?container[template]></td>
-			<td>
-				<%if container[status] == running>
-					<span class="online">Running</span>
-				<%/if><%if container[status] == stopped>
-					<span class="offline">Stopped</span>
-				<%/if><%if container[status] == suspended>
-					<span class="suspended">Suspended</span>
-				<%/if><%if container[status] == unknown>
-					<span class="unknown">Unknown</span>
-				<%/if>
-			</td>
 		</tr>
 	<%/foreach>
 </table>
