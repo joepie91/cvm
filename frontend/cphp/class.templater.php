@@ -82,87 +82,8 @@ class Templater
 	{
 		if(!is_null($this->tpl))
 		{
-			$this->tpl_rendered = preg_replace_callback("/<%foreach ([a-z0-9_-]+) in ([a-z0-9_-]+)>(.*?)<%\/foreach>/si", function($matches) use($strings) {
-				$variable_name = $matches[1];
-				$array_name = $matches[2];
-				$template = $matches[3];
-				$returnvalue = "";
-				
-				if(isset($strings[$array_name]))
-				{
-					foreach($strings[$array_name] as $item)
-					{
-						$rendered = $template;
-						
-						foreach($item as $key => $value)
-						{
-							$rendered = str_replace("<%?{$variable_name}[{$key}]>", $value, $rendered);
-						}
-						
-						$returnvalue .= $rendered;
-					}
-					
-					return $returnvalue;
-				}
-				
-				return false;
-			}, $this->tpl_rendered);
-			
-			$this->tpl_rendered = preg_replace_callback("/<%if ([a-z0-9_-]+) (=|==|>|<|>=|<=|!=) ([^>]+)>(.*?)<%\/if>/si", function($matches) use($strings) {
-				$variable_name = $matches[1];
-				$operator = $matches[2];
-				$value = $matches[3];
-				$template = $matches[4];
-				
-				if(isset($strings[$variable_name]))
-				{
-					$variable = $strings[$variable_name];
-					
-					if($variable == "true") { $variable = true; }
-					if($variable == "false") { $variable = false; }
-					if(is_numeric($variable)) { $variable = (int)$variable; }
-					if($value == "true") { $value = true; }
-					if($value == "false") { $value = false; }
-					if(is_numeric($value)) { $value = (int)$value; }
-					
-					switch($operator)
-					{
-						case "=":
-						case "==":
-							$display = ($variable == $value);
-							break;
-						case ">":
-							$display = ($variable > $value);
-							break;
-						case "<":
-							$display = ($variable < $value);
-							break;
-						case ">=":
-							$display = ($variable >= $value);
-							break;
-						case "<=":
-							$display = ($variable <= $value);
-							break;
-						case "!=":
-							$display = ($variable != $value);
-							break;
-						default:
-							return false;
-							break;
-					}
-					
-					if($display === true)
-					{
-						return $template;
-					}
-					else
-					{
-						return "";
-					}
-				}
-				
-				return false;
-			}, $this->tpl_rendered);
+			$this->tpl_rendered = $this->ParseForEach($this->tpl_rendered, $strings);
+			$this->tpl_rendered = $this->ParseIf($this->tpl_rendered, $strings);
 			
 			preg_match_all("/<%\?([a-zA-Z0-9_-]+)>/", $this->tpl_rendered, $strlist);
 			foreach($strlist[1] as $str)
@@ -177,6 +98,139 @@ class Templater
 		{
 			Throw new Exception("No template loaded.");
 		}
+	}
+	
+	public function ParseForEach($source, $data)
+	{
+		$templater = $this;
+		
+		return preg_replace_callback("/<%foreach ([a-z0-9_-]+) in ([a-z0-9_-]+)>(.*?)<%\/foreach>/si", function($matches) use($data, $templater) {
+			$variable_name = $matches[1];
+			$array_name = $matches[2];
+			$template = $matches[3];
+			$returnvalue = "";
+			
+			if(isset($data[$array_name]))
+			{
+				foreach($data[$array_name] as $item)
+				{
+					$rendered = $template;
+					
+					$rendered = $templater->ParseIf($rendered, $data, $item, $variable_name);
+					
+					foreach($item as $key => $value)
+					{
+						$rendered = str_replace("<%?{$variable_name}[{$key}]>", $value, $rendered);
+					}
+					
+					$returnvalue .= $rendered;
+				}
+				
+				return $returnvalue;
+			}
+			
+			return false;
+		}, $source);
+	}
+	
+	public function ParseIf($source, $data, $context = null, $identifier = "")
+	{
+		return preg_replace_callback("/<%if ([][a-z0-9_-]+) (=|==|>|<|>=|<=|!=) ([^>]+)>(.*?)<%\/if>/si", function($matches) use($data, $context, $identifier) {
+			$variable_name = $matches[1];
+			$operator = $matches[2];
+			$value = $matches[3];
+			$template = $matches[4];
+			
+			if(!empty($identifier))
+			{
+				if(preg_match("/{$identifier}\[([a-z0-9_-]+)\]/i", $variable_name, $submatches))
+				{
+					// Local variable.
+					$name = $submatches[1];
+					
+					if(isset($context[$name]))
+					{
+						$variable = $context[$name];
+					}
+					else
+					{
+						return false;
+					}
+				}
+				elseif(preg_match("/[a-z0-9_-]+\[[a-z0-9_-]+\]/i", $variable_name))
+				{
+					// Not the right scope.
+					return false;
+				}
+				else
+				{
+					// Global variable.
+					if(isset($data[$variable_name]))
+					{
+						$variable = $data[$variable_name];
+					}
+					else
+					{
+						return false;
+					}
+				}
+			}
+			else
+			{
+				if(isset($data[$variable_name]))
+				{
+					$variable = $data[$variable_name];
+				}
+				else
+				{
+					return false;
+				}
+			}
+				
+			if($variable == "true") { $variable = true; }
+			if($variable == "false") { $variable = false; }
+			if(is_numeric($variable)) { $variable = (int)$variable; }
+			if($value == "true") { $value = true; }
+			if($value == "false") { $value = false; }
+			if(is_numeric($value)) { $value = (int)$value; }
+			
+			switch($operator)
+			{
+				case "=":
+				case "==":
+					$display = ($variable == $value);
+					break;
+				case ">":
+					$display = ($variable > $value);
+					break;
+				case "<":
+					$display = ($variable < $value);
+					break;
+				case ">=":
+					$display = ($variable >= $value);
+					break;
+				case "<=":
+					$display = ($variable <= $value);
+					break;
+				case "!=":
+					$display = ($variable != $value);
+					break;
+				default:
+					return false;
+					break;
+			}
+			
+			if($display === true)
+			{
+				return $template;
+			}
+			else
+			{
+				return "";
+			}
+			
+			return false;
+		}, $source);
 	}
 	
 	public function Render()

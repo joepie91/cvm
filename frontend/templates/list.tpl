@@ -11,7 +11,17 @@
 	<%foreach container in containers>
 		<tr>
 			<td><%?container[hostname]></td>
-			<td><%?container[virtualization-type]></td>
+			<td>
+				<%if container[virtualization-type] == 1>
+					OpenVZ
+				<%/if><%if container[virtualization-type] == 2>
+					Xen PV
+				<%/if><%if container[virtualization-type] == 3>
+					Xen HVM
+				<%/if><%if container[virtualization-type] == 4>
+					KVM
+				<%/if>
+			</td>
 			<td><%?container[node]> (<%?container[node-hostname]>)</td>
 			<td><%?container[diskspace]></td>
 			<td><%?container[guaranteed-ram]></td>
