@@ -17,6 +17,11 @@ try
 {
 	$sContainer = new Container($mainrouter->uParameters[1]);
 	
+	if($sContainer->sUserId != $sUser->sId)
+	{
+		throw new UnauthorizedException("You are not authorized to control this container.");
+	}
+	
 	$sError = "";
 	$sPageContents = "";
 

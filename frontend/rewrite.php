@@ -14,6 +14,15 @@
 $_CVM = true;
 require("includes/include.base.php");
 
+if(!empty($_SESSION['userid']))
+{
+	$sUser = new User($sUser);
+}
+else
+{
+	$sUser = new User(0);
+}
+
 $sMainContents = "";
 $sMainClass = "";
 $sPageTitle = "";
@@ -25,19 +34,27 @@ $sPageContents = null;
 $router = null;
 $sError = null;
 
-$mainrouter = new CPHPRouter();
+try
+{
+	$mainrouter = new CPHPRouter();
 
-$mainrouter->routes = array(
-	0 => array(
-		'^/?$'			=> "module.home.php",
-		'^/containers/?$'	=> "module.list.php",
-		'^/login/?$'		=> "module.login.php",
-		'^/logout/?$'		=> "module.logout.php",
-		'^/([0-9]+)(/.*)?$'	=> "module.vps.php"
-	)
-);
+	$mainrouter->routes = array(
+		0 => array(
+			'^/?$'			=> "module.home.php",
+			'^/containers/?$'	=> "module.list.php",
+			'^/login/?$'		=> "module.login.php",
+			'^/logout/?$'		=> "module.logout.php",
+			'^/([0-9]+)(/.*)?$'	=> "module.vps.php"
+		)
+	);
 
-$mainrouter->RouteRequest();
+	$mainrouter->RouteRequest();
+}
+catch (UnauthorizedException $e)
+{
+	$sPageTitle = "Unauthorized";
+	$sMainContents = "You are not authorized to view this page.";
+}
 
 echo(Templater::InlineRender("main", $locale->strings, array(
 	'title'			=> $sPageTitle,
