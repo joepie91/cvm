@@ -28,7 +28,7 @@ $sMainClass = "";
 $sPageTitle = "";
 
 // Initialize some variables to ensure they are available through the application.
-// This works about the inability of CPHP to retain variables set in the first rewrite.
+// This works around the inability of CPHP to retain variables set in the first rewrite.
 $sContainer = null;
 $sPageContents = null;
 $router = null;
