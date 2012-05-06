@@ -13,5 +13,5 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-
+$sMainContents = "Overview goes here...";
 ?>
