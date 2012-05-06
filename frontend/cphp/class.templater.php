@@ -82,6 +82,92 @@ class Templater
 	{
 		if(!is_null($this->tpl))
 		{
+			$this->tpl_rendered = preg_replace_callback("/<%foreach ([a-z0-9_-]+) in ([a-z0-9_-]+)>(.*?)<%\/foreach>/si", function($matches) use($strings) {
+				$variable_name = $matches[1];
+				$array_name = $matches[2];
+				$template = $matches[3];
+				$returnvalue = "";
+				
+				if(isset($strings[$array_name]))
+				{
+					foreach($strings[$array_name] as $item)
+					{
+						$rendered = $template;
+						
+						foreach($item as $key => $value)
+						{
+							$rendered = str_replace("<%?{$variable_name}[{$key}]>", $value, $rendered);
+						}
+						
+						$returnvalue .= $rendered;
+					}
+					
+					return $returnvalue;
+				}
+				
+				return false;
+			}, $this->tpl_rendered);
+			
+			$this->tpl_rendered = preg_replace_callback("/<%if ([a-z0-9_-]+) (=|==|>|<|>=|<=|!=) ([^>]+)>(.*?)<%\/if>/si", function($matches) use($strings) {
+				$variable_name = $matches[1];
+				$operator = $matches[2];
+				$value = $matches[3];
+				$template = $matches[4];
+				
+				if(isset($strings[$variable_name]))
+				{
+					$variable = $strings[$variable_name];
+					
+					if($variable == "true") { $variable = true; }
+					if($variable == "false") { $variable = false; }
+					if(is_numeric($variable)) { $variable = (int)$variable; }
+					if($value == "true") { $value = true; }
+					if($value == "false") { $value = false; }
+					if(is_numeric($value)) { $value = (int)$value; }
+					
+					var_dump($variable, $operator, $value);
+					
+					switch($operator)
+					{
+						case "=":
+						case "==":
+							$display = ($variable == $value);
+							break;
+						case ">":
+							$display = ($variable > $value);
+							break;
+						case "<":
+							$display = ($variable < $value);
+							break;
+						case ">=":
+							$display = ($variable >= $value);
+							break;
+						case "<=":
+							$display = ($variable <= $value);
+							break;
+						case "!=":
+							$display = ($variable != $value);
+							break;
+						default:
+							return false;
+							break;
+					}
+					
+					var_dump($display);
+					
+					if($display === true)
+					{
+						return $template;
+					}
+					else
+					{
+						return "";
+					}
+				}
+				
+				return false;
+			}, $this->tpl_rendered);
+			
 			preg_match_all("/<%\?([a-zA-Z0-9_-]+)>/", $this->tpl_rendered, $strlist);
 			foreach($strlist[1] as $str)
 			{
