@@ -38,6 +38,6 @@ $sPageContents = Templater::InlineRender("vps.overview", $locale->strings, array
 	'disk-space'		=> "{$sContainer->sDiskSpace}MB",
 	'total-traffic-limit'	=> "{$sContainer->sTotalTrafficLimit} bytes",
 	'bandwidth-limit'	=> "100mbit",
-	'status'		=> Templater::InlineRender("status.{$sContainer->sStatusText}", $locale->strings)
+	'status'		=> $sContainer->sStatusText
 ));
 ?>

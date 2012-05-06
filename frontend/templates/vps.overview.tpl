@@ -47,7 +47,17 @@
 	<table class="vpsinfo">
 		<tr>
 			<th>Status</th>
-			<td><%?status></td>
+			<td>
+				<%if status == running>
+					<span class="online">Running</span>
+				<%/if><%if status == stopped>
+					<span class="offline">Stopped</span>
+				<%/if><%if status == suspended>
+					<span class="suspended">Suspended</span>
+				<%/if><%if status == unknown>
+					<span class="unknown">Unknown</span>
+				<%/if>
+			</td>
 		</tr>
 		<tr>
 			<th>Server location</th>
