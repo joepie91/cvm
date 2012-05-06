@@ -120,7 +120,26 @@ table.vpslist tr:hover
 	font-size: 16px;
 	font-weight: normal;
 	float: right;
-	margin-top: 46px;
+	margin-top: 28px;
+	text-align: right;
+}
+
+.userbox a
+{
+	display: block;
+	float: left;
+	padding: 5px 8px;
+	margin: 6px 3px 3px 3px;
+	font-size: 14px;
+	font-weight: bold;
+	text-decoration: none;
+	background-color: #31305E;
+	color: white;
+}
+
+.userbox a:hover
+{
+	background-color: #15144E;
 }
 
 .main
