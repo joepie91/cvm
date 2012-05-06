@@ -16,7 +16,7 @@
 			<td><%?container[diskspace]></td>
 			<td><%?container[guaranteed-ram]></td>
 			<td><%?container[template]></td>
-			<td><%?container[hostname]></td>
+			<td><%?container[status]></td>
 		</tr>
 	<%/foreach>
 </table>
