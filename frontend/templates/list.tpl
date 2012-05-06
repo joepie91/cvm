@@ -26,7 +26,17 @@
 			<td><%?container[diskspace]></td>
 			<td><%?container[guaranteed-ram]></td>
 			<td><%?container[template]></td>
-			<td><%?container[status]></td>
+			<td>
+				<%if container[status] == running>
+					<span class="online">Running</span>
+				<%/if><%if container[status] == stopped>
+					<span class="offline">Stopped</span>
+				<%/if><%if container[status] == suspended>
+					<span class="suspended">Suspended</span>
+				<%/if><%if container[status] == unknown>
+					<span class="unknown">Unknown</span>
+				<%/if>
+			</td>
 		</tr>
 	<%/foreach>
 </table>
