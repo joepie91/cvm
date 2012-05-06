@@ -186,12 +186,13 @@ class Templater
 					return false;
 				}
 			}
+			
 				
-			if($variable == "true") { $variable = true; }
-			if($variable == "false") { $variable = false; }
+			if($variable === "true") { $variable = true; }
+			if($variable === "false") { $variable = false; }
 			if(is_numeric($variable)) { $variable = (int)$variable; }
-			if($value == "true") { $value = true; }
-			if($value == "false") { $value = false; }
+			if($value === "true") { $value = true; }
+			if($value === "false") { $value = false; }
 			if(is_numeric($value)) { $value = (int)$value; }
 			
 			switch($operator)
