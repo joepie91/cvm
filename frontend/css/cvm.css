@@ -76,9 +76,25 @@ table.vpsinfo th
 	width: 150px;
 }
 
+table.vpslist tr:hover
+{
+	background-color: #BABAD0;
+}
+
+.clickable a
+{
+	color: black;
+	text-decoration: none;
+}
+
 .clear
 {
 	clear: both;
+}
+
+.clickable
+{
+	cursor: pointer;
 }
 
 .preload

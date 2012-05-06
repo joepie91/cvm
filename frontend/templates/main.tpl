@@ -17,7 +17,7 @@
 				<%if logged-in == true>
 					<div class="userbox">
 						<div>You are logged in as <strong><%?username></strong>.</div>
-						<div><a href="/">Account overview</a> | <a href="/containers/">My VPSes</a></div>
+						<div><a href="/account/">Account settings</a> | <a href="/">My VPSes</a></div> | <a href="/logout/">Log out</a></div>
 					</div>
 				<%/if>
 			</div>

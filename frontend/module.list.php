@@ -23,6 +23,7 @@ if($sLoggedIn === true)
 	{
 		$sContainer = new Container($row);
 		$sContainerList[] = array(
+			'id'			=> $sContainer->sId,
 			'hostname'		=> $sContainer->sHostname,
 			'node'			=> $sContainer->sNode->sName,
 			'node-hostname'		=> $sContainer->sNode->sHostname,

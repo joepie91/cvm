@@ -1,4 +1,4 @@
-<table>
+<table class="vpslist">
 	<tr>
 		<th></th>
 		<th>Hostname</th>
@@ -9,7 +9,7 @@
 		<th>Template</th>
 	</tr>
 	<%foreach container in containers>
-		<tr>
+		<tr class="clickable" data-url="/<%?container[id]>/">
 			<td class="container-status">
 				<%if container[status] == running>
 					<img src="/images/icon_online.png" alt="Running">
@@ -19,21 +19,29 @@
 					<img src="/images/icon_suspended.png" alt="Suspended">
 				<%/if>
 			</td>
-			<td><%?container[hostname]></td>
 			<td>
-				<%if container[virtualization-type] == 1>
-					OpenVZ
-				<%/if><%if container[virtualization-type] == 2>
-					Xen PV
-				<%/if><%if container[virtualization-type] == 3>
-					Xen HVM
-				<%/if><%if container[virtualization-type] == 4>
-					KVM
-				<%/if>
+				<a href="/<%?container[id]>/">
+					<%?container[hostname]>
+				</a>
 			</td>
 			<td>
-				<span class="nodename"><%?container[node]></span>
-				<span class="hostname">(<%?container[node-hostname]>)</span>
+				<a href="/<%?container[id]>/">
+					<%if container[virtualization-type] == 1>
+						OpenVZ
+					<%/if><%if container[virtualization-type] == 2>
+						Xen PV
+					<%/if><%if container[virtualization-type] == 3>
+						Xen HVM
+					<%/if><%if container[virtualization-type] == 4>
+						KVM
+					<%/if>
+				</a>
+			</td>
+			<td>
+				<a href="/<%?container[id]>/">
+					<span class="nodename"><%?container[node]></span>
+					<span class="hostname">(<%?container[node-hostname]>)</span>
+				</a>
 			</td>
 			<td>
 				<%?container[diskspace]>

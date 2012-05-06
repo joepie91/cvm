@@ -16,7 +16,7 @@ require("includes/include.base.php");
 
 $sTemplateParameters = array();
 
-//$_SESSION['userid'] = 1;
+$_SESSION['userid'] = 1;
 
 if(!empty($_SESSION['userid']))
 {

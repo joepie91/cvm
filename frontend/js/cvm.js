@@ -1,6 +1,10 @@
 var command_running = false;
 
 $(function(){
+	$('.clickable').click(function(){
+		window.location.href = $(this).data('url');
+	});
+	
 	$('.button-loader').click(function(){
 		if(command_running === false)
 		{
