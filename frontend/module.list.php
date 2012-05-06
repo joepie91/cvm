@@ -13,5 +13,35 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-$sMainContents = "Container list goes here...";
+if($sLoggedIn === true)
+{
+	$result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$sUser->sId}'");
+	
+	$sContainerList = array();
+	
+	foreach($result->data as $row)
+	{
+		$sContainer = new Container($row);
+		$sContainerList[] = array(
+			'hostname'		=> $sContainer->sHostname,
+			'node'			=> $sContainer->sNode->sName,
+			'node-hostname'		=> $sContainer->sNode->sHostname,
+			'template'		=> $sContainer->sTemplate->sName,
+			'diskspace'		=> $sContainer->sDiskSpace,
+			'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
+			'status'		=> $sContainer->sStatusText,
+			'virtualization-type'	=> $sContainer->sVirtualizationType
+		);
+	}
+	
+	$sMainContents = Templater::InlineRender("list", $locale->strings, array(
+		'containers'	=> $sContainerList
+	));
+}
+else
+{
+	throw new UnauthorizedException("You must be logged in to view this page.");
+}
+
+$sMainContents = "";
 ?>
