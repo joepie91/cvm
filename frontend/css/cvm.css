@@ -40,7 +40,7 @@ table
 th
 {
 	text-align: left;
-	background-color: #12005E;
+	background-color: #31305E;
 	color: white;
 	padding: 3px 4px;
 }
@@ -51,14 +51,29 @@ td
 	padding: 4px 4px 0px 4px;
 }
 
+table.vertical th
+{
+	padding: 3px 7px;
+}
+
 td.container-status img
 {
 	margin-top: 3px;
 }
 
+table.vpsinfo
+{
+	border: 2px solid #31305E;
+}
+
 table.vpsinfo td
 {
 	padding: 2px 13px;
+}
+
+table.vpsinfo th
+{
+	width: 150px;
 }
 
 .clear

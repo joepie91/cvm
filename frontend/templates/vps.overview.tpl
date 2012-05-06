@@ -42,58 +42,56 @@
 	<div class="clear"></div>
 </div>
 
-<div class="infobox">
-	<h2>VPS configuration</h2>
-	<table class="vpsinfo">
-		<tr>
-			<th>Status</th>
-			<td>
-				<%if status == running>
-					<span class="online">Running</span>
-				<%/if><%if status == stopped>
-					<span class="offline">Stopped</span>
-				<%/if><%if status == suspended>
-					<span class="suspended">Suspended</span>
-				<%/if><%if status == unknown>
-					<span class="unknown">Unknown</span>
-				<%/if>
-			</td>
-		</tr>
-		<tr>
-			<th>Server location</th>
-			<td><%?server-location></td>
-		</tr>
-		<tr>
-			<th>Operating system</th>
-			<td><%?operating-system></td>
-		</tr>
-		<tr>
-			<th>IPv4 Addresses</th>
-			<td>98.142.213.226, 204.12.235.84</td>
-		</tr>
-		<tr>
-			<th>IPv6 Addresses</th>
-			<td>2607:f7a0:1:1::24:6</td>
-		</tr>
-		<tr>
-			<th>Guaranteed RAM</th>
-			<td><%?guaranteed-ram></td>
-		</tr>
-		<tr>
-			<th>Burstable RAM</th>
-			<td><%?burstable-ram></td>
-		</tr>
-		<tr>
-			<th>Disk space</th>
-			<td><%?disk-space></td>
-		</tr>
-		<tr>
-			<th>Traffic</th>
-			<td><%?total-traffic-limit></td>
-		</tr>
-		<tr>
-			<th>Bandwidth</th>
-			<td><%?bandwidth-limit></td>
-		</tr>
-	</table>
-</div>
+<h2>VPS configuration</h2>
+<table class="vpsinfo vertical">
+	<tr>
+		<th>Status</th>
+		<td>
+			<%if status == running>
+				<span class="online">Running</span>
+			<%/if><%if status == stopped>
+				<span class="offline">Stopped</span>
+			<%/if><%if status == suspended>
+				<span class="suspended">Suspended</span>
+			<%/if><%if status == unknown>
+				<span class="unknown">Unknown</span>
+			<%/if>
+		</td>
+	</tr>
+	<tr>
+		<th>Server location</th>
+		<td><%?server-location></td>
+	</tr>
+	<tr>
+		<th>Operating system</th>
+		<td><%?operating-system></td>
+	</tr>
+	<tr>
+		<th>IPv4 Addresses</th>
+		<td>98.142.213.226, 204.12.235.84</td>
+	</tr>
+	<tr>
+		<th>IPv6 Addresses</th>
+		<td>2607:f7a0:1:1::24:6</td>
+	</tr>
+	<tr>
+		<th>Guaranteed RAM</th>
+		<td><%?guaranteed-ram></td>
+	</tr>
+	<tr>
+		<th>Burstable RAM</th>
+		<td><%?burstable-ram></td>
+	</tr>
+	<tr>
+		<th>Disk space</th>
+		<td><%?disk-space></td>
+	</tr>
+	<tr>
+		<th>Traffic</th>
+		<td><%?total-traffic-limit></td>
+	</tr>
+	<tr>
+		<th>Bandwidth</th>
+		<td><%?bandwidth-limit></td>
+	</tr>
+</table>
