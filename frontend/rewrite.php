@@ -14,9 +14,14 @@
 $_CVM = true;
 require("includes/include.base.php");
 
+$sUserbox = "";
+
 if(!empty($_SESSION['userid']))
 {
-	$sUser = new User($sUser);
+	$sUser = new User($_SESSION['userid']);
+	$sUserbox = Templater::InlineRender("userbox", $locale->strings, array(
+		'username'	=> "joepie91"
+	));
 }
 else
 {
@@ -57,6 +62,7 @@ catch (UnauthorizedException $e)
 }
 
 echo(Templater::InlineRender("main", $locale->strings, array(
+	'userbox'		=> $sUserbox,
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
 	'main-class'		=> $sMainClass

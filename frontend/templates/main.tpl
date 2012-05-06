@@ -14,10 +14,7 @@
 		<div class="wrapper">
 			<div class="header">
 				<img src="/images/logo.png">
-				<div class="userbox">
-					<div>You are logged in as <strong>joepie91</strong>.</div>
-					<div><a href="/">Account overview</a> | <a href="/containers/">My VPSes</a></div>
-				</div>
+				<%?userbox>
 			</div>
 			<div class="main <%?main-class>">
 				<%?main>
