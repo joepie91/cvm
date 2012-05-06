@@ -15,6 +15,7 @@ $_CVM = true;
 require("includes/include.base.php");
 
 $sMainContents = "";
+$sMainClass = "";
 $sPageTitle = "";
 
 // Initialize some variables to ensure they are available through the application.
@@ -29,6 +30,7 @@ $mainrouter = new CPHPRouter();
 $mainrouter->routes = array(
 	0 => array(
 		'^/?$'			=> "module.home.php",
+		'^/containers/?$'	=> "module.list.php",
 		'^/login/?$'		=> "module.login.php",
 		'^/logout/?$'		=> "module.logout.php",
 		'^/([0-9]+)(/.*)?$'	=> "module.vps.php"
@@ -39,7 +41,8 @@ $mainrouter->RouteRequest();
 
 echo(Templater::InlineRender("main", $locale->strings, array(
 	'title'			=> $sPageTitle,
-	'main'			=> $sMainContents
+	'main'			=> $sMainContents,
+	'main-class'		=> $sMainClass
 )));
 
 ?>

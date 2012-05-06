@@ -82,8 +82,12 @@ table.vpsinfo td
 	background-color: #F1F1F1;
 	padding: 9px 13px;
 	border: 2px solid #817F9D;
-	padding-left: 225px;
 	min-height: 400px;
+}
+
+.main.shift
+{
+	padding-left: 225px;
 }
 
 .sidebar

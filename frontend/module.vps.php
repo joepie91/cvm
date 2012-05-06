@@ -20,6 +20,8 @@ try
 	$sError = "";
 	$sPageContents = "";
 
+	$sMainClass = "shift";
+
 	$router = new CPHPRouter();
 
 	$router->routes = array(

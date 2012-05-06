@@ -16,7 +16,7 @@
 					<div><a href="/">Account overview</a> | <a href="/containers/">My VPSes</a></div>
 				</div>
 			</div>
-			<div class="main">
+			<div class="main <%?main-class>">
 				<%?main>
 			</div>
 			<div class="footer">
