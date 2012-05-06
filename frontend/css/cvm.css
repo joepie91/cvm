@@ -424,3 +424,21 @@ table.vpslist tr:hover
 	margin: 0px;
 	padding-left: 24px;
 }
+
+
+input
+{
+	padding: 4px 6px;
+}
+
+input, label
+{
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+button.column
+{
+	margin-left: 1.6% !important;
+	margin-right: 1.6% !important;
+}
