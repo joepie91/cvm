@@ -14,7 +14,12 @@
 		<div class="wrapper">
 			<div class="header">
 				<img src="/images/logo.png">
-				<%?userbox>
+				<%if logged-in == true>
+					<div class="userbox">
+						<div>You are logged in as <strong><%?username></strong>.</div>
+						<div><a href="/">Account overview</a> | <a href="/containers/">My VPSes</a></div>
+					</div>
+				<%/if>
 			</div>
 			<div class="main <%?main-class>">
 				<%?main>

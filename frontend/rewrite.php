@@ -14,18 +14,22 @@
 $_CVM = true;
 require("includes/include.base.php");
 
-$sUserbox = "";
+$sTemplateParameters = array();
+
+$_SESSION['userid'] = 1;
 
 if(!empty($_SESSION['userid']))
 {
 	$sUser = new User($_SESSION['userid']);
-	$sUserbox = Templater::InlineRender("userbox", $locale->strings, array(
-		'username'	=> "joepie91"
+	$sLoggedIn = true;
+	$sTemplateParameters = array_merge($sTemplateParameters, array(
+		'username'	=> $sUser->sUsername
 	));
 }
 else
 {
 	$sUser = new User(0);
+	$sLoggedIn = false;
 }
 
 $sMainContents = "";
@@ -61,11 +65,13 @@ catch (UnauthorizedException $e)
 	$sMainContents = "You are not authorized to view this page.";
 }
 
-echo(Templater::InlineRender("main", $locale->strings, array(
-	'userbox'		=> $sUserbox,
+$sTemplateParameters = array_merge($sTemplateParameters, array(
+	'logged-in'		=> $sLoggedIn,
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
 	'main-class'		=> $sMainClass
-)));
+));
+
+echo(Templater::InlineRender("main", $locale->strings, $sTemplateParameters));
 
 ?>
