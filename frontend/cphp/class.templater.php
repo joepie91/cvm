@@ -125,8 +125,6 @@ class Templater
 					if($value == "false") { $value = false; }
 					if(is_numeric($value)) { $value = (int)$value; }
 					
-					var_dump($variable, $operator, $value);
-					
 					switch($operator)
 					{
 						case "=":
@@ -152,8 +150,6 @@ class Templater
 							return false;
 							break;
 					}
-					
-					var_dump($display);
 					
 					if($display === true)
 					{
