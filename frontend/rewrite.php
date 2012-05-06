@@ -49,8 +49,8 @@ try
 
 	$mainrouter->routes = array(
 		0 => array(
-			'^/?$'			=> "module.home.php",
-			'^/containers/?$'	=> "module.list.php",
+			'^/?$'			=> "module.list.php",
+			'^/account/?$'	=> "module.account.php",
 			'^/login/?$'		=> "module.login.php",
 			'^/logout/?$'		=> "module.logout.php",
 			'^/([0-9]+)(/.*)?$'	=> "module.vps.php"

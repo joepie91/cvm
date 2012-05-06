@@ -4,10 +4,10 @@
 		<title>CVM</title>
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
 		<link rel="stylesheet" href="/css/cvm.css?1">
-		<link rel="stylesheet" href="css/kickstart.css" media="all">
+		<link rel="stylesheet" href="/css/kickstart.css" media="all">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="js/prettify.js"></script>
-		<script src="js/kickstart.js"></script>
+		<script src="/js/prettify.js"></script>
+		<script src="/js/kickstart.js"></script>
 		<script src="/js/cvm.js?3"></script>
 	</head>
 	<body>
