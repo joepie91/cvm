@@ -64,6 +64,9 @@ class Container extends CPHPDatabaseRecordClass
 			case "sDiskUsed":
 				return $this->GetDiskUsed();
 				break;
+			case "sDiskTotal":
+				return $this->GetDiskTotal();
+				break;
 			case "sBandwidthUsed":
 				return $this->GetBandwidthUsed();
 				break;
@@ -125,6 +128,48 @@ class Container extends CPHPDatabaseRecordClass
 		{
 			return "unknown";
 		}
+	}
+	
+	public function GetDiskUsed()
+	{
+		$disk = $this->GetDisk();
+		return $disk['used'];
+	}
+	
+	public function GetDiskTotal()
+	{
+		$disk = $this->GetDisk();
+		return $disk['total'];
+	}
+	
+	public function GetDisk()
+	{
+		$result = $this->sNode->ssh->RunCommandCached("vzctl exec {$this->sInternalId} df -l -x tmpfs", true);
+		$lines = explode("\n", $result->stdout);
+		array_shift($lines);
+		
+		$total_free = 0;
+		$total_used = 0;
+		$total_total = 0;
+		
+		foreach($lines as $disk)
+		{
+			$disk = trim($disk);
+			
+			if(!empty($disk))
+			{
+				$values = split_whitespace($disk);
+				$total_free += (int)$values[3] / 1024;
+				$total_used += (int)$values[2] / 1024;
+				$total_total += ((int)$values[2] + (int)$values[3]) / 1024;
+			}
+		}
+		
+		return array(
+			'free'	=> $total_free,
+			'used'	=> $total_used,
+			'total'	=> $total_total
+		);
 	}
 	
 	public function Deploy($conf = array())

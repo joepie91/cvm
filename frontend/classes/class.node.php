@@ -104,6 +104,7 @@ class Node extends CPHPDatabaseRecordClass
 		
 		$total_free = 0;
 		$total_used = 0;
+		$total_total = 0;
 		
 		foreach($lines as $disk)
 		{
@@ -114,12 +115,14 @@ class Node extends CPHPDatabaseRecordClass
 				$values = split_whitespace($disk);
 				$total_free += (int)$values[3] / 1024;
 				$total_used += (int)$values[2] / 1024;
+				$total_total += ((int)$values[2] + (int)$values[3]) / 1024;
 			}
 		}
 		
 		return array(
 			'free'	=> $total_free,
-			'used'	=> $total_used
+			'used'	=> $total_used,
+			'total'	=> $total_total
 		);
 	}
 }

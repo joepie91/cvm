@@ -5,8 +5,8 @@
 	<div class="quota-item">
 		<h3>Disk space</h3>
 		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: 55%;"></div>
-			<div class="quota-bar-label">55/100GB</div>
+			<div class="quota-bar-inner" style="width: <%?disk-percentage>%;"></div>
+			<div class="quota-bar-label"><%?disk-used>/<%?disk-total><%?disk-unit></div>
 		</div>
 	</div>
 	<div class="quota-item">

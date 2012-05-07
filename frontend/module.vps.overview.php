@@ -38,6 +38,11 @@ $sPageContents = Templater::InlineRender("vps.overview", $locale->strings, array
 	'disk-space'		=> "{$sContainer->sDiskSpace}MB",
 	'total-traffic-limit'	=> "{$sContainer->sTotalTrafficLimit} bytes",
 	'bandwidth-limit'	=> "100mbit",
-	'status'		=> $sContainer->sStatusText
+	'status'		=> $sContainer->sStatusText,
+	'disk-used'		=> number_format($sContainer->sDiskUsed / 1024, 2),
+	'disk-total'		=> number_format($sContainer->sDiskTotal / 1024, 2),
+	'disk-percentage'	=> number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
+	'disk-unit'		=> "GB"
+	
 ));
 ?>
