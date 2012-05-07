@@ -61,6 +61,9 @@ class Container extends CPHPDatabaseRecordClass
 			case "sRamUsed":
 				return $this->GetRamUsed();
 				break;
+			case "sRamTotal":
+				return $this->GetRamTotal();
+				break;
 			case "sDiskUsed":
 				return $this->GetDiskUsed();
 				break;
@@ -128,6 +131,49 @@ class Container extends CPHPDatabaseRecordClass
 		{
 			return "unknown";
 		}
+	}
+	
+	public function GetRamUsed()
+	{
+		$ram = $this->GetRam();
+		return $ram['used'];
+	}
+	
+	public function GetRamTotal()
+	{
+		$ram = $this->GetRam();
+		return $ram['total'];
+	}
+	
+	public function GetRam()
+	{
+		$result = $this->RunCommandCached("free -m", true);
+		$lines = explode("\n", $result->stdout);
+		array_shift($lines);
+		
+		$total_free = 0;
+		$total_used = 0;
+		$total_total = 0;
+
+		foreach($lines as $line)
+		{
+			$line = trim($line);
+			$values = split_whitespace($line);
+			
+			if(trim($values[0]) == "Mem:")
+			{
+				$total_total = $values[1];
+				$total_used = $values[2];
+				$total_free = $values[3];
+			}
+			
+		}
+		
+		return array(
+			'free'	=> $total_free,
+			'used'	=> $total_used,
+			'total'	=> $total_total
+		);
 	}
 	
 	public function GetDiskUsed()

@@ -12,8 +12,8 @@
 	<div class="quota-item">
 		<h3>RAM</h3>
 		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: 24%;"></div>
-			<div class="quota-bar-label">241/1024MB</div>
+			<div class="quota-bar-inner" style="width: <%?ram-percentage>%;"></div>
+			<div class="quota-bar-label"><%?ram-used>/<%?ram-total><%?ram-unit></div>
 		</div>
 	</div>
 	<div class="quota-item last">

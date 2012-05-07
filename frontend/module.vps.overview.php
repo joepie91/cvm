@@ -42,7 +42,11 @@ $sPageContents = Templater::InlineRender("vps.overview", $locale->strings, array
 	'disk-used'		=> number_format($sContainer->sDiskUsed / 1024, 2),
 	'disk-total'		=> number_format($sContainer->sDiskTotal / 1024, 2),
 	'disk-percentage'	=> number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
-	'disk-unit'		=> "GB"
+	'disk-unit'		=> "GB",
+	'ram-used'		=> $sContainer->sRamUsed,
+	'ram-total'		=> $sContainer->sRamTotal,
+	'ram-percentage'	=> ($sContainer->sRamUsed / $sContainer->sRamTotal) * 100,
+	'ram-unit'		=> "MB"
 	
 ));
 ?>
