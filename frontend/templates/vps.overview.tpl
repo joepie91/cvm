@@ -19,8 +19,8 @@
 	<div class="quota-item last">
 		<h3>Traffic</h3>
 		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: 8%;"></div>
-			<div class="quota-bar-label">80/1000GB</div>
+			<div class="quota-bar-inner" style="width: <%?traffic-percentage>%;"></div>
+			<div class="quota-bar-label"><%?traffic-used>/<%?traffic-total><%?traffic-unit></div>
 		</div>
 	</div>
 	<div class="clear"></div>
@@ -68,11 +68,11 @@
 	</tr>
 	<tr>
 		<th>IPv4 Addresses</th>
-		<td>98.142.213.226, 204.12.235.84</td>
+		<td></td>
 	</tr>
 	<tr>
 		<th>IPv6 Addresses</th>
-		<td>2607:f7a0:1:1::24:6</td>
+		<td></td>
 	</tr>
 	<tr>
 		<th>Guaranteed RAM</th>

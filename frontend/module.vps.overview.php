@@ -29,7 +29,7 @@ if(!empty($router->uParameters[2]))
 	}
 }
 
-$sPageContents = Templater::InlineRender("vps.overview", $locale->strings, array(
+$sVariables = array(
 	'id'			=> $sContainer->sId,
 	'server-location'	=> $sContainer->sNode->sPhysicalLocation,
 	'operating-system'	=> $sContainer->sTemplate->sName,
@@ -39,14 +39,50 @@ $sPageContents = Templater::InlineRender("vps.overview", $locale->strings, array
 	'total-traffic-limit'	=> "{$sContainer->sTotalTrafficLimit} bytes",
 	'bandwidth-limit'	=> "100mbit",
 	'status'		=> $sContainer->sStatusText,
-	'disk-used'		=> number_format($sContainer->sDiskUsed / 1024, 2),
-	'disk-total'		=> number_format($sContainer->sDiskTotal / 1024, 2),
-	'disk-percentage'	=> number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
-	'disk-unit'		=> "GB",
-	'ram-used'		=> $sContainer->sRamUsed,
-	'ram-total'		=> $sContainer->sRamTotal,
-	'ram-percentage'	=> ($sContainer->sRamUsed / $sContainer->sRamTotal) * 100,
-	'ram-unit'		=> "MB"
-	
-));
+	'traffic-used'		=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
+	'traffic-total'		=> number_format(($sContainer->sIncomingTrafficLimit + $sContainer->sOutgoingTrafficLimit) / 1024 / 1024 / 1024, 0),
+	'traffic-percentage'	=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / ($sContainer->sIncomingTrafficLimit + $sContainer->sOutgoingTrafficLimit), 2),
+	'traffic-unit'		=> "GB"
+);
+
+try
+{
+	$sVariables = array_merge($sVariables, array(
+		'disk-used'		=> number_format($sContainer->sDiskUsed / 1024, 2),
+		'disk-total'		=> number_format($sContainer->sDiskTotal / 1024, 2),
+		'disk-percentage'	=> number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
+		'disk-unit'		=> "GB"
+	));
+}
+catch (SshExitException $e)
+{
+	$sVariables = array_merge($sVariables, array(
+		'disk-used'		=> 0,
+		'disk-total'		=> 0,
+		'disk-percentage'	=> 0,
+		'disk-unit'		=> "GB"
+	));
+}
+
+try
+{
+	$sVariables = array_merge($sVariables, array(
+		'ram-used'		=> $sContainer->sRamUsed,
+		'ram-total'		=> $sContainer->sRamTotal,
+		'ram-percentage'	=> ($sContainer->sRamUsed / $sContainer->sRamTotal) * 100,
+		'ram-unit'		=> "MB"
+	));
+}
+catch (SshExitException $e)
+{
+	$sVariables = array_merge($sVariables, array(
+		'ram-used'		=> 0,
+		'ram-total'		=> 0,
+		'ram-percentage'	=> 0,
+		'ram-unit'		=> "MB"
+	));
+}
+
+
+$sPageContents = Templater::InlineRender("vps.overview", $locale->strings, $sVariables);
 ?>
