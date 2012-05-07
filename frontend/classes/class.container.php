@@ -144,7 +144,7 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetDisk()
 	{
-		$result = $this->sNode->ssh->RunCommandCached("vzctl exec {$this->sInternalId} df -l -x tmpfs", true);
+		$result = $this->RunCommandCached("df -l -x tmpfs", true);
 		$lines = explode("\n", $result->stdout);
 		array_shift($lines);
 		
@@ -170,6 +170,16 @@ class Container extends CPHPDatabaseRecordClass
 			'used'	=> $total_used,
 			'total'	=> $total_total
 		);
+	}
+	
+	public function RunCommand($command, $throw_exception = false)
+	{
+		return $this->sNode->ssh->RunCommand("vzctl exec {$this->sInternalId} $command", $throw_exception);
+	}
+	
+	public function RunCommandCached($command, $throw_exception = false)
+	{
+		return $this->sNode->ssh->RunCommandCached("vzctl exec {$this->sInternalId} $command", $throw_exception);
 	}
 	
 	public function Deploy($conf = array())
