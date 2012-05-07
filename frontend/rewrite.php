@@ -50,9 +50,10 @@ try
 	$mainrouter->routes = array(
 		0 => array(
 			'^/?$'			=> "module.list.php",
-			'^/account/?$'	=> "module.account.php",
+			'^/account/?$'		=> "module.account.php",
 			'^/login/?$'		=> "module.login.php",
 			'^/logout/?$'		=> "module.logout.php",
+			'^/admin(/.*)?$'	=> "module.admin.php",
 			'^/([0-9]+)(/.*)?$'	=> "module.vps.php"
 		)
 	);
