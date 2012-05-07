@@ -101,8 +101,8 @@ class SshConnector extends CPHPBaseClass
 	
 	private function DoCommand($command, $throw_exception)
 	{
-		$command = str_replace("'", "\'", $command);
-		$command = "{$this->helper} '{$command}'";
+		$command = escapeshellarg($command);
+		$command = "{$this->helper} {$command}";
 		
 		$stream = ssh2_exec($this->connection, $command);
 		stream_set_blocking($stream, true);
