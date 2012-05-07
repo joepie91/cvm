@@ -17,7 +17,7 @@ try
 {
 	$sContainer = new Container($mainrouter->uParameters[1]);
 	
-	if($sContainer->sUserId != $sUser->sId)
+	if($sContainer->sUserId != $sUser->sId && $sUser->sAccessLevel < 20)
 	{
 		throw new UnauthorizedException("You are not authorized to control this container.");
 	}
