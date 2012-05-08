@@ -11,13 +11,15 @@
  * licensing text.
  */
 
-cphp_dependency_provides("cphp_router", "1.0");
+cphp_dependency_provides("cphp_router", "1.1");
 
 class CPHPRouter extends CPHPBaseClass
 {
 	public $routes = array();
 	public $parameters = array();
 	public $custom_query = "";
+	public $allow_slash = false;
+	public $ignore_query = false;
 	
 	public function RouteRequest()
 	{
@@ -39,6 +41,14 @@ class CPHPRouter extends CPHPBaseClass
 			}
 		}
 		
+		if($this->ignore_query === true)
+		{
+			if(strpos($requestpath, "?") !== false)
+			{
+				list($requestpath, $bogus) = explode("?", $requestpath, 2);
+			}
+		}
+		
 		$found = false;  // Workaround because a break after an include apparently doesn't work in PHP.
 		
 		foreach($this->routes as $priority)
@@ -47,6 +57,11 @@ class CPHPRouter extends CPHPBaseClass
 			{
 				if($found === false)
 				{
+					if($this->allow_slash === true)
+					{
+						$route_regex = "{$route_regex}/?";
+					}
+					
 					$regex = str_replace("/", "\/", $route_regex);
 					if(preg_match("/{$regex}/i", $requestpath, $matches))
 					{
@@ -59,4 +74,3 @@ class CPHPRouter extends CPHPBaseClass
 		}
 	}
 }
-?>
