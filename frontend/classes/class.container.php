@@ -54,6 +54,13 @@ class Container extends CPHPDatabaseRecordClass
 		)
 	);
 	
+	public $prototype_export = array(
+		'Hostname',
+		'InternalId',
+		'NodeId',
+		'Status'
+	);
+	
 	public function __get($name)
 	{
 		switch($name)
