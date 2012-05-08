@@ -11,10 +11,4 @@
  * licensing text.
  */
 
-$settings['master_privkey'] = "/etc/cvm/key";
-$settings['master_pubkey'] = "/etc/cvm/key.pub";
-$settings['salt'] = "kAU0qM";
-
-require("include.config.api.php");
-
-?>
+$settings['local_api_key'] = "something";
