@@ -29,12 +29,18 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 				
 				if($sUser->VerifyPassword($_GET['password']) === true)
 				{
-					$return_object = true;
+					$return_object = array(
+						'correct' => true,
+						'userid' => $sUser->sId
+					);
 					$return_success = true;
 				}
 				else
 				{
-					$return_object = false;
+					$return_object = array(
+						'correct' => false,
+						'userid' => 0
+					);
 					$return_success = true;
 				}
 			}
@@ -63,12 +69,24 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 				}
 				
 				$return_object = $sContainers;
-				$return_status = true;
+				$return_success = true;
 			}
 			break;
 			
 		case "vps_info":
 			// TODO: return VPS info
+			break;
+			
+		case "node_info":
+			try
+			{
+				$sNode = new Node($_GET['nodeid']);
+				$return_object = $sNode->Export();
+			}
+			catch (NotFoundException $e)
+			{
+				// Silently pass.
+			}
 			break;
 	}
 }

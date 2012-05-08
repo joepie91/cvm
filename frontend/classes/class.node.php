@@ -36,6 +36,17 @@ class Node extends CPHPDatabaseRecordClass
 		)
 	);
 	
+	public $prototype_export = array(
+		'Name',
+		'Hostname',
+		'Port',
+		'User',
+		'PhysicalLocation',
+		'PrivateKey',
+		'PublicKey',
+		'HasCustomkey'
+	);
+	
 	public $ssh = null;
 	
 	protected function EventConstructed()
