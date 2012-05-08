@@ -44,6 +44,13 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 					$return_success = true;
 				}
 			}
+			else
+			{
+				$return_object = array(
+					'correct' => false,
+					'userid' => 0
+				);
+			}
 			break;
 			
 		case "list_vps":

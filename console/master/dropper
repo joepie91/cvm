@@ -1,6 +1,10 @@
 #!/usr/bin/python
 
-import paramiko, socket, sys, termios, tty, select, urllib, urllib2, json
+import socket, sys, termios, tty, select, urllib, urllib2, json, warnings, getpass
+
+with warnings.catch_warnings():
+	warnings.simplefilter("ignore")
+	import paramiko
 
 key = "abcde"
 endpoint = "http://cvm.local/api.local.php"
@@ -57,6 +61,23 @@ def api_request(parameters, method="GET"):
 		response = urllib2.urlopen(req)
 		return json.loads(response.read())
 
+def show_list():
+	print ""
+	for key, vps in vpsmap.items():
+		node = nodemap[vps['NodeId']]
+		print "%s. %s (%s [%s], %s)" % (key, vps['Hostname'], node['Name'], node['Hostname'], node['PhysicalLocation'])
+		
+	print ""
+	choice = raw_input("Make your choice: ")
+	
+	try:
+		current_vps = vpsmap[int(choice)]
+		current_node = nodemap[current_vps['NodeId']]
+		
+		open_shell(current_node['Hostname'], "vz", current_vps['InternalId'])
+	except KeyError, ValueError:
+		print "That was not a valid option. Try again. "
+		show_list()
 
 print "#############################################################"
 print "###               CVM OpenVZ shell dropper                ###"
@@ -65,7 +86,7 @@ print ""
 print "Please enter your VPS panel login details to continue."
 print ""
 username = raw_input("Username: ")
-password = raw_input("Password: ")
+password = getpass.getpass("Password: ")
 print ""
 
 auth_result = api_request({
@@ -104,21 +125,8 @@ if auth_result['data']['correct'] == True:
 			'action': "node_info",
 			'nodeid': node
 		})['data']
-
-	for key, vps in vpsmap.items():
-		node = nodemap[vps['NodeId']]
-		print "%s. %s (%s [%s], %s)" % (key, vps['Hostname'], node['Name'], node['Hostname'], node['PhysicalLocation'])
 		
-	print ""
-	choice = raw_input("Make your choice: ")
-	
-	try:
-		current_vps = vpsmap[int(choice)]
-		current_node = nodemap[current_vps['NodeId']]
-		
-		open_shell(current_node['Hostname'], "vz", current_vps['InternalId'])
-	except KeyError, ValueError:
-		print "That was not a valid option."
+	show_list()
 	
 	exit(0)
 else:
