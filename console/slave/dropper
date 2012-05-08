@@ -1,0 +1,5 @@
+#!/usr/bin/python
+import sys, subprocess
+
+ctid = raw_input()
+subprocess.call(['sudo', 'vzctl', 'enter', ctid])
