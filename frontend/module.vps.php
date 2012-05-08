@@ -28,13 +28,15 @@ try
 	$sMainClass = "shift";
 
 	$router = new CPHPRouter();
+	
+	$router->ignore_query = true;
 
 	$router->routes = array(
 		0 => array(
 			'^/([0-9]+)/?$'			=> "module.vps.overview.php",
 			'^/([0-9]+)/(start)/?$'		=> "module.vps.overview.php",
 			'^/([0-9]+)/(stop)/?$'		=> "module.vps.overview.php",
-			'^/([0-9]+)/(restart)/?$'	=> "module.vps.overview.php"
+			'^/([0-9]+)/(restart)/?$'		=> "module.vps.overview.php"
 		)
 	);
 

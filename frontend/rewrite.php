@@ -46,6 +46,8 @@ $sError = null;
 try
 {
 	$mainrouter = new CPHPRouter();
+	
+	$mainrouter->ignore_query = true;
 
 	$mainrouter->routes = array(
 		0 => array(
