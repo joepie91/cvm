@@ -19,16 +19,18 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 	public $verify_query = "";
 	public $table_name = "";
 	public $query_cache = 60;
+	public $id_field = "Id";
 	
 	public $prototype = array();
 	public $prototype_render = array();	
+	public $prototype_export = array();
 	public $uData = array();
 	
 	public $sId = 0;
 	
-	public function __construct($uDataSource, $uCommunityId = 0)
+	public function __construct($uDataSource)
 	{
-		$this->ConstructDataset($uDataSource, $uCommunityId);
+		$this->ConstructDataset($uDataSource);
 		$this->EventConstructed();
 	}
 	
@@ -92,7 +94,7 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 		
 		if($bind_datasets === true)
 		{
-			$this->sId = (is_numeric($uDataSource['Id'])) ? $uDataSource['Id'] : 0;
+			$this->sId = (is_numeric($uDataSource[$this->id_field])) ? $uDataSource[$this->id_field] : 0;
 			
 			$this->uData = $uDataSource;
 			
@@ -335,7 +337,7 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 				}
 				
 				$sQueryKeysValues = implode(", ", $sKeyValueList);
-				$query = "UPDATE {$this->table_name} SET {$sQueryKeysValues} WHERE `Id` = '{$this->sId}'";
+				$query = "UPDATE {$this->table_name} SET {$sQueryKeysValues} WHERE `{$this->id_field}` = '{$this->sId}'";
 			}
 			
 			if($result = mysql_query($query))
@@ -364,6 +366,8 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 	
 	public function RetrieveChildren($type, $field)
 	{
+		// Not done yet!
+		
 		if(!isset($cphp_class_map[$type]))
 		{
 			$classname = get_class($this);
@@ -396,6 +400,34 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 		}
 		
 		return $this->DoRenderInternalTemplate();
+	}
+	
+	public function Export()
+	{
+		// Exports the object as a nested array. Observes the export prototype.
+		$export_array = array();
+		
+		foreach($this->prototype_export as $field)
+		{
+			$variable_name = "s{$field}";
+			if(is_object($this->$variable_name))
+			{
+				if(!empty($this->$variable_name->sId))
+				{
+					$export_array[$field] = $this->$variable_name->Export();
+				}
+				else
+				{
+					$export_array[$field] = null;
+				}
+			}
+			else
+			{
+				$export_array[$field] = $this->$variable_name;
+			}
+		}
+		
+		return $export_array;
 	}
 	
 	// Define events
