@@ -63,6 +63,7 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 				}
 				
 				$return_object = $sContainers;
+				$return_status = true;
 			}
 			break;
 			
