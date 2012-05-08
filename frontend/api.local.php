@@ -54,6 +54,15 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 			if($result = mysql_query_cached($query))
 			{
 				// TODO: output results
+				$sContainers = array();
+				
+				foreach($result->data as $row)
+				{
+					$sContainer = new Container($row);
+					$sContainers[] = $sContainer->Export();
+				}
+				
+				$return_object = $sContainers;
 			}
 			break;
 			
