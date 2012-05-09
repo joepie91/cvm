@@ -18,5 +18,6 @@
 
 	<div class="centered">
 		<button type="submit" name="submit" value="submit" class="padded spaced"><%!button-reinstall></button>
+		&nbsp;<%!reinstall-patience>
 	</div>
 </form>

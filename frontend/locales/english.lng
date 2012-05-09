@@ -84,3 +84,4 @@ list-status-stopped;							Stopped
 list-status-suspended;							Suspended
 
 reinstall-warning;							I understand that by reinstalling my VPS, <strong>all data on the VPS is permanently lost</strong> and cannot be recovered. There will be no further confirmations, <strong>after clicking the Reinstall button the reinstallation process cannot be aborted.</strong>
+reinstall-patience;							(be patient; this may take a while)

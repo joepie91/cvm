@@ -34,6 +34,7 @@ if(isset($_POST['submit']))
 							$sContainer->uTemplateId = $sTemplate->sId;
 							$sContainer->InsertIntoDatabase();
 							$sContainer->Reinstall();
+							$sContainer->Start();
 							
 							$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Reinstallation succeeded!", "Your VPS was successfully reinstalled.");
 							$sPageContents .= $err->Render();
@@ -41,6 +42,11 @@ if(isset($_POST['submit']))
 						catch (ContainerReinstallException $e)
 						{
 							$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation failed", "Something went wrong during the reinstallation of your VPS. Please try again. If the reinstallation fails again, please contact support.");
+							$sPageContents .= $err->Render();
+						}
+						catch (ContainerStartException $e)
+						{
+							$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "Failed to start", "The VPS was successfully reinstalled, but it could not be started. If the issue persists, please contact support.");
 							$sPageContents .= $err->Render();
 						}
 					}
