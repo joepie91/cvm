@@ -99,21 +99,28 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetCurrentStatus()
 	{
-		$command = "vzctl status {$this->sInternalId}";
-		
-		$result = $this->sNode->ssh->RunCommandCached($command, false);
-		
-		if($result->returncode == 0)
+		if($this->sStatus == CVM_STATUS_SUSPENDED || $this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			$values = split_whitespace($result->stdout);
+			return $this->sStatus;
+		}
+		else
+		{
+			$command = "vzctl status {$this->sInternalId}";
 			
-			if($values[4] == "running")
+			$result = $this->sNode->ssh->RunCommandCached($command, false);
+			
+			if($result->returncode == 0)
 			{
-				return CVM_STATUS_STARTED;
-			}
-			else
-			{
-				return CVM_STATUS_STOPPED;
+				$values = split_whitespace($result->stdout);
+				
+				if($values[4] == "running")
+				{
+					return CVM_STATUS_STARTED;
+				}
+				else
+				{
+					return CVM_STATUS_STOPPED;
+				}
 			}
 		}
 	}
