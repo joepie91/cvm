@@ -20,7 +20,7 @@ $cphp_class_map = array(
 	'template'	=> "Template"
 );
 
-$cphp_locale_name = "english";
+$cphp_locale_name = "dutch";
 $cphp_locale_path = "locales";
 $cphp_locale_ext  = "lng";
 

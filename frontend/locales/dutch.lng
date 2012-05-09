@@ -1,0 +1,86 @@
+_locale;								nl_NL.UTF-8,nl_NL
+_datetime_short;							%d/%m/%Y %H:%M:%S
+_datetime_long;								%A %B %d, %Y %H:%M:%S
+_date_short;								%d/%m/%Y
+_date_long;								%A %B %d, %Y
+_time;									%H:%M:%S
+		
+event-now;								zojuist
+event-future;								in de toekomst
+event-past;								in het verleden
+event-1second-ago;							1 seconde geleden
+event-seconds-ago;							%1$d seconden geleden
+event-1minutes-ago;							1 minuut geleden
+event-minutes-ago;							%1$d minuten geleden
+event-1hour-ago;							1 uur geleden
+event-hours-ago;							%1$d uren geleden
+event-1day-ago;								1 dag geleden
+event-days-ago;								%1$d dagen geleden
+event-1week-ago;							1 week geleden
+event-weeks-ago;							%1$d weken geleden
+event-1month-ago;							1 maand geleden
+event-months-ago;							%1$d maanden geleden
+event-1year-ago;							1 jaar geleden
+event-years-ago;							%1$d jaar geleden
+
+title-overview;								Overzicht
+title-login;								Inloggen op je VPS panel
+title-reinstall;							VPS herinstalleren
+
+button-login;								Inloggen
+button-reinstall;							Herinstalleren
+
+notfound;								De gezochte VPS is niet gevonden.
+footer;									CPHP is een gratis en open-source VPS-beheerpaneel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Help mee!</a>
+
+userbox-loggedin;							Je bent ingelogd als <strong><%?username></strong>.
+userbox-account;							Accountinstellingen
+userbox-list;								Mijn VPSen
+userbox-logout;								Uitloggen
+
+menu-overview;								Overzicht
+menu-statistics;							Statistieken
+menu-reinstall;								Herinstalleren
+menu-backups;								Backups
+menu-console;								Console
+menu-ip;								IP-toewijzing
+menu-alerts;								Notificaties
+menu-api;								API
+
+login-username;								Gebruikersnaam
+login-password;								Wachtwoord
+
+overview-quota-title-disk;						Schijfruimte
+overview-quota-title-ram;						RAM
+overview-quota-title-traffic;						Dataverkeer
+overview-title-configuration;						VPS-configuratie
+overview-title-status;							Status
+overview-title-location;						Serverlocatie
+overview-title-node;							Host-server
+overview-title-os;							Besturingssysteem
+overview-title-ipv4;							IPv4-adressen
+overview-title-ipv6;							IPv6-adressen
+overview-title-guaranteed;						Gegarandeerde RAM
+overview-title-burstable;						Burstable RAM
+overview-title-disk;							Schijfruimte
+overview-title-traffic;							Dataverkeer
+overview-title-bandwidth;						Bandbreedtte
+overview-status-running;						Gestart
+overview-status-stopped;						Gestopt
+overview-status-suspended;						Geblokkeerd
+overview-status-unknown;						Onbekend
+overview-button-start;							Start VPS
+overview-button-restart;						Herstart VPS
+overview-button-stop;							Stop VPS
+
+list-column-hostname;							Hostnaam
+list-column-platform;							Platform
+list-column-node;							Host-server
+list-column-disk;							Schijfruimte
+list-column-ram;							RAM
+list-column-template;							Sjabloon
+list-status-running;							Gestart
+list-status-stopped;							Gestopt
+list-status-suspended;							Geblokkeerd
+
+reinstall-warning;							Ik begrijp dat bij het herinstalleren van mijn VPS <strong>alle gegevens die zich op de VPS bevinden onherroepelijk verloren gaan,</strong> en niet hersteld kunnen worden. Er zijn geen verdere bevestigingen, <strong>na het aanklikken van onderstaande knop wordt de herinstallatie gestart. Deze kan niet geannuleerd worden.</strong>
