@@ -41,6 +41,8 @@ class ContainerCreateException extends ContainerException {}
 class ContainerConfigureException extends ContainerException {}
 class ContainerStartException extends ContainerException {}
 class ContainerStopException extends ContainerException {}
+class ContainerSuspendException extends ContainerException {}
+class ContainerUnsuspendException extends ContainerException {}
 class ContainerDestroyException extends ContainerException {}
 class ContainerReinstallException extends ContainerException {}
 class ContainerDeployException extends ContainerException {}

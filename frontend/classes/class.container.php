@@ -443,6 +443,48 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function Suspend()
+	{
+		if($this->sStatus != CVM_STATUS_SUSPENDED)
+		{
+			try
+			{
+				$this->Stop();
+				$this->uStatus = CVM_STATUS_SUSPENDED;
+				$this->InsertIntoDatabase();
+			}
+			catch (ContainerStopException $e)
+			{
+				throw new ContainerSuspendException("Suspension failed as the container could not be stopped.", 1, $this->sInternalId, $e);
+			}
+		}
+		else
+		{
+			throw new ContainerSuspendException("The container is already suspended.", 1, $this->sInternalId);
+		}
+	}
+	
+	public function Unsuspend()
+	{
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
+		{
+			try
+			{
+				$this->Start();
+				$this->uStatus = CVM_STATUS_STARTED;
+				$this->InsertIntoDatabase();
+			}
+			catch (ContainerStopException $e)
+			{
+				throw new ContainerUnsuspendException("Unsuspension failed as the container could not be started.", 1, $this->sInternalId, $e);
+			}
+		}
+		else
+		{
+			throw new ContainerUnsuspendException("The container is not suspended.", 1, $this->sInternalId);
+		}
+	}
+	
 	public function AddIp($ip)
 	{
 		$command = shrink_command("vzctl set {$this->sInternalId}
