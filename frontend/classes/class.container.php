@@ -410,18 +410,29 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function Start()
 	{
-		$command = "vzctl start {$this->sInternalId}";
-		$result = $this->sNode->ssh->RunCommand($command, false);
-		
-		if($result->returncode == 0)
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
 		{
-			$this->uStatus = CVM_STATUS_STARTED;
-			$this->InsertIntoDatabase();
-			return true;
+			throw new ContainerSuspendedException("The container cannot be started as it is suspended.", 1, $this->sInternalId);
+		}
+		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			throw new ContainerSuspendedException("The container cannot be started as it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
-			throw new ContainerStartException($result->stderr, $result->returncode, $this->sInternalId);
+			$command = "vzctl start {$this->sInternalId}";
+			$result = $this->sNode->ssh->RunCommand($command, false);
+			
+			if($result->returncode == 0)
+			{
+				$this->uStatus = CVM_STATUS_STARTED;
+				$this->InsertIntoDatabase();
+				return true;
+			}
+			else
+			{
+				throw new ContainerStartException($result->stderr, $result->returncode, $this->sInternalId);
+			}
 		}
 	}
 	
