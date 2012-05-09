@@ -367,6 +367,39 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function Destroy()
+	{
+		$this->Stop();
+		$command = "vzctl destroy {$this->sInternalId}";
+		$result = $this->sNode->ssh->RunCommand($command, false);
+		
+		if($result->returncode == 0)
+		{
+			return true;
+		}
+		else
+		{
+			throw new ContainerDestroyException("Destroying container failed: {$result->stderr}", $result->returncode, $this->sInternalId);
+		}
+	}
+	
+	public function Reinstall()
+	{
+		try
+		{
+			$this->Destroy();
+			$this->Deploy();
+		}
+		catch (ContainerDestroyException $e)
+		{
+			throw new ContainerReinstallException("Reinstalling container failed during destroying: " . $e->getMessage(), $e->getCode(), $this->sInternalId);
+		}
+		catch (ContainerDeployException $e)
+		{
+			throw new ContainerReinstallException("Reinstalling container failed during deploying: " . $e->getMessage(), $e->getCode(), $this->sInternalId);
+		}
+	}
+	
 	public function Start()
 	{
 		$command = "vzctl start {$this->sInternalId}";
