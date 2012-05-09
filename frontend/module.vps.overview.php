@@ -69,7 +69,7 @@ try
 	$sVariables = array_merge($sVariables, array(
 		'ram-used'		=> $sContainer->sRamUsed,
 		'ram-total'		=> $sContainer->sRamTotal,
-		'ram-percentage'	=> ($sContainer->sRamUsed / $sContainer->sRamTotal) * 100,
+		'ram-percentage'	=> number_format(($sContainer->sRamUsed / $sContainer->sRamTotal) * 100, 2),
 		'ram-unit'		=> "MB"
 	));
 }
