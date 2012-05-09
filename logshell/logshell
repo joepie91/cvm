@@ -1,0 +1,22 @@
+#!/usr/bin/python
+import random, string, subprocess, os
+from datetime import time, date, datetime
+from time import strftime
+
+rand = ''.join(random.choice(string.letters + string.digits) for i in xrange(8))
+
+today = datetime.today()
+day = today.day
+month = today.month
+year = today.year
+hour = today.hour
+minute = today.minute
+second = today.second
+
+rand = "%s_%s" % (strftime("%Y%m%d_%H%M%S"), rand)
+
+subprocess.call("script -qt 2>/etc/cvm/log/log.%s.time -c 'su -s \"/bin/bash\" cvm' -a /etc/cvm/log/log.%s" % (rand, rand), shell=True)
+
+if os.environ['SHELL'] != "/bin/bash":
+	os.remove("/etc/cvm/log/log.%s.time" % rand)
+	os.remove("/etc/cvm/log/log.%s" % rand)
