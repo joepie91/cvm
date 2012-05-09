@@ -249,6 +249,8 @@ class Container extends CPHPDatabaseRecordClass
 		$this->uRootPassword = $sRootPassword;
 		$this->InsertIntoDatabase();
 		
+		var_dump($this->sTemplate->sTemplateName);
+		
 		$command = shrink_command("vzctl create {$this->sInternalId}
 			--ostemplate {$this->sTemplate->sTemplateName}
 		");
@@ -376,7 +378,7 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function Destroy()
 	{
-		if($this->sCurrentStatus == CVM_STATUS_RUNNING)
+		if($this->sCurrentStatus == CVM_STATUS_STARTED)
 		{
 			$this->Stop();
 		}
@@ -423,7 +425,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			throw new ContainerSuspendedException("The container cannot be started as it is terminated.", 1, $this->sInternalId);
+			throw new ContainerTerminatedException("The container cannot be started as it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
