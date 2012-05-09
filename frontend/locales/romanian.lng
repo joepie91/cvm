@@ -1,0 +1,86 @@
+_locale;								ro_RO.UTF-8,ro_RO
+_datetime_short;							%d/%m/%Y %H:%M:%S
+_datetime_long;								%A %B %d, %Y %H:%M:%S
+_date_short;								%d/%m/%Y
+_date_long;								%A %B %d, %Y
+_time;									%H:%M:%S
+		
+event-now;								acum
+event-future;								in viitor
+event-past;								in trecut
+event-1second-ago;							cu o secunda in urma
+event-seconds-ago;							cu %1$d secunde in urma
+event-1minutes-ago;							cu un minut in urma
+event-minutes-ago;							cu %1$d minute in urma
+event-1hour-ago;							cu o ora in urma
+event-hours-ago;							cu %1$d ore in urma
+event-1day-ago;								cu o zi in urma
+event-days-ago;								cu %1$d zile in urma
+event-1week-ago;							saptamana trecuta
+event-weeks-ago;							cu %1$d saptamani in urma
+event-1month-ago;							luna trecuta
+event-months-ago;							cu %1$d luni in urma
+event-1year-ago;							anul trecut
+event-years-ago;							cu %1$d ani in urma
+
+title-overview;								Prezentare generala
+title-login;								Autentificare la panoul de VPS
+title-reinstall;							Reinstalarea VPS-ului
+
+button-login;								Autentificare
+button-reinstall;							Reinstalare
+
+notfound;								VPS-ul specificat nu a putut fi gasit
+footer;									CPHP este un panou de control pentru VPS-uri, gratuit si open source. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Vrei sa contribui?</a>
+
+userbox-loggedin;							Esti logat ca <strong><%?username></strong>.
+userbox-account;							Setari cont
+userbox-list;								VPS-urile mele
+userbox-logout;								Iesire (logout)
+
+menu-overview;								Sumar
+menu-statistics;							Statistici
+menu-reinstall;								Reinstalare
+menu-backups;								Backups
+menu-console;								Consola
+menu-ip;								Alocarea IP-urilor
+menu-alerts;								Alerte
+menu-api;								API
+
+login-username;								Username
+login-password;								Parola
+
+overview-quota-title-disk;						Spatiu pe disc
+overview-quota-title-ram;						RAM
+overview-quota-title-traffic;						Trafic
+overview-title-configuration;						Configuratie VPS
+overview-title-status;							Status
+overview-title-location;						Locatie server
+overview-title-node;							Nod gazda
+overview-title-os;							Sistem de operare
+overview-title-ipv4;							Adrese IPv4
+overview-title-ipv6;							Adrese IPv6
+overview-title-guaranteed;						RAM Garantat
+overview-title-burstable;						RAM burst
+overview-title-disk;							Spatiu pe disc
+overview-title-traffic;							Trafic
+overview-title-bandwidth;						Banda
+overview-status-running;						Pornit
+overview-status-stopped;						Oprit
+overview-status-suspended;						Suspendat
+overview-status-unknown;						Necunoscut
+overview-button-start;							Pornire VPS
+overview-button-restart;						Restart VPS
+overview-button-stop;							Oprire VPS
+
+list-column-hostname;							Hostname
+list-column-platform;							Platforma
+list-column-node;							Gazda
+list-column-disk;							Spatiu pe disc
+list-column-ram;							RAM
+list-column-template;							Template
+list-status-running;							Activ
+list-status-stopped;							Oprit
+list-status-suspended;							Suspendat
+
+reinstall-warning;							Inteleg ca prin reinstalarea VPS-ului, <strong>toate datele de pe VPS vor fi permanent pierdute</strong> si nu pot fi recuperate. Nu vor mai urma alte confirmari, <strong>dupa apasarea butonului Reinstalare procesul de reinstalare nu poate fi intrerupt.</strong>
