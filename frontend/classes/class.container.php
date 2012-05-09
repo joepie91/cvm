@@ -396,15 +396,15 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		catch (ContainerDestroyException $e)
 		{
-			throw new ContainerReinstallException("Reinstalling container failed during destroying: " . $e->getMessage(), $e->getCode(), $this->sInternalId);
+			throw new ContainerReinstallException("Reinstalling container failed during destroying: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
 		}
 		catch (ContainerCreateException $e)
 		{
-			throw new ContainerReinstallException("Reinstalling container failed during creation: " . $e->getMessage(), $e->getCode(), $this->sInternalId);
+			throw new ContainerReinstallException("Reinstalling container failed during creation: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
 		}
 		catch (ContainerConfigureException $e)
 		{
-			throw new ContainerReinstallException("Reinstalling container failed during configuration: " . $e->getMessage(), $e->getCode(), $this->sInternalId);
+			throw new ContainerReinstallException("Reinstalling container failed during configuration: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
 		}
 	}
 	
