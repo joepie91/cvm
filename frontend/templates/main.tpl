@@ -16,10 +16,10 @@
 				<img src="/images/logo.png">
 				<%if logged-in == true>
 					<div class="userbox">
-						<div>You are logged in as <strong><%?username></strong>.</div>
-						<a href="/account/">Account settings</a>
-						<a href="/">My VPSes</a>
-						<a href="/logout/">Log out</a>
+						<div><%!userbox-loggedin></div>
+						<a href="/account/"><%!userbox-account></a>
+						<a href="/"><%!userbox-list></a>
+						<a href="/logout/"><%!userbox-logout></a>
 					</div>
 				<%/if>
 			</div>
@@ -27,7 +27,7 @@
 				<%?main>
 			</div>
 			<div class="footer">
-				CPHP is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
+				<%!footer>
 			</div>
 		</div>
 		<img class="preload" src="images/loading.gif">

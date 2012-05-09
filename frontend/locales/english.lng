@@ -22,3 +22,65 @@ event-1month-ago;							1 month ago
 event-months-ago;							%1$d months ago
 event-1year-ago;							1 year ago
 event-years-ago;							%1$d years ago
+
+title-overview;								Overview
+title-login;								Login to your VPS panel
+title-reinstall;							Reinstall your VPS
+
+button-login;								Login
+button-reinstall;							Reinstall
+
+notfound;								The specified VPS was not found.
+footer;									CPHP is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
+
+userbox-loggedin;							You are logged in as <strong><%?username></strong>.
+userbox-account;							Account settings
+userbox-list;								My VPSes
+userbox-logout;								Log out
+
+menu-overview;								Overview
+menu-statistics;							Statistics
+menu-reinstall;								Reinstall
+menu-backups;								Backups
+menu-console;								Console
+menu-ip;								IP Allocation
+menu-alerts;								Alerts
+menu-api;								API
+
+login-username;								Username
+login-password;								Password
+
+overview-quota-title-disk;						Disk space
+overview-quota-title-ram;						RAM
+overview-quota-title-traffic;						Traffic
+overview-title-configuration;						VPS configuration
+overview-title-status;							Status
+overview-title-location;						Server location
+overview-title-node;							Host node
+overview-title-os;							Operating system
+overview-title-ipv4;							IPv4 addresses
+overview-title-ipv6;							IPv6 addresses
+overview-title-guaranteed;						Guaranteed RAM
+overview-title-burstable;						Burstable RAM
+overview-title-disk;							Disk space
+overview-title-traffic;							Traffic
+overview-title-bandwidth;						Bandwidth
+overview-status-running;						Running
+overview-status-stopped;						Stopped
+overview-status-suspended;						Suspended
+overview-status-unknown;						Unknown
+overview-button-start;							Start VPS
+overview-button-restart;						Restart VPS
+overview-button-stop;							Stop VPS
+
+list-column-hostname;							Hostname
+list-column-platform;							Platform
+list-column-node;							Node
+list-column-disk;							Disk space
+list-column-ram;							RAM
+list-column-template;							Template
+list-status-running;							Running
+list-status-stopped;							Stopped
+list-status-suspended;							Suspended
+
+reinstall-warning;							I understand that by reinstalling my VPS, <strong>all data on the VPS is permanently lost</strong> and cannot be recovered. There will be no further confirmations, <strong>after clicking the Reinstall button the reinstallation process cannot be aborted.</strong>

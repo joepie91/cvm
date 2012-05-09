@@ -1,22 +1,22 @@
 <table class="vpslist">
 	<tr>
 		<th></th>
-		<th>Hostname</th>
-		<th>Platform</th>
-		<th>Node</th>
-		<th>Disk space</th>
-		<th>RAM</th>
-		<th>Template</th>
+		<th><%!list-column-hostname></th>
+		<th><%!list-column-platform></th>
+		<th><%!list-column-node></th>
+		<th><%!list-column-disk></th>
+		<th><%!list-column-ram></th>
+		<th><%!list-column-template></th>
 	</tr>
 	<%foreach container in containers>
 		<tr class="clickable" data-url="/<%?container[id]>/">
 			<td class="container-status">
 				<%if container[status] == running>
-					<img src="/images/icon_online.png" alt="Running">
+					<img src="/images/icon_online.png" alt="<%!list-status-running>">
 				<%/if><%if container[status] == stopped>
-					<img src="/images/icon_offline.png" alt="Stopped">
+					<img src="/images/icon_offline.png" alt="<%!list-status-stopped>">
 				<%/if><%if container[status] == suspended>
-					<img src="/images/icon_suspended.png" alt="Suspended">
+					<img src="/images/icon_suspended.png" alt="<%!list-status-suspended>">
 				<%/if>
 			</td>
 			<td>

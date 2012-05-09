@@ -1,23 +1,22 @@
-<h1>Overview</h1>
+<h1><%!title-overview></h1>
 
-<!-- <h2>Consolidated traffic example</h2> -->
 <div class="quota">
 	<div class="quota-item">
-		<h3>Disk space</h3>
+		<h3><%!overview-quota-title-disk></h3>
 		<div class="quota-bar">
 			<div class="quota-bar-inner" style="width: <%?disk-percentage>%;"></div>
 			<div class="quota-bar-label"><%?disk-used>/<%?disk-total><%?disk-unit></div>
 		</div>
 	</div>
 	<div class="quota-item">
-		<h3>RAM</h3>
+		<h3><%!overview-quota-title-ram></h3>
 		<div class="quota-bar">
 			<div class="quota-bar-inner" style="width: <%?ram-percentage>%;"></div>
 			<div class="quota-bar-label"><%?ram-used>/<%?ram-total><%?ram-unit></div>
 		</div>
 	</div>
 	<div class="quota-item last">
-		<h3>Traffic</h3>
+		<h3><%!overview-quota-title-traffic></h3>
 		<div class="quota-bar">
 			<div class="quota-bar-inner" style="width: <%?traffic-percentage>%;"></div>
 			<div class="quota-bar-label"><%?traffic-used>/<%?traffic-total><%?traffic-unit></div>
@@ -29,69 +28,69 @@
 <div class="controlbox">
 	<a class="controlbutton button-loader" href="/<%?id>/start/">
 		<img src="/images/button_start.png" class="button-icon">
-		Start VPS
+		<%!overview-button-start>
 	</a>
 	<a class="controlbutton button-loader" href="/<%?id>/restart/">
 		<img src="/images/button_restart.png" class="button-icon">
-		Restart VPS
+		<%!overview-button-restart>
 	</a>
 	<a class="controlbutton button-loader last" href="/<%?id>/stop/">
 		<img src="/images/button_stop.png" class="button-icon">
-		Stop VPS
+		<%!overview-button-stop>
 	</a>
 	<div class="clear"></div>
 </div>
 
-<h2>VPS configuration</h2>
+<h2><%!overview-title-configuration></h2>
 <table class="vpsinfo vertical">
 	<tr>
-		<th>Status</th>
+		<th><%!overview-title-status></th>
 		<td>
 			<%if status == running>
-				<span class="online">Running</span>
+				<span class="online"><%!overview-status-running></span>
 			<%/if><%if status == stopped>
-				<span class="offline">Stopped</span>
+				<span class="offline"><%!overview-status-stopped></span>
 			<%/if><%if status == suspended>
-				<span class="suspended">Suspended</span>
+				<span class="suspended"><%!overview-status-suspended></span>
 			<%/if><%if status == unknown>
-				<span class="unknown">Unknown</span>
+				<span class="unknown"><%!overview-status-unknown></span>
 			<%/if>
 		</td>
 	</tr>
 	<tr>
-		<th>Server location</th>
+		<th><%!overview-title-location></th>
 		<td><%?server-location></td>
 	</tr>
 	<tr>
-		<th>Operating system</th>
+		<th><%!overview-title-os></th>
 		<td><%?operating-system></td>
 	</tr>
 	<tr>
-		<th>IPv4 Addresses</th>
+		<th><%!overview-title-ipv4></th>
 		<td></td>
 	</tr>
 	<tr>
-		<th>IPv6 Addresses</th>
+		<th><%!overview-title-ipv6></th>
 		<td></td>
 	</tr>
 	<tr>
-		<th>Guaranteed RAM</th>
+		<th><%!overview-title-guaranteed></th>
 		<td><%?guaranteed-ram></td>
 	</tr>
 	<tr>
-		<th>Burstable RAM</th>
+		<th><%!overview-title-burstable></th>
 		<td><%?burstable-ram></td>
 	</tr>
 	<tr>
-		<th>Disk space</th>
+		<th><%!overview-title-disk></th>
 		<td><%?disk-space></td>
 	</tr>
 	<tr>
-		<th>Traffic</th>
+		<th><%!overview-title-traffic></th>
 		<td><%?total-traffic-limit></td>
 	</tr>
 	<tr>
-		<th>Bandwidth</th>
+		<th><%!overview-title-bandwidth></th>
 		<td><%?bandwidth-limit></td>
 	</tr>
 </table>
