@@ -34,6 +34,11 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 		$this->EventConstructed();
 	}
 	
+	public function RefreshData()
+	{
+		$this->ConstructDataset($this->sId);
+	}
+	
 	public function ConstructDataset($uDataSource, $uCommunityId = 0)
 	{
 		$bind_datasets = true;
@@ -348,6 +353,7 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 				}
 				
 				$this->PurgeCache();
+				$this->RefreshData();
 				
 				return $result;
 			}

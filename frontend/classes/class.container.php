@@ -249,8 +249,6 @@ class Container extends CPHPDatabaseRecordClass
 		$this->uRootPassword = $sRootPassword;
 		$this->InsertIntoDatabase();
 		
-		var_dump($this->sTemplate->sTemplateName);
-		
 		$command = shrink_command("vzctl create {$this->sInternalId}
 			--ostemplate {$this->sTemplate->sTemplateName}
 		");
