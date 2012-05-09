@@ -30,6 +30,11 @@ try
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container restarted", "Your container was successfully restarted.");
 	$sError .= $err->Render();
 }
+catch (ContainerSuspendedException $e)
+{
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is suspended", "Your container could not be restarted, as it is currently suspended. If you believe this is in error, please file a support ticket.");
+	$sError .= $err->Render();
+}
 catch(ContainerStartException $e)
 {
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container failed to start", "Your container could not be started. If this error persists, please file a support ticket.");

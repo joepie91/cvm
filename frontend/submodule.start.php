@@ -23,7 +23,12 @@ if($sContainer->sCurrentStatus != CVM_STATUS_STARTED)
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container started", "Your container was successfully started.");
 		$sError .= $err->Render();
 	}
-	catch(ContainerStartException $e)
+	catch (ContainerSuspendedException $e)
+	{
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is suspended", "Your container could not be started, as it is currently suspended. If you believe this is in error, please file a support ticket.");
+		$sError .= $err->Render();
+	}
+	catch (ContainerStartException $e)
 	{
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container failed to start", "Your container could not be started. If this error persists, please file a support ticket.");
 		$sError .= $err->Render();
