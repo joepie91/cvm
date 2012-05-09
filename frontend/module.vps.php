@@ -36,7 +36,8 @@ try
 			'^/([0-9]+)/?$'			=> "module.vps.overview.php",
 			'^/([0-9]+)/(start)/?$'		=> "module.vps.overview.php",
 			'^/([0-9]+)/(stop)/?$'		=> "module.vps.overview.php",
-			'^/([0-9]+)/(restart)/?$'		=> "module.vps.overview.php"
+			'^/([0-9]+)/(restart)/?$'	=> "module.vps.overview.php",
+			'^/([0-9]+)/reinstall/?$'	=> "module.vps.reinstall.php"
 		)
 	);
 
