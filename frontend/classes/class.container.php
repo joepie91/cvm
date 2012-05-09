@@ -369,7 +369,11 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function Destroy()
 	{
-		$this->Stop();
+		if($this->sCurrentStatus == CVM_STATUS_RUNNING)
+		{
+			$this->Stop();
+		}
+		
 		$command = "vzctl destroy {$this->sInternalId}";
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
