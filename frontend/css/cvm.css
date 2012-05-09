@@ -97,6 +97,22 @@ table.vpslist tr:hover
 	cursor: pointer;
 }
 
+.centered
+{
+	text-align: center;
+}
+
+.padded
+{
+	padding: 10px 25px;
+}
+
+.spaced
+{
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
 .preload
 {
 	width: 1px;
@@ -433,7 +449,7 @@ input
 
 input, label
 {
-	margin-top: 0px !important;
+	/*margin-top: 0px !important;*/
 	margin-bottom: 0px !important;
 }
 
@@ -441,4 +457,44 @@ button.column
 {
 	margin-left: 1.6% !important;
 	margin-right: 1.6% !important;
+}
+
+.template-option
+{
+	border: 1px solid #31305E;
+	margin: 11px 0px;
+}
+
+.template-name
+{
+	background-color: #31305E;
+	padding: 4px 3px;
+	color: white;
+	font-weight: bold;
+}
+
+.template-name input
+{
+	float: left;
+	margin-top: 6px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.template-description
+{
+	padding: 6px 7px;
+}
+
+.confirm-text
+{
+	padding-left: 24px;
+	display: block;
+}
+
+.confirm input
+{
+	float: left;
+	margin-right: 4px;
+	margin-top: 7px;
 }
