@@ -44,7 +44,22 @@ try
 
 	$router->RouteRequest();
 
-	$sMainContents = Templater::InlineRender("main.vps", $locale->strings, array(
+	try
+	{
+		$sContainer->CheckAllowed();
+	}
+	catch (ContainerSuspendedException $e)
+	{
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "This container is suspended", "You cannot change any configuration or perform any actions on this container. If you feel this should not be the case, please contact support.");
+		$sMainContents .= $err->Render();
+	}
+	catch (ContainerTerminatedException $e)
+	{
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "This container has been terminated", "You cannot change any configuration or perform any actions on this container, as it is terminated.");
+		$sMainContents .= $err->Render();
+	}
+
+	$sMainContents .= Templater::InlineRender("main.vps", $locale->strings, array(
 		'error'			=> $sError,
 		'contents'		=> $sPageContents,
 		'id'			=> $sContainer->sId
