@@ -232,6 +232,22 @@ class Container extends CPHPDatabaseRecordClass
 		);
 	}
 	
+	function CheckAllowed()
+	{
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
+		{
+			throw new ContainerSuspendedException("No operations can be performed on this container beacuse it is suspended.", 1, $this->sInternalId);
+		}
+		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			throw new ContainerSuspendedException("No operations can be performed on this container beacuse it is terminated.", 1, $this->sInternalId);
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
 	public function RunCommand($command, $throw_exception = false)
 	{
 		return $this->sNode->ssh->RunCommand("vzctl exec {$this->sInternalId} $command", $throw_exception);
@@ -598,5 +614,3 @@ class Container extends CPHPDatabaseRecordClass
 		$command = "vzctl set {$this->sInternalId} --devnodes net/tun:rw --save";
 	}
 }
-
-?>

@@ -17,5 +17,3 @@ class Controller extends CPHPBaseClass
 {
 	public $connection = null;
 }
-
-?>

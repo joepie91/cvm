@@ -137,5 +137,3 @@ class Node extends CPHPDatabaseRecordClass
 		);
 	}
 }
-
-?>
