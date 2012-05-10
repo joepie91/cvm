@@ -629,8 +629,10 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function SetRootPassword($password)
 	{
+		$sPassword = escapeshellarg($password);
+		
 		$this->SetOptions(array(
-			'userpasswd'	=> "root:{$password}"
+			'userpasswd'	=> "root:{$sPassword}"
 		));
 	}
 	

@@ -26,9 +26,11 @@ event-years-ago;							%1$d years ago
 title-overview;								Overview
 title-login;								Login to your VPS panel
 title-reinstall;							Reinstall your VPS
+title-password;								Set new root password
 
 button-login;								Login
 button-reinstall;							Reinstall
+button-password;							Set new root password
 
 notfound;								The specified VPS was not found.
 footer;									CPHP is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
@@ -46,7 +48,7 @@ menu-console;								Console
 menu-ip;								IP Allocation
 menu-alerts;								Alerts
 menu-api;								API
-menu-password;								Password
+menu-password;								Root Password
 
 login-username;								Username
 login-password;								Password
@@ -86,3 +88,6 @@ list-status-suspended;							Suspended
 
 reinstall-warning;							I understand that by reinstalling my VPS, <strong>all data on the VPS is permanently lost</strong> and cannot be recovered. There will be no further confirmations, <strong>after clicking the Reinstall button the reinstallation process cannot be aborted.</strong>
 reinstall-patience;							(be patient; this may take a while)
+
+password-field-password;						New root password
+password-field-confirm;							Confirm password
