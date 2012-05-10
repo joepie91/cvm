@@ -51,6 +51,10 @@ menu-alerts;								Alerts
 menu-api;								API
 menu-password;								Root Password
 
+menu-admin-overview;							Overview
+menu-admin-users;							Users
+menu-admin-containers;							Containers
+
 login-username;								Username
 login-password;								Password
 
