@@ -47,7 +47,7 @@ if(isset($_POST['submit']))
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to configure root password", "You can not configure the root password for this VPS, because it is suspended. If you believe this is in error, please contact support.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to configure root password", "You can not configure the root password for this VPS, because it has been terminated.");
 		$sPageContents .= $err->Render();
 	}
 	catch (SshExitException $e)

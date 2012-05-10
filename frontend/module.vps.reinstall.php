@@ -68,7 +68,7 @@ if(isset($_POST['submit']))
 		}
 		catch (ContainerTerminatedException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You can not reinstall this VPS, because it is suspended. If you believe this is in error, please contact support.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You can not reinstall this VPS, because it has been terminated.");
 			$sPageContents .= $err->Render();
 		}
 	}
