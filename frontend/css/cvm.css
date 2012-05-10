@@ -61,14 +61,19 @@ td.container-status img
 	margin-top: 3px;
 }
 
-table.vpsinfo
+table.vpsinfo, table.console
 {
 	border: 2px solid #31305E;
 }
 
-table.vpsinfo td
+table.vpsinfo td, table.console td
 {
 	padding: 2px 13px;
+}
+
+table.console
+{
+	margin: 12px 0px;
 }
 
 table.vpsinfo th
@@ -79,6 +84,11 @@ table.vpsinfo th
 table.vpslist tr:hover
 {
 	background-color: #BABAD0;
+}
+
+table.console th
+{
+	width: 100px;
 }
 
 .clickable a
