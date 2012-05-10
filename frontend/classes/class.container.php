@@ -232,7 +232,7 @@ class Container extends CPHPDatabaseRecordClass
 		);
 	}
 	
-	function CheckAllowed()
+	public function CheckAllowed()
 	{
 		if($this->sStatus == CVM_STATUS_SUSPENDED)
 		{
