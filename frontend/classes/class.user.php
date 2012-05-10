@@ -74,4 +74,16 @@ class User extends CPHPDatabaseRecordClass
 			return false;
 		}
 	}
+	
+	public function RequireAccessLevel($level)
+	{
+		if($this->sAccessLevel < $level)
+		{
+			throw new InsufficientAccessLevelException("You do not have the required access level to perform this action.");
+		}
+		else
+		{
+			return true;
+		}
+	}
 }
