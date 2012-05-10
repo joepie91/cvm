@@ -44,5 +44,3 @@ class Template extends CPHPDatabaseRecordClass
 		}
 	}
 }
-
-?>
