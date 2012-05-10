@@ -627,6 +627,13 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function SetRootPassword($password)
+	{
+		$this->SetOptions(array(
+			'userpasswd'	=> "root:{$password}"
+		));
+	}
+	
 	public function EnableTunTap()
 	{
 		// TODO: Finish EnableTunTap function, check whether tun module is available on host
