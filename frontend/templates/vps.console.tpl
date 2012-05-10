@@ -1,26 +1,26 @@
-<h2>Out-of-band console</h2>
+<h2><%!title-console></h2>
 
-<p>If you cannot access your container for some reason, you can use the out-of-band console (also known as shell dropper) to invoke a root shell.</p>
+<p><%!console-introduction></p>
 
-<p>To use the out-of-band console, connect through SSH as follows:</p>
+<p><%!console-step1></p>
 
 <table class="console vertical">
 	<tr>
-		<th>Hostname</th>
+		<th><%!console-title-hostname></th>
 		<td><%?host></td>
 	</tr>
 	<tr>
-		<th>Port</th>
+		<th><%!console-title-port></th>
 		<td>22</td>
 	</tr>
 	<tr>
-		<th>Username</th>
+		<th><%!console-title-username></th>
 		<td>vz</td>
 	</tr>
 	<tr>
-		<th>Password</th>
+		<th><%!console-title-password></th>
 		<td>vz</td>
 	</tr>
 </table>
 
-<p>After logging in with the above details, you will have to enter your VPS panel login details, after which you can select a container to invoke a root shell on.</p>
+<p><%!console-step2></p>
