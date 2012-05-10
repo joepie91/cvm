@@ -1,4 +1,7 @@
 #!/usr/bin/python
+
+# Depends on package: bsdutils
+
 import random, string, subprocess, os
 from datetime import time, date, datetime
 from time import strftime
