@@ -445,19 +445,30 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function Stop()
 	{
-		$command = "vzctl stop {$this->sInternalId}";
-		$result = $this->sNode->ssh->RunCommand($command, false);
-		
-		// vzctl is retarded enough to return exit status 0 when the command fails because the container isn't running, so we'll have to check the stderr for specific error string(s) as well. come on guys, it's 2012.
-		if($result->returncode == 0 && strpos($result->stderr, "Unable to stop") === false)
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
 		{
-			$this->uStatus = CVM_STATUS_STOPPED;
-			$this->InsertIntoDatabase();
-			return true;
+			throw new ContainerSuspendedException("The container cannot be stopped as it is suspended.", 1, $this->sInternalId);
+		}
+		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			throw new ContainerTerminatedException("The container cannot be stopped as it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
-			throw new ContainerStopException($result->stderr, $result->returncode, $this->sInternalId);
+			$command = "vzctl stop {$this->sInternalId}";
+			$result = $this->sNode->ssh->RunCommand($command, false);
+			
+			// vzctl is retarded enough to return exit status 0 when the command fails because the container isn't running, so we'll have to check the stderr for specific error string(s) as well. come on guys, it's 2012.
+			if($result->returncode == 0 && strpos($result->stderr, "Unable to stop") === false)
+			{
+				$this->uStatus = CVM_STATUS_STOPPED;
+				$this->InsertIntoDatabase();
+				return true;
+			}
+			else
+			{
+				throw new ContainerStopException($result->stderr, $result->returncode, $this->sInternalId);
+			}
 		}
 	}
 	
