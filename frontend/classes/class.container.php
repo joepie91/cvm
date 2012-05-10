@@ -248,6 +248,25 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function SetOptions($options)
+	{
+		if(is_array($options))
+		{
+			foreach($options as $key => $value)
+			{
+				$config_elements[] = "--{$key} {$value}";
+			}
+			
+			$config_string = implode("  ", $config_elements);
+			
+			$this->sNode->ssh->RunCommand("vzctl set {$this->sInternalId} {$config_string}  --save", true);
+		}
+		else
+		{
+			throw new InvalidArgumentException("The option argument to Container::SetOptions should be an array.");
+		}
+	}
+	
 	public function RunCommand($command, $throw_exception = false)
 	{
 		return $this->sNode->ssh->RunCommand("vzctl exec {$this->sInternalId} $command", $throw_exception);
