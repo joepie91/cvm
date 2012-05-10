@@ -46,6 +46,7 @@ menu-console;								Console
 menu-ip;								IP Allocation
 menu-alerts;								Alerts
 menu-api;								API
+menu-password;								Password
 
 login-username;								Username
 login-password;								Password

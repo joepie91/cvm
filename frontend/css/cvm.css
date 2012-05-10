@@ -239,6 +239,11 @@ table.vpslist tr:hover
 	background-image: url(../images/icon_alerts.png);
 }
 
+#button_password
+{
+	background-image: url(../images/icon_password.png);
+}
+
 .quota-item
 {
 	float: left;
