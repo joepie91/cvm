@@ -22,55 +22,53 @@ if(isset($_POST['submit']))
 		try
 		{
 			$sTemplate = new Template($_POST['template']);
+			$sTemplate->CheckAvailable();
 			
-			if($sTemplate->sIsAvailable === true)
+			if(isset($_POST['confirm']))
 			{
-				if(isset($_POST['confirm']))
+				if($sContainer->sStatus != CVM_STATUS_SUSPENDED)
 				{
-					if($sContainer->sStatus != CVM_STATUS_SUSPENDED)
+					try
 					{
-						try
-						{
-							$sContainer->uTemplateId = $sTemplate->sId;
-							$sContainer->InsertIntoDatabase();
-							$sContainer->Reinstall();
-							$sContainer->Start();
-							
-							$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Reinstallation succeeded!", "Your VPS was successfully reinstalled.");
-							$sPageContents .= $err->Render();
-						}
-						catch (ContainerReinstallException $e)
-						{
-							$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation failed", "Something went wrong during the reinstallation of your VPS. Please try again. If the reinstallation fails again, please contact support.");
-							$sPageContents .= $err->Render();
-						}
-						catch (ContainerStartException $e)
-						{
-							$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "Failed to start", "The VPS was successfully reinstalled, but it could not be started. If the issue persists, please contact support.");
-							$sPageContents .= $err->Render();
-						}
+						$sContainer->uTemplateId = $sTemplate->sId;
+						$sContainer->InsertIntoDatabase();
+						$sContainer->Reinstall();
+						$sContainer->Start();
+						
+						$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Reinstallation succeeded!", "Your VPS was successfully reinstalled.");
+						$sPageContents .= $err->Render();
 					}
-					else
+					catch (ContainerReinstallException $e)
 					{
-						$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You can not reinstall this VPS, because it is suspended. If you believe this is in error, please contact support.");
+						$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation failed", "Something went wrong during the reinstallation of your VPS. Please try again. If the reinstallation fails again, please contact support.");
+						$sPageContents .= $err->Render();
+					}
+					catch (ContainerStartException $e)
+					{
+						$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "Failed to start", "The VPS was successfully reinstalled, but it could not be started. If the issue persists, please contact support.");
 						$sPageContents .= $err->Render();
 					}
 				}
 				else
 				{
-					$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You did not tick the checkbox at the bottom of the page. Please carefully read the warning, tick the checkbox, and try again.");
+					$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You can not reinstall this VPS, because it is suspended. If you believe this is in error, please contact support.");
 					$sPageContents .= $err->Render();
 				}
 			}
 			else
 			{
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "The template you selected is not available. Please select a different template.");
+				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You did not tick the checkbox at the bottom of the page. Please carefully read the warning, tick the checkbox, and try again.");
 				$sPageContents .= $err->Render();
 			}
 		}
 		catch (NotFoundException $e)
 		{
 			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "The template you selected does not exist (anymore). Please select a different template.");
+			$sPageContents .= $err->Render();
+		}
+		catch (TemplateUnavailableException $e)
+		{
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "The template you selected is not available. Please select a different template.");
 			$sPageContents .= $err->Render();
 		}
 	}

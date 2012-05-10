@@ -31,6 +31,18 @@ class Template extends CPHPDatabaseRecordClass
 			'IsOutdated'		=> "Outdated"
 		)
 	);
+	
+	function CheckAvailable()
+	{
+		if($this->sIsAvailable === true)
+		{
+			return true;
+		}
+		else
+		{
+			throw new TemplateUnavailableException("This template is not available.");
+		}
+	}
 }
 
 ?>
