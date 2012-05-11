@@ -34,6 +34,7 @@ title-admin-userinfo;							User lookup
 title-admin-overview;							Administrative overview
 
 header-admin-user-containers;						Containers owned by this user
+header-vps-admin;							Administrative tasks
 
 button-login;								Login
 button-reinstall;							Reinstall
@@ -122,3 +123,7 @@ admin-level-nodeadmin;							Node administrator
 admin-level-masteradmin;						Master administrator
 
 admin-overview-message;							In the future, this page will hold a log of all most recent events. For now, it's just an empty page.
+
+vps-admin-suspend;							Suspend / unsuspend
+vps-admin-transfer;							Transfer
+vps-admin-terminate;							Terminate

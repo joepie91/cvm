@@ -162,7 +162,7 @@ tr.clickable:hover
 	text-align: right;
 }
 
-.userbox a, .userbox a:active
+.userbox a, .userbox a:active, .vps-admin a, .vps-admin a:active
 {
 	display: block;
 	float: left;
@@ -175,7 +175,7 @@ tr.clickable:hover
 	color: white;
 }
 
-.userbox a:hover
+.userbox a:hover, .vps-admin a:hover
 {
 	background-color: #15144E;
 }
