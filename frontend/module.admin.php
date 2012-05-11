@@ -29,7 +29,8 @@ try
 	$router->routes = array(
 		0 => array(
 			'^/admin/?$'			=> "module.admin.overview.php",
-			'^/admin/users/?$'		=> "module.admin.users.php"
+			'^/admin/users/?$'		=> "module.admin.users.php",
+			'^/admin/user/([0-9]+)/?$'	=> "module.admin.user.php"
 		)
 	);
 

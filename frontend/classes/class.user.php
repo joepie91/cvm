@@ -37,6 +37,31 @@ class User extends CPHPDatabaseRecordClass
 		'AccessLevel'
 	);
 	
+	public function __get($name)
+	{
+		switch($name)
+		{
+			case "sContainerCount":
+				return $this->GetContainerCount();
+				break;
+			default:
+				return null;
+				break;
+		}
+	}
+	
+	public function GetContainerCount()
+	{
+		if($result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$this->sId}'"))
+		{
+			return count($result->data);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+	
 	public function GenerateSalt()
 	{
 		$this->uSalt = random_string(10);

@@ -106,9 +106,11 @@ console-title-port;							Port
 console-title-username;							Username
 console-title-password;							Password
 
+admin-title-id;								User ID
 admin-title-username;							Username
 admin-title-email;							Email address
 admin-title-accesslevel;						Access level
+admin-title-containers;							Container count
 admin-level-enduser;							End user
 admin-level-reseller;							Reseller
 admin-level-nodeadmin;							Node administrator

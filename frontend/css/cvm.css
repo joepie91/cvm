@@ -66,7 +66,7 @@ table.vpsinfo, table.console
 	border: 2px solid #31305E;
 }
 
-table.vpsinfo td, table.console td
+table.vertical td
 {
 	padding: 2px 13px;
 }
@@ -84,6 +84,11 @@ table.vpsinfo th
 table.console th
 {
 	width: 120px;
+}
+
+table.userinfo th
+{
+	width: 180px;
 }
 
 table.userlist td
