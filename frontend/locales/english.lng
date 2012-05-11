@@ -29,6 +29,7 @@ title-reinstall;							Reinstall your VPS
 title-password;								Set new root password
 title-console;								Out-of-band console
 title-admin-userlist;							User overview
+title-admin-containerlist;						Container overview
 title-admin-userinfo;							User lookup
 
 header-admin-user-containers;						Containers owned by this user
