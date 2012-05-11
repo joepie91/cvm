@@ -14,6 +14,7 @@
 if($_CPHP !== true) { die(); }
 
 $template_cache = array();
+$template_global_vars = array();
 
 class Templater
 {
@@ -80,8 +81,12 @@ class Templater
 	
 	public function Compile($strings)
 	{
+		global $template_global_vars;
+		
 		if(!is_null($this->tpl))
 		{
+			$strings = array_merge($strings, $template_global_vars);
+			
 			$this->tpl_rendered = $this->ParseForEach($this->tpl_rendered, $strings);
 			$this->tpl_rendered = $this->ParseIf($this->tpl_rendered, $strings);
 			

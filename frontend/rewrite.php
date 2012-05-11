@@ -20,6 +20,7 @@ if(!empty($_SESSION['userid']))
 {
 	$sUser = new User($_SESSION['userid']);
 	$sLoggedIn = true;
+	$template_global_vars['accesslevel'] = $sUser->sAccessLevel;
 	$sTemplateParameters = array_merge($sTemplateParameters, array(
 		'username'	=> $sUser->sUsername
 	));
@@ -28,6 +29,7 @@ else
 {
 	$sUser = new User(0);
 	$sLoggedIn = false;
+	$template_global_vars['accesslevel'] = 0;
 }
 
 $sMainContents = "";

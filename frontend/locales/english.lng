@@ -31,6 +31,7 @@ title-console;								Out-of-band console
 title-admin-userlist;							User overview
 title-admin-containerlist;						Container overview
 title-admin-userinfo;							User lookup
+title-admin-overview;							Administrative overview
 
 header-admin-user-containers;						Containers owned by this user
 
@@ -119,3 +120,5 @@ admin-level-enduser;							End user
 admin-level-reseller;							Reseller
 admin-level-nodeadmin;							Node administrator
 admin-level-masteradmin;						Master administrator
+
+admin-overview-message;							In the future, this page will hold a log of all most recent events. For now, it's just an empty page.
