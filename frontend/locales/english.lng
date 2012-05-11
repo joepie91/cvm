@@ -28,6 +28,7 @@ title-login;								Login to your VPS panel
 title-reinstall;							Reinstall your VPS
 title-password;								Set new root password
 title-console;								Out-of-band console
+title-admin-userlist;							User overview
 
 button-login;								Login
 button-reinstall;							Reinstall
@@ -104,3 +105,11 @@ console-title-hostname;							Hostname
 console-title-port;							Port
 console-title-username;							Username
 console-title-password;							Password
+
+admin-title-username;							Username
+admin-title-email;							Email address
+admin-title-accesslevel;						Access level
+admin-level-enduser;							End user
+admin-level-reseller;							Reseller
+admin-level-nodeadmin;							Node administrator
+admin-level-masteradmin;						Master administrator
