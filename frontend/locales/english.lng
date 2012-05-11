@@ -32,6 +32,10 @@ title-admin-userlist;							User overview
 title-admin-containerlist;						Container overview
 title-admin-userinfo;							User lookup
 title-admin-overview;							Administrative overview
+title-admin-vps-suspend;						Suspend container
+title-admin-vps-unsuspend;						Unsuspend container
+title-admin-vps-transfer;						Transfer container ownership
+title-admin-vps-terminate;						Terminate container
 
 header-admin-user-containers;						Containers owned by this user
 header-vps-admin;							Administrative tasks
@@ -39,6 +43,10 @@ header-vps-admin;							Administrative tasks
 button-login;								Login
 button-reinstall;							Reinstall
 button-password;							Set new root password
+button-admin-vps-suspend;						Suspend container
+button-admin-vps-unsuspend;						Unsuspend container
+button-admin-vps-transfer;						Transfer container
+button-admin-vps-terminate;						Terminate container
 
 notfound;								The specified VPS was not found.
 footer;									CPHP is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
@@ -127,3 +135,6 @@ admin-overview-message;							In the future, this page will hold a log of all mo
 vps-admin-suspend;							Suspend / unsuspend
 vps-admin-transfer;							Transfer
 vps-admin-terminate;							Terminate
+
+vps-admin-suspend-text;							Are you sure you wish to suspend this container? The owner will no longer be able to use it, until it is unsuspended!
+vps-admin-unsuspend-text;						Are you sure you wish to unsuspend this container? The owner will be able to use it again.

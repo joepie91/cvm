@@ -28,10 +28,13 @@ try
 
 	$router->routes = array(
 		0 => array(
-			'^/admin/?$'			=> "module.admin.overview.php",
-			'^/admin/users/?$'		=> "module.admin.users.php",
-			'^/admin/containers/?$'		=> "module.admin.containers.php",
-			'^/admin/user/([0-9]+)/?$'	=> "module.admin.user.php"
+			'^/admin/?$'					=> "module.admin.overview.php",
+			'^/admin/users/?$'				=> "module.admin.users.php",
+			'^/admin/containers/?$'				=> "module.admin.containers.php",
+			'^/admin/user/([0-9]+)/?$'			=> "module.admin.user.php",
+			'^/admin/container/([0-9]+)/suspend/?$'		=> "module.admin.container.suspend.php",
+			'^/admin/container/([0-9]+)/transfer/?$'	=> "module.admin.container.transfer.php",
+			'^/admin/container/([0-9]+)/terminate/?$'	=> "module.admin.container.terminate.php"
 		)
 	);
 
