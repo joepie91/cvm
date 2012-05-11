@@ -15,12 +15,37 @@ try
 {
 	$sUserEntry = new User($router->uParameters[1]);
 	
+	$sContainerList = array();
+	
+	if($result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$sUserEntry->sId}'"))
+	{
+		foreach($result->data as $row)
+		{
+			$sContainer = new Container($row);
+			
+			$sContainerList[] = array(
+				'id'			=> $sContainer->sId,
+				'hostname'		=> $sContainer->sHostname,
+				'node'			=> $sContainer->sNode->sName,
+				'node-hostname'		=> $sContainer->sNode->sHostname,
+				'template'		=> $sContainer->sTemplate->sName,
+				'diskspace'		=> number_format($sContainer->sDiskSpace / 1024),
+				'diskspace-unit'	=> "GB",
+				'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
+				'guaranteed-ram-unit'	=> "MB",
+				'status'		=> $sContainer->sStatusText,
+				'virtualization-type'	=> $sContainer->sVirtualizationType
+			);
+		}
+	}
+	
 	$sPageContents = Templater::InlineRender("admin.user", $locale->strings, array(
 		'id'			=> $sUserEntry->sId,
 		'username'		=> $sUserEntry->sUsername,
 		'email'			=> $sUserEntry->sEmailAddress,
 		'accesslevel'		=> $sUserEntry->sAccessLevel,
-		'containers'		=> $sUserEntry->sContainerCount
+		'containercount'	=> $sUserEntry->sContainerCount,
+		'containers'		=> $sContainerList
 	));
 }
 catch (NotFoundException $e)
