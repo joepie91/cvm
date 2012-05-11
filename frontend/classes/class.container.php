@@ -534,9 +534,9 @@ class Container extends CPHPDatabaseRecordClass
 		{
 			try
 			{
-				$this->Start();
 				$this->uStatus = CVM_STATUS_STARTED;
 				$this->InsertIntoDatabase();
+				$this->Start();
 			}
 			catch (ContainerStopException $e)
 			{
