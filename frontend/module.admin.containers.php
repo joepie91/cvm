@@ -11,6 +11,8 @@
  * licensing text.
  */
 
+if(!isset($_CVM)) { die("Unauthorized."); }
+
 $sContainerList = array();
 
 if($result = mysql_query_cached("SELECT * FROM containers"))

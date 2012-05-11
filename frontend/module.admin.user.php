@@ -11,6 +11,8 @@
  * licensing text.
  */
 
+if(!isset($_CVM)) { die("Unauthorized."); }
+
 try
 {
 	$sUserEntry = new User($router->uParameters[1]);
