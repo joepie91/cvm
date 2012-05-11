@@ -81,20 +81,25 @@ table.vpsinfo th
 	width: 150px;
 }
 
-table.vpslist tr:hover
-{
-	background-color: #BABAD0;
-}
-
 table.console th
 {
 	width: 120px;
+}
+
+table.userlist td
+{
+	padding-bottom: 4px;
 }
 
 .clickable a
 {
 	color: black;
 	text-decoration: none;
+}
+
+tr.clickable:hover
+{
+	background-color: #BABAD0;
 }
 
 .clear

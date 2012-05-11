@@ -31,6 +31,12 @@ class User extends CPHPDatabaseRecordClass
 		)
 	);
 	
+	public $prototype_export = array(
+		'Username',
+		'EmailAddress',
+		'AccessLevel'
+	);
+	
 	public function GenerateSalt()
 	{
 		$this->uSalt = random_string(10);
