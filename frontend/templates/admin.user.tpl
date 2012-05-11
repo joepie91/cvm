@@ -1,3 +1,5 @@
+<h2><%!title-admin-userinfo></h2>
+
 <table class="userinfo vertical">
 	<tr>
 		<th><%!admin-title-id></th>
