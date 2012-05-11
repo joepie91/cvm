@@ -450,13 +450,13 @@ class Container extends CPHPDatabaseRecordClass
 		}
 	}
 	
-	public function Start()
+	public function Start($forced = false)
 	{
-		if($this->sStatus == CVM_STATUS_SUSPENDED)
+		if($this->sStatus == CVM_STATUS_SUSPENDED && $forced == false)
 		{
 			throw new ContainerSuspendedException("The container cannot be started as it is suspended.", 1, $this->sInternalId);
 		}
-		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		elseif($this->sStatus == CVM_STATUS_TERMINATED && $forced == false)
 		{
 			throw new ContainerTerminatedException("The container cannot be started as it is terminated.", 1, $this->sInternalId);
 		}
@@ -534,11 +534,11 @@ class Container extends CPHPDatabaseRecordClass
 		{
 			try
 			{
+				$this->Start(true);
 				$this->uStatus = CVM_STATUS_STARTED;
 				$this->InsertIntoDatabase();
-				$this->Start();
 			}
-			catch (ContainerStopException $e)
+			catch (ContainerStartException $e)
 			{
 				throw new ContainerUnsuspendException("Unsuspension failed as the container could not be started.", 1, $this->sInternalId, $e);
 			}
