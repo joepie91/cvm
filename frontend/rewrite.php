@@ -16,8 +16,6 @@ require("includes/include.base.php");
 
 $sTemplateParameters = array();
 
-//$_SESSION['userid'] = 1;
-
 if(!empty($_SESSION['userid']))
 {
 	$sUser = new User($_SESSION['userid']);
@@ -76,5 +74,3 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 ));
 
 echo(Templater::InlineRender("main", $locale->strings, $sTemplateParameters));
-
-?>

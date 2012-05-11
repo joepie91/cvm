@@ -34,5 +34,3 @@ else
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container can't be stopped", "Your container cannot be stopped because it is not running.");
 	$sError .= $err->Render();
 }
-
-?>

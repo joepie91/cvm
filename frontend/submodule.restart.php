@@ -40,5 +40,3 @@ catch(ContainerStartException $e)
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container failed to start", "Your container could not be started. If this error persists, please file a support ticket.");
 	$sError .= $err->Render();
 }
-
-?>

@@ -66,4 +66,3 @@ if($display_form === true)
 		'id'	=> $sContainer->sId
 	));
 }
-?>

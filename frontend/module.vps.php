@@ -70,4 +70,3 @@ catch(NotFoundException $e)
 {
 	$sMainContents = Templater::InlineRender("error.vps.notfound");
 }
-?>

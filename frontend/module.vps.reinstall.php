@@ -99,4 +99,3 @@ if($display_form === true)
 		'templates'	=> $sTemplateList
 	));
 }
-?>

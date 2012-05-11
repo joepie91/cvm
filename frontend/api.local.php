@@ -106,5 +106,3 @@ echo(json_encode(array(
 	'status'	=> $return_success,
 	'data'		=> $return_object
 )));
-
-?>

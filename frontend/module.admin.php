@@ -46,4 +46,3 @@ catch (InsufficientAccessLevelException $e)
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "You are not authorized to view this page", "Your access level is not sufficient.");
 	$sMainContents .= $err->Render();
 }
-?>

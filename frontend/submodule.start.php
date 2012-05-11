@@ -39,5 +39,3 @@ else
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container can't be started", "Your container cannot be started because it is already running.");
 	$sError .= $err->Render();
 }
-
-?>

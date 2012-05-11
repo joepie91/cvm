@@ -85,4 +85,3 @@ catch (SshExitException $e)
 
 
 $sPageContents = Templater::InlineRender("vps.overview", $locale->strings, $sVariables);
-?>
