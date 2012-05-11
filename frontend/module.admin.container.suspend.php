@@ -37,6 +37,8 @@ try
 			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container unsuspended", "The container has been unsuspended and can now be used by the owner again.");
 			$sMainContents .= $err->Render();
 		}
+		
+		$sContainer->RefreshData();
 	}
 	
 	$sPageContents = Templater::InlineRender("admin.container.suspend", $locale->strings, array(
