@@ -36,6 +36,7 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 	
 	public function RefreshData()
 	{
+		$this->PurgeCache();
 		$this->ConstructDataset($this->sId);
 	}
 	
@@ -352,7 +353,6 @@ abstract class CPHPDatabaseRecordClass extends CPHPBaseClass
 					$this->sId = mysql_insert_id();
 				}
 				
-				$this->PurgeCache();
 				$this->RefreshData();
 				
 				return $result;
