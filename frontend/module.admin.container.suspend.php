@@ -27,14 +27,14 @@ try
 		{
 			$sContainer->Suspend();
 			
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCES, "Container suspended", "The container has been suspended and can no longer be used by the owner.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container suspended", "The container has been suspended and can no longer be used by the owner.");
 			$sMainContents .= $err->Render();
 		}
 		elseif($_POST['action'] == "unsuspend")
 		{
 			$sContainer->Unsuspend();
 			
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCES, "Container unsuspended", "The container has been unsuspended and can now be used by the owner again.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container unsuspended", "The container has been unsuspended and can now be used by the owner again.");
 			$sMainContents .= $err->Render();
 		}
 	}
