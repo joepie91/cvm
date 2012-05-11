@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-$result = mysql_query_cached("SELECT * FROM users");
+$result = mysql_query_cached("SELECT * FROM users ORDER BY `AccessLevel` DESC");
 
 $sUserList = array();
 
