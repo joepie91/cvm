@@ -297,7 +297,10 @@ class Templater
 	
 	public function Parse($data)
 	{
+		global $template_global_vars;
+		
 		$tree = $this->BuildSyntaxTree();
+		$data = array_merge($data, $template_global_vars);
 		return $this->root->Evaluate($data);
 	}
 	
