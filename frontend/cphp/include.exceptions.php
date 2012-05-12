@@ -21,3 +21,23 @@ class ConstructorException extends Exception {}
 class MissingDataException extends Exception {}
 class DatabaseException extends Exception {}
 class TypeException extends Exception {}
+
+class TemplateException extends Exception
+{
+	public $message = "";
+	public $file = "";
+	public $startpos = 0;
+	public $endpos = 0;
+	public $code = 0;
+	
+	public function __construct($message, $file, $startpos, $endpos, $code)
+	{
+		$this->message = $message;
+		$this->file = $file;
+		$this->startpos = $startpos;
+		$this->endpos = $endpos;
+	}
+}
+
+class TemplateSyntaxException extends TemplateException {}
+class TemplateParsingException extends TemplateException {}
