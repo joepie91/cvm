@@ -17,6 +17,9 @@
 				{%if logged-in == true}
 					<div class="userbox">
 						<div>{%!userbox-loggedin}</div>
+						{%if accesslevel >= 20}
+							<a href="/admin/">{%!userbox-admin}</a>
+						{%/if}
 						<a href="/account/">{%!userbox-account}</a>
 						<a href="/">{%!userbox-list}</a>
 						<a href="/logout/">{%!userbox-logout}</a>
