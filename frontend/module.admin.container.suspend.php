@@ -19,8 +19,6 @@ try
 	
 	$sContainer = new Container($router->uParameters[1]);
 	
-	$sSuspended = ($sContainer->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
-	
 	if(isset($_POST['submit']))
 	{
 		if($_POST['action'] == "suspend")
@@ -40,6 +38,8 @@ try
 		
 		$sContainer->RefreshData();
 	}
+	
+	$sSuspended = ($sContainer->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
 	
 	$sPageContents = Templater::InlineRender("admin.container.suspend", $locale->strings, array(
 		'id'		=> $sContainer->sId,
