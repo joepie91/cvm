@@ -55,6 +55,7 @@ userbox-loggedin;							You are logged in as <strong>{%?username}</strong>.
 userbox-account;							Account settings
 userbox-list;								My VPSes
 userbox-logout;								Log out
+userbox-admin;								Administration panel
 
 menu-overview;								Overview
 menu-statistics;							Statistics
