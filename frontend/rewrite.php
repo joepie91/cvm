@@ -11,6 +11,8 @@
  * licensing text.
  */
  
+$timing_start = microtime(true);
+ 
 $_CVM = true;
 require("includes/include.base.php");
 
@@ -72,7 +74,8 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'logged-in'		=> $sLoggedIn,
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
-	'main-class'		=> $sMainClass
+	'main-class'		=> $sMainClass,
+	'generation'		=> "<!-- page generated in " . (round(microtime(true) - $timing_start, 6)) . " seconds. -->"
 ));
 
 echo(Templater::AdvancedParse("main", $locale->strings, $sTemplateParameters));

@@ -34,5 +34,6 @@
 			</div>
 		</div>
 		<img class="preload" src="images/loading.gif">
+		{%?generation}
 	</body>
 </html>
