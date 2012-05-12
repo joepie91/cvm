@@ -51,7 +51,7 @@ button-admin-vps-terminate;						Terminate container
 notfound;								The specified VPS was not found.
 footer;									CPHP is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
 
-userbox-loggedin;							You are logged in as <strong><%?username></strong>.
+userbox-loggedin;							You are logged in as <strong>{%?username}</strong>.
 userbox-account;							Account settings
 userbox-list;								My VPSes
 userbox-logout;								Log out

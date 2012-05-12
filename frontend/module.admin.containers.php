@@ -37,6 +37,6 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 	}
 }
 
-$sPageContents = Templater::InlineRender("admin.containers", $locale->strings, array(
+$sPageContents = Templater::AdvancedParse("admin.containers", $locale->strings, array(
 	'containers'		=> $sContainerList
 ));

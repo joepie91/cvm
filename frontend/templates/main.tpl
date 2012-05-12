@@ -14,20 +14,20 @@
 		<div class="wrapper">
 			<div class="header">
 				<img src="/images/logo.png">
-				<%if logged-in == true>
+				{%if logged-in == true}
 					<div class="userbox">
-						<div><%!userbox-loggedin></div>
-						<a href="/account/"><%!userbox-account></a>
-						<a href="/"><%!userbox-list></a>
-						<a href="/logout/"><%!userbox-logout></a>
+						<div>{%!userbox-loggedin}</div>
+						<a href="/account/">{%!userbox-account}</a>
+						<a href="/">{%!userbox-list}</a>
+						<a href="/logout/">{%!userbox-logout}</a>
 					</div>
-				<%/if>
+				{%/if}
 			</div>
-			<div class="main <%?main-class>">
-				<%?main>
+			<div class="main {%?main-class}">
+				{%?main}
 			</div>
 			<div class="footer">
-				<%!footer>
+				{%!footer}
 			</div>
 		</div>
 		<img class="preload" src="images/loading.gif">

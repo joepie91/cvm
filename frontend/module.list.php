@@ -37,7 +37,7 @@ if($sLoggedIn === true)
 		);
 	}
 	
-	$sMainContents = Templater::InlineRender("list", $locale->strings, array(
+	$sMainContents = Templater::AdvancedParse("list", $locale->strings, array(
 		'containers'	=> $sContainerList
 	));
 }

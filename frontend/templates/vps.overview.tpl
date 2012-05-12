@@ -1,106 +1,106 @@
-<h1><%!title-overview></h1>
+<h1>{%!title-overview}</h1>
 
 <div class="quota">
 	<div class="quota-item">
-		<h3><%!overview-quota-title-disk></h3>
+		<h3>{%!overview-quota-title-disk}</h3>
 		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: <%?disk-percentage>%;"></div>
-			<div class="quota-bar-label"><%?disk-used>/<%?disk-total><%?disk-unit></div>
+			<div class="quota-bar-inner" style="width: {%?disk-percentage}%;"></div>
+			<div class="quota-bar-label">{%?disk-used}/{%?disk-total}{%?disk-unit}</div>
 		</div>
 	</div>
 	<div class="quota-item">
-		<h3><%!overview-quota-title-ram></h3>
+		<h3>{%!overview-quota-title-ram}</h3>
 		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: <%?ram-percentage>%;"></div>
-			<div class="quota-bar-label"><%?ram-used>/<%?ram-total><%?ram-unit></div>
+			<div class="quota-bar-inner" style="width: {%?ram-percentage}%;"></div>
+			<div class="quota-bar-label">{%?ram-used}/{%?ram-total}{%?ram-unit}</div>
 		</div>
 	</div>
 	<div class="quota-item last">
-		<h3><%!overview-quota-title-traffic></h3>
+		<h3>{%!overview-quota-title-traffic}</h3>
 		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: <%?traffic-percentage>%;"></div>
-			<div class="quota-bar-label"><%?traffic-used>/<%?traffic-total><%?traffic-unit></div>
+			<div class="quota-bar-inner" style="width: {%?traffic-percentage}%;"></div>
+			<div class="quota-bar-label">{%?traffic-used}/{%?traffic-total}{%?traffic-unit}</div>
 		</div>
 	</div>
 	<div class="clear"></div>
 </div>
 
 <div class="controlbox">
-	<a class="controlbutton button-loader" href="/<%?id>/start/">
+	<a class="controlbutton button-loader" href="/{%?id}/start/">
 		<img src="/images/button_start.png" class="button-icon">
-		<%!overview-button-start>
+		{%!overview-button-start}
 	</a>
-	<a class="controlbutton button-loader" href="/<%?id>/restart/">
+	<a class="controlbutton button-loader" href="/{%?id}/restart/">
 		<img src="/images/button_restart.png" class="button-icon">
-		<%!overview-button-restart>
+		{%!overview-button-restart}
 	</a>
-	<a class="controlbutton button-loader last" href="/<%?id>/stop/">
+	<a class="controlbutton button-loader last" href="/{%?id}/stop/">
 		<img src="/images/button_stop.png" class="button-icon">
-		<%!overview-button-stop>
+		{%!overview-button-stop}
 	</a>
 	<div class="clear"></div>
 </div>
 
-<h2><%!overview-title-configuration></h2>
+<h2>{%!overview-title-configuration}</h2>
 <table class="vpsinfo vertical">
 	<tr>
-		<th><%!overview-title-status></th>
+		<th>{%!overview-title-status}</th>
 		<td>
-			<%if status == running>
-				<span class="online"><%!overview-status-running></span>
-			<%/if><%if status == stopped>
-				<span class="offline"><%!overview-status-stopped></span>
-			<%/if><%if status == suspended>
-				<span class="suspended"><%!overview-status-suspended></span>
-			<%/if><%if status == unknown>
-				<span class="unknown"><%!overview-status-unknown></span>
-			<%/if>
+			{%if status == running}
+				<span class="online">{%!overview-status-running}</span>
+			{%/if}{%if status == stopped}
+				<span class="offline">{%!overview-status-stopped}</span>
+			{%/if}{%if status == suspended}
+				<span class="suspended">{%!overview-status-suspended}</span>
+			{%/if}{%if status == unknown}
+				<span class="unknown">{%!overview-status-unknown}</span>
+			{%/if}
 		</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-location></th>
-		<td><%?server-location></td>
+		<th>{%!overview-title-location}</th>
+		<td>{%?server-location}</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-os></th>
-		<td><%?operating-system></td>
+		<th>{%!overview-title-os}</th>
+		<td>{%?operating-system}</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-ipv4></th>
+		<th>{%!overview-title-ipv4}</th>
 		<td></td>
 	</tr>
 	<tr>
-		<th><%!overview-title-ipv6></th>
+		<th>{%!overview-title-ipv6}</th>
 		<td></td>
 	</tr>
 	<tr>
-		<th><%!overview-title-guaranteed></th>
-		<td><%?guaranteed-ram></td>
+		<th>{%!overview-title-guaranteed}</th>
+		<td>{%?guaranteed-ram}</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-burstable></th>
-		<td><%?burstable-ram></td>
+		<th>{%!overview-title-burstable}</th>
+		<td>{%?burstable-ram}</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-disk></th>
-		<td><%?disk-space></td>
+		<th>{%!overview-title-disk}</th>
+		<td>{%?disk-space}</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-traffic></th>
-		<td><%?total-traffic-limit></td>
+		<th>{%!overview-title-traffic}</th>
+		<td>{%?total-traffic-limit}</td>
 	</tr>
 	<tr>
-		<th><%!overview-title-bandwidth></th>
-		<td><%?bandwidth-limit></td>
+		<th>{%!overview-title-bandwidth}</th>
+		<td>{%?bandwidth-limit}</td>
 	</tr>
 </table>
 
-<%if accesslevel >= 20>
-	<h3><%!header-vps-admin></h3>
+{%if accesslevel }= 20>
+	<h3>{%!header-vps-admin}</h3>
 	<div class="vps-admin">
-		<a href="/admin/container/<%?id>/suspend/"><%!vps-admin-suspend></a>
-		<a href="/admin/container/<%?id>/transfer/"><%!vps-admin-transfer></a>
-		<a href="/admin/container/<%?id>/terminate/"><%!vps-admin-terminate></a>
+		<a href="/admin/container/{%?id}/suspend/">{%!vps-admin-suspend}</a>
+		<a href="/admin/container/{%?id}/transfer/">{%!vps-admin-transfer}</a>
+		<a href="/admin/container/{%?id}/terminate/">{%!vps-admin-terminate}</a>
 	</div>
 	<div class="clear"></div>
-<%/if>
+{%/if}

@@ -60,7 +60,7 @@ try
 		$sMainContents .= $err->Render();
 	}
 
-	$sMainContents .= Templater::InlineRender("main.vps", $locale->strings, array(
+	$sMainContents .= Templater::AdvancedParse("main.vps", $locale->strings, array(
 		'error'			=> $sError,
 		'contents'		=> $sPageContents,
 		'id'			=> $sContainer->sId
@@ -68,5 +68,5 @@ try
 }
 catch(NotFoundException $e)
 {
-	$sMainContents = Templater::InlineRender("error.vps.notfound");
+	$sMainContents = Templater::AdvancedParse("error.vps.notfound");
 }

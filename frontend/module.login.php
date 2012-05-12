@@ -50,7 +50,7 @@ if(isset($_POST['submit']))
 	}
 }
 
-$sMainContents = Templater::InlineRender("login", $locale->strings, array(
+$sMainContents = Templater::AdvancedParse("login", $locale->strings, array(
 	'error'			=> $sError,
 	'field-username'	=> $sFieldUsername
 ));

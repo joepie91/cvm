@@ -1,1 +1,1 @@
-<%!notfound>
+{%!notfound}

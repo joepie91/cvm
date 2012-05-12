@@ -33,7 +33,7 @@ button-reinstall;							Reinstalare
 notfound;								VPS-ul specificat nu a putut fi gasit
 footer;									CPHP este un panou de control pentru VPS-uri, gratuit si open source. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Vrei sa contribui?</a>
 
-userbox-loggedin;							Esti logat ca <strong><%?username></strong>.
+userbox-loggedin;							Esti logat ca <strong>{%?username}</strong>.
 userbox-account;							Setari cont
 userbox-list;								VPS-urile mele
 userbox-logout;								Iesire (logout)

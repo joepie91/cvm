@@ -95,7 +95,7 @@ if($display_form === true)
 		);
 	}
 
-	$sPageContents .= Templater::InlineRender("vps.reinstall", $locale->strings, array(
+	$sPageContents .= Templater::AdvancedParse("vps.reinstall", $locale->strings, array(
 		'templates'	=> $sTemplateList
 	));
 }

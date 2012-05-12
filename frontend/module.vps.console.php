@@ -13,6 +13,6 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-$sPageContents .= Templater::InlineRender("vps.console", $locale->strings, array(
+$sPageContents .= Templater::AdvancedParse("vps.console", $locale->strings, array(
 	'host'		=> 	htmlspecialchars($_SERVER['SERVER_NAME'])
 ));

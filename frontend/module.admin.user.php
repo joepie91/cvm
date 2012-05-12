@@ -41,7 +41,7 @@ try
 		}
 	}
 	
-	$sPageContents = Templater::InlineRender("admin.user", $locale->strings, array(
+	$sPageContents = Templater::AdvancedParse("admin.user", $locale->strings, array(
 		'id'			=> $sUserEntry->sId,
 		'username'		=> $sUserEntry->sUsername,
 		'email'			=> $sUserEntry->sEmailAddress,

@@ -41,7 +41,7 @@ try
 	
 	$sSuspended = ($sContainer->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
 	
-	$sPageContents = Templater::InlineRender("admin.container.suspend", $locale->strings, array(
+	$sPageContents = Templater::AdvancedParse("admin.container.suspend", $locale->strings, array(
 		'id'		=> $sContainer->sId,
 		'suspended'	=> $sSuspended
 	));

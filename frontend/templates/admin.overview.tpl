@@ -1,3 +1,3 @@
-<h2><%!title-admin-overview></h2>
+<h2>{%!title-admin-overview}</h2>
 
-<p><%!admin-overview-message></p>
+<p>{%!admin-overview-message}</p>

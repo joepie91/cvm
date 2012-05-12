@@ -28,6 +28,6 @@ foreach($result->data as $row)
 	);
 }
 
-$sPageContents = Templater::InlineRender("admin.users", $locale->strings, array(
+$sPageContents = Templater::AdvancedParse("admin.users", $locale->strings, array(
 	'users'		=> $sUserList
 ));

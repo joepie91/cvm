@@ -40,7 +40,7 @@ try
 
 	$router->RouteRequest();
 
-	$sMainContents .= Templater::InlineRender("main.admin", $locale->strings, array(
+	$sMainContents .= Templater::AdvancedParse("main.admin", $locale->strings, array(
 		'contents'		=> $sPageContents
 	));
 }

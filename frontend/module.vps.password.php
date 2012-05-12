@@ -62,7 +62,7 @@ if($display_form === true)
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "Security warning", "Configuring your root password through this panel may expose it to the VPS provider. Only use this feature in an emergency situation, and always change your password again afterwards, from within your container.");
 	$sPageContents .= $err->Render();
 	
-	$sPageContents .= Templater::InlineRender("vps.password", $locale->strings, array(
+	$sPageContents .= Templater::AdvancedParse("vps.password", $locale->strings, array(
 		'id'	=> $sContainer->sId
 	));
 }

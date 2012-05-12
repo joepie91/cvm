@@ -75,4 +75,4 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'main-class'		=> $sMainClass
 ));
 
-echo(Templater::InlineRender("main", $locale->strings, $sTemplateParameters));
+echo(Templater::AdvancedParse("main", $locale->strings, $sTemplateParameters));

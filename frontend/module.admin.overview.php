@@ -13,4 +13,4 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-$sPageContents = Templater::InlineRender("admin.overview", $locale->strings, array());
+$sPageContents = Templater::AdvancedParse("admin.overview", $locale->strings, array());

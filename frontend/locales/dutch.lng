@@ -33,7 +33,7 @@ button-reinstall;							Herinstalleren
 notfound;								De gezochte VPS is niet gevonden.
 footer;									CPHP is een gratis en open-source VPS-beheerpaneel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Help mee!</a>
 
-userbox-loggedin;							Je bent ingelogd als <strong><%?username></strong>.
+userbox-loggedin;							Je bent ingelogd als <strong>{%?username}</strong>.
 userbox-account;							Accountinstellingen
 userbox-list;								Mijn VPSen
 userbox-logout;								Uitloggen
