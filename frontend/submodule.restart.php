@@ -35,6 +35,11 @@ catch (ContainerSuspendedException $e)
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-restart-suspended-title'], $locale->strings['error-restart-suspended-text']);
 	$sError .= $err->Render();
 }
+catch (ContainerTerminatedException $e)
+{
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-restart-terminated-title'], $locale->strings['error-restart-terminated-text']);
+	$sError .= $err->Render();
+}
 catch(ContainerStartException $e)
 {
 	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-restart-start-title'], $locale->strings['error-restart-start-text']);

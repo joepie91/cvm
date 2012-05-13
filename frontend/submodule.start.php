@@ -28,6 +28,11 @@ if($sContainer->sCurrentStatus != CVM_STATUS_STARTED)
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-suspended-title'], $locale->strings['error-start-suspended-text']);
 		$sError .= $err->Render();
 	}
+	catch (ContainerTerminatedException $e)
+	{
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-terminated-title'], $locale->strings['error-start-terminated-text']);
+		$sError .= $err->Render();
+	}
 	catch (ContainerStartException $e)
 	{
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-failed-title'], $locale->strings['error-start-failed-text']);

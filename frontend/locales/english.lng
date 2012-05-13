@@ -164,6 +164,8 @@ error-start-success-title;						Container started
 error-start-success-text;						Your container was successfully started.
 error-start-suspended-title;						Container is suspended
 error-start-suspended-text;						Your container could not be started, as it is currently suspended. If you believe this is in error, please file a support ticket.
+error-start-terminated-title;						Container is terminated
+error-start-terminated-text;						Your container could not be started, as it is terminated.
 error-start-failed-title;						Container failed to start
 error-start-failed-text;						Your container could not be started. If this error persists, please file a support ticket.
 error-start-running-title;						Container can't be started
@@ -212,5 +214,7 @@ error-restart-success-title;						Container restarted
 error-restart-success-text;						Your container was successfully restarted.
 error-restart-suspended-title;						Container is suspended
 error-restart-suspended-text;						Your container could not be restarted, as it is currently suspended. If you believe this is in error, please file a support ticket.
+error-restart-suspended-title;						Container is terminated
+error-restart-suspended-text;						Your container could not be restarted, as it is terminated.
 error-restart-start-title;						Container failed to start
 error-restart-start-text;						Your container could not be started. If this error persists, please file a support ticket.
