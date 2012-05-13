@@ -139,3 +139,78 @@ vps-admin-terminate;							Terminate
 
 vps-admin-suspend-text;							Are you sure you wish to suspend this container? The owner will no longer be able to use it, until it is unsuspended!
 vps-admin-unsuspend-text;						Are you sure you wish to unsuspend this container? The owner will be able to use it again.
+
+error-logout-success-title;						Successfully logged out
+error-logout-success-text;						You have been successfully logged out. You can now close this page.
+error-logout-notloggedin-title;						You are not logged in
+error-logout-notloggedin-text;						You can only logout when you are already logged in.
+error-suspend-success-title;						Container suspended
+error-suspend-success-text;						The container has been suspended and can no longer be used by the owner.
+error-unsuspend-success-title;						Container unsuspended
+error-unsuspend-success-text;						The container has been unsuspended and can now be used by the owner again.
+error-suspend-error-title;						Failed to suspend container
+error-suspend-error-text;						The container could not be suspended.
+error-unsuspend-error-title;						Failed to unsuspend container
+error-unsuspend-error-text;						The container could not be unsuspended.
+error-unauthorized-title;						You are not authorized to view this page
+error-unauthorized-text;						Your access level is not sufficient.
+error-notfound-title;							Container not found
+error-notfound-text;							The container you selected was not found.
+warning-suspended-title;						This container is suspended
+warning-suspended-text;							You cannot change any configuration or perform any actions on this container. If you feel this should not be the case, please contact support.
+warning-terminated-title;						This container has been terminated
+warning-terminated-text;						You cannot change any configuration or perform any actions on this container, as it is terminated.
+error-start-success-title;						Container started
+error-start-success-text;						Your container was successfully started.
+error-start-suspended-title;						Container is suspended
+error-start-suspended-text;						Your container could not be started, as it is currently suspended. If you believe this is in error, please file a support ticket.
+error-start-failed-title;						Container failed to start
+error-start-failed-text;						Your container could not be started. If this error persists, please file a support ticket.
+error-start-running-title;						Container can't be started
+error-start-running-text;						Your container cannot be started because it is already running.
+error-stop-success-title;						Container stopped
+error-stop-success-text;						Your container was successfully stopped.
+error-stop-failed-title;						Container failed to stop
+error-stop-failed-text;							Your container could not be stopped. If this error persists, please file a support ticket.
+error-stop-stopped-title;						Container can't be stopped
+error-stop-stopped-text;						Your container cannot be stopped because it is not running.
+error-login-invalid-title;						Login failed
+error-login-invalid-text;						The login details you provided are invalid. Please try again.
+error-admin-user-title;							That user does not exist
+error-admin-user-text;							The user you tried to look up does not exist.
+error-password-success-title;						Password configuration succeeded!
+error-password-success-text;						Your new root password was successfully configured. Please ensure to change your root password again from your container after logging in.
+error-password-nomatch-title;						Passwords do not match
+error-password-nomatch-text;						Both entries must be identical. Please try again.
+error-password-missing-title;						Fields missing
+error-password-missing-text;						Both fields are required. Please try again.
+error-password-suspended-title;						Failed to configure root password
+error-password-suspended-text;						You can not configure the root password for this VPS, because it is suspended. If you believe this is in error, please contact support.
+error-password-terminated-title;					Failed to configure root password
+error-password-terminated-text;						You can not configure the root password for this VPS, because it has been terminated.
+error-password-invalid-title;						Failed to configure root password
+error-password-invalid-text;						Your password may be in an invalid format. Try again with a different password.
+warning-password-title;							Security warning
+warning-password-text;							Configuring your root password through this panel may expose it to the VPS provider. Only use this feature in an emergency situation, and always change your password again afterwards, from within your container.
+error-reinstall-success-title;						Reinstallation succeeded!
+error-reinstall-success-text;						Your VPS was successfully reinstalled.
+error-reinstall-confirm-title;						Reinstallation aborted
+error-reinstall-confirm-text;						You did not tick the checkbox at the bottom of the page. Please carefully read the warning, tick the checkbox, and try again.
+error-reinstall-notfound-title;						Reinstallation aborted
+error-reinstall-notfound-text;						The template you selected does not exist (anymore). Please select a different template.
+error-reinstall-unavailable-title;					Reinstallation aborted
+error-reinstall-unavailable-text;					The template you selected is not available. Please select a different template.
+error-reinstall-failed-title;						Reinstallation failed
+error-reinstall-failed-text;						Something went wrong during the reinstallation of your VPS. Please try again. If the reinstallation fails again, please contact support.
+error-reinstall-start-title;						Failed to start
+error-reinstall-start-text;						The VPS was successfully reinstalled, but it could not be started. If the issue persists, please contact support.
+error-reinstall-suspended-title;					Reinstallation aborted
+error-reinstall-suspended-text;						You can not reinstall this VPS, because it is suspended. If you believe this is in error, please contact support.
+error-reinstall-terminated-title;					Reinstallation aborted
+error-reinstall-terminated-text;					You can not reinstall this VPS, because it has been terminated.
+error-restart-success-title;						Container restarted
+error-restart-success-text;						Your container was successfully restarted.
+error-restart-suspended-title;						Container is suspended
+error-restart-suspended-text;						Your container could not be restarted, as it is currently suspended. If you believe this is in error, please file a support ticket.
+error-restart-start-title;						Container failed to start
+error-restart-start-text;						Your container could not be started. If this error persists, please file a support ticket.

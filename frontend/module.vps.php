@@ -51,12 +51,12 @@ try
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "This container is suspended", "You cannot change any configuration or perform any actions on this container. If you feel this should not be the case, please contact support.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-suspended-title'], $locale->strings['warning-suspended-text']);
 		$sMainContents .= $err->Render();
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "This container has been terminated", "You cannot change any configuration or perform any actions on this container, as it is terminated.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-terminated-title'], $locale->strings['warning-terminated-text']);
 		$sMainContents .= $err->Render();
 	}
 

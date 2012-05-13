@@ -25,14 +25,14 @@ try
 		{
 			$sContainer->Suspend();
 			
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container suspended", "The container has been suspended and can no longer be used by the owner.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-suspend-success-title'], $locale->strings['error-suspend-success-text']);
 			$sMainContents .= $err->Render();
 		}
 		elseif($_POST['action'] == "unsuspend")
 		{
 			$sContainer->Unsuspend();
 			
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container unsuspended", "The container has been unsuspended and can now be used by the owner again.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-unsuspend-success-title'], $locale->strings['error-unsuspend-success-text']);
 			$sMainContents .= $err->Render();
 		}
 		
@@ -48,21 +48,21 @@ try
 }
 catch (InsufficientAccessLevelException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "You are not authorized to view this page", "Your access level is not sufficient.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-unauthorized-title'], $locale->strings['error-unauthorized-text']);
 	$sMainContents .= $err->Render();
 }
 catch (NotFoundException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container not found", "The container you selected was not found.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-notfound-title'], $locale->strings['error-notfound-text']);
 	$sMainContents .= $err->Render();
 }
 catch (ContainerSuspendException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to suspend container", "The container could not be suspended.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-suspend-error-title'], $locale->strings['error-suspend-error-text']);
 	$sMainContents .= $err->Render();
 }
 catch (ContainerUnsuspendException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to unsuspend container", "The container could not be unsuspended.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-unsuspend-error-title'], $locale->strings['error-unsuspend-error-text']);
 	$sMainContents .= $err->Render();
 }

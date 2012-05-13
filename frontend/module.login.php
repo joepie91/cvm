@@ -39,13 +39,13 @@ if(isset($_POST['submit']))
 		}
 		else
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Login failed", "The login details you provided are invalid. Please try again.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-login-invalid-title'], $locale->strings['error-login-invalid-text']);
 			$sError .= $err->Render();
 		}
 	}
 	else
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Login failed", "The login details you provided are invalid. Please try again.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-login-invalid-title'], $locale->strings['error-login-invalid-text']);
 		$sError .= $err->Render();
 	}
 }

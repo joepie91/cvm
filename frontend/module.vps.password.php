@@ -25,41 +25,41 @@ if(isset($_POST['submit']))
 			{
 				$sContainer->SetRootPassword($_POST['password']);
 				
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Password configuration succeeded!", "Your new root password was successfully configured. Please ensure to change your root password again from your container after logging in.");
+				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-password-success-title'], $locale->strings['error-password-success-text']);
 				$sPageContents .= $err->Render();
 			}
 			else
 			{
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Passwords do not match", "Both entries should be identical. Please try again.");
+				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-nomatch-title'], $locale->strings['error-password-nomatch-text']);
 				$sPageContents .= $err->Render();
 			}
 		}
 		else
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Fields missing", "Both fields are required. Please try again.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-missing-title'], $locale->strings['error-password-missing-text']);
 			$sPageContents .= $err->Render();
 		}
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to configure root password", "You can not configure the root password for this VPS, because it is suspended. If you believe this is in error, please contact support.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-suspended-title'], $locale->strings['error-password-suspended-text']);
 		$sPageContents .= $err->Render();
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to configure root password", "You can not configure the root password for this VPS, because it has been terminated.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-terminated-title'], $locale->strings['error-password-terminated-text']);
 		$sPageContents .= $err->Render();
 	}
 	catch (SshExitException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Failed to configure root password", "Your password may be in an invalid format. Try again with a different password.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-invalid-title'], $locale->strings['error-password-invalid-text']);
 		$sPageContents .= $err->Render();
 	}
 }
 
 if($display_form === true)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "Security warning", "Configuring your root password through this panel may expose it to the VPS provider. Only use this feature in an emergency situation, and always change your password again afterwards, from within your container.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-password-title'], $locale->strings['warning-password-text']);
 	$sPageContents .= $err->Render();
 	
 	$sPageContents .= Templater::AdvancedParse("vps.password", $locale->strings, array(

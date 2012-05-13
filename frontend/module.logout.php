@@ -19,11 +19,11 @@ if($sLoggedIn === true)
 	$sUser = new User(0);
 	$sLoggedIn = false;
 	
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Successfully logged out", "You have been successfully logged out. You can now close this page.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-logout-success-title'], $locale->strings['error-logout-success-text']);
 	$sMainContents .= $err->Render();
 }
 else
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "You are not logged in", "You can only logout when you are already logged in.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-logout-notloggedin-title'], $locale->strings['error-logout-notloggedin-text']);
 	$sMainContents .= $err->Render();
 }

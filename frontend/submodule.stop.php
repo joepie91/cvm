@@ -20,17 +20,17 @@ if($sContainer->sCurrentStatus != CVM_STATUS_STOPPED)
 		$sContainer->Stop();
 		$sContainer->sCurrentStatus = CVM_STATUS_STOPPED;
 		
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container stopped", "Your container was successfully stopped.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-stop-success-title'], $locale->strings['error-stop-success-text']);
 		$sError .= $err->Render();
 	}
 	catch(ContainerStartException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container failed to stop", "Your container could not be stopped. If this error persists, please file a support ticket.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-stop-failed-title'], $locale->strings['error-stop-failed-text']);
 		$sError .= $err->Render();
 	}
 }
 else
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container can't be stopped", "Your container cannot be stopped because it is not running.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-stop-stopped-title'], $locale->strings['error-stop-stopped-text']);
 	$sError .= $err->Render();
 }

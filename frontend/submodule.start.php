@@ -20,22 +20,22 @@ if($sContainer->sCurrentStatus != CVM_STATUS_STARTED)
 		$sContainer->Start();
 		$sContainer->sCurrentStatus = CVM_STATUS_STARTED;
 		
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Container started", "Your container was successfully started.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-start-success-title'], $locale->strings['error-start-success-text']);
 		$sError .= $err->Render();
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is suspended", "Your container could not be started, as it is currently suspended. If you believe this is in error, please file a support ticket.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-suspended-title'], $locale->strings['error-start-suspended-text']);
 		$sError .= $err->Render();
 	}
 	catch (ContainerStartException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container failed to start", "Your container could not be started. If this error persists, please file a support ticket.");
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-failed-title'], $locale->strings['error-start-failed-text']);
 		$sError .= $err->Render();
 	}
 }
 else
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container can't be started", "Your container cannot be started because it is already running.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-running-title'], $locale->strings['error-start-running-text']);
 	$sError .= $err->Render();
 }

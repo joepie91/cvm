@@ -32,43 +32,43 @@ if(isset($_POST['submit']))
 				$sContainer->Reinstall();
 				$sContainer->Start();
 				
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, "Reinstallation succeeded!", "Your VPS was successfully reinstalled.");
+				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-reinstall-success-title'], $locale->strings['error-reinstall-success-text']);
 				$sPageContents .= $err->Render();
 			}
 			else
 			{
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You did not tick the checkbox at the bottom of the page. Please carefully read the warning, tick the checkbox, and try again.");
+				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-confirm-title'], $locale->strings['error-reinstall-confirm-text']);
 				$sPageContents .= $err->Render();
 			}
 		}
 		catch (NotFoundException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "The template you selected does not exist (anymore). Please select a different template.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-notfound-title'], $locale->strings['error-reinstall-notfound-text']);
 			$sPageContents .= $err->Render();
 		}
 		catch (TemplateUnavailableException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "The template you selected is not available. Please select a different template.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-unavailable-title'], $locale->strings['error-reinstall-unavailable-text']);
 			$sPageContents .= $err->Render();
 		}
 		catch (ContainerReinstallException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation failed", "Something went wrong during the reinstallation of your VPS. Please try again. If the reinstallation fails again, please contact support.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-failed-title'], $locale->strings['error-reinstall-failed-text']);
 			$sPageContents .= $err->Render();
 		}
 		catch (ContainerStartException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, "Failed to start", "The VPS was successfully reinstalled, but it could not be started. If the issue persists, please contact support.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['error-reinstall-start-title'], $locale->strings['error-reinstall-start-text']);
 			$sPageContents .= $err->Render();
 		}
 		catch (ContainerSuspendedException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You can not reinstall this VPS, because it is suspended. If you believe this is in error, please contact support.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-suspended-title'], $locale->strings['error-reinstall-suspended-text']);
 			$sPageContents .= $err->Render();
 		}
 		catch (ContainerTerminatedException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Reinstallation aborted", "You can not reinstall this VPS, because it has been terminated.");
+			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-terminated-title'], $locale->strings['error-reinstall-terminated-text']);
 			$sPageContents .= $err->Render();
 		}
 	}

@@ -52,7 +52,7 @@ try
 }
 catch (NotFoundException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "That user does not exist", "The user you tried to look up does not exist.");
+	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-admin-user-title'], $locale->strings['error-admin-user-text']);
 	$sPageContents .= $err->Render();
 }
 
