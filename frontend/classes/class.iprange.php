@@ -79,34 +79,6 @@ class IpRange
 		}
 	}
 	
-	/* if($this->ValidateRangeFormat($input) === true)
-			{
-				list($ip, $size) = explode("/", $input, 2);
-				
-				if($this->sType == IP_TYPE_IPV6)
-				{
-					$ip = $this->ExpandIpv6($ip);
-				}
-				
-				$result = IpRange::ParseRange($ip, $size, ":", SEGMENT_BITS_IPV6, true);
-				
-				echo "Start: {$result['start']}    End: {$result['end']}    Size: {$result['count']}";
-			}
-			else
-			{
-				throw new InvalidArgumentException("The given input is not a valid IP range.");
-			}
-			* 
-			* 
-			* if($this->ValidateIpFormat($input) === true)
-			{
-				
-			}
-			else
-			{
-				throw new InvalidArgumentException("The given input is not a valid IP.");
-			}*/
-	
 	private function ValidateRangeFormat()
 	{
 		list($ip, $size) = explode("/", $this->sInput, 2);
