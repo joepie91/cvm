@@ -87,7 +87,7 @@ class Container extends CPHPDatabaseRecordClass
 				return $this->GetStatusText();
 				break;
 			default:
-				return null;
+				return parent::__get($name);
 				break;
 		}
 	}

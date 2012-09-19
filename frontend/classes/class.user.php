@@ -16,8 +16,8 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 class User extends CPHPDatabaseRecordClass
 {
 	public $table_name = "users";
-	public $fill_query = "SELECT * FROM users WHERE `Id` = '%d'";
-	public $verify_query = "SELECT * FROM users WHERE `Id` = '%d'";
+	public $fill_query = "SELECT * FROM users WHERE `Id` = :Id";
+	public $verify_query = "SELECT * FROM users WHERE `Id` = :Id";
 	
 	public $prototype = array(
 		'string' => array(
@@ -45,7 +45,7 @@ class User extends CPHPDatabaseRecordClass
 				return $this->GetContainerCount();
 				break;
 			default:
-				return null;
+				return parent::__get($name);
 				break;
 		}
 	}

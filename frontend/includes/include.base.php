@@ -13,6 +13,7 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
+$_CPHP_CONFIG = "../config.json";
 $_CPHP = true;
 require("cphp/base.php");
 require("include.config.php");

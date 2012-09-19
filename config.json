@@ -1,0 +1,36 @@
+{
+	"database": {
+		"driver": 	"mysql",
+		"pdo":		"true",
+		"hostname": 	"localhost",
+		"username": 	"root",
+		"password": 	"",
+		"database": 	"cvm"
+	},
+	"locale": {
+		"path": 		"locales",
+		"extension":		"lng",
+		"default_locale": 	"english",
+		"default_timezone": 	"Europe/Amsterdam"
+	},
+	"memcache": {
+		"enabled": 	true,
+		"compressed": 	true,
+		"hostname": 	"localhost",
+		"port": 	11211
+	},
+	"class_map": {
+		"user": 	"User",
+		"node":		"Node",
+		"container":	"Container",
+		"template":	"Template"
+	},
+	"components": [
+		"router",
+		"errorhandler"
+	],
+	"authentication": {
+		"salt":				"abcdef",
+		"session_length":		2592000
+	}
+}

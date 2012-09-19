@@ -85,7 +85,7 @@ class Node extends CPHPDatabaseRecordClass
 				return $this->GetDiskUsed();
 				break;
 			default:
-				return null;
+				return parent::__get($name);
 				break;
 		}
 	}
