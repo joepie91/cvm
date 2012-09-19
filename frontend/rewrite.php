@@ -58,7 +58,8 @@ try
 			'^/login/?$'		=> "module.login.php",
 			'^/logout/?$'		=> "module.logout.php",
 			'^/admin(/.*)?$'	=> "module.admin.php",
-			'^/([0-9]+)(/.*)?$'	=> "module.vps.php"
+			'^/([0-9]+)(/.*)?$'	=> "module.vps.php",
+			'^/test/?$'		=> "module.test.php"
 		)
 	);
 
