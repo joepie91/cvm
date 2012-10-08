@@ -23,7 +23,7 @@ if($sContainer->sCurrentStatus != CVM_STATUS_STOPPED)
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-stop-success-title'], $locale->strings['error-stop-success-text']);
 		$sError .= $err->Render();
 	}
-	catch(ContainerStartException $e)
+	catch(ContainerStopException $e)
 	{
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-stop-failed-title'], $locale->strings['error-stop-failed-text']);
 		$sError .= $err->Render();
