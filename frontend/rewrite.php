@@ -41,7 +41,7 @@ $sPageTitle = "";
 // Initialize some variables to ensure they are available through the application.
 // This works around the inability of CPHP to retain variables set in the first rewrite.
 $sContainer = null;
-$sPageContents = null;
+$sPageContents = "";
 $router = null;
 $sError = null;
 
@@ -145,7 +145,20 @@ try
 		)
 	);
 	
-	$router->RouteRequest();
+	try
+	{
+		$router->RouteRequest();
+	}
+	catch (ContainerSuspendedException $e)
+	{
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is suspended", $e->getMessage());
+		$sError .= $err->Render();
+	}
+	catch (ContainerTerminatedException $e)
+	{
+		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is terminated", $e->getMessage());
+		$sError .= $err->Render();
+	}
 	
 	if($router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
 	{
