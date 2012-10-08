@@ -13,38 +13,19 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
+$router->uVariables['display_menu'] = true;
+
 try
 {
-	$sContainer = new Container($mainrouter->uParameters[1]);
+	$sContainer = new Container($router->uParameters[1]);
 	
 	if($sContainer->sUserId != $sUser->sId && $sUser->sAccessLevel < 20)
 	{
 		throw new UnauthorizedException("You are not authorized to control this container.");
 	}
 	
-	$sError = "";
-	$sPageContents = "";
-
-	$sMainClass = "shift";
-
-	$router = new CPHPRouter();
+	$sRouterAuthenticated = true;
 	
-	$router->ignore_query = true;
-
-	$router->routes = array(
-		0 => array(
-			'^/([0-9]+)/?$'			=> "module.vps.overview.php",
-			'^/([0-9]+)/(start)/?$'		=> "module.vps.overview.php",
-			'^/([0-9]+)/(stop)/?$'		=> "module.vps.overview.php",
-			'^/([0-9]+)/(restart)/?$'	=> "module.vps.overview.php",
-			'^/([0-9]+)/reinstall/?$'	=> "module.vps.reinstall.php",
-			'^/([0-9]+)/password/?$'	=> "module.vps.password.php",
-			'^/([0-9]+)/console/?$'		=> "module.vps.console.php"
-		)
-	);
-
-	$router->RouteRequest();
-
 	try
 	{
 		$sContainer->CheckAllowed();
@@ -59,14 +40,16 @@ try
 		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-terminated-title'], $locale->strings['warning-terminated-text']);
 		$sMainContents .= $err->Render();
 	}
-
-	$sMainContents .= Templater::AdvancedParse("main.vps", $locale->strings, array(
-		'error'			=> $sError,
-		'contents'		=> $sPageContents,
-		'id'			=> $sContainer->sId
-	));
 }
 catch(NotFoundException $e)
 {
-	$sMainContents = Templater::AdvancedParse("error.vps.notfound");
+	$router->uVariables['display_menu'] = false;
+	$sMainContents = Templater::AdvancedParse("error.vps.notfound", $locale->strings, array());
+	$sRouterAuthenticated = false;
 }
+catch(UnauthorizedException $e)
+{
+	$router->uVariables['display_menu'] = false;
+	$sRouterAuthenticated = false;
+}
+

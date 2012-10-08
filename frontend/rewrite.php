@@ -47,23 +47,121 @@ $sError = null;
 
 try
 {
-	$mainrouter = new CPHPRouter();
+	$router = new CPHPRouter();
 	
-	$mainrouter->ignore_query = true;
+	$router->ignore_query = true;
 
-	$mainrouter->routes = array(
+	$router->routes = array(
 		0 => array(
-			'^/?$'			=> "module.list.php",
-			'^/account/?$'		=> "module.account.php",
-			'^/login/?$'		=> "module.login.php",
-			'^/logout/?$'		=> "module.logout.php",
-			'^/admin(/.*)?$'	=> "module.admin.php",
-			'^/([0-9]+)(/.*)?$'	=> "module.vps.php",
-			'^/test/?$'		=> "module.test.php"
+			'^/?$'				=> "module.list.php",
+			'^/account/?$'			=> "module.account.php",
+			'^/login/?$'			=> "module.login.php",
+			'^/logout/?$'			=> "module.logout.php",
+			'^/([0-9]+)/?$'			=> array(
+				'target'			=> "module.vps.overview.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/([0-9]+)/(start)/?$'		=> array(
+				'target'			=> "module.vps.overview.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/([0-9]+)/(stop)/?$'		=> array(
+				'target'			=> "module.vps.overview.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/([0-9]+)/(restart)/?$'	=> array(
+				'target'			=> "module.vps.overview.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/([0-9]+)/reinstall/?$'	=> array(
+				'target'			=> "module.vps.reinstall.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/([0-9]+)/password/?$'	=> array(
+				'target'			=> "module.vps.password.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/([0-9]+)/console/?$'		=> array(
+				'target'			=> "module.vps.console.php",
+				'authenticator'			=> "authenticator.vps.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "vps"
+			),
+			'^/admin/?$'			=> array(
+				'target'			=> "module.admin.overview.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
+			'^/admin/users/?$'		=> array(
+				'target'			=> "module.admin.users.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
+			'^/admin/containers/?$'		=> array(
+				'target'			=> "module.admin.containers.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
+			'^/admin/user/([0-9]+)/?$'	=> array(
+				'target'			=> "module.admin.user.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
+			'^/admin/container/([0-9]+)/suspend/?$'		=> array(
+				'target'					=> "module.admin.container.suspend.php",
+				'authenticator'					=> "authenticator.admin.php",
+				'auth_error'					=> "error.access.php",
+				'_menu'						=> "admin"
+			),
+			'^/admin/container/([0-9]+)/transfer/?$'	=> array(
+				'target'					=> "module.admin.container.transfer.php",
+				'authenticator'					=> "authenticator.admin.php",
+				'auth_error'					=> "error.access.php",
+				'_menu'						=> "admin"
+			),
+			'^/admin/container/([0-9]+)/terminate/?$'	=> array(
+				'target'					=> "module.admin.container.terminate.php",
+				'authenticator'					=> "authenticator.admin.php",
+				'auth_error'					=> "error.access.php",
+				'_menu'						=> "admin"
+			),
+			'^/test/?$'			=> "module.test.php"
 		)
 	);
-
-	$mainrouter->RouteRequest();
+	
+	$router->RouteRequest();
+	
+	if($router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
+	{
+		$sMainContents .= Templater::AdvancedParse("main.vps", $locale->strings, array(
+			'error'			=> $sError,
+			'contents'		=> $sPageContents,
+			'id'			=> $sContainer->sId
+		));
+	}
+	elseif($router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
+	{
+		$sMainContents .= Templater::AdvancedParse("main.admin", $locale->strings, array(
+			'error'			=> $sError,
+			'contents'		=> $sPageContents
+		));
+	}
 }
 catch (UnauthorizedException $e)
 {
@@ -75,7 +173,7 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'logged-in'		=> $sLoggedIn,
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
-	'main-class'		=> $sMainClass,
+	'main-class'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true) ? "shift" : "",
 	'generation'		=> "<!-- page generated in " . (round(microtime(true) - $timing_start, 6)) . " seconds. -->"
 ));
 

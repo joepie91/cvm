@@ -85,3 +85,4 @@ catch (SshExitException $e)
 
 
 $sPageContents = Templater::AdvancedParse("vps.overview", $locale->strings, $sVariables);
+
