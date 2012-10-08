@@ -629,11 +629,22 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function SetRootPassword($password)
 	{
-		$sPassword = escapeshellarg($password);
-		
-		$this->SetOptions(array(
-			'userpasswd'	=> "root:{$sPassword}"
-		));
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
+		{
+			throw new ContainerSuspendedException("The root password cannot be changed, because the container is suspended.", 1, $this->sInternalId);
+		}
+		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			throw new ContainerTerminatedException("The root password cannot be changed, because the container is terminated.", 1, $this->sInternalId);
+		}
+		else
+		{
+			$sPassword = escapeshellarg($password);
+			
+			$this->SetOptions(array(
+				'userpasswd'	=> "root:{$sPassword}"
+			));
+		}
 	}
 	
 	public function EnableTunTap()
