@@ -15,3 +15,5 @@
 {%/if}
 
 {%?contents}
+
+<div class="clear"></div>

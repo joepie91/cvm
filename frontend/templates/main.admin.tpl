@@ -5,3 +5,5 @@
 </div>
 
 {%?contents}
+
+<div class="clear"></div>
