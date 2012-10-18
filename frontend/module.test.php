@@ -1,5 +1,5 @@
 <?php
-
+/*
 function test_iprange($input, $desired_start, $desired_end, $desired_size, $desired_type)
 {
 	try
@@ -39,4 +39,24 @@ test_iprange("0.0.0.0/1", "0.0.0.0", "127.255.255.255", 1, 4);
 test_iprange("162.16.47.0/16", "162.16.0.0", "162.16.255.255", 16, 4);
 test_iprange("192.168.1.0/27", "192.168.1.0", "192.168.1.31", 27, 4);
 test_iprange("192.168.1.0/32", "192.168.1.0", "192.168.1.0", 32, 4);
-test_iprange("192.168.1.0", "192.168.1.0", "192.168.1.0", 0, 4);
+test_iprange("192.168.1.0", "192.168.1.0", "192.168.1.0", 0, 4);*/
+
+$sContainer = new Container(0);
+$sContainer->uHostname = "test6.cryto.net";
+$sContainer->uInternalId = "110";
+$sContainer->uNodeId = 2;
+$sContainer->uTemplateId = 1;
+$sContainer->uUserId = 1;
+$sContainer->uVirtualizationType = CVM_VIRTUALIZATION_OPENVZ;
+$sContainer->uGuaranteedRam = 256;
+$sContainer->uBurstableRam = 384;
+$sContainer->uDiskSpace = 6000;
+$sContainer->uCpuCount = 1;
+$sContainer->uStatus = CVM_STATUS_BLANK;
+$sContainer->uIncomingTrafficLimit = 500000000000;
+$sContainer->uOutgoingTrafficLimit = 500000000000;
+$sContainer->uTotalTrafficLimit = 1000000000000;
+$sContainer->InsertIntoDatabase();
+
+$sContainer->Deploy();
+
