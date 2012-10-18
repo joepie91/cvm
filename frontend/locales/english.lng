@@ -30,6 +30,7 @@ title-password;								Set new root password
 title-console;								Out-of-band console
 title-admin-userlist;							User overview
 title-admin-containerlist;						Container overview
+title-admin-nodelist;							Node overview
 title-admin-userinfo;							User lookup
 title-admin-overview;							Administrative overview
 title-admin-vps-suspend;						Suspend container
@@ -70,6 +71,7 @@ menu-password;								Root Password
 menu-admin-overview;							Overview
 menu-admin-users;							Users
 menu-admin-containers;							Containers
+menu-admin-nodes;							Nodes
 
 login-username;								Username
 login-password;								Password
@@ -103,6 +105,7 @@ list-column-node;							Node
 list-column-disk;							Disk space
 list-column-ram;							RAM
 list-column-template;							Template
+list-column-location;							Physical location
 list-status-running;							Running
 list-status-stopped;							Stopped
 list-status-suspended;							Suspended
