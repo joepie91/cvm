@@ -105,13 +105,25 @@ class SshConnector extends CPHPBaseClass
 		$command = "{$this->helper} {$command}";
 		
 		$stream = ssh2_exec($this->connection, $command);
-		stream_set_blocking($stream, true);
+		$error_stream = ssh2_fetch_stream($stream, SSH2_STREAM_STDERR);
 		
-		$returndata = json_decode(stream_get_contents($stream));
+		stream_set_blocking($stream, true);
+		stream_set_blocking($error_stream, true);
+		
+		$result = stream_get_contents($stream);
+		$error = stream_get_contents($error_stream);
+		
+		if(strpos($error, "No such file or directory") !== false)
+		{
+			throw new Exception("The runhelper is not installed on the node.");
+		}
+		
+		$returndata = json_decode($result);
 		
 		$returndata->stderr = trim($returndata->stderr);
 		
 		fclose($stream);
+		fclose($error_stream);
 		
 		if($returndata->returncode != 0 && $throw_exception === true)
 		{
