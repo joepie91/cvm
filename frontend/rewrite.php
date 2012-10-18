@@ -129,6 +129,12 @@ try
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
+			'^/admin/node/([0-9]+)/?$'	=> array(
+				'target'			=> "module.admin.node.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
 			'^/admin/container/([0-9]+)/suspend/?$'		=> array(
 				'target'					=> "module.admin.container.suspend.php",
 				'authenticator'					=> "authenticator.admin.php",

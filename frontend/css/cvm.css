@@ -93,6 +93,11 @@ table.userinfo th
 	width: 180px;
 }
 
+table.nodeinfo th
+{
+	width: 180px;
+}
+
 table.userlist td
 {
 	padding-bottom: 4px;
