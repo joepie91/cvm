@@ -57,101 +57,117 @@ try
 			'^/account/?$'			=> "module.account.php",
 			'^/login/?$'			=> "module.login.php",
 			'^/logout/?$'			=> "module.logout.php",
+			/* Frontpage/overview */
 			'^/([0-9]+)/?$'			=> array(
 				'target'			=> "module.vps.overview.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* VPS - Start */
 			'^/([0-9]+)/(start)/?$'		=> array(
 				'target'			=> "module.vps.overview.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* VPS - Stop */
 			'^/([0-9]+)/(stop)/?$'		=> array(
 				'target'			=> "module.vps.overview.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* VPS - Restart */
 			'^/([0-9]+)/(restart)/?$'	=> array(
 				'target'			=> "module.vps.overview.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* VPS - Reinstall */
 			'^/([0-9]+)/reinstall/?$'	=> array(
 				'target'			=> "module.vps.reinstall.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* VPS - Change password */
 			'^/([0-9]+)/password/?$'	=> array(
 				'target'			=> "module.vps.password.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* VPS - Console */
 			'^/([0-9]+)/console/?$'		=> array(
 				'target'			=> "module.vps.console.php",
 				'authenticator'			=> "authenticator.vps.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "vps"
 			),
+			/* Admin - Overview */
 			'^/admin/?$'			=> array(
 				'target'			=> "module.admin.overview.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
+			/* Admin - Users - Overview */
 			'^/admin/users/?$'		=> array(
 				'target'			=> "module.admin.users.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
-			'^/admin/containers/?$'		=> array(
-				'target'			=> "module.admin.containers.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
-				'_menu'				=> "admin"
-			),
+			/* Admin - Users - Lookup */
 			'^/admin/user/([0-9]+)/?$'	=> array(
 				'target'			=> "module.admin.user.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
-			'^/admin/nodes/?$'		=> array(
-				'target'			=> "module.admin.nodes.php",
+			/* Admin - Containers - Overview */
+			'^/admin/containers/?$'		=> array(
+				'target'			=> "module.admin.containers.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
-			'^/admin/node/([0-9]+)/?$'	=> array(
-				'target'			=> "module.admin.node.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
-				'_menu'				=> "admin"
-			),
+			/* Admin - Containers - Suspend */
 			'^/admin/container/([0-9]+)/suspend/?$'		=> array(
 				'target'					=> "module.admin.container.suspend.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
 			),
+			/* Admin - Containers - Transfer */
 			'^/admin/container/([0-9]+)/transfer/?$'	=> array(
 				'target'					=> "module.admin.container.transfer.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
 			),
+			/* Admin - Containers - Terminate */
 			'^/admin/container/([0-9]+)/terminate/?$'	=> array(
 				'target'					=> "module.admin.container.terminate.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
+			),
+			/* Admin - Nodes - Overview */
+			'^/admin/nodes/?$'		=> array(
+				'target'			=> "module.admin.nodes.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
+			/* Admin - Nodes - Lookup */
+			'^/admin/node/([0-9]+)/?$'	=> array(
+				'target'			=> "module.admin.node.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
 			),
 			'^/test/?$'			=> "module.test.php"
 		)
