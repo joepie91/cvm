@@ -302,26 +302,31 @@ class Container extends CPHPDatabaseRecordClass
 			$this->uStatus = CVM_STATUS_CREATED;
 			$this->InsertIntoDatabase();
 			
-			$sKMemSize = (isset($conf['sKMemSize'])) 		? $conf['sKMemSize'] : 		$this->sGuaranteedRam * 65000;
+			$dummy_processes = 1000;
+			$dummy_files = $this->sGuaranteedRam * 32;
+			$dummy_sockets = $this->sGuaranteedRam * 3;
+			
+			$sKMemSize = (isset($conf['sKMemSize'])) 		? $conf['sKMemSize'] : 		(40 * 1024 * ($dummy_processes / 2)) + ($dummy_files * 384 * 100);
 			$sKMemSizeLimit = (isset($conf['sKMemSizeLimit'])) 	? $conf['sKMemSizeLimit'] : 	(int)($sKMemSize * 1.1);
-			$sLockedPages = (isset($conf['sLockedPages'])) 		? $conf['sLockedPages'] : 	(int)($this->sGuaranteedRam * 1.5);
-			$sShmPages = (isset($conf['sShmPages'])) 		? $conf['sShmPages'] : 		$sLockedPages * 64;
-			$sOomGuarPages = (isset($conf['sOomGuarPages'])) 	? $conf['sOomGuarPages'] : 	$this->sGuaranteedRam * 140;
-			$sTcpSock = (isset($conf['sTcpSock'])) 			? $conf['sTcpSock'] : 		$this->sGuaranteedRam * 3;
-			$sOtherSock = (isset($conf['sOtherSock'])) 		? $conf['sOtherSock'] : 	$this->sGuaranteedRam * 3;
-			$sFLock = (isset($conf['sFLock'])) 			? $conf['sFLock'] : 		(int)($this->sGuaranteedRam * 0.6);
+			$sLockedPages = (isset($conf['sLockedPages'])) 		? $conf['sLockedPages'] : 	$dummy_processes;
+			$sShmPages = (isset($conf['sShmPages'])) 		? $conf['sShmPages'] : 		$this->sGuaranteedRam . "M";
+			$sOomGuarPages = (isset($conf['sOomGuarPages'])) 	? $conf['sOomGuarPages'] : 	$this->sGuaranteedRam . "M";
+			$sTcpSock = (isset($conf['sTcpSock'])) 			? $conf['sTcpSock'] : 		$dummy_sockets;
+			$sOtherSock = (isset($conf['sOtherSock'])) 		? $conf['sOtherSock'] : 	$dummy_sockets;
+			$sFLock = (isset($conf['sFLock'])) 			? $conf['sFLock'] : 		$dummy_processes;
 			$sFLockLimit = (isset($conf['sFLockLimit'])) 		? $conf['sFLockLimit'] : 	(int)($sFLock * 1.1);
-			$sTcpSndBuf = (isset($conf['sTcpSndBuf'])) 		? $conf['sTcpSndBuf'] : 	(int)($this->sGuaranteedRam * 10000);
-			$sTcpRcvBuf = (isset($conf['sTcpRcvBuf'])) 		? $conf['sTcpRcvBuf'] : 	(int)($this->sGuaranteedRam * 10000);
-			$sOtherBuf = (isset($conf['sOtherBuf'])) 		? $conf['sOtherBuf'] : 		(int)($this->sGuaranteedRam * 10000);
-			$sOtherBufLimit = (isset($conf['sOtherBufLimit'])) 	? $conf['sOtherBufLimit'] : 	(int)($sTcpSndBuf * 2);
-			$sTcpSndBufLimit = (isset($conf['sTcpSndBufLimit'])) 	? $conf['sTcpSndBufLimit'] : 	(int)($sTcpSndBuf * 2);
-			$sTcpRcvBufLimit = (isset($conf['sTcpRcvBufLimit'])) 	? $conf['sTcpRcvBufLimit'] : 	(int)($sTcpRcvBuf * 2);
-			$sDgramBuf = (isset($conf['sDgramBuf'])) 		? $conf['sDgramBuf'] : 		(int)($sTcpRcvBuf / 40);
-			$sNumFile = (isset($conf['sNumFile'])) 			? $conf['sNumFile'] : 		$this->sGuaranteedRam * 32;
-			$sDCache = (isset($conf['sDCache'])) 			? $conf['sDCache'] : 		$this->sGuaranteedRam * 16000;
+			$sTcpSndBuf = (isset($conf['sTcpSndBuf'])) 		? $conf['sTcpSndBuf'] : 	round($this->sGuaranteedRam * 1024 / 5) . "K";
+			$sTcpRcvBuf = (isset($conf['sTcpRcvBuf'])) 		? $conf['sTcpRcvBuf'] : 	round($this->sGuaranteedRam * 1024 / 5) . "K";
+			$sOtherBuf = (isset($conf['sOtherBuf'])) 		? $conf['sOtherBuf'] : 		round($this->sGuaranteedRam * 1024 / 5) . "K";
+			$sOtherBufLimit = (isset($conf['sOtherBufLimit'])) 	? $conf['sOtherBufLimit'] : 	(int)($sOtherBuf + (2 * $dummy_processes * 16));
+			$sTcpSndBufLimit = (isset($conf['sTcpSndBufLimit'])) 	? $conf['sTcpSndBufLimit'] : 	(int)($sTcpSndBuf + (2 * $dummy_processes * 16));
+			$sTcpRcvBufLimit = (isset($conf['sTcpRcvBufLimit'])) 	? $conf['sTcpRcvBufLimit'] : 	(int)($sTcpRcvBuf + (2 * $dummy_processes * 16));
+			$sDgramBuf = (isset($conf['sDgramBuf'])) 		? $conf['sDgramBuf'] : 		round($this->sGuaranteedRam * 1024 / 5) . "K";
+			$sNumFile = (isset($conf['sNumFile'])) 			? $conf['sNumFile'] : 		$dummy_files;
+			$sNumProc = (isset($conf['sNumProc'])) 			? $conf['sNumProc'] : 		$dummy_processes;
+			$sDCache = (isset($conf['sDCache'])) 			? $conf['sDCache'] : 		$dummy_files * 384;
 			$sDCacheLimit = (isset($conf['sDCacheLimit'])) 		? $conf['sDCacheLimit'] : 	(int)($sDCache * 1.1);
-			$sAvgProc = (isset($conf['sAvgProc'])) 			? $conf['sAvgProc'] : 		(int)($this->sGuaranteedRam);
+			$sAvgProc = (isset($conf['sAvgProc'])) 			? $conf['sAvgProc'] : 		$dummy_processes / 2;
 			
 			$command = shrink_command("vzctl set {$this->sInternalId}
 				--onboot yes
@@ -350,6 +355,7 @@ class Container extends CPHPDatabaseRecordClass
 				--dgramrcvbuf {$sDgramBuf}:{$sDgramBuf}
 				--numothersock {$sOtherSock}:{$sOtherSock}
 				--numfile {$sNumFile}:{$sNumFile}
+				--numproc {$sNumProc}:{$sNumProc}
 				--dcachesize {$sDCache}:{$sDCacheLimit}
 				--numiptent 128:128
 				--diskinodes 200000:220000
