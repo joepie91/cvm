@@ -1,0 +1,21 @@
+Background:			#E4EAEA
+
+Box Background:			#F1F1F1
+Box Border:			#817F9D	2px
+
+Header Text:			#343352
+
+Sidebar Background:		#DCDCDC
+Sidebar Button Text:		#343352
+Sidebar Button Hover:		#CDCCDE
+
+Button:				#31305E
+Button Text:			#FFFFFF
+Button Hover:			#15144E
+
+Toolbar Button:			#5D5C79
+Toolbar Button Text:		#FFFFFF
+Toolbar Button Hover:		#4E4D69
+
+Table Header Background:	#31305E
+Table Header Text:		#FFFFFF
