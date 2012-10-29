@@ -66,13 +66,17 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 			
 			if($result = mysql_query_cached($query))
 			{
-				// TODO: output results
 				$sContainers = array();
 				
 				foreach($result->data as $row)
 				{
 					$sContainer = new Container($row);
-					$sContainers[] = $sContainer->Export();
+					$sContainers[] = array(
+						'hostname'	=> $sContainer->sHostname,
+						'internal_id'	=> $sContainer->sInternalId,
+						'node_id'	=> $sContainer->sNodeId,
+						'status'	=> $sContainer->sStatus
+					);
 				}
 				
 				$return_object = $sContainers;
@@ -88,7 +92,16 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 			try
 			{
 				$sNode = new Node($_GET['nodeid']);
-				$return_object = $sNode->Export();
+				$return_object = array(
+					'name'			=> $sNode->sName,
+					'hostname'		=> $sNode->sHostname,
+					'port'			=> $sNode->sPort,
+					'user'			=> $sNode->sUser,
+					'physical_location'	=> $sNode->sPhysicalLocation,
+					'private_key'		=> $sNode->sPrivateKey,
+					'public_key'		=> $sNode->sPublicKey,
+					'has_custom_key'	=> $sNode->sHasCustomKey
+				);
 			}
 			catch (NotFoundException $e)
 			{

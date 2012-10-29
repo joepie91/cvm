@@ -59,22 +59,23 @@ def api_request(parameters, method="GET"):
 		querystring = urllib.urlencode(parameters)
 		req = urllib2.Request(endpoint + "?" + querystring)
 		response = urllib2.urlopen(req)
-		return json.loads(response.read())
+		result = response.read()
+		return json.loads(result)
 
 def show_list():
 	print ""
 	for key, vps in vpsmap.items():
-		node = nodemap[vps['NodeId']]
-		print "%s. %s (%s [%s], %s)" % (key, vps['Hostname'], node['Name'], node['Hostname'], node['PhysicalLocation'])
+		node = nodemap[vps['node_id']]
+		print "%s. %s (%s [%s], %s)" % (key, vps['hostname'], node['name'], node['hostname'], node['physical_location'])
 		
 	print ""
 	choice = raw_input("Make your choice: ")
 	
 	try:
 		current_vps = vpsmap[int(choice)]
-		current_node = nodemap[current_vps['NodeId']]
+		current_node = nodemap[current_vps['node_id']]
 		
-		open_shell(current_node['Hostname'], "vz", current_vps['InternalId'])
+		open_shell(current_node['hostname'], "vz", current_vps['internal_id'])
 	except KeyError, ValueError:
 		print "That was not a valid option. Try again. "
 		show_list()
@@ -114,8 +115,8 @@ if auth_result['data']['correct'] == True:
 	for vps in vpslist["data"]:
 		vpsmap[i] = vps
 		
-		if vps["NodeId"] not in nodelist:
-			nodelist.append(vps["NodeId"])
+		if vps["node_id"] not in nodelist:
+			nodelist.append(vps["node_id"])
 		
 		i += 1
 		
