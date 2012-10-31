@@ -31,6 +31,7 @@ title-console;								Out-of-band console
 title-admin-userlist;							User overview
 title-admin-containerlist;						Container overview
 title-admin-nodelist;							Node overview
+title-admin-addnode;							Add node
 title-admin-userinfo;							User lookup
 title-admin-nodeinfo;							Node lookup
 title-admin-overview;							Administrative overview
@@ -50,9 +51,10 @@ button-admin-vps-suspend;						Suspend container
 button-admin-vps-unsuspend;						Unsuspend container
 button-admin-vps-transfer;						Transfer container
 button-admin-vps-terminate;						Terminate container
+button-admin-addnode;							Add node
 
 notfound;								The specified VPS was not found.
-footer;									CPHP is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
+footer;									CVM is a free and open source VPS control panel. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Want to contribute?</a>
 
 userbox-loggedin;							You are logged in as <strong>{%?username}</strong>.
 userbox-account;							Account settings
@@ -138,6 +140,13 @@ admin-level-nodeadmin;							Node administrator
 admin-level-masteradmin;						Master administrator
 
 admin-overview-message;							In the future, this page will hold a log of all most recent events. For now, it's just an empty page.
+
+addnode-name;								Name
+addnode-hostname;							Hostname
+addnode-location;							Physical location
+addnode-customkeypair;							Custom keypair
+addnode-publickey;							Public key
+addnode-privatekey;							Private key
 
 vps-admin-suspend;							Suspend / unsuspend
 vps-admin-transfer;							Transfer
@@ -228,3 +237,7 @@ error-restart-terminated-title;						Container is terminated
 error-restart-terminated-text;						Your container could not be restarted, as it is terminated.
 error-restart-start-title;						Container failed to start
 error-restart-start-text;						Your container could not be started. If this error persists, please file a support ticket.
+error-admin-nodes-add-name;						You did not fill in a valid name.
+error-admin-nodes-add-hostname;						You did not fill in a valid hostname.
+error-admin-nodes-add-location;						You did not fill in a valid physical location.
+error-form;								One or more fields were not filled in correctly.
