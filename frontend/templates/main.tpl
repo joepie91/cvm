@@ -33,7 +33,7 @@
 				{%!footer}
 			</div>
 		</div>
-		<img class="preload" src="images/loading.gif">
+		<img class="preload" src="/images/loading.gif">
 		{%?generation}
 	</body>
 </html>
