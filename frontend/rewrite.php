@@ -169,6 +169,13 @@ try
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
+			/* Admin - Nodes - Add */
+			'^/admin/nodes/add/?$' 		=> array(
+				'target'			=> "module.admin.nodes.add.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
 			'^/test/?$'			=> "module.test.php"
 		)
 	);

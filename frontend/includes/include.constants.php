@@ -23,4 +23,5 @@ define("CVM_STATUS_STOPPED",				5	);
 define("CVM_STATUS_SUSPENDED",				6	);
 define("CVM_STATUS_TERMINATED",				7	);
 
+define("REGEX_HOSTNAME",	"/(([a-zA-Z0-9-]+\.)+)([a-zA-Z0-9-]+)/");
 ?>

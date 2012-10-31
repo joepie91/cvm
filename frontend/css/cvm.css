@@ -481,8 +481,8 @@ input
 
 input, label
 {
-	/*margin-top: 0px !important;*/
-	margin-bottom: 0px !important;
+	/*margin-top: 0px !important;
+	margin-bottom: 0px !important;*/
 }
 
 button.column
@@ -529,4 +529,86 @@ button.column
 	float: left;
 	margin-right: 4px;
 	margin-top: 7px;
+}
+
+.toolbar
+{
+	/*background-color: #D4D5E0;
+	padding: 4px;*/
+	margin-bottom: 8px;
+	margin-top: 7px;
+}
+
+.toolbar a
+{
+	display: block;
+	float: left;
+	color: white;
+	padding: 4px 6px;
+	text-decoration: none;
+	background-color: #5D5C79;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.toolbar a:hover
+{
+	background-color: #4E4D69;
+}
+
+form.add
+{
+	background-color: #31305E;
+	color: white;
+	padding: 2px 0.5%;
+	font-size: 15px;
+	font-weight: bold;
+	width: 75%;
+}
+
+form.add label, form.add .filler
+{
+	display: block;
+	float: left;
+	margin: 3px 1%;
+	width: 45.8%;
+}
+
+form.add input
+{
+	display: block;
+	float: left;
+	width: 48%;
+	border: 0px;
+	margin: 3px 0.4%;
+	padding: 4px 2%;
+}
+
+form.add input[type="checkbox"]
+{
+	width: auto;
+	margin-top: 7px;
+}
+
+form.add input[type="file"]
+{
+	height: 24px;
+	font-size: 13px;
+	margin-top: 4px;
+	margin-bottom: 0px;
+	padding: 0px 0px;
+}
+
+form.add button[type="submit"]
+{
+	float: right;
+	margin: 9px 7px 7px 7px;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+form.add .field.disabled
+{
+	background-color: #444452;
+	color: #B5B5B5;
 }

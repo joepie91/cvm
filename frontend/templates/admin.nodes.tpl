@@ -1,5 +1,10 @@
 <h2>{%!title-admin-nodelist}</h2>
 
+<div class="toolbar">
+	<a href="/admin/nodes/add/">Add node</a>
+	<div class="clear"></div>
+</div>
+
 <table class="vpslist">
 	<tr>
 		<th>{%!list-column-hostname}</th>

@@ -240,4 +240,7 @@ error-restart-start-text;						Your container could not be started. If this erro
 error-admin-nodes-add-name;						You did not fill in a valid name.
 error-admin-nodes-add-hostname;						You did not fill in a valid hostname.
 error-admin-nodes-add-location;						You did not fill in a valid physical location.
-error-form;								One or more fields were not filled in correctly.
+error-admin-nodes-add-publickey;					You did not upload a valid public key.
+error-admin-nodes-add-privatekey;					You did not upload a valid private key.
+error-admin-nodes-add-upload;						Something went wrong while processing the uploaded keys. Ensure that the keys directory is writable.
+error-form;								One or more problems occurred.
