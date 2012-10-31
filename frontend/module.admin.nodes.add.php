@@ -36,6 +36,8 @@ if(isset($_POST['submit']))
 	{
 		$sKeyId = random_string(20);
 		
+		/* TODO: Ensure validity of the custom keys. */
+		
 		if($_FILES["publickey"]["error"] == UPLOAD_ERR_OK)
 		{
 			$sPublicKeyName = "{$sKeyId}.public.key";
