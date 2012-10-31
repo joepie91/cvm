@@ -10,7 +10,7 @@
 	<a class="sidebutton" id="button_api" href="/{%?id}/api/">{%!menu-api}</a> -->
 </div>
 
-{%if isset|error}
+{%if isset|error == true}
 	{%?error}
 {%/if}
 
