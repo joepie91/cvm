@@ -70,6 +70,8 @@ if(isset($_POST['submit']))
 			$sNode->uHasCustomKey = isset($_POST['customkey']);
 			$sNode->uPublicKey = $sPublicKeyName;
 			$sNode->uPrivateKey = $sPrivateKeyName;
+			$sNode->uUser = "cvm";
+			$sNode->uPort = 22;
 			$sNode->InsertIntoDatabase();
 			
 			redirect("/admin/nodes/");
