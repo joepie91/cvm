@@ -1,5 +1,10 @@
 <h2>{%!title-admin-userinfo}</h2>
 
+<div class="toolbar">
+	<a href="/admin/user/{%?id}/add/">{%!toolbar-edituser}</a>
+	<div class="clear"></div>
+</div>
+
 <table class="userinfo vertical">
 	<tr>
 		<th>{%!admin-title-id}</th>

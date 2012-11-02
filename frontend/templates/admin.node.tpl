@@ -1,5 +1,11 @@
 <h2>{%!title-admin-nodeinfo}</h2>
 
+<div class="toolbar">
+	<a href="/admin/node/{%?id}/add/">{%!toolbar-createvps}</a>
+	<a href="/admin/node/{%?id}/edit/">{%!toolbar-editnode}</a>
+	<div class="clear"></div>
+</div>
+
 <table class="nodeinfo vertical">
 	<tr>
 		<th>{%!list-column-nodeid}</th>

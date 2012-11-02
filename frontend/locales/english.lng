@@ -244,3 +244,9 @@ error-admin-nodes-add-publickey;					You did not upload a valid public key.
 error-admin-nodes-add-privatekey;					You did not upload a valid private key.
 error-admin-nodes-add-upload;						Something went wrong while processing the uploaded keys. Ensure that the keys directory is writable.
 error-form;								One or more problems occurred.
+
+toolbar-addnode;							Add node
+toolbar-createvps;							Create VPS
+toolbar-editnode;							Edit node details
+toolbar-createuser;							Create user
+toolbar-edituser;							Edit user details

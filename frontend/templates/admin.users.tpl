@@ -1,5 +1,10 @@
 <h2>{%!title-admin-userlist}</h2>
 
+<div class="toolbar">
+	<a href="/admin/users/add/">{%!toolbar-createuser}</a>
+	<div class="clear"></div>
+</div>
+
 <table class="userlist">
 	<tr>
 		<th>{%!admin-title-username}</th>
