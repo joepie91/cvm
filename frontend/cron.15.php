@@ -28,7 +28,7 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 		{
 			if($sContainer->sCurrentStatus == CVM_STATUS_STARTED)
 			{
-				// This is not supposed to fail, as the container is running.
+				// This is not supposed to fail, as the VPS is running.
 				// Something shady going on.
 				// TODO: Log exception
 			}

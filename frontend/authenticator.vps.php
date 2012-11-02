@@ -21,7 +21,7 @@ try
 	
 	if($sContainer->sUserId != $sUser->sId && $sUser->sAccessLevel < 20)
 	{
-		throw new UnauthorizedException("You are not authorized to control this container.");
+		throw new UnauthorizedException("You are not authorized to control this VPS.");
 	}
 	
 	$sRouterAuthenticated = true;
