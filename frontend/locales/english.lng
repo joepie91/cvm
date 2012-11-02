@@ -40,8 +40,8 @@ title-admin-vps-unsuspend;						Unsuspend VPS
 title-admin-vps-transfer;						Transfer VPS ownership
 title-admin-vps-terminate;						Terminate VPS
 
-header-admin-user-containers;						VPSs owned by this user
-header-admin-node-containers;						VPSs on this node
+header-admin-user-containers;						VPSes owned by this user
+header-admin-node-containers;						VPSes on this node
 header-vps-admin;							Administrative tasks
 
 button-login;								Login
@@ -74,7 +74,7 @@ menu-password;								Root Password
 
 menu-admin-overview;							Overview
 menu-admin-users;							Users
-menu-admin-containers;							VPSs
+menu-admin-containers;							VPSes
 menu-admin-nodes;							Nodes
 
 login-username;								Username
