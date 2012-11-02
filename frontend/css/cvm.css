@@ -549,6 +549,7 @@ button.column
 	background-color: #5D5C79;
 	font-weight: bold;
 	font-size: 15px;
+	margin-right: 5px;
 }
 
 .toolbar a:hover
