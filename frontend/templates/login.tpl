@@ -2,17 +2,24 @@
 
 {%?error}
 
-<form method="post" action="/login/" class="col_12">
-	<div class="col_3"></div>
-	<label class="col_2" for="field_username">{%!login-username}</label>
-	<input class="col_4" type="text" name="username" id="field_username" value="">
-	<div class="clear"></div>
+<form method="post" action="/login/" class="login">
+	<div class="field">
+		<label for="form_login_username">{%!login-username}</label>
+		{%input type="text" group="login" name="username"}
+		<div class="clear"></div>
+	</div>
 
-	<div class="col_3"></div>
-	<label class="col_2" for="field_password">{%!login-password}</label>
-	<input class="col_4" type="password" name="password" id="field_password">
-	<div class="clear"></div>
-
-	<div class="col_7"></div>
-	<button class="col_2" type="submit" name="submit">{%!button-login}</button>
+	<div class="field">
+		<label for="form_login_password">{%!login-password}</label>
+		{%input type="password" group="login" name="password"}
+		<div class="clear"></div>
+	</div>
+	
+	<div class="field">
+		<div class="filler">
+			<a href="/forgot/">Forgot?</a>
+		</div>
+		<button type="submit" name="submit">{%!button-login}</button>
+		<div class="clear"></div>
+	</div>
 </form>

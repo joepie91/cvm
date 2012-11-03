@@ -562,7 +562,7 @@ button.column
 	background-color: #4E4D69;
 }
 
-form.add
+form
 {
 	background-color: #31305E;
 	color: white;
@@ -572,7 +572,7 @@ form.add
 	width: 75%;
 }
 
-form.add label, form.add .filler
+form label, form .filler
 {
 	display: block;
 	float: left;
@@ -580,7 +580,7 @@ form.add label, form.add .filler
 	width: 45.8%;
 }
 
-form.add input
+form input
 {
 	display: block;
 	float: left;
@@ -590,13 +590,13 @@ form.add input
 	padding: 4px 2%;
 }
 
-form.add input[type="checkbox"]
+form input[type="checkbox"]
 {
 	width: auto;
 	margin-top: 7px;
 }
 
-form.add input[type="file"]
+form input[type="file"]
 {
 	height: 24px;
 	font-size: 13px;
@@ -605,7 +605,7 @@ form.add input[type="file"]
 	padding: 0px 0px;
 }
 
-form.add button[type="submit"]
+form button[type="submit"]
 {
 	float: right;
 	margin: 9px 7px 7px 7px;
@@ -613,8 +613,32 @@ form.add button[type="submit"]
 	font-weight: bold;
 }
 
-form.add .field.disabled
+form .field.disabled
 {
 	background-color: #444452;
 	color: #B5B5B5;
+}
+
+form .filler a
+{
+	display: block;
+	color: white;
+	font-size: 13px;
+	margin-top: 12px;
+}
+
+form.login
+{
+	width: 40%;
+	margin: 64px auto;
+}
+
+form.login label, form.login .filler
+{
+	width: 40.8%;
+}
+
+form.login input
+{
+	width: 53%;
 }
