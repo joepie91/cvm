@@ -2,7 +2,7 @@
 
 {%?error}
 
-<form method="post" action="/login/" class="login">
+<form method="post" action="/login/" class="login dark">
 	<div class="field">
 		<label for="form_login_username">{%!login-username}</label>
 		{%input type="text" group="login" name="username"}

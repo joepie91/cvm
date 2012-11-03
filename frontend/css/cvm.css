@@ -562,7 +562,7 @@ button.column
 	background-color: #4E4D69;
 }
 
-form
+form.dark
 {
 	background-color: #31305E;
 	color: white;
@@ -572,7 +572,7 @@ form
 	width: 75%;
 }
 
-form label, form .filler
+form.dark label, form .filler
 {
 	display: block;
 	float: left;
@@ -580,7 +580,7 @@ form label, form .filler
 	width: 45.8%;
 }
 
-form input
+form.dark input
 {
 	display: block;
 	float: left;
@@ -590,13 +590,13 @@ form input
 	padding: 4px 2%;
 }
 
-form input[type="checkbox"]
+form.dark input[type="checkbox"]
 {
 	width: auto;
 	margin-top: 7px;
 }
 
-form input[type="file"]
+form.dark input[type="file"]
 {
 	height: 24px;
 	font-size: 13px;
@@ -605,7 +605,7 @@ form input[type="file"]
 	padding: 0px 0px;
 }
 
-form button[type="submit"]
+form.dark button[type="submit"]
 {
 	float: right;
 	margin: 9px 7px 7px 7px;
@@ -613,13 +613,13 @@ form button[type="submit"]
 	font-weight: bold;
 }
 
-form .field.disabled
+form.dark .field.disabled
 {
 	background-color: #444452;
 	color: #B5B5B5;
 }
 
-form .filler a
+form.dark .filler a
 {
 	display: block;
 	color: white;

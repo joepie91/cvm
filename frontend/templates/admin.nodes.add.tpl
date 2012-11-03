@@ -13,7 +13,7 @@
 	</div>
 {%/if}
 
-<form enctype="multipart/form-data" method="post" action="/admin/nodes/add/" class="add">
+<form enctype="multipart/form-data" method="post" action="/admin/nodes/add/" class="add dark">
 	<div class="field">
 		<label for="form_addnode_name">{%!addnode-name}</label>
 		{%input type="text" group="addnode" name="name"}
