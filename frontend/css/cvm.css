@@ -533,10 +533,15 @@ button.column
 
 .toolbar
 {
-	/*background-color: #D4D5E0;
-	padding: 4px;*/
+	background-color: #DDDDDF;
+	padding: 3px;
 	margin-bottom: 8px;
 	margin-top: 7px;
+	border: 2px solid #817F9D;
+	padding-left: 38px;
+	background-image: url(/images/icon_wrench.png);
+	background-repeat: no-repeat;
+	background-position: 4px center;
 }
 
 .toolbar a

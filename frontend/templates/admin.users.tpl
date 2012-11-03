@@ -1,9 +1,9 @@
-<h2>{%!title-admin-userlist}</h2>
-
 <div class="toolbar">
 	<a href="/admin/users/add/">{%!toolbar-createuser}</a>
 	<div class="clear"></div>
 </div>
+
+<h2>{%!title-admin-userlist}</h2>
 
 <table class="userlist">
 	<tr>

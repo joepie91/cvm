@@ -1,9 +1,9 @@
-<h2>{%!title-admin-nodelist}</h2>
-
 <div class="toolbar">
 	<a href="/admin/nodes/add/">{%!toolbar-addnode}</a>
 	<div class="clear"></div>
 </div>
+
+<h2>{%!title-admin-nodelist}</h2>
 
 <table class="vpslist">
 	<tr>
