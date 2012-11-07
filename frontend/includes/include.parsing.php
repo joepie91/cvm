@@ -37,4 +37,58 @@ function shrink_command($command)
 	return $command;
 }
 
+function parse_size($size, $multiplier = 1024)
+{
+	/* Note that this function will always assume bytes and the given multiplier, regardless of
+	 * what is actually specified. */
+	if(preg_match("/(-?[0-9.,]+)\s*(([kKmMgGtTpPeEzZyY]?)([iI]?)([bB]?))/", $size, $matches))
+	{
+		$number = (float) $matches[1];
+		$unit = $matches[2];
+		$prefix = $matches[3];
+		$suffix = $matches[5];
+		
+		if(empty($prefix))
+		{
+			/* Size is in bytes. */
+			return $number;
+		}
+		else
+		{
+			switch(strtolower($prefix))
+			{
+				case "y":
+					$number = $number * $multiplier;
+				case "z":
+					$number = $number * $multiplier;
+				case "e":
+					$number = $number * $multiplier;
+				case "p":
+					$number = $number * $multiplier;
+				case "t":
+					$number = $number * $multiplier;
+				case "g":
+					$number = $number * $multiplier;
+				case "m":
+					$number = $number * $multiplier;
+				case "k":
+					$number = $number * $multiplier;
+					break;
+				default:
+					throw new ParsingException("No valid unit was specified.");
+			}
+			
+			return $number;
+		}
+	}
+	elseif(is_numeric($size))
+	{
+		return (int) $size;
+	}
+	else
+	{
+		throw new ParsingException("The given size specification could not be parsed.");
+	}
+}
+
 ?>

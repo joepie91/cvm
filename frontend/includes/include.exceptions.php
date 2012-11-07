@@ -55,3 +55,5 @@ class ContainerTrafficRetrieveException extends ContainerException {}
 class UnauthorizedException extends Exception {}
 class InsufficientAccessLevelException extends Exception {}
 class TemplateUnavailableException extends Exception {}
+
+class ParsingException extends Exception {}

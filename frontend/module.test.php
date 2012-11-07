@@ -39,7 +39,7 @@ test_iprange("0.0.0.0/1", "0.0.0.0", "127.255.255.255", 1, 4);
 test_iprange("162.16.47.0/16", "162.16.0.0", "162.16.255.255", 16, 4);
 test_iprange("192.168.1.0/27", "192.168.1.0", "192.168.1.31", 27, 4);
 test_iprange("192.168.1.0/32", "192.168.1.0", "192.168.1.0", 32, 4);
-test_iprange("192.168.1.0", "192.168.1.0", "192.168.1.0", 0, 4);*/
+test_iprange("192.168.1.0", "192.168.1.0", "192.168.1.0", 0, 4);
 
 $sContainer = new Container(0);
 $sContainer->uHostname = "test6.cryto.net";
@@ -59,4 +59,10 @@ $sContainer->uTotalTrafficLimit = 1000000000000;
 $sContainer->InsertIntoDatabase();
 
 $sContainer->Deploy();
+*/
 
+var_dump(
+	parse_size("15m"),	parse_size("24 KB"),	parse_size("51"),
+	parse_size("2 TiB"),	parse_size("4.9GiB"),	parse_size("0.75GB"),
+	parse_size("20gb", 1000),	parse_size("14.6 TiB", 1000),	parse_size("84YB")
+);
