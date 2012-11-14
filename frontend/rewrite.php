@@ -134,6 +134,13 @@ try
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
+			/* Admin - Nodes - Create VPS */
+			'^/admin/containers/add/?$'	=> array(
+				'target'			=> "module.admin.containers.create.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin"
+			),
 			/* Admin - Containers - Suspend */
 			'^/admin/container/([0-9]+)/suspend/?$'		=> array(
 				'target'					=> "module.admin.container.suspend.php",
@@ -175,6 +182,14 @@ try
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
+			),
+			/* Admin - Nodes - Create VPS */
+			'^/admin/node/([0-9]+)/add/?$'	=> array(
+				'target'			=> "module.admin.containers.create.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin",
+				'_prefilled_node'		=> true
 			),
 			'^/test/?$'			=> "module.test.php"
 		)

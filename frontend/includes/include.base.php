@@ -20,6 +20,7 @@ require("include.config.php");
 require("include.exceptions.php");
 require("include.constants.php");
 require("include.parsing.php");
+require("include.misc.php");
 require("classes/class.user.php");
 require("classes/class.controller.php");
 require("classes/class.container.php");

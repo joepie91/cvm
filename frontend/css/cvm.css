@@ -580,7 +580,7 @@ form.dark label, form .filler
 	width: 45.8%;
 }
 
-form.dark input
+form.dark input, form.dark select
 {
 	display: block;
 	float: left;
@@ -588,6 +588,7 @@ form.dark input
 	border: 0px;
 	margin: 3px 0.4%;
 	padding: 4px 2%;
+	box-sizing: content-box;
 }
 
 form.dark input[type="checkbox"]

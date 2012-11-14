@@ -32,6 +32,7 @@ title-admin-userlist;							User overview
 title-admin-containerlist;						VPS overview
 title-admin-nodelist;							Node overview
 title-admin-addnode;							Add node
+title-admin-addcontainer;						Create VPS
 title-admin-userinfo;							User lookup
 title-admin-nodeinfo;							Node lookup
 title-admin-overview;							Administrative overview
@@ -244,9 +245,29 @@ error-admin-nodes-add-publickey;					You did not upload a valid public key.
 error-admin-nodes-add-privatekey;					You did not upload a valid private key.
 error-admin-nodes-add-upload;						Something went wrong while processing the uploaded keys. Ensure that the keys directory is writable.
 error-form;								One or more problems occurred.
+error-admin-vpses-add-node;						You did not select a valid node.
+error-admin-vpses-add-user;						You did not select a valid user.
+error-admin-vpses-add-template;						You did not select a valid template.
+error-admin-vpses-add-disk;						You did not enter a valid disk space specification.
+error-admin-vpses-add-guaranteed;					You did not enter a valid guaranteed RAM specification.
+error-admin-vpses-add-burstable;					You did not enter a valid burstable RAM specification.
+error-admin-vpses-add-cpucount;						You did not enter a valid amount of CPUs.
+error-admin-vpses-add-traffic;						You did not enter a valid traffic allocation specification.
+error-admin-vpses-add-hostname;						You entered an invalid hostname.
 
 toolbar-addnode;							Add node
 toolbar-createvps;							Create VPS
 toolbar-editnode;							Edit node details
 toolbar-createuser;							Create user
 toolbar-edituser;							Edit user details
+
+addcontainer-node;							Node
+addcontainer-user;							User
+addcontainer-diskspace;							Disk space
+addcontainer-guaranteed;						Guaranteed RAM
+addcontainer-burstable;							Burstable RAM
+addcontainer-cpucount;							CPUs
+addcontainer-traffic;							Traffic allocation
+addcontainer-hostname;							Hostname (optional)
+addcontainer-template;							Template
+button-admin-addcontainer;						Create VPS
