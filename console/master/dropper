@@ -79,6 +79,9 @@ def show_list():
 	except KeyError, ValueError:
 		print "That was not a valid option. Try again. "
 		show_list()
+	except paramiko.AuthenticationException:
+		print "Could not connect to the node."
+		exit(1)
 
 print "#############################################################"
 print "###               CVM OpenVZ shell dropper                ###"
