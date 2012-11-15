@@ -81,6 +81,7 @@ table.console
 table.vpsinfo th
 {
 	width: 150px;
+	text-align: right;
 }
 
 table.console th

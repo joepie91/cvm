@@ -67,5 +67,8 @@ var_dump(
 	parse_size("20gb", 1000),	parse_size("14.6 TiB", 1000),	parse_size("84YB")
 );
 */
-
+/*
 var_dump(first_unused_ctid());
+*/
+
+var_dump(format_size(900), format_size(900000), format_size(900000000), format_size(900000000000), format_size(900000000000000), format_size(9000000000000000));

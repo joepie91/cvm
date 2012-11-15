@@ -95,6 +95,8 @@ overview-title-guaranteed;						Guaranteed RAM
 overview-title-burstable;						Burstable RAM
 overview-title-disk;							Disk space
 overview-title-traffic;							Traffic
+overview-title-traffic-incoming;					Incoming traffic
+overview-title-traffic-outgoing;					Outgoing traffic
 overview-title-bandwidth;						Bandwidth
 overview-status-running;						Running
 overview-status-stopped;						Stopped

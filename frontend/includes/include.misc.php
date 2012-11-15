@@ -96,3 +96,70 @@ function first_unused_ctid()
 		return $highest + 1;
 	}
 }
+
+function format_size($input, $multiplier = 1024, $group = false, $decimal_places = 0, $return_array = false)
+{
+	if($input > pow($multiplier, 8))
+	{
+		$unit = "Y";
+		$number = $input / pow($multiplier, 8);
+	}
+	elseif($input > pow($multiplier, 7))
+	{
+		$unit = "Z";
+		$number = $input / pow($multiplier, 7);
+	}
+	elseif($input > pow($multiplier, 6))
+	{
+		$unit = "E";
+		$number = $input / pow($multiplier, 6);
+	}
+	elseif($input > pow($multiplier, 5))
+	{
+		$unit = "P";
+		$number = $input / pow($multiplier, 5);
+	}
+	elseif($input > pow($multiplier, 4))
+	{
+		$unit = "T";
+		$number = $input / pow($multiplier, 4);
+	}
+	elseif($input > pow($multiplier, 3))
+	{
+		$unit = "G";
+		$number = $input / pow($multiplier, 3);
+	}
+	elseif($input > pow($multiplier, 2))
+	{
+		$unit = "M";
+		$number = $input / pow($multiplier, 2);
+	}
+	elseif($input > $multiplier)
+	{
+		$unit = "K";
+		$number = $input / $multiplier;
+	}
+	else
+	{
+		$unit = "";
+		$number = $input;
+	}
+	
+	if($group === true)
+	{
+		$number = number_format($number, $decimal_places);
+	}
+	else
+	{
+		$number = round($number, $decimal_places);
+	}
+	
+	if($return_array == true)
+	{
+		return array($number, $unit);
+	}
+	else
+	{
+		return $number . $unit;
+	}
+}

@@ -56,42 +56,43 @@
 				<span class="unknown">{%!overview-status-unknown}</span>
 			{%/if}
 		</td>
-	</tr>
-	<tr>
-		<th>{%!overview-title-location}</th>
-		<td>{%?server-location}</td>
-	</tr>
-	<tr>
 		<th>{%!overview-title-os}</th>
 		<td>{%?operating-system}</td>
 	</tr>
 	<tr>
-		<th>{%!overview-title-ipv4}</th>
-		<td></td>
-	</tr>
-	<tr>
-		<th>{%!overview-title-ipv6}</th>
-		<td></td>
-	</tr>
-	<tr>
 		<th>{%!overview-title-guaranteed}</th>
 		<td>{%?guaranteed-ram}</td>
-	</tr>
-	<tr>
 		<th>{%!overview-title-burstable}</th>
 		<td>{%?burstable-ram}</td>
 	</tr>
 	<tr>
 		<th>{%!overview-title-disk}</th>
 		<td>{%?disk-space}</td>
-	</tr>
-	<tr>
-		<th>{%!overview-title-traffic}</th>
-		<td>{%?total-traffic-limit}</td>
-	</tr>
-	<tr>
 		<th>{%!overview-title-bandwidth}</th>
 		<td>{%?bandwidth-limit}</td>
+	</tr>
+	<tr>
+		{%if total-traffic-limit == "0B"}
+			<th>{%!overview-title-traffic-incoming}</th>
+			<td>{%?incoming-traffic-limit}</td>
+			<th>{%!overview-title-traffic-outgoing}</th>
+			<td>{%?outgoing-traffic-limit}</td>
+		{%else}
+			<th>{%!overview-title-traffic}</th>
+			<td colspan="3">{%?total-traffic-limit}</td>
+		{%/if}
+	</tr>
+	<tr>
+		<th>{%!overview-title-location}</th>
+		<td colspan="3">{%?server-location}</td>
+	</tr>
+	<tr>
+		<th>{%!overview-title-ipv4}</th>
+		<td colspan="3"></td>
+	</tr>
+	<tr>
+		<th>{%!overview-title-ipv6}</th>
+		<td colspan="3"></td>
 	</tr>
 </table>
 
