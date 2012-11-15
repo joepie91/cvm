@@ -98,7 +98,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$command = "vzctl status {$this->sInternalId}";
+			$command = array("vzctl", "status", $this->sInternalId);
 			
 			$result = $this->sNode->ssh->RunCommandCached($command, false);
 			
@@ -245,14 +245,17 @@ class Container extends CPHPDatabaseRecordClass
 	{
 		if(is_array($options))
 		{
+			$command_elements = array("vzctl", "set", $this->sInternalId);
+			
 			foreach($options as $key => $value)
 			{
-				$config_elements[] = "--{$key} {$value}";
+				$command_elements[] = "--{$key}";
+				$command_elements[] = $value;
 			}
 			
-			$config_string = implode("  ", $config_elements);
+			$command_elements[] = "--save";
 			
-			$this->sNode->ssh->RunCommand("vzctl set {$this->sInternalId} {$config_string}  --save", true);
+			$this->sNode->ssh->RunCommand($command_elements, true);
 		}
 		else
 		{
@@ -262,12 +265,12 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function RunCommand($command, $throw_exception = false)
 	{
-		return $this->sNode->ssh->RunCommand("vzctl exec {$this->sInternalId} $command", $throw_exception);
+		return $this->sNode->ssh->RunCommand(array("vzctl", "exec", $this->sInternalId, $command), $throw_exception);
 	}
 	
 	public function RunCommandCached($command, $throw_exception = false)
 	{
-		return $this->sNode->ssh->RunCommandCached("vzctl exec {$this->sInternalId} $command", $throw_exception);
+		return $this->sNode->ssh->RunCommandCached(array("vzctl", "exec", $this->sInternalId, $command), $throw_exception);
 	}
 	
 	public function Deploy($conf = array())
@@ -277,9 +280,7 @@ class Container extends CPHPDatabaseRecordClass
 		$this->uRootPassword = $sRootPassword;
 		$this->InsertIntoDatabase();
 		
-		$command = shrink_command("vzctl create {$this->sInternalId}
-			--ostemplate {$this->sTemplate->sTemplateName}
-		");
+		$command = array("vzctl", "create", $this->sInternalId, "--ostemplate", $this->sTemplate->sTemplateName);
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		$result->returncode = 0;
@@ -321,40 +322,40 @@ class Container extends CPHPDatabaseRecordClass
 			$sDCacheLimit = (isset($conf['sDCacheLimit'])) 		? $conf['sDCacheLimit'] : 	(int)($sDCache * 1.1);
 			$sAvgProc = (isset($conf['sAvgProc'])) 			? $conf['sAvgProc'] : 		$dummy_processes / 2;
 			
-			$command = shrink_command("vzctl set {$this->sInternalId}
-				--onboot yes
-				--setmode restart
-				--hostname {$this->sHostname}
-				--nameserver 8.8.8.8
-				--nameserver 8.8.4.4
-				--numproc {$this->sCpuCount}
-				--vmguarpages {$this->sGuaranteedRam}M:unlimited
-				--privvmpages {$this->sBurstableRam}M:{$this->sBurstableRam}M
-				--quotatime 0
-				--diskspace {$this->sDiskSpace}M:{$this->sDiskSpace}M
-				--userpasswd root:{$sRootPassword}
-				--kmemsize {$sKMemSize}:{$sKMemSizeLimit}
-				--lockedpages {$sLockedPages}:{$sLockedPages}
-				--shmpages {$sShmPages}:{$sShmPages}
-				--physpages 0:unlimited
-				--oomguarpages {$sOomGuarPages}:unlimited
-				--numtcpsock {$sTcpSock}:{$sTcpSock}
-				--numflock {$sFLock}:{$sFLockLimit}
-				--numpty 32:32
-				--numsiginfo 512:512
-				--tcpsndbuf {$sTcpSndBuf}:{$sTcpSndBufLimit}
-				--tcprcvbuf {$sTcpRcvBuf}:{$sTcpRcvBufLimit}
-				--othersockbuf {$sOtherBuf}:{$sOtherBufLimit}
-				--dgramrcvbuf {$sDgramBuf}:{$sDgramBuf}
-				--numothersock {$sOtherSock}:{$sOtherSock}
-				--numfile {$sNumFile}:{$sNumFile}
-				--numproc {$sNumProc}:{$sNumProc}
-				--dcachesize {$sDCache}:{$sDCacheLimit}
-				--numiptent 128:128
-				--diskinodes 200000:220000
-				--avnumproc {$sAvgProc}:{$sAvgProc}
-				--save
-			");
+			$command = array("vzctl", "set", $this->sInternalId,
+				"--onboot", "yes",
+				"--setmode", "restart",
+				"--hostname", $this->sHostname,
+				"--nameserver", "8.8.8.8",
+				"--nameserver", "8.8.4.4",
+				"--numproc", $this->sCpuCount,
+				"--vmguarpages", "{$this->sGuaranteedRam}M:unlimited",
+				"--privvmpages", "{$this->sBurstableRam}M:{$this->sBurstableRam}M",
+				"--quotatime", "0",
+				"--diskspace", "{$this->sDiskSpace}M:{$this->sDiskSpace}M",
+				"--userpasswd", "root:{$sRootPassword}",
+				"--kmemsize", "{$sKMemSize}:{$sKMemSizeLimit}",
+				"--lockedpages", "{$sLockedPages}:{$sLockedPages}",
+				"--shmpages", "{$sShmPages}:{$sShmPages}",
+				"--physpages", "0:unlimited",
+				"--oomguarpages", "{$sOomGuarPages}:unlimited",
+				"--numtcpsock", "{$sTcpSock}:{$sTcpSock}",
+				"--numflock", "{$sFLock}:{$sFLockLimit}",
+				"--numpty", "32:32",
+				"--numsiginfo", "512:512",
+				"--tcpsndbuf", "{$sTcpSndBuf}:{$sTcpSndBufLimit}",
+				"--tcprcvbuf", "{$sTcpRcvBuf}:{$sTcpRcvBufLimit}",
+				"--othersockbuf", "{$sOtherBuf}:{$sOtherBufLimit}",
+				"--dgramrcvbuf", "{$sDgramBuf}:{$sDgramBuf}",
+				"--numothersock", "{$sOtherSock}:{$sOtherSock}",
+				"--numfile", "{$sNumFile}:{$sNumFile}",
+				"--numproc", "{$sNumProc}:{$sNumProc}",
+				"--dcachesize", "{$sDCache}:{$sDCacheLimit}",
+				"--numiptent", "128:128",
+				"--diskinodes", "200000:220000",
+				"--avnumproc", "{$sAvgProc}:{$sAvgProc}",
+				"--save"
+			);
 			
 			/* 
 			This may be useful if we turn out to have a kernel that supports vswap
@@ -415,7 +416,7 @@ class Container extends CPHPDatabaseRecordClass
 			$this->Stop();
 		}
 		
-		$command = "vzctl destroy {$this->sInternalId}";
+		$command = array("vzctl", "destroy", $this->sInternalId);
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
 		if($result->returncode == 0)
@@ -461,7 +462,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$command = "vzctl start {$this->sInternalId}";
+			$command = array("vzctl", "start", $this->sInternalId);
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
 			if($result->returncode == 0)
@@ -489,7 +490,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$command = "vzctl stop {$this->sInternalId}";
+			$command = array("vzctl", "stop", $this->sInternalId);
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
 			// vzctl is retarded enough to return exit status 0 when the command fails because the container isn't running, so we'll have to check the stderr for specific error string(s) as well. come on guys, it's 2012.
@@ -550,14 +551,9 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function AddIp($ip)
 	{
-		$command = shrink_command("vzctl set {$this->sInternalId}
-			--ipadd {$ip}
-			--save
-		");
+		$command = array("vzctl", "set", $this->sInternalId, "--ipadd", $ip, "--save");
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
-		
-		pretty_dump($result);
 		
 		if($result->returncode == 0)
 		{
@@ -571,10 +567,7 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function RemoveIp($ip)
 	{
-		$command = shrink_command("vzctl set {$this->sInternalId}
-			--ipdel {$ip}
-			--save
-		");
+		$command = array("vzctl", "set", $this->sInternalId, "--ipdel", $ip, "--save");
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
@@ -590,7 +583,9 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function UpdateTraffic()
 	{
-		$result = $this->sNode->ssh->RunCommand("vzctl exec {$this->sInternalId} cat /proc/net/dev | grep venet0", false);
+		/* TODO: Don't rely on grep, and parse the output in this function itself. Also try to find another way to do this without relying
+		 * on the container at all. */
+		$result = $this->sNode->ssh->RunCommand(array("vzctl", "exec", $this->sInternalId, "cat /proc/net/dev | grep venet0"), false);
 		
 		if($result->returncode == 0)
 		{
@@ -638,10 +633,8 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$sPassword = escapeshellarg($password);
-			
 			$this->SetOptions(array(
-				'userpasswd'	=> "root:{$sPassword}"
+				'userpasswd'	=> "root:{$password}"
 			));
 		}
 	}
@@ -649,6 +642,6 @@ class Container extends CPHPDatabaseRecordClass
 	public function EnableTunTap()
 	{
 		// TODO: Finish EnableTunTap function, check whether tun module is available on host
-		$command = "vzctl set {$this->sInternalId} --devnodes net/tun:rw --save";
+		$command = array("vzctl", "set", $this->sInternalId, "--devnodes", "net/tun:rw", "--save");
 	}
 }

@@ -50,15 +50,15 @@ class SshConnector extends CPHPBaseClass
 	
 	public function RunCommandCached($command, $throw_exception = false)
 	{
-		if(!isset($this->cache[$command]))
+		if(!isset($this->cache[serialize($command)]))
 		{
 			$result = $this->RunCommand($command, $throw_exception);
-			$this->cache[$command] = $result;
+			$this->cache[serialize($command)] = $result;
 			return $result;
 		}
 		else
 		{
-			return $this->cache[$command];
+			return $this->cache[serialize($command)];
 		}
 	}
 	
@@ -101,7 +101,7 @@ class SshConnector extends CPHPBaseClass
 	
 	private function DoCommand($command, $throw_exception)
 	{
-		$command = escapeshellarg($command);
+		$command = base64_encode(json_encode($command));
 		$command = "{$this->helper} {$command}";
 		
 		$stream = ssh2_exec($this->connection, $command);
@@ -115,7 +115,7 @@ class SshConnector extends CPHPBaseClass
 		
 		if(strpos($error, "No such file or directory") !== false)
 		{
-			throw new Exception("The runhelper is not installed on the node.");
+			throw new Exception("The runhelper is not installed on the node or an error occurred.");
 		}
 		
 		$returndata = json_decode($result);

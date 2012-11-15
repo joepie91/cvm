@@ -6,7 +6,14 @@ from optparse import OptionParser
 parser = OptionParser()
 (options, args) = parser.parse_args()
 
-pr = subprocess.Popen(args[0], shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+try:
+	command = args[0]
+except IndexError, e:
+	exit(1)
+
+command = json.loads(command.decode('base64'))
+
+pr = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 data = pr.communicate()
 pr.wait()
 
