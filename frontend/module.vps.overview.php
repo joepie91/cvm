@@ -61,7 +61,7 @@ try
 	$sVariables = array_merge($sVariables, array(
 		'disk-used'		=> number_format($sContainer->sDiskUsed / 1024, 2),
 		'disk-total'		=> number_format($sContainer->sDiskTotal / 1024, 2),
-		'disk-percentage'	=> number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
+		'disk-percentage'	=> ($sContainer->sDiskTotal == 0) ? 0 : number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
 		'disk-unit'		=> "GB"
 	));
 }
@@ -80,7 +80,7 @@ try
 	$sVariables = array_merge($sVariables, array(
 		'ram-used'		=> $sContainer->sRamUsed,
 		'ram-total'		=> $sContainer->sRamTotal,
-		'ram-percentage'	=> number_format(($sContainer->sRamUsed / $sContainer->sRamTotal) * 100, 2),
+		'ram-percentage'	=> ($sContainer->sRamTotal == 0) ? 0 : number_format(($sContainer->sRamUsed / $sContainer->sRamTotal) * 100, 2),
 		'ram-unit'		=> "MB"
 	));
 }

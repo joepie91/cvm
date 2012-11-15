@@ -44,7 +44,7 @@ class SshConnector extends CPHPBaseClass
 		catch (SshConnectException $e)
 		{
 			$error = $e->getMessage();
-			throw new SshCommandException("Could not run command {$command}: Failed to connect: {$error}");
+			throw new SshConnectException("Could not run command {$command}: Failed to connect: {$error}");
 		}
 	}
 	
@@ -68,7 +68,7 @@ class SshConnector extends CPHPBaseClass
 			'hostkey' => $this->keytype
 		);
 		
-		if($this->connection = ssh2_connect($this->host, $this->port, $options))
+		if($this->connection = @ssh2_connect($this->host, $this->port, $options))
 		{
 			$this->connected = true;
 			

@@ -98,22 +98,29 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$command = array("vzctl", "status", $this->sInternalId);
-			
-			$result = $this->sNode->ssh->RunCommandCached($command, false);
-			
-			if($result->returncode == 0)
+			try
 			{
-				$values = split_whitespace($result->stdout);
+				$command = array("vzctl", "status", $this->sInternalId);
 				
-				if($values[4] == "running")
+				$result = $this->sNode->ssh->RunCommandCached($command, false);
+				
+				if($result->returncode == 0)
 				{
-					return CVM_STATUS_STARTED;
+					$values = split_whitespace($result->stdout);
+					
+					if($values[4] == "running")
+					{
+						return CVM_STATUS_STARTED;
+					}
+					else
+					{
+						return CVM_STATUS_STOPPED;
+					}
 				}
-				else
-				{
-					return CVM_STATUS_STOPPED;
-				}
+			}
+			catch (SshCommandException $e)
+			{
+				return CVM_STATUS_STOPPED;
 			}
 		}
 	}
@@ -154,26 +161,35 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetRam()
 	{
-		$result = $this->RunCommandCached("free -m", true);
-		$lines = explode("\n", $result->stdout);
-		array_shift($lines);
-		
-		$total_free = 0;
-		$total_used = 0;
-		$total_total = 0;
-
-		foreach($lines as $line)
+		try
 		{
-			$line = trim($line);
-			$values = split_whitespace($line);
+			$result = $this->RunCommandCached("free -m", true);
+			$lines = explode("\n", $result->stdout);
+			array_shift($lines);
 			
-			if(trim($values[0]) == "Mem:")
+			$total_free = 0;
+			$total_used = 0;
+			$total_total = 0;
+
+			foreach($lines as $line)
 			{
-				$total_total = $values[1];
-				$total_used = $values[2];
-				$total_free = $values[3];
+				$line = trim($line);
+				$values = split_whitespace($line);
+				
+				if(trim($values[0]) == "Mem:")
+				{
+					$total_total = $values[1];
+					$total_used = $values[2];
+					$total_free = $values[3];
+				}
+				
 			}
-			
+		}
+		catch (SshCommandException $e)
+		{
+			$total_free = 0;
+			$total_used = 0;
+			$total_total = 0;
 		}
 		
 		return array(
@@ -197,25 +213,34 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetDisk()
 	{
-		$result = $this->RunCommandCached("df -l -x tmpfs", true);
-		$lines = explode("\n", $result->stdout);
-		array_shift($lines);
-		
-		$total_free = 0;
-		$total_used = 0;
-		$total_total = 0;
-		
-		foreach($lines as $disk)
+		try
 		{
-			$disk = trim($disk);
+			$result = $this->RunCommandCached("df -l -x tmpfs", true);
+			$lines = explode("\n", $result->stdout);
+			array_shift($lines);
 			
-			if(!empty($disk))
+			$total_free = 0;
+			$total_used = 0;
+			$total_total = 0;
+			
+			foreach($lines as $disk)
 			{
-				$values = split_whitespace($disk);
-				$total_free += (int)$values[3] / 1024;
-				$total_used += (int)$values[2] / 1024;
-				$total_total += ((int)$values[2] + (int)$values[3]) / 1024;
+				$disk = trim($disk);
+				
+				if(!empty($disk))
+				{
+					$values = split_whitespace($disk);
+					$total_free += (int)$values[3] / 1024;
+					$total_used += (int)$values[2] / 1024;
+					$total_total += ((int)$values[2] + (int)$values[3]) / 1024;
+				}
 			}
+		}
+		catch (SshCommandException $e)
+		{
+			$total_free = 0;
+			$total_used = 0;
+			$total_total = 0;
 		}
 		
 		return array(
