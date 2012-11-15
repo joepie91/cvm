@@ -29,6 +29,15 @@ if(!empty($router->uParameters[2]))
 	}
 }
 
+if($sContainer->sTotalTrafficLimit != 0)
+{
+	$sTrafficLimit = $sContainer->sTotalTrafficLimit;
+}
+else
+{
+	$sTrafficLimit = $sContainer->sIncomingTrafficLimit + $sContainer->sOutgoingTrafficLimit;
+}
+
 $sVariables = array(
 	'id'			=> $sContainer->sId,
 	'server-location'	=> $sContainer->sNode->sPhysicalLocation,
@@ -40,8 +49,8 @@ $sVariables = array(
 	'bandwidth-limit'	=> "100mbit",
 	'status'		=> $sContainer->sStatusText,
 	'traffic-used'		=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
-	'traffic-total'		=> number_format(($sContainer->sIncomingTrafficLimit + $sContainer->sOutgoingTrafficLimit) / 1024 / 1024 / 1024, 0),
-	'traffic-percentage'	=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / ($sContainer->sIncomingTrafficLimit + $sContainer->sOutgoingTrafficLimit), 2),
+	'traffic-total'		=> number_format($sTrafficLimit / 1024 / 1024 / 1024, 0),
+	'traffic-percentage'	=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / $sTrafficLimit, 2),
 	'traffic-unit'		=> "GB"
 );
 
