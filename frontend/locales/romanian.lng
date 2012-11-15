@@ -31,7 +31,7 @@ button-login;								Autentificare
 button-reinstall;							Reinstalare
 
 notfound;								VPS-ul specificat nu a putut fi gasit
-footer;									CVM este un panou de control pentru VPS-uri, gratuit si open source. <a href="http://cvm.cryto.net/trac/wiki/Contribute">Vrei sa contribui?</a>
+footer;									CVM este un panou de control pentru VPS-uri, gratuit si open source. <a href="http://cvm.cryto.net/">Vrei sa contribui?</a>
 
 userbox-loggedin;							Esti logat ca <strong>{%?username}</strong>.
 userbox-account;							Setari cont
