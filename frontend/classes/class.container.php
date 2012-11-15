@@ -287,12 +287,6 @@ class Container extends CPHPDatabaseRecordClass
 
 		if($result->returncode == 0 && strpos($result->stderr, "ERROR") === false)
 		{
-			// TODO: set sensible defaults depending on container resource configuration
-			// http://wiki.openvz.org/UBC_consistency_check
-			// http://wiki.openvz.org/UBC_parameter_units
-			// http://wiki.openvz.org/UBC_configuration_examples
-			// http://wiki.openvz.org/UBC_parameters_table
-			
 			$this->uStatus = CVM_STATUS_CREATED;
 			$this->InsertIntoDatabase();
 			
@@ -641,7 +635,7 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function EnableTunTap()
 	{
-		// TODO: Finish EnableTunTap function, check whether tun module is available on host
+		/* TODO: Finish EnableTunTap function, check whether tun module is available on host */
 		$command = array("vzctl", "set", $this->sInternalId, "--devnodes", "net/tun:rw", "--save");
 	}
 }
