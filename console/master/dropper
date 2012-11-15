@@ -17,7 +17,7 @@ def posix_shell(chan, ctid):
 		tty.setcbreak(sys.stdin.fileno())
 		chan.settimeout(0.0)
 
-		chan.send('%s\r\n' % ctid)
+		chan.send('%s\n' % ctid)
 
 		while True:
 			r, w, e = select.select([chan, sys.stdin], [], [])
