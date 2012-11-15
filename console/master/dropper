@@ -12,6 +12,8 @@ endpoint = "http://cvm.local/api.local.php"
 def posix_shell(chan, ctid):
 	oldtty = termios.tcgetattr(sys.stdin)
 	
+	enable_input = False
+	
 	try:
 		tty.setraw(sys.stdin.fileno())
 		tty.setcbreak(sys.stdin.fileno())
@@ -24,18 +26,27 @@ def posix_shell(chan, ctid):
 			if chan in r:
 				try:
 					buff = chan.recv(1024)
+					
 					if len(buff) == 0:
 						print '\r\nYou have been logged out of your container. Goodbye!\r\n',
 						break
+					
+					if "entered into" in buff:
+						# Successfully entered into the container, we can enable user input now.
+						enable_input = True
+					
 					sys.stdout.write(buff)
 					sys.stdout.flush()
 				except socket.timeout:
 					pass
 			if sys.stdin in r:
-				buff = sys.stdin.read(1)
-				if len(buff) == 0:
-					break
-				chan.send(buff)
+				if enable_input == True:
+					buff = sys.stdin.read(1)
+					
+					if len(buff) == 0:
+						break
+					
+					chan.send(buff)
 
 	finally:
 		termios.tcsetattr(sys.stdin, termios.TCSADRAIN, oldtty)
