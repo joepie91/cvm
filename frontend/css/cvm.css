@@ -304,11 +304,16 @@ tr.clickable:hover
 	font-weight: bold;
 	color: white;
 	padding-left: 5px;
-	text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+	/*text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
 	-webkit-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
 	-moz-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
 	-o-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
-	-ms-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;
+	-ms-text-shadow: 0px 0px 3px #000673, 0px 0px 1px #000000, 0px 0px 3px #000000, 0px 0px 2px #000673;*/
+	text-shadow: 1px 0px 0px #000673, -1px 0px 0px #000673, 0px 1px 0px #000673, 0px -1px 0px #000673;
+	-webkit-text-shadow: 1px 0px 0px #000673, -1px 0px 0px #000673, 0px 1px 0px #000673, 0px -1px 0px #000673;
+	-moz-text-shadow: 1px 0px 0px #000673, -1px 0px 0px #000673, 0px 1px 0px #000673, 0px -1px 0px #000673;
+	-o-text-shadow: 1px 0px 0px #000673, -1px 0px 0px #000673, 0px 1px 0px #000673, 0px -1px 0px #000673;
+	-ms-text-shadow: 1px 0px 0px #000673, -1px 0px 0px #000673, 0px 1px 0px #000673, 0px -1px 0px #000673;
 }
 
 .quota-item.wide
