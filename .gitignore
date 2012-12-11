@@ -1,0 +1,3 @@
+installer/slave_sfx.py
+installer/master_sfx.py
+*.pyc

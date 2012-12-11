@@ -1,0 +1,1 @@
+print "Master installer placeholder."
