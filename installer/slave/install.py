@@ -357,8 +357,28 @@ else:
 		setuplib.install_remote_rpm(cstream_name, mirrors)
 		setuplib.install_remote_rpm("vzdump-1.2-4.noarch.rpm", mirrors)
 		
+		# Set environment variable
 		os.environ["PERL5LIB"] = "/usr/share/perl5/"
 		
+		# Update .profile and .bash_profile for the root user
+		profile = open("/root/.profile", "a")
+		profile.write("export PERL5LIB=/usr/share/perl5/\n")
+		profile.close()
+		
+		profile = open("/root/.bash_profile", "a")
+		profile.write("export PERL5LIB=/usr/share/perl5/\n")
+		profile.close()
+		
+		# Update .profile and .bash_profile for the cvm user
+		profile = open("/home/cvm/.profile", "a")
+		profile.write("export PERL5LIB=/usr/share/perl5/\n")
+		profile.close()
+		
+		profile = open("/home/cvm/.bash_profile", "a")
+		profile.write("export PERL5LIB=/usr/share/perl5/\n")
+		profile.close()
+		
+		# Done installing vzdump
 		sys.stdout.write("Installed vzdump and dependencies.\n")
 		
 		# CentOS 6 apparently does not support /etc/sysctl.d anymore, so we'll just append to the
