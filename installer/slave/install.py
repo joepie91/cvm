@@ -357,6 +357,8 @@ else:
 		setuplib.install_remote_rpm(cstream_name, mirrors)
 		setuplib.install_remote_rpm("vzdump-1.2-4.noarch.rpm", mirrors)
 		
+		os.environ["PERL5LIB"] = "/usr/share/perl5/"
+		
 		sys.stdout.write("Installed vzdump and dependencies.\n")
 		
 		# CentOS 6 apparently does not support /etc/sysctl.d anymore, so we'll just append to the
