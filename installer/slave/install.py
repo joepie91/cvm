@@ -240,6 +240,7 @@ if enable_dropper == "y":
 # Copy the logged shell
 setuplib.copy_file("logshell", "/home/cvm/logshell", True, cvm_uid, cvm_gid, "u+rwx")
 setuplib.copy_file("cvmshell", "/home/cvm/cvmshell", True, cvm_uid, cvm_gid, "u+rwx")
+setuplib.copy_file("logcmd", "/home/cvm/logcmd", True, cvm_uid, cvm_gid, "u+rwx")
 sys.stdout.write("Installed logged shell.\n")
 
 if os.path.exists("/etc/sudoers.lock"):
