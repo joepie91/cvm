@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python 
 
 # Depends on package: bsdutils
 
@@ -7,14 +7,6 @@ from datetime import time, date, datetime
 from time import strftime
 
 rand = ''.join(random.choice(string.letters + string.digits) for i in xrange(8))
-
-today = datetime.today()
-day = today.day
-month = today.month
-year = today.year
-hour = today.hour
-minute = today.minute
-second = today.second
 
 rand = "%s_%s" % (strftime("%Y%m%d_%H%M%S"), rand)
 

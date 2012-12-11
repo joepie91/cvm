@@ -1,2 +1,21 @@
-#!/bin/sh
-sudo /home/cvm/logshell
+#!/usr/bin/env python 
+import sys, subprocess
+
+try:
+	if sys.argv[1] == "-c":
+		try:
+			command = sys.argv[2]
+			interactive = False
+		except:
+			exit(1)
+	else:
+		interactive = True
+except IndexError:
+	interactive = True
+
+if interactive == True:
+	returncode = subprocess.call(["sudo", "/home/cvm/logshell"])
+else:
+	returncode = subprocess.call(["sudo", "/home/cvm/logcmd", command])
+
+exit(returncode)
