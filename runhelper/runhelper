@@ -13,7 +13,7 @@ except IndexError, e:
 
 command = json.loads(command.decode('base64'))
 
-pr = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+pr = subprocess.Popen(["sudo"] + command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 data = pr.communicate()
 pr.wait()
 
