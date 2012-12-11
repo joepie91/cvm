@@ -1,2 +1,2 @@
 #!/bin/sh
-sudo /etc/cvm/logshell
+sudo /home/cvm/logshell
