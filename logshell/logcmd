@@ -16,7 +16,7 @@ logfile = open("/etc/cvm/log/log.%s" % rand, "w")
 logfile.write("# NON-INTERACTIVE COMMAND EXECUTION\n")
 logfile.write("$ " + command + "\n")
 
-prc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+prc = subprocess.Popen(["su", "-s", "/bin/bash", "-c", command, "cvm"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 while prc.poll() is None:
 	stdout = prc.stdout.read()
