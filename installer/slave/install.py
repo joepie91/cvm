@@ -253,7 +253,7 @@ sys.stdout.write("Lock on /etc/sudoers created.\n")
 
 # Append new rules to /etc/sudoers
 sudoers = open("/etc/sudoers", "a")
-sudoers.write("cvm ALL = (root) NOPASSWD: /home/cvm/logshell, NOPASSWD: /usr/sbin/vzctl, NOPASSWD: /usr/sbin/vzlist\n")
+sudoers.write("cvm ALL = (root) NOPASSWD: /home/cvm/logshell, NOPASSWD: /usr/sbin/vzctl, NOPASSWD: /usr/sbin/vzlist, NOPASSWD: /home/cvm/logcmd\n")
 
 if enable_dropper == "y":
 	sudoers.write("vz ALL = (root) NOPASSWD: /usr/sbin/vzctl enter\n")
