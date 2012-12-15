@@ -74,11 +74,11 @@ class SshConnector extends CPHPBaseClass
 			
 			if(empty($this->passphrase))
 			{
-				$result = ssh2_auth_pubkey_file($this->connection, $this->user, $this->pubkey, $this->key);
+				$result = @ssh2_auth_pubkey_file($this->connection, $this->user, $this->pubkey, $this->key);
 			}
 			else
 			{
-				$result = ssh2_auth_pubkey_file($this->connection, $this->user, $this->pubkey, $this->key, $this->passphrase);
+				$result = @ssh2_auth_pubkey_file($this->connection, $this->user, $this->pubkey, $this->key, $this->passphrase);
 			}
 			
 			if($result === true)
