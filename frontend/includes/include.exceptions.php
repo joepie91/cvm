@@ -14,10 +14,11 @@
 if(!isset($_CVM)) { die("Unauthorized."); }
 
 // SshConnector-related exceptions
-class SshConnectException extends Exception {}
-class SshAuthException extends Exception {}
-class SshCommandException extends Exception {}
-class SshExitException extends Exception {}
+class SshException extends Exception {}
+class SshConnectException extends SshException {}
+class SshAuthException extends SshException {}
+class SshCommandException extends SshException {}
+class SshExitException extends SshException {}
 
 // Container-related exceptions
 class ContainerException extends Exception

@@ -34,8 +34,9 @@ class SshConnector extends CPHPBaseClass
 	{
 		try
 		{
-			if($this->connected == false && $this->authenticated == false)
+			if($this->connected == false || $this->authenticated == false)
 			{
+				/* TODO: Don't attempt to connect again if it failed the first time. */
 				$this->Connect();
 			}
 			
@@ -44,7 +45,14 @@ class SshConnector extends CPHPBaseClass
 		catch (SshConnectException $e)
 		{
 			$error = $e->getMessage();
+			$command = implode(" ", $command);
 			throw new SshConnectException("Could not run command {$command}: Failed to connect: {$error}");
+		}
+		catch (SshAuthException $e)
+		{
+			$error = $e->getMessage();
+			$command = implode(" ", $command);
+			throw new SshConnectException("Could not run command {$command}: Failed to authenticate: {$error}");
 		}
 	}
 	

@@ -22,6 +22,16 @@ if($sLoggedIn === true)
 	foreach($result->data as $row)
 	{
 		$sContainer = new Container($row);
+		
+		try
+		{
+			$sStatus = $sContainer->sStatusText;
+		}
+		catch (SshException $e)
+		{
+			$sStatus = "stopped";
+		}
+		
 		$sContainerList[] = array(
 			'id'			=> $sContainer->sId,
 			'hostname'		=> $sContainer->sHostname,
@@ -32,7 +42,7 @@ if($sLoggedIn === true)
 			'diskspace-unit'	=> "GB",
 			'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
 			'guaranteed-ram-unit'	=> "MB",
-			'status'		=> $sContainer->sStatusText,
+			'status'		=> $sStatus,
 			'virtualization-type'	=> $sContainer->sVirtualizationType
 		);
 	}
