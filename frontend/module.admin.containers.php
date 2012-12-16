@@ -27,7 +27,7 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 		}
 		catch (SshException $e)
 		{
-			$sStatus = "stopped";
+			$sStatus = "unknown";
 		}
 		
 		$sVpsList[] = array(

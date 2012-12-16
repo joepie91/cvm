@@ -257,6 +257,7 @@ list-column-nodeid;							Node ID
 list-status-running;							Running
 list-status-stopped;							Stopped
 list-status-suspended;							Suspended
+list-status-unknown;							Status unknown
 
 ## Node list
 title-admin-nodelist;							Node overview

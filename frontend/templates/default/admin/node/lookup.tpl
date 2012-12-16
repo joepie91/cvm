@@ -35,12 +35,14 @@
 		{%foreach container in containers}
 			<tr class="clickable" data-url="/{%?container[id]}/">
 				<td class="container-status">
-					{%if container[status] == running}
+					{%if vps[status] == running}
 						<img src="/images/icon_online.png" alt="{%!list-status-running}">
-					{%/if}{%if container[status] == stopped}
+					{%elseif vps[status] == stopped}
 						<img src="/images/icon_offline.png" alt="{%!list-status-stopped}">
-					{%/if}{%if container[status] == suspended}
+					{%elseif vps[status] == suspended}
 						<img src="/images/icon_suspended.png" alt="{%!list-status-suspended}">
+					{%else}
+						<img src="/images/icon_unknown.png" alt="{%!list-status-unknown}">
 					{%/if}
 				</td>
 				<td>

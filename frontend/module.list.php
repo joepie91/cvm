@@ -29,7 +29,7 @@ if($sLoggedIn === true)
 		}
 		catch (SshException $e)
 		{
-			$sStatus = "stopped";
+			$sStatus = "unknown";
 		}
 		
 		$sContainerList[] = array(
