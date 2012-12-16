@@ -16,8 +16,8 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 class Template extends CPHPDatabaseRecordClass
 {
 	public $table_name = "templates";
-	public $fill_query = "SELECT * FROM templates WHERE `Id` = '%d'";
-	public $verify_query = "SELECT * FROM templates WHERE `Id` = '%d'";
+	public $fill_query = "SELECT * FROM templates WHERE `Id` = :Id";
+	public $verify_query = "SELECT * FROM templates WHERE `Id` = :Id";
 	
 	public $prototype = array(
 		'string' => array(

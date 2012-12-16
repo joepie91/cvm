@@ -16,8 +16,8 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 class Vps extends CPHPDatabaseRecordClass
 {
 	public $table_name = "containers";
-	public $fill_query = "SELECT * FROM containers WHERE `Id` = '%d'";
-	public $verify_query = "SELECT * FROM containers WHERE `Id` = '%d'";
+	public $fill_query = "SELECT * FROM containers WHERE `Id` = :Id";
+	public $verify_query = "SELECT * FROM containers WHERE `Id` = :Id";
 	
 	public $prototype = array(
 		'string' => array(
