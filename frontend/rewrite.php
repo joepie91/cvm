@@ -40,8 +40,9 @@ $sMainContents = "";
 $sMainClass = "";
 $sPageTitle = "";
 
-// Initialize some variables to ensure they are available through the application.
-// This works around the inability of CPHP to retain variables set in the first rewrite.
+/* Initialize some variables to ensure that they are available throughout the application.
+ * Due to the way PHP variable scoping works (and the way CPHP works around this), variables
+ * are only available at the end of rewrite.php if they were set *before* routing the request. */
 $sVps = null;
 $sPageContents = "";
 $router = null;
