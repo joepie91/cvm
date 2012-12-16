@@ -26,7 +26,7 @@
 					</div>
 				{%/if}
 			</div>
-			<div class="main {%?main-class}">
+			<div class="main {%if menu-visible == true}shift{%/if}">
 				{%?main}
 			</div>
 			<div class="footer">

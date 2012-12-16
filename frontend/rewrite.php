@@ -255,8 +255,7 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'logged-in'		=> $sLoggedIn,
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
-	/* TODO: Return a boolean instead and use this in the template. */
-	'main-class'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true) ? "shift" : "",
+	'menu-visible'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true),
 	'generation'		=> "<!-- page generated in " . (round(microtime(true) - $timing_start, 6)) . " seconds. -->"
 ));
 
