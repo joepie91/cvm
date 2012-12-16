@@ -27,8 +27,9 @@ event-years-ago;							%1$d years ago
 
 ## Miscellaneous
 footer;									CVM is a free and open source VPS control panel. <a href="http://cvm.cryto.net/">Want to contribute?</a>
+title-unauthorized;							Unauthorized
 error-unauthorized-title;						You are not authorized to view this page
-error-unauthorized-text;						Your access level is not sufficient.
+error-unauthorized-text;						Your access level is not sufficient or you are not logged in.
 error-notfound-title;							VPS not found
 error-notfound-text;							The VPS you selected was not found.
 

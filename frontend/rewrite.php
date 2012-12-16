@@ -234,9 +234,12 @@ try
 }
 catch (UnauthorizedException $e)
 {
-	/* TODO: Create a proper template for this. */
-	$sPageTitle = "Unauthorized";
-	$sMainContents = "You are not authorized to view this page.";
+	$sPageTitle = $locale->strings['title-unauthorized'];
+	
+	$sMainContents = NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-unauthorized-title'],
+		'message'	=> $locale->strings['error-unauthorized-text']
+	));
 }
 
 $sTemplateParameters = array_merge($sTemplateParameters, array(
