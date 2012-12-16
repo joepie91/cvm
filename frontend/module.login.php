@@ -39,18 +39,22 @@ if(isset($_POST['submit']))
 		}
 		else
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-login-invalid-title'], $locale->strings['error-login-invalid-text']);
-			$sError .= $err->Render();
+			$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-login-invalid-title'],
+				'message'	=> $locale->strings['error-login-invalid-text']
+			));
 		}
 	}
 	else
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-login-invalid-title'], $locale->strings['error-login-invalid-text']);
-		$sError .= $err->Render();
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-login-invalid-title'],
+			'message'	=> $locale->strings['error-login-invalid-text']
+		));
 	}
 }
 
-$sMainContents = Templater::AdvancedParse("login", $locale->strings, array(
+$sMainContents = Templater::AdvancedParse("{$sTheme}/shared/login", $locale->strings, array(
 	'error'			=> $sError,
 	'field-username'	=> $sFieldUsername
 ));

@@ -32,50 +32,69 @@ if(isset($_POST['submit']))
 				$sContainer->Reinstall();
 				$sContainer->Start();
 				
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-reinstall-success-title'], $locale->strings['error-reinstall-success-text']);
-				$sPageContents .= $err->Render();
+				$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+					'title'		=> $locale->strings['error-reinstall-success-title'],
+					'message'	=> $locale->strings['error-reinstall-success-text']
+				));
 			}
 			else
 			{
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-confirm-title'], $locale->strings['error-reinstall-confirm-text']);
-				$sPageContents .= $err->Render();
+				$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+					'title'		=> $locale->strings['error-reinstall-confirm-title'],
+					'message'	=> $locale->strings['error-reinstall-confirm-text']
+				));
 			}
 		}
 		catch (NotFoundException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-notfound-title'], $locale->strings['error-reinstall-notfound-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-reinstall-notfound-title'],
+				'message'	=> $locale->strings['error-reinstall-notfound-text']
+			));
 		}
 		catch (TemplateUnavailableException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-unavailable-title'], $locale->strings['error-reinstall-unavailable-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-reinstall-unavailable-title'],
+				'message'	=> $locale->strings['error-reinstall-unavailable-text']
+			));
 		}
 		catch (ContainerReinstallException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-failed-title'], $locale->strings['error-reinstall-failed-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-reinstall-failed-title'],
+				'message'	=> $locale->strings['error-reinstall-failed-text']
+			));
 		}
 		catch (ContainerStartException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['error-reinstall-start-title'], $locale->strings['error-reinstall-start-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-reinstall-start-title'],
+				'message'	=> $locale->strings['error-reinstall-start-text']
+			));
 		}
 		catch (ContainerSuspendedException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-suspended-title'], $locale->strings['error-reinstall-suspended-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-reinstall-suspended-title'],
+				'message'	=> $locale->strings['error-reinstall-suspended-text']
+			));
 		}
 		catch (ContainerTerminatedException $e)
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-reinstall-terminated-title'], $locale->strings['error-reinstall-terminated-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-reinstall-terminated-title'],
+				'message'	=> $locale->strings['error-reinstall-terminated-text']
+			));
 		}
 	}
 	else
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "No template selected", "You did not select a template from the list. Please select a template and try again.");
-		$sPageContents .= $err->Render();
+		/* TODO: Grab text from locale file. */
+		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> "No template selected",
+			'message'	=> "You did not select a template from the list. Please select a template and try again."
+		));
 	}
 }
 
@@ -95,7 +114,7 @@ if($display_form === true)
 		);
 	}
 
-	$sPageContents .= Templater::AdvancedParse("vps.reinstall", $locale->strings, array(
+	$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/reinstall", $locale->strings, array(
 		'templates'	=> $sTemplateList
 	));
 }

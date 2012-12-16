@@ -37,6 +37,7 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 	}
 }
 
-$sPageContents = Templater::AdvancedParse("admin.containers", $locale->strings, array(
+/* TODO: Change variable name to phase out the use of the term "container". */
+$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/list", $locale->strings, array(
 	'containers'		=> $sContainerList
 ));

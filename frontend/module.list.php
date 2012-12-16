@@ -47,7 +47,7 @@ if($sLoggedIn === true)
 		);
 	}
 	
-	$sMainContents = Templater::AdvancedParse("list", $locale->strings, array(
+	$sMainContents = Templater::AdvancedParse("{$sTheme}/client/vps/list", $locale->strings, array(
 		'containers'	=> $sContainerList
 	));
 }

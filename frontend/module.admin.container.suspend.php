@@ -25,44 +25,59 @@ try
 		{
 			$sContainer->Suspend();
 			
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-suspend-success-title'], $locale->strings['error-suspend-success-text']);
-			$sMainContents .= $err->Render();
+			$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+				'title'		=> $locale->strings['error-suspend-success-title'],
+				'message'	=> $locale->strings['error-suspend-success-text']
+			));
 		}
 		elseif($_POST['action'] == "unsuspend")
 		{
 			$sContainer->Unsuspend();
 			
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-unsuspend-success-title'], $locale->strings['error-unsuspend-success-text']);
-			$sMainContents .= $err->Render();
+			$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+				'title'		=> $locale->strings['error-unsuspend-success-title'],
+				'message'	=> $locale->strings['error-unsuspend-success-text']
+			));
 		}
 		
 		$sContainer->RefreshData();
+		
+		/* TODO: Flash message and redirect to VPS lookup page. */
 	}
 	
 	$sSuspended = ($sContainer->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
 	
-	$sPageContents = Templater::AdvancedParse("admin.container.suspend", $locale->strings, array(
+	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/suspend", $locale->strings, array(
 		'id'		=> $sContainer->sId,
 		'suspended'	=> $sSuspended
 	));
 }
 catch (InsufficientAccessLevelException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-unauthorized-title'], $locale->strings['error-unauthorized-text']);
-	$sMainContents .= $err->Render();
+	/* TODO: Is this really necessary? */
+	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-unauthorized-title'],
+		'message'	=> $locale->strings['error-unauthorized-text']
+	));
 }
 catch (NotFoundException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-notfound-title'], $locale->strings['error-notfound-text']);
-	$sMainContents .= $err->Render();
+	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-notfound-title'],
+		'message'	=> $locale->strings['error-notfound-text']
+	));
 }
 catch (ContainerSuspendException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-suspend-error-title'], $locale->strings['error-suspend-error-text']);
-	$sMainContents .= $err->Render();
+	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-suspend-error-title'],
+		'message'	=> $locale->strings['error-suspend-error-text']
+	));
 }
 catch (ContainerUnsuspendException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-unsuspend-error-title'], $locale->strings['error-unsuspend-error-text']);
-	$sMainContents .= $err->Render();
+	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-unsuspend-error-title'],
+		'message'	=> $locale->strings['error-unsuspend-error-text']
+	));
 }

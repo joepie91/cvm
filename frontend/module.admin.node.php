@@ -39,7 +39,7 @@ try
 		}
 	}
 	
-	$sPageContents = Templater::AdvancedParse("admin.node", $locale->strings, array(
+	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/node/lookup", $locale->strings, array(
 		'id'			=> $sNode->sId,
 		'hostname'		=> $sNode->sHostname,
 		'location'		=> $sNode->sPhysicalLocation,
@@ -48,7 +48,9 @@ try
 }
 catch (NotFoundException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-admin-node-title'], $locale->strings['error-admin-node-text']);
-	$sPageContents .= $err->Render();
+	$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-admin-node-title'],
+		'message'	=> $locale->strings['error-admin-node-text']
+	));
 }
 

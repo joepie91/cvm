@@ -23,8 +23,10 @@ try
 }
 catch (InsufficientAccessLevelException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-unauthorized-title'], $locale->strings['error-unauthorized-text']);
-	$sMainContents .= $err->Render();
+	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-unauthorized-title'],
+		'message'	=> $locale->strings['error-unauthorized-text']
+	));
 	
 	$sRouterAuthenticated = false;
 	

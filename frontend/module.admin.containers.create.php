@@ -136,6 +136,8 @@ if(isset($_POST['submit']))
 		$sContainer->InsertIntoDatabase();
 		$sContainer->Deploy();
 		
+		/* TODO: Flash message. */
+		
 		redirect("/admin/node/{$node->sId}/");
 	}
 }
@@ -189,7 +191,7 @@ foreach($result->data as $row)
 	);
 }
 
-$sPageContents = Templater::AdvancedParse("admin.containers.add", $locale->strings, array(
+$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/add", $locale->strings, array(
 	'errors'	=> $sErrors,
 	'nodes'		=> $sNodes,
 	'users'		=> $sUsers,

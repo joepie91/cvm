@@ -16,6 +16,8 @@ $timing_start = microtime(true);
 $_CVM = true;
 require("includes/include.base.php");
 
+$sTheme = "default";
+
 $sTemplateParameters = array();
 
 if(!empty($_SESSION['userid']))
@@ -201,18 +203,24 @@ try
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is suspended", $e->getMessage());
-		$sError .= $err->Render();
+		/* TODO: Grab error title from locale file? */
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> "Container is suspended",
+			'message'	=> $e->getMessage()
+		));
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, "Container is terminated", $e->getMessage());
-		$sError .= $err->Render();
+		/* TODO: Grab error title from locale file? */
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> "Container is terminated",
+			'message'	=> $e->getMessage()
+		));
 	}
 	
 	if($router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
 	{
-		$sMainContents .= Templater::AdvancedParse("main.vps", $locale->strings, array(
+		$sMainContents .= Templater::AdvancedParse("{$sTheme}/client/vps/main", $locale->strings, array(
 			'error'			=> $sError,
 			'contents'		=> $sPageContents,
 			'id'			=> $sContainer->sId
@@ -220,7 +228,7 @@ try
 	}
 	elseif($router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
 	{
-		$sMainContents .= Templater::AdvancedParse("main.admin", $locale->strings, array(
+		$sMainContents .= Templater::AdvancedParse("{$sTheme}/admin/main", $locale->strings, array(
 			'error'			=> $sError,
 			'contents'		=> $sPageContents
 		));
@@ -228,6 +236,7 @@ try
 }
 catch (UnauthorizedException $e)
 {
+	/* TODO: Create a proper template for this. */
 	$sPageTitle = "Unauthorized";
 	$sMainContents = "You are not authorized to view this page.";
 }
@@ -240,4 +249,4 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'generation'		=> "<!-- page generated in " . (round(microtime(true) - $timing_start, 6)) . " seconds. -->"
 ));
 
-echo(Templater::AdvancedParse("main", $locale->strings, $sTemplateParameters));
+echo(Templater::AdvancedParse("{$sTheme}/shared/main", $locale->strings, $sTemplateParameters));

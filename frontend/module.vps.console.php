@@ -13,6 +13,8 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-$sPageContents .= Templater::AdvancedParse("vps.console", $locale->strings, array(
+/* TODO: Specify user, password and port as variables. */
+
+$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/console", $locale->strings, array(
 	'host'		=> 	htmlspecialchars($_SERVER['SERVER_NAME'])
 ));

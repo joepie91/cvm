@@ -25,44 +25,58 @@ if(isset($_POST['submit']))
 			{
 				$sContainer->SetRootPassword($_POST['password']);
 				
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-password-success-title'], $locale->strings['error-password-success-text']);
-				$sPageContents .= $err->Render();
+				$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+					'title'		=> $locale->strings['error-password-success-title'],
+					'message'	=> $locale->strings['error-password-success-text']
+				));
 			}
 			else
 			{
-				$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-nomatch-title'], $locale->strings['error-password-nomatch-text']);
-				$sPageContents .= $err->Render();
+				$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+					'title'		=> $locale->strings['error-password-nomatch-title'],
+					'message'	=> $locale->strings['error-password-nomatch-text']
+				));
 			}
 		}
 		else
 		{
-			$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-missing-title'], $locale->strings['error-password-missing-text']);
-			$sPageContents .= $err->Render();
+			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+				'title'		=> $locale->strings['error-password-missing-title'],
+				'message'	=> $locale->strings['error-password-missing-text']
+			));
 		}
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-suspended-title'], $locale->strings['error-password-suspended-text']);
-		$sPageContents .= $err->Render();
+		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-password-suspended-title'],
+			'message'	=> $locale->strings['error-password-suspended-text']
+		));
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-terminated-title'], $locale->strings['error-password-terminated-text']);
-		$sPageContents .= $err->Render();
+		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-password-terminated-title'],
+			'message'	=> $locale->strings['error-password-terminated-text']
+		));
 	}
 	catch (SshExitException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-password-invalid-title'], $locale->strings['error-password-invalid-text']);
-		$sPageContents .= $err->Render();
+		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-password-invalid-title'],
+			'message'	=> $locale->strings['error-password-invalid-text']
+		));
 	}
 }
 
 if($display_form === true)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-password-title'], $locale->strings['warning-password-text']);
-	$sPageContents .= $err->Render();
+	$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/warning", $locale->strings, array(
+		'title'		=> $locale->strings['warning-password-title'],
+		'message'	=> $locale->strings['warning-password-text']
+	));
 	
-	$sPageContents .= Templater::AdvancedParse("vps.password", $locale->strings, array(
+	$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/password", $locale->strings, array(
 		'id'	=> $sContainer->sId
 	));
 }

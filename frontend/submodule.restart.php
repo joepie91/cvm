@@ -27,21 +27,29 @@ try
 	$sContainer->Start();
 	$sContainer->sCurrentStatus = CVM_STATUS_STARTED;
 	
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-restart-success-title'], $locale->strings['error-restart-success-text']);
-	$sError .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+		'title'		=> $locale->strings['error-stop-restart-success'],
+		'message'	=> $locale->strings['error-stop-restart-success']
+	));
 }
 catch (ContainerSuspendedException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-restart-suspended-title'], $locale->strings['error-restart-suspended-text']);
-	$sError .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-restart-suspended-title'],
+		'message'	=> $locale->strings['error-restart-suspended-text']
+	));
 }
 catch (ContainerTerminatedException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-restart-terminated-title'], $locale->strings['error-restart-terminated-text']);
-	$sError .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-restart-terminated-title'],
+		'message'	=> $locale->strings['error-restart-terminated-text']
+	));
 }
 catch(ContainerStartException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-restart-start-title'], $locale->strings['error-restart-start-text']);
-	$sError .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-restart-start-title'],
+		'message'	=> $locale->strings['error-restart-start-text']
+	));
 }

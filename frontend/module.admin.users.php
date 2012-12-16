@@ -28,6 +28,6 @@ foreach($result->data as $row)
 	);
 }
 
-$sPageContents = Templater::AdvancedParse("admin.users", $locale->strings, array(
+$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/user/list", $locale->strings, array(
 	'users'		=> $sUserList
 ));

@@ -95,5 +95,5 @@ catch (SshExitException $e)
 }
 
 
-$sPageContents = Templater::AdvancedParse("vps.overview", $locale->strings, $sVariables);
+$sPageContents = Templater::AdvancedParse("{$sTheme}/client/vps/lookup", $locale->strings, $sVariables);
 

@@ -29,6 +29,6 @@ if($result = mysql_query_cached("SELECT * FROM nodes"))
 	}
 }
 
-$sPageContents = Templater::AdvancedParse("admin.nodes", $locale->strings, array(
+$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/node/list", $locale->strings, array(
 	'nodes'		=> $sNodeList
 ));

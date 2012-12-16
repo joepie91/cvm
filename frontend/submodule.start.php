@@ -20,27 +20,37 @@ if($sContainer->sCurrentStatus != CVM_STATUS_STARTED)
 		$sContainer->Start();
 		$sContainer->sCurrentStatus = CVM_STATUS_STARTED;
 		
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-start-success-title'], $locale->strings['error-start-success-text']);
-		$sError .= $err->Render();
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+			'title'		=> $locale->strings['error-start-success-title'],
+			'message'	=> $locale->strings['error-start-success-text']
+		));
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-suspended-title'], $locale->strings['error-start-suspended-text']);
-		$sError .= $err->Render();
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-start-suspended-title'],
+			'message'	=> $locale->strings['error-start-suspended-text']
+		));
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-terminated-title'], $locale->strings['error-start-terminated-text']);
-		$sError .= $err->Render();
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-start-terminated-title'],
+			'message'	=> $locale->strings['error-start-terminated-text']
+		));
 	}
 	catch (ContainerStartException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-failed-title'], $locale->strings['error-start-failed-text']);
-		$sError .= $err->Render();
+		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+			'title'		=> $locale->strings['error-start-failed-title'],
+			'message'	=> $locale->strings['error-start-failed-text']
+		));
 	}
 }
 else
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-start-running-title'], $locale->strings['error-start-running-text']);
-	$sError .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-start-running-title'],
+		'message'	=> $locale->strings['error-start-running-text']
+	));
 }

@@ -32,19 +32,23 @@ try
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-suspended-title'], $locale->strings['warning-suspended-text']);
-		$sMainContents .= $err->Render();
+		$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/warning", $locale->strings, array(
+			'title'		=> $locale->strings['warning-suspended-title'],
+			'message'	=> $locale->strings['warning-suspended-text']
+		));
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_WARNING, $locale->strings['warning-terminated-title'], $locale->strings['warning-terminated-text']);
-		$sMainContents .= $err->Render();
+		$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/warning", $locale->strings, array(
+			'title'		=> $locale->strings['warning-terminated-title'],
+			'message'	=> $locale->strings['warning-terminated-text']
+		));
 	}
 }
 catch(NotFoundException $e)
 {
 	$router->uVariables['display_menu'] = false;
-	$sMainContents = Templater::AdvancedParse("error.vps.notfound", $locale->strings, array());
+	$sMainContents = Templater::AdvancedParse("{$sTheme}/client/vps/error/notfound", $locale->strings, array());
 	$sRouterAuthenticated = false;
 }
 catch(UnauthorizedException $e)

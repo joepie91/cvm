@@ -11,6 +11,8 @@
  * licensing text.
  */
 
+/* TODO: Add "create VPS" button. */
+
 if(!isset($_CVM)) { die("Unauthorized."); }
 
 try
@@ -24,6 +26,8 @@ try
 		foreach($result->data as $row)
 		{
 			$sContainer = new Container($row);
+			
+			/* TODO: Deal with unreachable servers (SshException). */
 			
 			$sContainerList[] = array(
 				'id'			=> $sContainer->sId,
@@ -41,7 +45,7 @@ try
 		}
 	}
 	
-	$sPageContents = Templater::AdvancedParse("admin.user", $locale->strings, array(
+	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/user/lookup", $locale->strings, array(
 		'id'			=> $sUserEntry->sId,
 		'username'		=> $sUserEntry->sUsername,
 		'email'			=> $sUserEntry->sEmailAddress,
@@ -52,7 +56,9 @@ try
 }
 catch (NotFoundException $e)
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-admin-user-title'], $locale->strings['error-admin-user-text']);
-	$sPageContents .= $err->Render();
+	$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-admin-user-title'],
+		'message'	=> $locale->strings['error-admin-user-text']
+	));
 }
 

@@ -19,11 +19,15 @@ if($sLoggedIn === true)
 	$sUser = new User(0);
 	$sLoggedIn = false;
 	
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_SUCCESS, $locale->strings['error-logout-success-title'], $locale->strings['error-logout-success-text']);
-	$sMainContents .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
+		'title'		=> $locale->strings['error-logout-success-title'],
+		'message'	=> $locale->strings['error-logout-success-text']
+	));
 }
 else
 {
-	$err = new CPHPErrorHandler(CPHP_ERRORHANDLER_TYPE_ERROR, $locale->strings['error-logout-notloggedin-title'], $locale->strings['error-logout-notloggedin-text']);
-	$sMainContents .= $err->Render();
+	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
+		'title'		=> $locale->strings['error-logout-notloggedin-title'],
+		'message'	=> $locale->strings['error-logout-notloggedin-text']
+	));
 }
