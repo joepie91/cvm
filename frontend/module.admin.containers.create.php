@@ -142,9 +142,19 @@ if(isset($_POST['submit']))
 	}
 }
 
+/* This is a bit hacky - there's no better method for this yet. If the node or user has to be
+ * pre-determined (according to the requested URL), it is stored in the relevant POST variable
+ * so that the templater will think it was an already selected option, thereby causing the
+ * desired behaviour: pre-selecting the particular option. */
+
 if(!empty($router->uVariables['prefilled_node']))
 {
 	$_POST['node'] = $router->uParameters[1];
+}
+
+if(!empty($router->uVariables['prefilled_user']))
+{
+	$_POST['user'] = $router->uParameters[1];
 }
 
 $result = $database->CachedQuery("SELECT * FROM nodes");
@@ -186,8 +196,7 @@ foreach($result->data as $row)
 	
 	$sUsers[] = array(
 		'id'		=> $sUserOption->sId,
-		'username'	=> $sUserOption->sUsername,
-		'selected'	=> (!empty($router->uVariables['prefilled_user']) && $sUserOption->sId == $router->uParameters[1])
+		'username'	=> $sUserOption->sUsername
 	);
 }
 

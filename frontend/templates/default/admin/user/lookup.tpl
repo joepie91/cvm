@@ -1,5 +1,6 @@
 <div class="toolbar">
-	<a href="/admin/user/{%?id}/add/">{%!toolbar-edituser}</a>
+	<a href="/admin/user/{%?id}/add/">{%!toolbar-createvps}</a>
+	<a href="/admin/user/{%?id}/edit/">{%!toolbar-edituser}</a>
 	<div class="clear"></div>
 </div>
 

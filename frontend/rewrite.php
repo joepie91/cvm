@@ -129,6 +129,14 @@ try
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
+			/* Admin - Users - Create VPS */
+			'^/admin/user/([0-9]+)/add/?$'	=> array(
+				'target'			=> "module.admin.containers.create.php",
+				'authenticator'			=> "authenticator.admin.php",
+				'auth_error'			=> "error.access.php",
+				'_menu'				=> "admin",
+				'_prefilled_user'		=> true
+			),
 			/* Admin - VPSes - Overview */
 			'^/admin/containers/?$'		=> array(
 				'target'			=> "module.admin.containers.php",
