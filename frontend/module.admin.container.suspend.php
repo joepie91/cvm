@@ -52,14 +52,6 @@ try
 		'suspended'	=> $sSuspended
 	));
 }
-catch (InsufficientAccessLevelException $e)
-{
-	/* TODO: Is this really necessary? */
-	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
-		'title'		=> $locale->strings['error-unauthorized-title'],
-		'message'	=> $locale->strings['error-unauthorized-text']
-	));
-}
 catch (NotFoundException $e)
 {
 	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
