@@ -256,7 +256,7 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
 	'menu-visible'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true),
-	'generation'		=> "<!-- page generated in " . (round(microtime(true) - $timing_start, 6)) . " seconds. -->"
+	'generation'		=> round(microtime(true) - $timing_start, 6)
 ));
 
 echo(Templater::AdvancedParse("{$sTheme}/shared/main", $locale->strings, $sTemplateParameters));

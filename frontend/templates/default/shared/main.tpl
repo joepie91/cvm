@@ -34,6 +34,6 @@
 			</div>
 		</div>
 		<img class="preload" src="/templates/default/static/images/misc/loading.gif">
-		{%?generation}
+		<!-- page generated in {%?generation} seconds. -->
 	</body>
 </html>
