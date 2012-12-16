@@ -27,7 +27,14 @@ try
 		{
 			$sContainer = new Container($row);
 			
-			/* TODO: Deal with unreachable servers (SshException). */
+			try
+			{
+				$sStatus = $sContainer->sStatusText;
+			}
+			catch (SshException $e)
+			{
+				$sStatus = "unknown";
+			}
 			
 			$sContainerList[] = array(
 				'id'			=> $sContainer->sId,
@@ -39,7 +46,7 @@ try
 				'diskspace-unit'	=> "GB",
 				'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
 				'guaranteed-ram-unit'	=> "MB",
-				'status'		=> $sContainer->sStatusText,
+				'status'		=> $sStatus,
 				'virtualization-type'	=> $sContainer->sVirtualizationType
 			);
 		}
