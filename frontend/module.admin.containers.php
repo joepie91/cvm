@@ -21,6 +21,15 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 	{
 		$sVps = new Container($row);
 		
+		try
+		{
+			$sStatus = $sVps->sStatusText;
+		}
+		catch (SshException $e)
+		{
+			$sStatus = "stopped";
+		}
+		
 		$sVpsList[] = array(
 			'id'			=> $sVps->sId,
 			'hostname'		=> $sVps->sHostname,
@@ -31,7 +40,7 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 			'diskspace-unit'	=> "GB",
 			'guaranteed-ram'	=> $sVps->sGuaranteedRam,
 			'guaranteed-ram-unit'	=> "MB",
-			'status'		=> $sVps->sStatusText,
+			'status'		=> $sStatus,
 			'virtualization-type'	=> $sVps->sVirtualizationType
 		);
 	}
