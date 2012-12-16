@@ -70,12 +70,14 @@ menu-admin-users;							Users
 menu-admin-containers;							VPSes
 menu-admin-nodes;							Nodes
 
-## Global warnings
+## Global warnings and errors
 error-form;								One or more problems occurred.
 warning-suspended-title;						This VPS is suspended
 warning-suspended-text;							You cannot change any configuration or perform any actions on this VPS. If you feel this should not be the case, please contact support.
 warning-terminated-title;						This VPS has been terminated
 warning-terminated-text;						You cannot change any configuration or perform any actions on this VPS, as it is terminated.
+error-suspended-title;							This VPS is suspended
+error-terminated-title;							This VPS has been terminated
 
 ## VPS overview page
 title-overview;								Overview

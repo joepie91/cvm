@@ -203,17 +203,15 @@ try
 	}
 	catch (ContainerSuspendedException $e)
 	{
-		/* TODO: Grab error title from locale file? */
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
-			'title'		=> "Container is suspended",
+			'title'		=> $locale->strings['error-suspended-title'],
 			'message'	=> $e->getMessage()
 		));
 	}
 	catch (ContainerTerminatedException $e)
 	{
-		/* TODO: Grab error title from locale file? */
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
-			'title'		=> "Container is terminated",
+			'title'		=> $locale->strings['error-terminated-title'],
 			'message'	=> $e->getMessage()
 		));
 	}
