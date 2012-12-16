@@ -1,4 +1,4 @@
-<h2>{%!title-console}</h2>
+<h1>{%!title-console}</h1>
 
 <p>{%!console-introduction}</p>
 
