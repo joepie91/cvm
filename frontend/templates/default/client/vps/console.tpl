@@ -11,15 +11,15 @@
 	</tr>
 	<tr>
 		<th>{%!console-title-port}</th>
-		<td>22</td>
+		<td>{%?port}</td>
 	</tr>
 	<tr>
 		<th>{%!console-title-username}</th>
-		<td>vz</td>
+		<td>{%?username}</td>
 	</tr>
 	<tr>
 		<th>{%!console-title-password}</th>
-		<td>vz</td>
+		<td>{%?password}</td>
 	</tr>
 </table>
 

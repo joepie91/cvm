@@ -13,8 +13,9 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-/* TODO: Specify user, password and port as variables. */
-
 $sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/console", $locale->strings, array(
-	'host'		=> 	htmlspecialchars($_SERVER['SERVER_NAME'])
+	'host'		=> htmlspecialchars($_SERVER['SERVER_NAME']),
+	'port'		=> 22,
+	'username'	=> "vzshell",
+	'password'	=> "vzshell"
 ));
