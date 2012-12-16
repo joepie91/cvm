@@ -78,6 +78,8 @@ class SshConnector extends CPHPBaseClass
 	
 	public function Connect()
 	{
+		/* TODO: Use fsockopen with a timeout to determine if the node and SSHd are reachable before attempting to connect. */
+		
 		$options = array(
 			'hostkey' => $this->keytype
 		);
