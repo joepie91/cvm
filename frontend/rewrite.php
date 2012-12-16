@@ -129,35 +129,35 @@ try
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
-			/* Admin - Containers - Overview */
+			/* Admin - VPSes - Overview */
 			'^/admin/containers/?$'		=> array(
 				'target'			=> "module.admin.containers.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
-			/* Admin - Nodes - Create VPS */
+			/* Admin - VPSes - Create VPS */
 			'^/admin/containers/add/?$'	=> array(
 				'target'			=> "module.admin.containers.create.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
-			/* Admin - Containers - Suspend */
+			/* Admin - VPSes - Suspend */
 			'^/admin/container/([0-9]+)/suspend/?$'		=> array(
 				'target'					=> "module.admin.container.suspend.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
 			),
-			/* Admin - Containers - Transfer */
+			/* Admin - VPSes - Transfer */
 			'^/admin/container/([0-9]+)/transfer/?$'	=> array(
 				'target'					=> "module.admin.container.transfer.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
 			),
-			/* Admin - Containers - Terminate */
+			/* Admin - VPSes - Terminate */
 			'^/admin/container/([0-9]+)/terminate/?$'	=> array(
 				'target'					=> "module.admin.container.terminate.php",
 				'authenticator'					=> "authenticator.admin.php",
