@@ -29,6 +29,8 @@ if(!empty($router->uParameters[2]))
 	}
 }
 
+/* TODO: Display incoming and outcoming traffic separately in the graphs when applicable. */
+
 if($sVps->sTotalTrafficLimit != 0)
 {
 	$sTrafficLimit = $sVps->sTotalTrafficLimit;
