@@ -118,23 +118,23 @@ if(isset($_POST['submit']))
 	
 	if(empty($sErrors))
 	{
-		$sContainer = new Container(0);
-		$sContainer->uHostname = $hostname;
-		$sContainer->uInternalId = first_unused_ctid();
-		$sContainer->uNodeId = $node->sId;
-		$sContainer->uTemplateId = $template->sId;
-		$sContainer->uUserId = $user->sId;
-		$sContainer->uVirtualizationType = CVM_VIRTUALIZATION_OPENVZ;
-		$sContainer->uGuaranteedRam = ($guaranteed_ram / 1024 / 1024); /* MB */
-		$sContainer->uBurstableRam = ($burstable_ram / 1024 / 1024); /* MB */
-		$sContainer->uDiskSpace = ($disk_space / 1024 / 1024); /* MB */
-		$sContainer->uCpuCount = $cpu_count;
-		$sContainer->uStatus = CVM_STATUS_BLANK;
-		$sContainer->uIncomingTrafficLimit = $traffic;
-		$sContainer->uOutgoingTrafficLimit = $traffic;
-		$sContainer->uTotalTrafficLimit = $traffic;
-		$sContainer->InsertIntoDatabase();
-		$sContainer->Deploy();
+		$sVps = new Vps(0);
+		$sVps->uHostname = $hostname;
+		$sVps->uInternalId = first_unused_ctid();
+		$sVps->uNodeId = $node->sId;
+		$sVps->uTemplateId = $template->sId;
+		$sVps->uUserId = $user->sId;
+		$sVps->uVirtualizationType = CVM_VIRTUALIZATION_OPENVZ;
+		$sVps->uGuaranteedRam = ($guaranteed_ram / 1024 / 1024); /* MB */
+		$sVps->uBurstableRam = ($burstable_ram / 1024 / 1024); /* MB */
+		$sVps->uDiskSpace = ($disk_space / 1024 / 1024); /* MB */
+		$sVps->uCpuCount = $cpu_count;
+		$sVps->uStatus = CVM_STATUS_BLANK;
+		$sVps->uIncomingTrafficLimit = $traffic;
+		$sVps->uOutgoingTrafficLimit = $traffic;
+		$sVps->uTotalTrafficLimit = $traffic;
+		$sVps->InsertIntoDatabase();
+		$sVps->Deploy();
 		
 		/* TODO: Flash message. */
 		

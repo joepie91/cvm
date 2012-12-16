@@ -41,24 +41,24 @@ test_iprange("192.168.1.0/27", "192.168.1.0", "192.168.1.31", 27, 4);
 test_iprange("192.168.1.0/32", "192.168.1.0", "192.168.1.0", 32, 4);
 test_iprange("192.168.1.0", "192.168.1.0", "192.168.1.0", 0, 4);
 
-$sContainer = new Container(0);
-$sContainer->uHostname = "test6.cryto.net";
-$sContainer->uInternalId = "110";
-$sContainer->uNodeId = 2;
-$sContainer->uTemplateId = 1;
-$sContainer->uUserId = 1;
-$sContainer->uVirtualizationType = CVM_VIRTUALIZATION_OPENVZ;
-$sContainer->uGuaranteedRam = 256;
-$sContainer->uBurstableRam = 384;
-$sContainer->uDiskSpace = 6000;
-$sContainer->uCpuCount = 1;
-$sContainer->uStatus = CVM_STATUS_BLANK;
-$sContainer->uIncomingTrafficLimit = 500000000000;
-$sContainer->uOutgoingTrafficLimit = 500000000000;
-$sContainer->uTotalTrafficLimit = 1000000000000;
-$sContainer->InsertIntoDatabase();
+$sVps = new Vps(0);
+$sVps->uHostname = "test6.cryto.net";
+$sVps->uInternalId = "110";
+$sVps->uNodeId = 2;
+$sVps->uTemplateId = 1;
+$sVps->uUserId = 1;
+$sVps->uVirtualizationType = CVM_VIRTUALIZATION_OPENVZ;
+$sVps->uGuaranteedRam = 256;
+$sVps->uBurstableRam = 384;
+$sVps->uDiskSpace = 6000;
+$sVps->uCpuCount = 1;
+$sVps->uStatus = CVM_STATUS_BLANK;
+$sVps->uIncomingTrafficLimit = 500000000000;
+$sVps->uOutgoingTrafficLimit = 500000000000;
+$sVps->uTotalTrafficLimit = 1000000000000;
+$sVps->InsertIntoDatabase();
 
-$sContainer->Deploy();
+$sVps->Deploy();
 */
 /*
 var_dump(

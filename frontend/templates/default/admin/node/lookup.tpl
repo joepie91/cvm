@@ -21,7 +21,7 @@
 	</tr>
 </table>
 
-<h3>{%!header-admin-node-containers}</h3>
+<h3>{%!header-admin-node-vpses}</h3>
 <table class="vpslist">
 	<tr>
 		<th></th>
@@ -31,47 +31,47 @@
 		<th>{%!list-column-ram}</th>
 		<th>{%!list-column-template}</th>
 	</tr>
-	{%if isset|containers == true}
-		{%foreach container in containers}
-			<tr class="clickable" data-url="/{%?container[id]}/">
-				<td class="container-status">
-					{%if container[status] == running}
+	{%if isset|vpses == true}
+		{%foreach vps in vpses}
+			<tr class="clickable" data-url="/{%?vps[id]}/">
+				<td class="vps-status">
+					{%if vps[status] == running}
 						<img src="/templates/default/static/images/status/online.png" alt="{%!list-status-running}">
-					{%elseif container[status] == stopped}
+					{%elseif vps[status] == stopped}
 						<img src="/templates/default/static/images/status/offline.png" alt="{%!list-status-stopped}">
-					{%elseif container[status] == suspended}
+					{%elseif vps[status] == suspended}
 						<img src="/templates/default/static/images/status/suspended.png" alt="{%!list-status-suspended}">
 					{%else}
 						<img src="/templates/default/static/images/status/unknown.png" alt="{%!list-status-unknown}">
 					{%/if}
 				</td>
 				<td>
-					<a href="/{%?container[id]}/">
-						{%?container[hostname]}
+					<a href="/{%?vps[id]}/">
+						{%?vps[hostname]}
 					</a>
 				</td>
 				<td>
-					<a href="/{%?container[id]}/">
-						{%if container[virtualization-type] == 1}
+					<a href="/{%?vps[id]}/">
+						{%if vps[virtualization-type] == 1}
 							OpenVZ
-						{%/if}{%if container[virtualization-type] == 2}
+						{%/if}{%if vps[virtualization-type] == 2}
 							Xen PV
-						{%/if}{%if container[virtualization-type] == 3}
+						{%/if}{%if vps[virtualization-type] == 3}
 							Xen HVM
-						{%/if}{%if container[virtualization-type] == 4}
+						{%/if}{%if vps[virtualization-type] == 4}
 							KVM
 						{%/if}
 					</a>
 				</td>
 				<td>
-					{%?container[diskspace]}
-					<span class="unit">{%?container[diskspace-unit]}</span>
+					{%?vps[diskspace]}
+					<span class="unit">{%?vps[diskspace-unit]}</span>
 				</td>
 				<td>
-					{%?container[guaranteed-ram]}
-					<span class="unit">{%?container[guaranteed-ram-unit]}</span>
+					{%?vps[guaranteed-ram]}
+					<span class="unit">{%?vps[guaranteed-ram-unit]}</span>
 				</td>
-				<td>{%?container[template]}</td>
+				<td>{%?vps[template]}</td>
 			</tr>
 		{%/foreach}
 	{%/if}

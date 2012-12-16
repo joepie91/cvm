@@ -17,13 +17,13 @@ try
 {
 	$sUser->RequireAccessLevel(20);
 	
-	$sContainer = new Container($router->uParameters[1]);
+	$sVps = new Vps($router->uParameters[1]);
 	
 	if(isset($_POST['submit']))
 	{
 		if($_POST['action'] == "suspend")
 		{
-			$sContainer->Suspend();
+			$sVps->Suspend();
 			
 			$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
 				'title'		=> $locale->strings['error-suspend-success-title'],
@@ -32,7 +32,7 @@ try
 		}
 		elseif($_POST['action'] == "unsuspend")
 		{
-			$sContainer->Unsuspend();
+			$sVps->Unsuspend();
 			
 			$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
 				'title'		=> $locale->strings['error-unsuspend-success-title'],
@@ -40,15 +40,15 @@ try
 			));
 		}
 		
-		$sContainer->RefreshData();
+		$sVps->RefreshData();
 		
 		/* TODO: Flash message and redirect to VPS lookup page. */
 	}
 	
-	$sSuspended = ($sContainer->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
+	$sSuspended = ($sVps->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
 	
 	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/suspend", $locale->strings, array(
-		'id'		=> $sContainer->sId,
+		'id'		=> $sVps->sId,
 		'suspended'	=> $sSuspended
 	));
 }
@@ -59,14 +59,14 @@ catch (NotFoundException $e)
 		'message'	=> $locale->strings['error-notfound-text']
 	));
 }
-catch (ContainerSuspendException $e)
+catch (VpsSuspendException $e)
 {
 	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 		'title'		=> $locale->strings['error-suspend-error-title'],
 		'message'	=> $locale->strings['error-suspend-error-text']
 	));
 }
-catch (ContainerUnsuspendException $e)
+catch (VpsUnsuspendException $e)
 {
 	$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 		'title'		=> $locale->strings['error-unsuspend-error-title'],

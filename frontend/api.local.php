@@ -68,20 +68,20 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 			
 			if($result = mysql_query_cached($query))
 			{
-				$sContainers = array();
+				$sVpses = array();
 				
 				foreach($result->data as $row)
 				{
-					$sContainer = new Container($row);
-					$sContainers[] = array(
-						'hostname'	=> $sContainer->sHostname,
-						'internal_id'	=> $sContainer->sInternalId,
-						'node_id'	=> $sContainer->sNodeId,
-						'status'	=> $sContainer->sStatus
+					$sVps = new Vps($row);
+					$sVpses[] = array(
+						'hostname'	=> $sVps->sHostname,
+						'internal_id'	=> $sVps->sInternalId,
+						'node_id'	=> $sVps->sNodeId,
+						'status'	=> $sVps->sStatus
 					);
 				}
 				
-				$return_object = $sContainers;
+				$return_object = $sVpses;
 				$return_success = true;
 			}
 			break;

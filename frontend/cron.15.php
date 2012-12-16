@@ -18,15 +18,15 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 {
 	foreach($result->data as $row)
 	{
-		$sContainer = new Container($row);
+		$sVps = new Vps($row);
 		
 		try
 		{
-			$sContainer->UpdateTraffic();
+			$sVps->UpdateTraffic();
 		}
-		catch (ContainerTrafficRetrieveException $e)
+		catch (VpsTrafficRetrieveException $e)
 		{
-			if($sContainer->sCurrentStatus == CVM_STATUS_STARTED)
+			if($sVps->sCurrentStatus == CVM_STATUS_STARTED)
 			{
 				// This is not supposed to fail, as the VPS is running.
 				// Something shady going on.

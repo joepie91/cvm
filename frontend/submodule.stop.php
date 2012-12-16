@@ -13,33 +13,33 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-if($sContainer->sCurrentStatus != CVM_STATUS_STOPPED)
+if($sVps->sCurrentStatus != CVM_STATUS_STOPPED)
 {
 	try
 	{
-		$sContainer->Stop();
-		$sContainer->sCurrentStatus = CVM_STATUS_STOPPED;
+		$sVps->Stop();
+		$sVps->sCurrentStatus = CVM_STATUS_STOPPED;
 		
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
 			'title'		=> $locale->strings['error-stop-success-title'],
 			'message'	=> $locale->strings['error-stop-success-text']
 		));
 	}
-	catch (ContainerSuspendedException $e)
+	catch (VpsSuspendedException $e)
 	{
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-stop-suspended-title'],
 			'message'	=> $locale->strings['error-stop-suspended-text']
 		));
 	}
-	catch (ContainerTerminatedException $e)
+	catch (VpsTerminatedException $e)
 	{
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-stop-terminated-title'],
 			'message'	=> $locale->strings['error-stop-terminated-text']
 		));
 	}
-	catch(ContainerStopException $e)
+	catch(VpsStopException $e)
 	{
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-stop-failed-title'],

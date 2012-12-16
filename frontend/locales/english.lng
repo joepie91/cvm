@@ -68,7 +68,7 @@ menu-password;								Root Password
 ## Administration panel menu items
 menu-admin-overview;							Overview
 menu-admin-users;							Users
-menu-admin-containers;							VPSes
+menu-admin-vpses;							VPSes
 menu-admin-nodes;							Nodes
 
 ## Global warnings and errors
@@ -237,12 +237,12 @@ admin-title-id;								User ID
 admin-title-username;							Username
 admin-title-email;							Email address
 admin-title-accesslevel;						Access level
-admin-title-containers;							VPS count
+admin-title-vpses;							VPS count
 admin-level-enduser;							End user
 admin-level-reseller;							Reseller
 admin-level-nodeadmin;							Node administrator
 admin-level-masteradmin;						Master administrator
-header-admin-user-containers;						VPSes owned by this user
+header-admin-user-vpses;						VPSes owned by this user
 
 ## VPS list
 title-admin-vpslist;							VPS overview
@@ -267,7 +267,7 @@ toolbar-addnode;							Add node
 title-admin-nodeinfo;							Node lookup
 toolbar-createvps;							Create VPS
 toolbar-editnode;							Edit node details
-header-admin-node-containers;						VPSes on this node
+header-admin-node-vpses;						VPSes on this node
 
 ## Add node
 title-admin-addnode;							Add node
@@ -286,7 +286,7 @@ addnode-privatekey;							Private key
 button-admin-addnode;							Add node
 
 ## Create VPS
-title-admin-addcontainer;						Create VPS
+title-admin-addvps;							Create VPS
 error-admin-vpses-add-node;						You did not select a valid node.
 error-admin-vpses-add-user;						You did not select a valid user.
 error-admin-vpses-add-template;						You did not select a valid template.
@@ -296,16 +296,16 @@ error-admin-vpses-add-burstable;					You did not enter a valid burstable RAM spe
 error-admin-vpses-add-cpucount;						You did not enter a valid amount of CPUs.
 error-admin-vpses-add-traffic;						You did not enter a valid traffic allocation specification.
 error-admin-vpses-add-hostname;						You entered an invalid hostname.
-addcontainer-node;							Node
-addcontainer-user;							User
-addcontainer-diskspace;							Disk space
-addcontainer-guaranteed;						Guaranteed RAM
-addcontainer-burstable;							Burstable RAM
-addcontainer-cpucount;							CPUs
-addcontainer-traffic;							Traffic allocation
-addcontainer-hostname;							Hostname (optional)
-addcontainer-template;							Template
-button-admin-addcontainer;						Create VPS
+addvps-node;								Node
+addvps-user;								User
+addvps-diskspace;							Disk space
+addvps-guaranteed;							Guaranteed RAM
+addvps-burstable;							Burstable RAM
+addvps-cpucount;							CPUs
+addvps-traffic;								Traffic allocation
+addvps-hostname;							Hostname (optional)
+addvps-template;							Template
+button-admin-addvps;							Create VPS
 
 ## Administrative overview
 title-admin-overview;							Administrative overview

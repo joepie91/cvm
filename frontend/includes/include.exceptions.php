@@ -20,8 +20,8 @@ class SshAuthException extends SshException {}
 class SshCommandException extends SshException {}
 class SshExitException extends SshException {}
 
-// Container-related exceptions
-class ContainerException extends Exception
+// VPS-related exceptions
+class VpsException extends Exception
 {
 	private $id = "";
 	
@@ -38,20 +38,20 @@ class ContainerException extends Exception
 	}
 }
 
-class ContainerCreateException extends ContainerException {}
-class ContainerConfigureException extends ContainerException {}
-class ContainerStartException extends ContainerException {}
-class ContainerStopException extends ContainerException {}
-class ContainerSuspendException extends ContainerException {}
-class ContainerUnsuspendException extends ContainerException {}
-class ContainerSuspendedException extends ContainerException {}
-class ContainerTerminatedException extends ContainerException {}
-class ContainerDestroyException extends ContainerException {}
-class ContainerReinstallException extends ContainerException {}
-class ContainerDeployException extends ContainerException {}
-class ContainerIpAddException extends ContainerException {}
-class ContainerIpRemoveException extends ContainerException {}
-class ContainerTrafficRetrieveException extends ContainerException {}
+class VpsCreateException extends VpsException {}
+class VpsConfigureException extends VpsException {}
+class VpsStartException extends VpsException {}
+class VpsStopException extends VpsException {}
+class VpsSuspendException extends VpsException {}
+class VpsUnsuspendException extends VpsException {}
+class VpsSuspendedException extends VpsException {}
+class VpsTerminatedException extends VpsException {}
+class VpsDestroyException extends VpsException {}
+class VpsReinstallException extends VpsException {}
+class VpsDeployException extends VpsException {}
+class VpsIpAddException extends VpsException {}
+class VpsIpRemoveException extends VpsException {}
+class VpsTrafficRetrieveException extends VpsException {}
 
 class UnauthorizedException extends Exception {}
 class InsufficientAccessLevelException extends Exception {}

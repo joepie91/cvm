@@ -17,9 +17,9 @@ $router->uVariables['display_menu'] = true;
 
 try
 {
-	$sContainer = new Container($router->uParameters[1]);
+	$sVps = new Vps($router->uParameters[1]);
 	
-	if($sContainer->sUserId != $sUser->sId && $sUser->sAccessLevel < 20)
+	if($sVps->sUserId != $sUser->sId && $sUser->sAccessLevel < 20)
 	{
 		throw new UnauthorizedException("You are not authorized to control this VPS.");
 	}
@@ -28,16 +28,16 @@ try
 	
 	try
 	{
-		$sContainer->CheckAllowed();
+		$sVps->CheckAllowed();
 	}
-	catch (ContainerSuspendedException $e)
+	catch (VpsSuspendedException $e)
 	{
 		$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/warning", $locale->strings, array(
 			'title'		=> $locale->strings['warning-suspended-title'],
 			'message'	=> $locale->strings['warning-suspended-text']
 		));
 	}
-	catch (ContainerTerminatedException $e)
+	catch (VpsTerminatedException $e)
 	{
 		$sMainContents .= NewTemplater::Render("{$sTheme}/shared/error/warning", $locale->strings, array(
 			'title'		=> $locale->strings['warning-terminated-title'],

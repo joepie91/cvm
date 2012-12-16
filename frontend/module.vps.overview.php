@@ -29,39 +29,39 @@ if(!empty($router->uParameters[2]))
 	}
 }
 
-if($sContainer->sTotalTrafficLimit != 0)
+if($sVps->sTotalTrafficLimit != 0)
 {
-	$sTrafficLimit = $sContainer->sTotalTrafficLimit;
+	$sTrafficLimit = $sVps->sTotalTrafficLimit;
 }
 else
 {
-	$sTrafficLimit = $sContainer->sIncomingTrafficLimit + $sContainer->sOutgoingTrafficLimit;
+	$sTrafficLimit = $sVps->sIncomingTrafficLimit + $sVps->sOutgoingTrafficLimit;
 }
 
 $sVariables = array(
-	'id'			=> $sContainer->sId,
-	'server-location'	=> $sContainer->sNode->sPhysicalLocation,
-	'operating-system'	=> $sContainer->sTemplate->sName,
-	'guaranteed-ram'	=> "{$sContainer->sGuaranteedRam}MB",
-	'burstable-ram'		=> "{$sContainer->sBurstableRam}MB",
-	'disk-space'		=> "{$sContainer->sDiskSpace}MB",
-	'total-traffic-limit'	=> format_size($sContainer->sTotalTrafficLimit, 1024, true, 0) . "B",
-	'incoming-traffic-limit'=> format_size($sContainer->sIncomingTrafficLimit, 1024, true, 0) . "B",
-	'outgoing-traffic-limit'=> format_size($sContainer->sOutgoingTrafficLimit, 1024, true, 0) . "B",
+	'id'			=> $sVps->sId,
+	'server-location'	=> $sVps->sNode->sPhysicalLocation,
+	'operating-system'	=> $sVps->sTemplate->sName,
+	'guaranteed-ram'	=> "{$sVps->sGuaranteedRam}MB",
+	'burstable-ram'		=> "{$sVps->sBurstableRam}MB",
+	'disk-space'		=> "{$sVps->sDiskSpace}MB",
+	'total-traffic-limit'	=> format_size($sVps->sTotalTrafficLimit, 1024, true, 0) . "B",
+	'incoming-traffic-limit'=> format_size($sVps->sIncomingTrafficLimit, 1024, true, 0) . "B",
+	'outgoing-traffic-limit'=> format_size($sVps->sOutgoingTrafficLimit, 1024, true, 0) . "B",
 	'bandwidth-limit'	=> "100mbit",
-	'status'		=> $sContainer->sStatusText,
-	'traffic-used'		=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
+	'status'		=> $sVps->sStatusText,
+	'traffic-used'		=> number_format(($sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
 	'traffic-total'		=> number_format($sTrafficLimit / 1024 / 1024 / 1024, 0),
-	'traffic-percentage'	=> number_format(($sContainer->sIncomingTrafficUsed + $sContainer->sOutgoingTrafficUsed) / $sTrafficLimit, 2),
+	'traffic-percentage'	=> number_format(($sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed) / $sTrafficLimit, 2),
 	'traffic-unit'		=> "GB"
 );
 
 try
 {
 	$sVariables = array_merge($sVariables, array(
-		'disk-used'		=> number_format($sContainer->sDiskUsed / 1024, 2),
-		'disk-total'		=> number_format($sContainer->sDiskTotal / 1024, 2),
-		'disk-percentage'	=> ($sContainer->sDiskTotal == 0) ? 0 : number_format(($sContainer->sDiskUsed / $sContainer->sDiskTotal) * 100, 2),
+		'disk-used'		=> number_format($sVps->sDiskUsed / 1024, 2),
+		'disk-total'		=> number_format($sVps->sDiskTotal / 1024, 2),
+		'disk-percentage'	=> ($sVps->sDiskTotal == 0) ? 0 : number_format(($sVps->sDiskUsed / $sVps->sDiskTotal) * 100, 2),
 		'disk-unit'		=> "GB"
 	));
 }
@@ -78,9 +78,9 @@ catch (SshExitException $e)
 try
 {
 	$sVariables = array_merge($sVariables, array(
-		'ram-used'		=> $sContainer->sRamUsed,
-		'ram-total'		=> $sContainer->sRamTotal,
-		'ram-percentage'	=> ($sContainer->sRamTotal == 0) ? 0 : number_format(($sContainer->sRamUsed / $sContainer->sRamTotal) * 100, 2),
+		'ram-used'		=> $sVps->sRamUsed,
+		'ram-total'		=> $sVps->sRamTotal,
+		'ram-percentage'	=> ($sVps->sRamTotal == 0) ? 0 : number_format(($sVps->sRamUsed / $sVps->sRamTotal) * 100, 2),
 		'ram-unit'		=> "MB"
 	));
 }

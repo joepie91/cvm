@@ -11,7 +11,7 @@
 	</tr>
 	{%foreach vps in vpses}
 		<tr class="clickable" data-url="/{%?vps[id]}/">
-			<td class="container-status">
+			<td class="vps-status">
 				{%if vps[status] == running}
 					<img src="/templates/default/static/images/status/online.png" alt="{%!list-status-running}">
 				{%elseif vps[status] == stopped}

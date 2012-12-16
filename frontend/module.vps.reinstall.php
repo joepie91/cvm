@@ -21,16 +21,16 @@ if(isset($_POST['submit']))
 	{
 		try
 		{
-			$sContainer->CheckAllowed();
+			$sVps->CheckAllowed();
 			$sTemplate = new Template($_POST['template']);
 			$sTemplate->CheckAvailable();
 			
 			if(isset($_POST['confirm']))
 			{
-				$sContainer->uTemplateId = $sTemplate->sId;
-				$sContainer->InsertIntoDatabase();
-				$sContainer->Reinstall();
-				$sContainer->Start();
+				$sVps->uTemplateId = $sTemplate->sId;
+				$sVps->InsertIntoDatabase();
+				$sVps->Reinstall();
+				$sVps->Start();
 				
 				$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
 					'title'		=> $locale->strings['error-reinstall-success-title'],
@@ -59,28 +59,28 @@ if(isset($_POST['submit']))
 				'message'	=> $locale->strings['error-reinstall-unavailable-text']
 			));
 		}
-		catch (ContainerReinstallException $e)
+		catch (VpsReinstallException $e)
 		{
 			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 				'title'		=> $locale->strings['error-reinstall-failed-title'],
 				'message'	=> $locale->strings['error-reinstall-failed-text']
 			));
 		}
-		catch (ContainerStartException $e)
+		catch (VpsStartException $e)
 		{
 			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 				'title'		=> $locale->strings['error-reinstall-start-title'],
 				'message'	=> $locale->strings['error-reinstall-start-text']
 			));
 		}
-		catch (ContainerSuspendedException $e)
+		catch (VpsSuspendedException $e)
 		{
 			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 				'title'		=> $locale->strings['error-reinstall-suspended-title'],
 				'message'	=> $locale->strings['error-reinstall-suspended-text']
 			));
 		}
-		catch (ContainerTerminatedException $e)
+		catch (VpsTerminatedException $e)
 		{
 			$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 				'title'		=> $locale->strings['error-reinstall-terminated-title'],

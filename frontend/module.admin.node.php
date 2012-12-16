@@ -21,29 +21,29 @@ try
 	{
 		foreach($result->data as $row)
 		{
-			$sContainer = new Container($row);
+			$sVps = new Vps($row);
 			
 			try
 			{
-				$sStatus = $sContainer->sStatusText;
+				$sStatus = $sVps->sStatusText;
 			}
 			catch (SshException $e)
 			{
 				$sStatus = "unknown";
 			}
 			
-			$sContainerList[] = array(
-				'id'			=> $sContainer->sId,
-				'hostname'		=> $sContainer->sHostname,
-				'node'			=> $sContainer->sNode->sName,
-				'node-hostname'		=> $sContainer->sNode->sHostname,
-				'template'		=> $sContainer->sTemplate->sName,
-				'diskspace'		=> number_format($sContainer->sDiskSpace / 1024),
+			$sVpsList[] = array(
+				'id'			=> $sVps->sId,
+				'hostname'		=> $sVps->sHostname,
+				'node'			=> $sVps->sNode->sName,
+				'node-hostname'		=> $sVps->sNode->sHostname,
+				'template'		=> $sVps->sTemplate->sName,
+				'diskspace'		=> number_format($sVps->sDiskSpace / 1024),
 				'diskspace-unit'	=> "GB",
-				'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
+				'guaranteed-ram'	=> $sVps->sGuaranteedRam,
 				'guaranteed-ram-unit'	=> "MB",
 				'status'		=> $sStatus,
-				'virtualization-type'	=> $sContainer->sVirtualizationType
+				'virtualization-type'	=> $sVps->sVirtualizationType
 			);
 		}
 	}
@@ -52,7 +52,7 @@ try
 		'id'			=> $sNode->sId,
 		'hostname'		=> $sNode->sHostname,
 		'location'		=> $sNode->sPhysicalLocation,
-		'containers'		=> $sContainerList
+		'vpses'			=> $sVpsList
 	));
 }
 catch (NotFoundException $e)

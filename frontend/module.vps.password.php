@@ -23,7 +23,7 @@ if(isset($_POST['submit']))
 		{
 			if($_POST['password'] == $_POST['confirm'])
 			{
-				$sContainer->SetRootPassword($_POST['password']);
+				$sVps->SetRootPassword($_POST['password']);
 				
 				$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
 					'title'		=> $locale->strings['error-password-success-title'],
@@ -46,14 +46,14 @@ if(isset($_POST['submit']))
 			));
 		}
 	}
-	catch (ContainerSuspendedException $e)
+	catch (VpsSuspendedException $e)
 	{
 		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-password-suspended-title'],
 			'message'	=> $locale->strings['error-password-suspended-text']
 		));
 	}
-	catch (ContainerTerminatedException $e)
+	catch (VpsTerminatedException $e)
 	{
 		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-password-terminated-title'],
@@ -77,6 +77,6 @@ if($display_form === true)
 	));
 	
 	$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/password", $locale->strings, array(
-		'id'	=> $sContainer->sId
+		'id'	=> $sVps->sId
 	));
 }

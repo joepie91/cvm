@@ -99,9 +99,9 @@
 {%if accesslevel = 20}
 	<h3>{%!header-vps-admin}</h3>
 	<div class="vps-admin">
-		<a href="/admin/container/{%?id}/suspend/">{%!vps-admin-suspend}</a>
-		<a href="/admin/container/{%?id}/transfer/">{%!vps-admin-transfer}</a>
-		<a href="/admin/container/{%?id}/terminate/">{%!vps-admin-terminate}</a>
+		<a href="/admin/vps/{%?id}/suspend/">{%!vps-admin-suspend}</a>
+		<a href="/admin/vps/{%?id}/transfer/">{%!vps-admin-transfer}</a>
+		<a href="/admin/vps/{%?id}/terminate/">{%!vps-admin-terminate}</a>
 	</div>
 	<div class="clear"></div>
 {%/if}

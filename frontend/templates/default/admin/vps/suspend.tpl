@@ -1,4 +1,4 @@
-<form method="post" action="/admin/container/{%?id}/suspend/">
+<form method="post" action="/admin/vps/{%?id}/suspend/">
 	{%if suspended == false}
 		<h2>{%!title-admin-vps-suspend}</h2>
 		<p>{%!vps-admin-suspend-text}</p>

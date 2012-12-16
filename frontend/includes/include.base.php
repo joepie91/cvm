@@ -21,6 +21,8 @@ require("include.exceptions.php");
 require("include.constants.php");
 require("include.parsing.php");
 require("include.misc.php");
+
+/* TODO: Reorganize and autoloading. */
 require("classes/class.user.php");
 require("classes/class.controller.php");
 require("classes/class.container.php");

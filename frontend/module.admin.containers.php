@@ -13,13 +13,13 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-$sContainerList = array();
+$sVpsList = array();
 
 if($result = mysql_query_cached("SELECT * FROM containers"))
 {
 	foreach($result->data as $row)
 	{
-		$sVps = new Container($row);
+		$sVps = new Vps($row);
 		
 		try
 		{

@@ -17,36 +17,36 @@ try
 {
 	try
 	{
-		$sContainer->Stop();
+		$sVps->Stop();
 	}
-	catch(ContainerStopException $e)
+	catch(VpsStopException $e)
 	{
 		// we can make this silently fail, as the only important thing is that it starts again
 	}
 	
-	$sContainer->Start();
-	$sContainer->sCurrentStatus = CVM_STATUS_STARTED;
+	$sVps->Start();
+	$sVps->sCurrentStatus = CVM_STATUS_STARTED;
 	
 	$sError .= NewTemplater::Render("{$sTheme}/shared/error/success", $locale->strings, array(
 		'title'		=> $locale->strings['error-stop-restart-success'],
 		'message'	=> $locale->strings['error-stop-restart-success']
 	));
 }
-catch (ContainerSuspendedException $e)
+catch (VpsSuspendedException $e)
 {
 	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 		'title'		=> $locale->strings['error-restart-suspended-title'],
 		'message'	=> $locale->strings['error-restart-suspended-text']
 	));
 }
-catch (ContainerTerminatedException $e)
+catch (VpsTerminatedException $e)
 {
 	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 		'title'		=> $locale->strings['error-restart-terminated-title'],
 		'message'	=> $locale->strings['error-restart-terminated-text']
 	));
 }
-catch(ContainerStartException $e)
+catch(VpsStartException $e)
 {
 	$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 		'title'		=> $locale->strings['error-restart-start-title'],

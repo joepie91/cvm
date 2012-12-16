@@ -13,7 +13,7 @@
  
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-class Container extends CPHPDatabaseRecordClass
+class Vps extends CPHPDatabaseRecordClass
 {
 	public $table_name = "containers";
 	public $fill_query = "SELECT * FROM containers WHERE `Id` = '%d'";
@@ -260,11 +260,11 @@ class Container extends CPHPDatabaseRecordClass
 	{
 		if($this->sStatus == CVM_STATUS_SUSPENDED)
 		{
-			throw new ContainerSuspendedException("No operations can be performed on this VPS beacuse it is suspended.", 1, $this->sInternalId);
+			throw new VpsSuspendedException("No operations can be performed on this VPS beacuse it is suspended.", 1, $this->sInternalId);
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			throw new ContainerSuspendedException("No operations can be performed on this VPS beacuse it is terminated.", 1, $this->sInternalId);
+			throw new VpsSuspendedException("No operations can be performed on this VPS beacuse it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
@@ -290,7 +290,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			throw new InvalidArgumentException("The option argument to Container::SetOptions should be an array.");
+			throw new InvalidArgumentException("The option argument to Vps::SetOptions should be an array.");
 		}
 	}
 	
@@ -425,12 +425,12 @@ class Container extends CPHPDatabaseRecordClass
 			}
 			else
 			{
-				throw new ContainerConfigureException($result->stderr, $result->returncode, $this->sInternalId);
+				throw new VpsConfigureException($result->stderr, $result->returncode, $this->sInternalId);
 			}
 		}
 		else
 		{
-			throw new ContainerCreateException($result->stderr, $result->returncode, $this->sInternalId);
+			throw new VpsCreateException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 	
@@ -450,7 +450,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			throw new ContainerDestroyException("Destroying VPS failed: {$result->stderr}", $result->returncode, $this->sInternalId);
+			throw new VpsDestroyException("Destroying VPS failed: {$result->stderr}", $result->returncode, $this->sInternalId);
 		}
 	}
 	
@@ -461,17 +461,17 @@ class Container extends CPHPDatabaseRecordClass
 			$this->Destroy();
 			$this->Deploy();
 		}
-		catch (ContainerDestroyException $e)
+		catch (VpsDestroyException $e)
 		{
-			throw new ContainerReinstallException("Reinstalling VPS failed during destroying: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
+			throw new VpsReinstallException("Reinstalling VPS failed during destroying: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
 		}
-		catch (ContainerCreateException $e)
+		catch (VpsCreateException $e)
 		{
-			throw new ContainerReinstallException("Reinstalling VPS failed during creation: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
+			throw new VpsReinstallException("Reinstalling VPS failed during creation: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
 		}
-		catch (ContainerConfigureException $e)
+		catch (VpsConfigureException $e)
 		{
-			throw new ContainerReinstallException("Reinstalling VPS failed during configuration: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
+			throw new VpsReinstallException("Reinstalling VPS failed during configuration: " . $e->getMessage(), $e->getCode(), $this->sInternalId, $e);
 		}
 	}
 	
@@ -479,11 +479,11 @@ class Container extends CPHPDatabaseRecordClass
 	{
 		if($this->sStatus == CVM_STATUS_SUSPENDED && $forced == false)
 		{
-			throw new ContainerSuspendedException("The VPS cannot be started as it is suspended.", 1, $this->sInternalId);
+			throw new VpsSuspendedException("The VPS cannot be started as it is suspended.", 1, $this->sInternalId);
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED && $forced == false)
 		{
-			throw new ContainerTerminatedException("The VPS cannot be started as it is terminated.", 1, $this->sInternalId);
+			throw new VpsTerminatedException("The VPS cannot be started as it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
@@ -498,7 +498,7 @@ class Container extends CPHPDatabaseRecordClass
 			}
 			else
 			{
-				throw new ContainerStartException($result->stderr, $result->returncode, $this->sInternalId);
+				throw new VpsStartException($result->stderr, $result->returncode, $this->sInternalId);
 			}
 		}
 	}
@@ -507,18 +507,19 @@ class Container extends CPHPDatabaseRecordClass
 	{
 		if($this->sStatus == CVM_STATUS_SUSPENDED)
 		{
-			throw new ContainerSuspendedException("The VPS cannot be stopped as it is suspended.", 1, $this->sInternalId);
+			throw new VpsSuspendedException("The VPS cannot be stopped as it is suspended.", 1, $this->sInternalId);
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			throw new ContainerTerminatedException("The VPS cannot be stopped as it is terminated.", 1, $this->sInternalId);
+			throw new VpsTerminatedException("The VPS cannot be stopped as it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
 			$command = array("vzctl", "stop", $this->sInternalId);
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
-			// vzctl is retarded enough to return exit status 0 when the command fails because the container isn't running, so we'll have to check the stderr for specific error string(s) as well. come on guys, it's 2012.
+			/* vzctl is retarded enough to return code 0 when the command fails because the container isn't running,
+			 * so we'll have to check stderr for specific error strings as well. Come on guys, it's 2012. */
 			if($result->returncode == 0 && strpos($result->stderr, "Unable to stop") === false)
 			{
 				$this->uStatus = CVM_STATUS_STOPPED;
@@ -527,7 +528,7 @@ class Container extends CPHPDatabaseRecordClass
 			}
 			else
 			{
-				throw new ContainerStopException($result->stderr, $result->returncode, $this->sInternalId);
+				throw new VpsStopException($result->stderr, $result->returncode, $this->sInternalId);
 			}
 		}
 	}
@@ -542,14 +543,14 @@ class Container extends CPHPDatabaseRecordClass
 				$this->uStatus = CVM_STATUS_SUSPENDED;
 				$this->InsertIntoDatabase();
 			}
-			catch (ContainerStopException $e)
+			catch (VpsStopException $e)
 			{
-				throw new ContainerSuspendException("Suspension failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);
+				throw new VpsSuspendException("Suspension failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);
 			}
 		}
 		else
 		{
-			throw new ContainerSuspendException("The VPS is already suspended.", 1, $this->sInternalId);
+			throw new VpsSuspendException("The VPS is already suspended.", 1, $this->sInternalId);
 		}
 	}
 	
@@ -563,14 +564,14 @@ class Container extends CPHPDatabaseRecordClass
 				$this->uStatus = CVM_STATUS_STARTED;
 				$this->InsertIntoDatabase();
 			}
-			catch (ContainerStartException $e)
+			catch (VpsStartException $e)
 			{
-				throw new ContainerUnsuspendException("Unsuspension failed as the VPS could not be started.", 1, $this->sInternalId, $e);
+				throw new VpsUnsuspendException("Unsuspension failed as the VPS could not be started.", 1, $this->sInternalId, $e);
 			}
 		}
 		else
 		{
-			throw new ContainerUnsuspendException("The VPS is not suspended.", 1, $this->sInternalId);
+			throw new VpsUnsuspendException("The VPS is not suspended.", 1, $this->sInternalId);
 		}
 	}
 	
@@ -586,7 +587,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			throw new ContainerIpAddException($result->stderr, $result->returncode, $this->sInternalId);
+			throw new VpsIpAddException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 	
@@ -602,7 +603,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			throw new ContainerIpRemoveException($result->stderr, $result->returncode, $this->sInternalId);
+			throw new VpsIpRemoveException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 	
@@ -642,7 +643,7 @@ class Container extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			throw new ContainerTrafficRetrieveException($result->stderr, $result->returncode, $this->sInternalId);
+			throw new VpsTrafficRetrieveException($result->stderr, $result->returncode, $this->sInternalId);
 		}
 	}
 	
@@ -650,11 +651,11 @@ class Container extends CPHPDatabaseRecordClass
 	{
 		if($this->sStatus == CVM_STATUS_SUSPENDED)
 		{
-			throw new ContainerSuspendedException("The root password cannot be changed, because the VPS is suspended.", 1, $this->sInternalId);
+			throw new VpsSuspendedException("The root password cannot be changed, because the VPS is suspended.", 1, $this->sInternalId);
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			throw new ContainerTerminatedException("The root password cannot be changed, because the VPS is terminated.", 1, $this->sInternalId);
+			throw new VpsTerminatedException("The root password cannot be changed, because the VPS is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{

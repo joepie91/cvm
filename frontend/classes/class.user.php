@@ -41,8 +41,8 @@ class User extends CPHPDatabaseRecordClass
 	{
 		switch($name)
 		{
-			case "sContainerCount":
-				return $this->GetContainerCount();
+			case "sVpsCount":
+				return $this->GetVpsCount();
 				break;
 			default:
 				return parent::__get($name);
@@ -50,7 +50,7 @@ class User extends CPHPDatabaseRecordClass
 		}
 	}
 	
-	public function GetContainerCount()
+	public function GetVpsCount()
 	{
 		if($result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$this->sId}'"))
 		{

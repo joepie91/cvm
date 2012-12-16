@@ -42,7 +42,7 @@ $sPageTitle = "";
 
 // Initialize some variables to ensure they are available through the application.
 // This works around the inability of CPHP to retain variables set in the first rewrite.
-$sContainer = null;
+$sVps = null;
 $sPageContents = "";
 $router = null;
 $sError = null;
@@ -138,35 +138,35 @@ try
 				'_prefilled_user'		=> true
 			),
 			/* Admin - VPSes - Overview */
-			'^/admin/containers/?$'		=> array(
+			'^/admin/vpses/?$'		=> array(
 				'target'			=> "module.admin.containers.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - VPSes - Create VPS */
-			'^/admin/containers/add/?$'	=> array(
+			'^/admin/vpses/add/?$'	=> array(
 				'target'			=> "module.admin.containers.create.php",
 				'authenticator'			=> "authenticator.admin.php",
 				'auth_error'			=> "error.access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - VPSes - Suspend */
-			'^/admin/container/([0-9]+)/suspend/?$'		=> array(
+			'^/admin/vps/([0-9]+)/suspend/?$'		=> array(
 				'target'					=> "module.admin.container.suspend.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
 			),
 			/* Admin - VPSes - Transfer */
-			'^/admin/container/([0-9]+)/transfer/?$'	=> array(
+			'^/admin/vps/([0-9]+)/transfer/?$'	=> array(
 				'target'					=> "module.admin.container.transfer.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
 				'_menu'						=> "admin"
 			),
 			/* Admin - VPSes - Terminate */
-			'^/admin/container/([0-9]+)/terminate/?$'	=> array(
+			'^/admin/vps/([0-9]+)/terminate/?$'	=> array(
 				'target'					=> "module.admin.container.terminate.php",
 				'authenticator'					=> "authenticator.admin.php",
 				'auth_error'					=> "error.access.php",
@@ -209,14 +209,14 @@ try
 	{
 		$router->RouteRequest();
 	}
-	catch (ContainerSuspendedException $e)
+	catch (VpsSuspendedException $e)
 	{
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-suspended-title'],
 			'message'	=> $e->getMessage()
 		));
 	}
-	catch (ContainerTerminatedException $e)
+	catch (VpsTerminatedException $e)
 	{
 		$sError .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
 			'title'		=> $locale->strings['error-terminated-title'],
@@ -229,7 +229,7 @@ try
 		$sMainContents .= Templater::AdvancedParse("{$sTheme}/client/vps/main", $locale->strings, array(
 			'error'			=> $sError,
 			'contents'		=> $sPageContents,
-			'id'			=> $sContainer->sId
+			'id'			=> $sVps->sId
 		));
 	}
 	elseif($router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
