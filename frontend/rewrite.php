@@ -55,153 +55,154 @@ try
 
 	$router->routes = array(
 		0 => array(
-			'^/?$'				=> "module.list.php",
-			'^/account/?$'			=> "module.account.php",
-			'^/login/?$'			=> "module.login.php",
-			'^/logout/?$'			=> "module.logout.php",
+			'^/?$'				=> "modules/client/vps/list.php",
+			'^/account/?$'			=> "modules/client/account/index.php",
+			'^/login/?$'			=> "modules/shared/login.php",
+			'^/logout/?$'			=> "modules/shared/logout.php",
 			/* Frontpage/overview */
 			'^/([0-9]+)/?$'			=> array(
-				'target'			=> "module.vps.overview.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/lookup.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
+			/* TODO: Use action variable instead of relying on the path. */
 			/* VPS - Start */
 			'^/([0-9]+)/(start)/?$'		=> array(
-				'target'			=> "module.vps.overview.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/lookup.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
 			/* VPS - Stop */
 			'^/([0-9]+)/(stop)/?$'		=> array(
-				'target'			=> "module.vps.overview.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/lookup.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
 			/* VPS - Restart */
 			'^/([0-9]+)/(restart)/?$'	=> array(
-				'target'			=> "module.vps.overview.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/lookup.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
 			/* VPS - Reinstall */
 			'^/([0-9]+)/reinstall/?$'	=> array(
-				'target'			=> "module.vps.reinstall.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/reinstall.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
 			/* VPS - Change password */
 			'^/([0-9]+)/password/?$'	=> array(
-				'target'			=> "module.vps.password.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/password.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
 			/* VPS - Console */
 			'^/([0-9]+)/console/?$'		=> array(
-				'target'			=> "module.vps.console.php",
-				'authenticator'			=> "authenticator.vps.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/client/vps/console.php",
+				'authenticator'			=> "authenticators/vps.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
 			/* Admin - Overview */
 			'^/admin/?$'			=> array(
-				'target'			=> "module.admin.overview.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/overview/index.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - Users - Overview */
 			'^/admin/users/?$'		=> array(
-				'target'			=> "module.admin.users.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/user/list.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - Users - Lookup */
 			'^/admin/user/([0-9]+)/?$'	=> array(
-				'target'			=> "module.admin.user.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/user/lookup.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - Users - Create VPS */
 			'^/admin/user/([0-9]+)/add/?$'	=> array(
-				'target'			=> "module.admin.containers.create.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/vps/create.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin",
 				'_prefilled_user'		=> true
 			),
 			/* Admin - VPSes - Overview */
 			'^/admin/vpses/?$'		=> array(
-				'target'			=> "module.admin.containers.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/vps/list.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - VPSes - Create VPS */
 			'^/admin/vpses/add/?$'	=> array(
-				'target'			=> "module.admin.containers.create.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/vps/create.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - VPSes - Suspend */
-			'^/admin/vps/([0-9]+)/suspend/?$'		=> array(
-				'target'					=> "module.admin.container.suspend.php",
-				'authenticator'					=> "authenticator.admin.php",
-				'auth_error'					=> "error.access.php",
-				'_menu'						=> "admin"
+			'^/admin/vps/([0-9]+)/suspend/?$'	=> array(
+				'target'				=> "modules/admin/vps/suspend.php",
+				'authenticator'				=> "authenticators/admin.php",
+				'auth_error'				=> "modules/error/access.php",
+				'_menu'					=> "admin"
 			),
 			/* Admin - VPSes - Transfer */
 			'^/admin/vps/([0-9]+)/transfer/?$'	=> array(
-				'target'					=> "module.admin.container.transfer.php",
-				'authenticator'					=> "authenticator.admin.php",
-				'auth_error'					=> "error.access.php",
-				'_menu'						=> "admin"
+				'target'				=> "modules/admin/vps/transfer.php",
+				'authenticator'				=> "authenticators/admin.php",
+				'auth_error'				=> "modules/error/access.php",
+				'_menu'					=> "admin"
 			),
 			/* Admin - VPSes - Terminate */
 			'^/admin/vps/([0-9]+)/terminate/?$'	=> array(
-				'target'					=> "module.admin.container.terminate.php",
-				'authenticator'					=> "authenticator.admin.php",
-				'auth_error'					=> "error.access.php",
-				'_menu'						=> "admin"
+				'target'				=> "modules/admin/vps/terminate.php",
+				'authenticator'				=> "authenticators/admin.php",
+				'auth_error'				=> "modules/error/access.php",
+				'_menu'					=> "admin"
 			),
 			/* Admin - Nodes - Overview */
 			'^/admin/nodes/?$'		=> array(
-				'target'			=> "module.admin.nodes.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/node/list.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - Nodes - Lookup */
 			'^/admin/node/([0-9]+)/?$'	=> array(
-				'target'			=> "module.admin.node.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/node/lookup.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - Nodes - Add */
 			'^/admin/nodes/add/?$' 		=> array(
-				'target'			=> "module.admin.nodes.add.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/node/add.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
 			/* Admin - Nodes - Create VPS */
 			'^/admin/node/([0-9]+)/add/?$'	=> array(
-				'target'			=> "module.admin.containers.create.php",
-				'authenticator'			=> "authenticator.admin.php",
-				'auth_error'			=> "error.access.php",
+				'target'			=> "modules/admin/vps/create.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin",
 				'_prefilled_node'		=> true
 			),
-			'^/test/?$'			=> "module.test.php"
+			'^/test/?$'			=> "modules/test.php"
 		)
 	);
 	
@@ -254,6 +255,7 @@ $sTemplateParameters = array_merge($sTemplateParameters, array(
 	'logged-in'		=> $sLoggedIn,
 	'title'			=> $sPageTitle,
 	'main'			=> $sMainContents,
+	/* TODO: Return a boolean instead and use this in the template. */
 	'main-class'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true) ? "shift" : "",
 	'generation'		=> "<!-- page generated in " . (round(microtime(true) - $timing_start, 6)) . " seconds. -->"
 ));

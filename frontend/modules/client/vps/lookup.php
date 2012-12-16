@@ -17,15 +17,15 @@ if(!empty($router->uParameters[2]))
 {
 	if($router->uParameters[2] == "start")
 	{
-		require("submodule.start.php");
+		require("modules/client/vps/action/start.php");
 	}
 	elseif($router->uParameters[2] == "stop")
 	{
-		require("submodule.stop.php");
+		require("modules/client/vps/action/stop.php");
 	}
 	elseif($router->uParameters[2] == "restart")
 	{
-		require("submodule.restart.php");
+		require("modules/client/vps/action/restart.php");
 	}
 }
 
