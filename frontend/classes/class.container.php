@@ -127,6 +127,12 @@ class Container extends CPHPDatabaseRecordClass
 	
 	public function GetStatusText()
 	{
+		/* TODO: Add several more options:
+		 *  - unknown
+		 *  - deleted / non-existent
+		 *  - terminated
+		 */
+		
 		$status = $this->sCurrentStatus;
 	
 		if($status == CVM_STATUS_STARTED)
