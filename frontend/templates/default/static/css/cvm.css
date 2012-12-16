@@ -229,47 +229,47 @@ tr.clickable:hover
 
 #button_overview
 {
-	background-image: url(../images/icon_overview.png);
+	background-image: url(../images/menu/overview.png);
 }
 
 #button_statistics
 {
-	background-image: url(../images/icon_statistics.png);
+	background-image: url(../images/menu/statistics.png);
 }
 
 #button_webshell
 {
-	background-image: url(../images/icon_webshell.png);
+	background-image: url(../images/menu/console.png);
 }
 
 #button_ip
 {
-	background-image: url(../images/icon_ip.png);
+	background-image: url(../images/menu/ip.png);
 }
 
 #button_reinstall
 {
-	background-image: url(../images/icon_reinstall.png);
+	background-image: url(../images/menu/reinstall.png);
 }
 
 #button_backup
 {
-	background-image: url(../images/icon_backup.png);
+	background-image: url(../images/menu/backup.png);
 }
 
 #button_api
 {
-	background-image: url(../images/icon_api.png);
+	background-image: url(../images/menu/api.png);
 }
 
 #button_alerts
 {
-	background-image: url(../images/icon_alerts.png);
+	background-image: url(../images/menu/alerts.png);
 }
 
 #button_password
 {
-	background-image: url(../images/icon_password.png);
+	background-image: url(../images/menu/password.png);
 }
 
 .quota-item
@@ -449,28 +449,28 @@ tr.clickable:hover
 {
 	background-color: #FCCBC9;
 	border: 1px solid red;
-	background-image: url(../images/errorhandler_error.png);
+	background-image: url(../images/error/error.png);
 }
 
 .errorhandler.error-info
 {
 	background-color: #C9F6FC;
 	border: 1px solid blue;
-	background-image: url(../images/errorhandler_info.png);
+	background-image: url(../images/error/info.png);
 }
 
 .errorhandler.error-warning
 {
 	background-color: #FBFCC9;
 	border: 1px solid #C5BA00;
-	background-image: url(../images/errorhandler_warning.png);
+	background-image: url(../images/error/warning.png);
 }
 
 .errorhandler.error-success
 {
 	background-color: #DEFCC9;
 	border: 1px solid #4CC500;
-	background-image: url(../images/errorhandler_success.png);
+	background-image: url(../images/error/success.png);
 }
 
 .errorhandler ul
@@ -545,7 +545,7 @@ button.column
 	margin-top: 7px;
 	border: 2px solid #817F9D;
 	padding-left: 38px;
-	background-image: url(/images/icon_wrench.png);
+	background-image: url(/images/misc/wrench.png);
 	background-repeat: no-repeat;
 	background-position: 4px center;
 }

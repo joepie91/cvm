@@ -3,17 +3,17 @@
 	<head>
 		<title>CVM</title>
 		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,700">
-		<link rel="stylesheet" href="/css/cvm.css?1">
-		<link rel="stylesheet" href="/css/kickstart-grid.css" media="all">
+		<link rel="stylesheet" href="/templates/default/static/css/cvm.css?1">
+		<link rel="stylesheet" href="/templates/default/static/css/kickstart-grid.css" media="all">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script src="/js/prettify.js"></script>
-		<script src="/js/kickstart.js"></script>
-		<script src="/js/cvm.js?3"></script>
+		<script src="/templates/default/static/js/prettify.js"></script>
+		<script src="/templates/default/static/js/kickstart.js"></script>
+		<script src="/templates/default/static/js/cvm.js?3"></script>
 	</head>
 	<body>
 		<div class="wrapper">
 			<div class="header">
-				<img src="/images/logo.png">
+				<img src="/templates/default/static/images/misc/logo.png">
 				{%if logged-in == true}
 					<div class="userbox">
 						<div>{%!userbox-loggedin}</div>
@@ -33,7 +33,7 @@
 				{%!footer}
 			</div>
 		</div>
-		<img class="preload" src="/images/loading.gif">
+		<img class="preload" src="/templates/default/static/images/misc/loading.gif">
 		{%?generation}
 	</body>
 </html>

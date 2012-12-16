@@ -27,15 +27,15 @@
 
 <div class="controlbox">
 	<a class="controlbutton button-loader" href="/{%?id}/start/">
-		<img src="/images/button_start.png" class="button-icon">
+		<img src="/templates/default/static/images/button/start.png" class="button-icon">
 		{%!overview-button-start}
 	</a>
 	<a class="controlbutton button-loader" href="/{%?id}/restart/">
-		<img src="/images/button_restart.png" class="button-icon">
+		<img src="/templates/default/static/images/button/restart.png" class="button-icon">
 		{%!overview-button-restart}
 	</a>
 	<a class="controlbutton button-loader last" href="/{%?id}/stop/">
-		<img src="/images/button_stop.png" class="button-icon">
+		<img src="/templates/default/static/images/button/stop.png" class="button-icon">
 		{%!overview-button-stop}
 	</a>
 	<div class="clear"></div>

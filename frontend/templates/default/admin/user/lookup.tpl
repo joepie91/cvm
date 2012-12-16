@@ -53,13 +53,13 @@
 		<tr class="clickable" data-url="/{%?container[id]}/">
 			<td class="container-status">
 				{%if container[status] == running}
-					<img src="/images/icon_online.png" alt="{%!list-status-running}">
+					<img src="/templates/default/static/images/status/online.png" alt="{%!list-status-running}">
 				{%elseif container[status] == stopped}
-					<img src="/images/icon_offline.png" alt="{%!list-status-stopped}">
+					<img src="/templates/default/static/images/status/offline.png" alt="{%!list-status-stopped}">
 				{%elseif container[status] == suspended}
-					<img src="/images/icon_suspended.png" alt="{%!list-status-suspended}">
+					<img src="/templates/default/static/images/status/suspended.png" alt="{%!list-status-suspended}">
 				{%else}
-					<img src="/images/icon_unknown.png" alt="{%!list-status-unknown}">
+					<img src="/templates/default/static/images/status/unknown.png" alt="{%!list-status-unknown}">
 				{%/if}
 			<td>
 				<a href="/{%?container[id]}/">
