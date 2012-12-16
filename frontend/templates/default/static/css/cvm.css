@@ -545,7 +545,7 @@ button.column
 	margin-top: 7px;
 	border: 2px solid #817F9D;
 	padding-left: 38px;
-	background-image: url(/images/misc/wrench.png);
+	background-image: url(../images/misc/wrench.png);
 	background-repeat: no-repeat;
 	background-position: 4px center;
 }
