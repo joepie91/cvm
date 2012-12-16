@@ -22,12 +22,18 @@ require("include.constants.php");
 require("include.parsing.php");
 require("include.misc.php");
 
-/* TODO: Reorganize and autoloading. */
-require("classes/class.user.php");
-require("classes/class.controller.php");
-require("classes/class.container.php");
-require("classes/class.node.php");
-require("classes/class.template.php");
-require("classes/class.sshconnector.php");
-require("classes/class.iprange.php");
-?>
+function __autoload($class_name) 
+{
+	global $_CVM;
+	
+	if(strpos($class_name, "\\") !== false)
+	{
+		$class_name = str_replace("\\", "/", strtolower($class_name));
+		require_once("classes/{$class_name}.php");
+	}
+	else
+	{
+		$class_name = strtolower($class_name);
+		require_once("classes/{$class_name}.php");
+	}
+}
