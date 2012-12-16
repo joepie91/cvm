@@ -1,4 +1,4 @@
-<h2>{%!title-admin-containerlist}</h2>
+<h2>{%!title-admin-vpslist}</h2>
 
 <table class="vpslist">
 	<tr>
@@ -9,44 +9,44 @@
 		<th>{%!list-column-ram}</th>
 		<th>{%!list-column-template}</th>
 	</tr>
-	{%foreach container in containers}
-		<tr class="clickable" data-url="/{%?container[id]}/">
+	{%foreach vps in vpses}
+		<tr class="clickable" data-url="/{%?vps[id]}/">
 			<td class="container-status">
-				{%if container[status] == running}
+				{%if vps[status] == running}
 					<img src="/images/icon_online.png" alt="{%!list-status-running}">
-				{%/if}{%if container[status] == stopped}
+				{%/if}{%if vps[status] == stopped}
 					<img src="/images/icon_offline.png" alt="{%!list-status-stopped}">
-				{%/if}{%if container[status] == suspended}
+				{%/if}{%if vps[status] == suspended}
 					<img src="/images/icon_suspended.png" alt="{%!list-status-suspended}">
 				{%/if}
 			</td>
 			<td>
-				<a href="/{%?container[id]}/">
-					{%?container[hostname]}
+				<a href="/{%?vps[id]}/">
+					{%?vps[hostname]}
 				</a>
 			</td>
 			<td>
-				<a href="/{%?container[id]}/">
-					{%if container[virtualization-type] == 1}
+				<a href="/{%?vps[id]}/">
+					{%if vps[virtualization-type] == 1}
 						OpenVZ
-					{%/if}{%if container[virtualization-type] == 2}
+					{%/if}{%if vps[virtualization-type] == 2}
 						Xen PV
-					{%/if}{%if container[virtualization-type] == 3}
+					{%/if}{%if vps[virtualization-type] == 3}
 						Xen HVM
-					{%/if}{%if container[virtualization-type] == 4}
+					{%/if}{%if vps[virtualization-type] == 4}
 						KVM
 					{%/if}
 				</a>
 			</td>
 			<td>
-				{%?container[diskspace]}
-				<span class="unit">{%?container[diskspace-unit]}</span>
+				{%?vps[diskspace]}
+				<span class="unit">{%?vps[diskspace-unit]}</span>
 			</td>
 			<td>
-				{%?container[guaranteed-ram]}
-				<span class="unit">{%?container[guaranteed-ram-unit]}</span>
+				{%?vps[guaranteed-ram]}
+				<span class="unit">{%?vps[guaranteed-ram-unit]}</span>
 			</td>
-			<td>{%?container[template]}</td>
+			<td>{%?vps[template]}</td>
 		</tr>
 	{%/foreach}
 </table>

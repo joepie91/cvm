@@ -245,7 +245,7 @@ admin-level-masteradmin;						Master administrator
 header-admin-user-containers;						VPSes owned by this user
 
 ## VPS list
-title-admin-containerlist;						VPS overview
+title-admin-vpslist;							VPS overview
 list-column-hostname;							Hostname
 list-column-platform;							Platform
 list-column-node;							Node

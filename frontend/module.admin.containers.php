@@ -19,25 +19,24 @@ if($result = mysql_query_cached("SELECT * FROM containers"))
 {
 	foreach($result->data as $row)
 	{
-		$sContainer = new Container($row);
+		$sVps = new Container($row);
 		
-		$sContainerList[] = array(
-			'id'			=> $sContainer->sId,
-			'hostname'		=> $sContainer->sHostname,
-			'node'			=> $sContainer->sNode->sName,
-			'node-hostname'		=> $sContainer->sNode->sHostname,
-			'template'		=> $sContainer->sTemplate->sName,
-			'diskspace'		=> number_format($sContainer->sDiskSpace / 1024),
+		$sVpsList[] = array(
+			'id'			=> $sVps->sId,
+			'hostname'		=> $sVps->sHostname,
+			'node'			=> $sVps->sNode->sName,
+			'node-hostname'		=> $sVps->sNode->sHostname,
+			'template'		=> $sVps->sTemplate->sName,
+			'diskspace'		=> number_format($sVps->sDiskSpace / 1024),
 			'diskspace-unit'	=> "GB",
-			'guaranteed-ram'	=> $sContainer->sGuaranteedRam,
+			'guaranteed-ram'	=> $sVps->sGuaranteedRam,
 			'guaranteed-ram-unit'	=> "MB",
-			'status'		=> $sContainer->sStatusText,
-			'virtualization-type'	=> $sContainer->sVirtualizationType
+			'status'		=> $sVps->sStatusText,
+			'virtualization-type'	=> $sVps->sVirtualizationType
 		);
 	}
 }
 
-/* TODO: Change variable name to phase out the use of the term "container". */
 $sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/list", $locale->strings, array(
-	'containers'		=> $sContainerList
+	'vpses'		=> $sVpsList
 ));
