@@ -69,25 +69,28 @@ try
 			),
 			/* TODO: Use action variable instead of relying on the path. */
 			/* VPS - Start */
-			'^/([0-9]+)/(start)/?$'		=> array(
+			'^/([0-9]+)/start/?$'		=> array(
 				'target'			=> "modules/client/vps/lookup.php",
 				'authenticator'			=> "authenticators/vps.php",
 				'auth_error'			=> "modules/error/access.php",
-				'_menu'				=> "vps"
+				'_menu'				=> "vps",
+				'_action'			=> "start"
 			),
 			/* VPS - Stop */
-			'^/([0-9]+)/(stop)/?$'		=> array(
+			'^/([0-9]+)/stop/?$'		=> array(
 				'target'			=> "modules/client/vps/lookup.php",
 				'authenticator'			=> "authenticators/vps.php",
 				'auth_error'			=> "modules/error/access.php",
-				'_menu'				=> "vps"
+				'_menu'				=> "vps",
+				'_action'			=> "stop"
 			),
 			/* VPS - Restart */
-			'^/([0-9]+)/(restart)/?$'	=> array(
+			'^/([0-9]+)/restart/?$'	=> array(
 				'target'			=> "modules/client/vps/lookup.php",
 				'authenticator'			=> "authenticators/vps.php",
 				'auth_error'			=> "modules/error/access.php",
-				'_menu'				=> "vps"
+				'_menu'				=> "vps",
+				'_action'			=> "restart"
 			),
 			/* VPS - Reinstall */
 			'^/([0-9]+)/reinstall/?$'	=> array(

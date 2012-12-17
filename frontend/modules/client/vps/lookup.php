@@ -13,17 +13,17 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-if(!empty($router->uParameters[2]))
+if(!empty($router->uVariables['action']))
 {
-	if($router->uParameters[2] == "start")
+	if($router->uVariables['action'] == "start")
 	{
 		require("modules/client/vps/action/start.php");
 	}
-	elseif($router->uParameters[2] == "stop")
+	elseif($router->uVariables['action'] == "stop")
 	{
 		require("modules/client/vps/action/stop.php");
 	}
-	elseif($router->uParameters[2] == "restart")
+	elseif($router->uVariables['action'] == "restart")
 	{
 		require("modules/client/vps/action/restart.php");
 	}
