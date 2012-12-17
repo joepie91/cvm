@@ -180,6 +180,8 @@ error-reinstall-confirm-title;						Reinstallation aborted
 error-reinstall-confirm-text;						You did not tick the checkbox at the bottom of the page. Please carefully read the warning, tick the checkbox, and try again.
 error-reinstall-notfound-title;						Reinstallation aborted
 error-reinstall-notfound-text;						The template you selected does not exist (anymore). Please select a different template.
+error-reinstall-notselected-title;					No template selected
+error-reinstall-notselected-text;					You did not select a template from the list. Please select a template and try again.
 error-reinstall-unavailable-title;					Reinstallation aborted
 error-reinstall-unavailable-text;					The template you selected is not available. Please select a different template.
 error-reinstall-failed-title;						Reinstallation failed

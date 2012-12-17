@@ -90,10 +90,9 @@ if(isset($_POST['submit']))
 	}
 	else
 	{
-		/* TODO: Grab text from locale file. */
 		$sPageContents .= NewTemplater::Render("{$sTheme}/shared/error/error", $locale->strings, array(
-			'title'		=> "No template selected",
-			'message'	=> "You did not select a template from the list. Please select a template and try again."
+			'title'		=> $locale->strings['error-reinstall-notselected-title'],
+			'message'	=> $locale->strings['error-reinstall-notselected-text']
 		));
 	}
 }
