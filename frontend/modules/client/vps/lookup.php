@@ -29,15 +29,15 @@ if(!empty($router->uVariables['action']))
 	}
 }
 
-/* TODO: Display incoming and outcoming traffic separately in the graphs when applicable. */
-
 if($sVps->sTotalTrafficLimit != 0)
 {
 	$sTrafficLimit = $sVps->sTotalTrafficLimit;
+	$sTrafficSplit = false;
 }
 else
 {
 	$sTrafficLimit = $sVps->sIncomingTrafficLimit + $sVps->sOutgoingTrafficLimit;
+	$sTrafficSplit = true;
 }
 
 $sVariables = array(
@@ -52,11 +52,31 @@ $sVariables = array(
 	'outgoing-traffic-limit'=> format_size($sVps->sOutgoingTrafficLimit, 1024, true, 0) . "B",
 	'bandwidth-limit'	=> "100mbit",
 	'status'		=> $sVps->sStatusText,
-	'traffic-used'		=> number_format(($sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
-	'traffic-total'		=> number_format($sTrafficLimit / 1024 / 1024 / 1024, 0),
-	'traffic-percentage'	=> number_format(($sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed) / $sTrafficLimit, 2),
-	'traffic-unit'		=> "GB"
+	'traffic-split'		=> $sTrafficSplit
 );
+
+if($sTrafficSplit == true)
+{
+	$sVariables = array_merge($sVariables, array(
+		'inbound-used'		=> number_format(($sVps->sIncomingTrafficUsed) / 1024 / 1024 / 1024, 2),
+		'inbound-total'		=> number_format($sIncomingTrafficLimit / 1024 / 1024 / 1024, 0),
+		'inbound-percentage'	=> number_format(($sVps->sIncomingTrafficUsed) / $sTrafficLimit, 2),
+		'inbound-unit'		=> "GB",
+		'outbound-used'		=> number_format(($sVps->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
+		'outbound-total'	=> number_format($sOutgoingTrafficLimit / 1024 / 1024 / 1024, 0),
+		'outbound-percentage'	=> number_format(($sVps->sOutgoingTrafficUsed) / $sTrafficLimit, 2),
+		'outbound-unit'		=> "GB"
+	));
+}
+else
+{
+	$sVariables = array_merge($sVariables, array(
+		'traffic-used'		=> number_format(($sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed) / 1024 / 1024 / 1024, 2),
+		'traffic-total'		=> number_format($sTrafficLimit / 1024 / 1024 / 1024, 0),
+		'traffic-percentage'	=> number_format(($sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed) / $sTrafficLimit, 2),
+		'traffic-unit'		=> "GB"
+	));
+}
 
 try
 {

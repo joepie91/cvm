@@ -86,6 +86,8 @@ notfound;								The specified VPS was not found.
 overview-quota-title-disk;						Disk space
 overview-quota-title-ram;						RAM
 overview-quota-title-traffic;						Traffic
+overview-quota-title-traffic-incoming;					Incoming traffic
+overview-quota-title-traffic-outgoing;					Outgoing traffic
 overview-title-configuration;						VPS configuration
 overview-title-status;							Status
 overview-title-location;						Server location

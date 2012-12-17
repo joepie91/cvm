@@ -1,27 +1,58 @@
 <h1>{%!title-overview}</h1>
 
 <div class="quota">
-	<div class="quota-item">
-		<h3>{%!overview-quota-title-disk}</h3>
-		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: {%?disk-percentage}%;"></div>
-			<div class="quota-bar-label">{%?disk-used}/{%?disk-total}{%?disk-unit}</div>
+	{%if traffic-split == false}
+		<div class="quota-item">
+			<h3>{%!overview-quota-title-disk}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?disk-percentage}%;"></div>
+				<div class="quota-bar-label">{%?disk-used}/{%?disk-total}{%?disk-unit}</div>
+			</div>
 		</div>
-	</div>
-	<div class="quota-item">
-		<h3>{%!overview-quota-title-ram}</h3>
-		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: {%?ram-percentage}%;"></div>
-			<div class="quota-bar-label">{%?ram-used}/{%?ram-total}{%?ram-unit}</div>
+		<div class="quota-item">
+			<h3>{%!overview-quota-title-ram}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?ram-percentage}%;"></div>
+				<div class="quota-bar-label">{%?ram-used}/{%?ram-total}{%?ram-unit}</div>
+			</div>
 		</div>
-	</div>
-	<div class="quota-item last">
-		<h3>{%!overview-quota-title-traffic}</h3>
-		<div class="quota-bar">
-			<div class="quota-bar-inner" style="width: {%?traffic-percentage}%;"></div>
-			<div class="quota-bar-label">{%?traffic-used}/{%?traffic-total}{%?traffic-unit}</div>
+		<div class="quota-item last">
+			<h3>{%!overview-quota-title-traffic}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?traffic-percentage}%;"></div>
+				<div class="quota-bar-label">{%?traffic-used}/{%?traffic-total}{%?traffic-unit}</div>
+			</div>
 		</div>
-	</div>
+	{%else}
+		<div class="quota-item wide">
+			<h3>{%!overview-quota-title-disk}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?disk-percentage}%;"></div>
+				<div class="quota-bar-label">{%?disk-used}/{%?disk-total}{%?disk-unit}</div>
+			</div>
+		</div>
+		<div class="quota-item wide last">
+			<h3>{%!overview-quota-title-ram}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?ram-percentage}%;"></div>
+				<div class="quota-bar-label">{%?ram-used}/{%?ram-total}{%?ram-unit}</div>
+			</div>
+		</div>
+		<div class="quota-item wide">
+			<h3>{%!overview-quota-title-traffic-incoming}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?inbound-percentage}%;"></div>
+				<div class="quota-bar-label">{%?inbound-used}/{%?inbound-total}{%?inbound-unit}</div>
+			</div>
+		</div>
+		<div class="quota-item wide last">
+			<h3>{%!overview-quota-title-traffic-outgoing}</h3>
+			<div class="quota-bar">
+				<div class="quota-bar-inner" style="width: {%?outbound-percentage}%;"></div>
+				<div class="quota-bar-label">{%?outbound-used}/{%?outbound-total}{%?outbound-unit}</div>
+			</div>
+		</div>
+	{%/if}
 	<div class="clear"></div>
 </div>
 
