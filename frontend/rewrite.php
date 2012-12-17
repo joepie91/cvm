@@ -67,7 +67,6 @@ try
 				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "vps"
 			),
-			/* TODO: Use action variable instead of relying on the path. */
 			/* VPS - Start */
 			'^/([0-9]+)/start/?$'		=> array(
 				'target'			=> "modules/client/vps/lookup.php",
