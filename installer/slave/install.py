@@ -199,14 +199,14 @@ authkeys.close()
 sys.stdout.write("Installed public key for cvm user.\n")
 
 if enable_dropper == "y":
-	setuplib.create_directory("/home/vz", True, cvm_uid, cvm_gid, "u+rwx g+rx")
+	setuplib.create_directory("/home/vz", True, vz_uid, vz_gid, "u+rwx g+rx o+x")
 	passwd.write("vz::%d:%d:CVM OpenVZ Shell Dropper:/home/vz:/home/vz/dropper\n" % (vz_uid, vz_gid))
 	sys.stdout.write("Created vz user.\n")
 
 	grp.write("vz::%d:\n" % vz_gid)
 	sys.stdout.write("Created vz group.\n")
 
-	setuplib.create_directory("/home/vz/.ssh", True, cvm_uid, cvm_gid, "u+rwx")
+	setuplib.create_directory("/home/vz/.ssh", True, vz_uid, vz_gid, "u+rwx")
 	authkeys = open("/home/vz/.ssh/authorized_keys", "a")
 	authkeys.write("%s\n" % pubkey)
 	authkeys.close()
