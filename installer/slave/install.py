@@ -276,8 +276,21 @@ setuplib.create_file("/etc/cvm/version", "slave-0.1\n", cvm_uid, cvm_gid, "u+rwx
 if os.path.exists("/etc/vz/vz.conf"):
 	sys.stdout.write("OpenVZ is already installed.\n")
 	
-	import exporter
-	exporter.run()
+	sys.stdout.write("I can export your current OpenVZ containers for you, so that you can import them into\n")
+	sys.stdout.write("your CVM panel. If you are already using another panel (such as HyperVM or SolusVM),\n")
+	sys.stdout.write("however, you should answer 'no' and use the exporter specific for that panel instead.\n")
+	sys.stdout.write(BOLD_START + "Do you wish to export existing OpenVZ containers?" + BOLD_END + " (Y/n)\n")
+	q = raw_input()
+	
+	if q.lower() in ["n", "no"]:
+		sys.stdout.write(BOLD_START + "CVM slave node installation successfully finished!" + BOLD_END + "\n")
+	else:
+		import exporter
+		
+		if exporter.run() == True:
+			sys.stdout.write(BOLD_START + "CVM slave node installation successfully finished!" + BOLD_END + "\n")
+		else:
+			sys.stdout.write(BOLD_START + "Something went wrong during exporting. Otherwise, the CVM slave node installation successfully finished!" + BOLD_END + "\n")
 else:
 	sys.stdout.write("Installing OpenVZ...\n")
 	packages = ["vzctl", "vzquota"]
