@@ -211,6 +211,9 @@ if enable_dropper == "y":
 	authkeys.write("%s\n" % pubkey)
 	authkeys.close()
 	sys.stdout.write("Installed public key for vz user.\n")
+	
+	setuplib.create_file("/home/vz/.hushlogin", "", vz_uid, vz_gid, "u+rwx")
+	sys.stdout.write("Hushed login for vz user.\n")
 
 # We're done with /etc/passwd and /etc/group
 passwd.close()
