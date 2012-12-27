@@ -8,7 +8,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 		<script src="/templates/default/static/js/prettify.js"></script>
 		<script src="/templates/default/static/js/kickstart.js"></script>
-		<script src="/templates/default/static/js/cvm.js?3"></script>
+		<script src="/templates/default/static/js/cvm.js?6"></script>
 	</head>
 	<body>
 		<div class="wrapper">
