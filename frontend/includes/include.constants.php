@@ -23,5 +23,9 @@ define("CVM_STATUS_STOPPED",				5	);
 define("CVM_STATUS_SUSPENDED",				6	);
 define("CVM_STATUS_TERMINATED",				7	);
 
+define("API_CLIENT",					1	);
+define("API_BILLING",					2	);
+define("API_ADMIN",					3	);
+
 define("REGEX_HOSTNAME",	"/(([a-zA-Z0-9-]+\.)+)([a-zA-Z0-9-]+)/");
 ?>

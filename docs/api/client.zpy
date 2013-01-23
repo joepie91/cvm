@@ -1,0 +1,230 @@
+# CVM Client API Documentation
+
+{TOC}
+
+## Overview
+
+The CVM Client API is a more or less RESTful API. That means it uses the standard HTTP 'verbs' like GET, POST, DELETE, etc. to execute certain commands.
+Authentication takes place per request (there is no concept of 'sessions') through the use of custom HTTP headers. Each API token pair is linked to a particular
+user, and can only be used for that user. A user can have multiple token pairs. Token pairs can be revoked at any time via the panel.
+
+## Authentication
+
+The CVM Client API expects two custom HTTP headers as authentication.
+
+API-Public-Token::
+	This is the public part of your API token pair. It's used to identify who you are.
+
+API-Private-Token::
+	This is the private part of your API token pair. It's used to verify your access.
+	
+If no valid token pair is passed on with your request, the server will return a `401 Not Authorized` status code.
+
+If your token pair does not have access to the client API, the server will return a `403 Forbidden` status code.
+
+## Response format
+
+The API responses will always be in JSON format. If errors occurred, an `errors` key will be present containing an array of errors. If there is a response, a `response` key will
+be present containing the response.
+
+@ Valid API call
+
+	$ /api/client/vps/list
+
+	> {
+	    "response": {
+		"vpses": [{
+		    "id": "1",
+		    "virtualization_type": "1",
+		    "hostname": "test-vz.cryto.net",
+		    "guaranteed_ram": "128",
+		    "burstable_ram": "256",
+		    "disk_space": "5000",
+		    "cpu_count": "1",
+		    "traffic_in_limit": "500000000000",
+		    "traffic_out_limit": "500000000000",
+		    "traffic_in_used": "912727849",
+		    "traffic_out_used": "16923948"
+		}, {
+		    "id": "2",
+		    "virtualization_type": "1",
+		    "hostname": "test2.cryto.net",
+		    "guaranteed_ram": "512",
+		    "burstable_ram": "768",
+		    "disk_space": "40000",
+		    "cpu_count": "240",
+		    "traffic_in_limit": "500000000000",
+		    "traffic_out_limit": "500000000000",
+		    "traffic_in_used": "0",
+		    "traffic_out_used": "0"
+		}]
+	    }
+	}
+
+@ API call with invalid token pair
+
+	$ /api/client/vps/list
+	
+	> {
+	    "errors": ["No valid API token pair was specified."]
+	}
+
+## API Calls
+
+^ GET /api/client/vps/list
+
+	This call will return a list of VPSes associated with the currently authenticated user. It takes no arguments.
+	
+	### Keys in the response objects
+	
+	id::
+		The numeric ID of this VPS. You will need this in further API calls.
+		
+	node::
+		The host node that this VPS exists on. You will need this in further node-related API calls.
+		
+	virtualization_type::
+		The virtualization platform used for this VPS. Right now the only supported value is `1` (OpenVZ).
+		
+	hostname::
+		The configured hostname of the VPS.
+		
+	guaranteed_ram::
+		The configured amount of guaranteed RAM, in __megabytes__.
+		
+	burstable_ram::
+		The configured amount of burstable RAM, in __megabytes__. **This key may not be present if vSwap is used.**
+		
+	disk_space::
+		The configured amount of disk space, in __megabytes__.
+		
+	cpu_count::
+		The amount of configured CPUs (or rather, CPU units) that this VPS has access to.
+		
+	traffic_limit::
+		The total traffic limit, in __bytes__. **This may not be present, depending on the method of traffic measuring. See the explanation below.**
+		
+	traffic_used::
+		The total amount of traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring. See the explanation below.**
+		
+	traffic_in_limit::
+		The total incoming traffic limit, in __bytes__. **This may not be present, depending on the method of traffic measuring. See the explanation below.**
+		
+	traffic_in_used::
+		The total amount of incoming traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring. See the explanation below.**
+	
+	traffic_out_limit::
+		The total outgoing traffic limit, in __bytes__. **This may not be present, depending on the method of traffic measuring. See the explanation below.**
+		
+	traffic_out_used::
+		The total amount of outgoing traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring. See the explanation below.**
+	
+	! If traffic accounting for the VPS is combined (incoming + outgoing), a `traffic_limit` and `traffic_used` key will be present. If traffic accounting for the VPS is split, the keys `traffic_in_limit`, `traffic_in_used`, `traffic_out_limit`, and `traffic_out_used` will be present.
+	
+	@ Valid call to /api/client/vps/list
+	
+		> {
+		    "response": {
+			"vpses": [{
+			    "id": "1",
+			    "node": "1",
+			    "virtualization_type": "1",
+			    "hostname": "test-vz.cryto.net",
+			    "guaranteed_ram": "128",
+			    "burstable_ram": "256",
+			    "disk_space": "5000",
+			    "cpu_count": "1",
+			    "traffic_in_limit": "500000000000",
+			    "traffic_out_limit": "500000000000",
+			    "traffic_in_used": "912727849",
+			    "traffic_out_used": "16923948"
+			}, {
+			    "id": "2",
+			    "node": "1",
+			    "virtualization_type": "1",
+			    "hostname": "test2.cryto.net",
+			    "guaranteed_ram": "512",
+			    "burstable_ram": "768",
+			    "disk_space": "40000",
+			    "cpu_count": "2",
+			    "traffic_in_limit": "500000000000",
+			    "traffic_out_limit": "500000000000",
+			    "traffic_in_used": "0",
+			    "traffic_out_used": "0"
+			}]
+		    }
+		}
+
+^ GET /api/client/vps/**id**/status
+	
+	This returns the current status and metrics for the specified VPS. The response will be a single object.
+	
+	### Arguments
+	
+	id::
+		The ID of the VPS you wish to retrieve the status for.
+		
+	### Keys in the response object
+	
+	traffic_used::
+		The total amount of traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring.**
+		
+	traffic_in_used::
+		The total amount of incoming traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring.**
+	
+	traffic_out_used::
+		The total amount of outgoing traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring.**
+		
+	ram_used::
+		The amount of RAM that is currently in use for the VPS, in __bytes__.
+		
+	disk_used::
+		The amount of disk space currently used by the VPS, in __bytes__.
+	
+	status::
+		The current status of the VPS.
+		
+		running::
+			The VPS is active and booted.
+		
+		stopped::
+			The VPS is active and shut down.
+			
+		suspended::
+			The VPS is suspended.
+			
+		terminated::
+			The VPS is terminated.
+			
+		unknown::
+			The status of the VPS is unknown. This can happen when, for example, the host node can't be reached.
+
+^ POST /api/client/vps/**id**/start
+
+	Starts the specified VPS. Returns either a `200` status code with an empty response if successful, a `500` status code with an error message if the VPS fails to start, or
+	a `503` status code with an error message if the host node is unreachable.
+	
+	### Arguments
+	
+	id::
+		The ID of the VPS you wish to start.
+
+^ POST /api/client/vps/**id**/stop
+
+	Shuts down the specified VPS. Returns either a `200` status code with an empty response if successful, a `500` status code with an error message if the VPS fails to shut down,
+	or a `503` status code with an error message if the host node is unreachable.
+	
+	### Arguments
+	
+	id::
+		The ID of the VPS you wish to stop.
+
+^ POST /api/client/vps/**id**/restart
+
+	Restarts the specified VPS. Returns either a `200` status code with an empty response if successful, a `500` status code with an error message if the VPS fails to restart, or
+	a `503` status code with an error message if the host node is unreachable.
+	
+	### Arguments
+	
+	id::
+		The ID of the VPS you wish to restart.

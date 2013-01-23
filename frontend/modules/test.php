@@ -71,4 +71,13 @@ var_dump(
 var_dump(first_unused_ctid());
 */
 
-var_dump(format_size(900), format_size(900000), format_size(900000000), format_size(900000000000), format_size(900000000000000), format_size(9000000000000000));
+//var_dump(format_size(900), format_size(900000), format_size(900000000), format_size(900000000000), format_size(900000000000000), format_size(9000000000000000));
+
+$sKey = new ApiKey(0);
+$sKey->GenerateSalt();
+$sKey->uPublicToken = random_string(32);
+$new_token = random_string(32);
+echo($new_token);
+$sKey->SetPrivateToken($new_token);
+$sKey->uUserId = 1;
+$sKey->InsertIntoDatabase();

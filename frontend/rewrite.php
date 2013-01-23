@@ -39,6 +39,8 @@ else
 $sMainContents = "";
 $sMainClass = "";
 $sPageTitle = "";
+$sResponse = array();
+$sResponseCode = 200;
 
 /* Initialize some variables to ensure that they are available throughout the application.
  * Due to the way PHP variable scoping works (and the way CPHP works around this), variables
@@ -205,6 +207,13 @@ try
 				'_menu'				=> "admin",
 				'_prefilled_node'		=> true
 			),
+			/* API - Client - List VPSes */
+			'^/api/client/list'		=> array(
+				'target'			=> "modules/api/client/vps/list.php",
+				'authenticator'			=> "authenticators/api/client.php",
+				'auth_error'			=> "modules/error/api/access.php",
+				'_raw'				=> true
+			),
 			'^/test/?$'			=> "modules/test.php"
 		)
 	);
@@ -228,20 +237,23 @@ try
 		));
 	}
 	
-	if($router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
+	if(empty($router->uVariables['raw']))
 	{
-		$sMainContents .= Templater::AdvancedParse("{$sTheme}/client/vps/main", $locale->strings, array(
-			'error'			=> $sError,
-			'contents'		=> $sPageContents,
-			'id'			=> $sVps->sId
-		));
-	}
-	elseif($router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
-	{
-		$sMainContents .= Templater::AdvancedParse("{$sTheme}/admin/main", $locale->strings, array(
-			'error'			=> $sError,
-			'contents'		=> $sPageContents
-		));
+		if($router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
+		{
+			$sMainContents .= Templater::AdvancedParse("{$sTheme}/client/vps/main", $locale->strings, array(
+				'error'			=> $sError,
+				'contents'		=> $sPageContents,
+				'id'			=> $sVps->sId
+			));
+		}
+		elseif($router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
+		{
+			$sMainContents .= Templater::AdvancedParse("{$sTheme}/admin/main", $locale->strings, array(
+				'error'			=> $sError,
+				'contents'		=> $sPageContents
+			));
+		}
 	}
 }
 catch (UnauthorizedException $e)
@@ -254,12 +266,20 @@ catch (UnauthorizedException $e)
 	));
 }
 
-$sTemplateParameters = array_merge($sTemplateParameters, array(
-	'logged-in'		=> $sLoggedIn,
-	'title'			=> $sPageTitle,
-	'main'			=> $sMainContents,
-	'menu-visible'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true),
-	'generation'		=> round(microtime(true) - $timing_start, 6)
-));
+if(empty($router->uVariables['raw']))
+{
+	$sTemplateParameters = array_merge($sTemplateParameters, array(
+		'logged-in'		=> $sLoggedIn,
+		'title'			=> $sPageTitle,
+		'main'			=> $sMainContents,
+		'menu-visible'		=> (isset($router->uVariables['menu']) && $router->sAuthenticated === true),
+		'generation'		=> round(microtime(true) - $timing_start, 6)
+	));
 
-echo(Templater::AdvancedParse("{$sTheme}/shared/main", $locale->strings, $sTemplateParameters));
+	echo(Templater::AdvancedParse("{$sTheme}/shared/main", $locale->strings, $sTemplateParameters));
+}
+else
+{
+	status_code($sResponseCode);
+	echo(json_encode($sResponse));
+}

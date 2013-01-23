@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+	<head>
+		<style>
+			body {
+				background-color: #F5F5F5;
+				font-family: sans-serif;
+				margin-right: 40px;
+			}
+
+			h2, h3, h4, h5, h6, h7
+			{
+				margin-top: 16px;
+				margin-bottom: 4px;
+			}
+
+			.children { padding-left: 40px; }
+
+			.definition
+			{
+				font-weight: bold;
+				margin-bottom: 32px;
+			}
+
+			.example 
+			{ 
+				padding: 5px 6px;
+				font-weight: bold;
+				font-size: 15px;
+				background-color: #E6E6E6; 
+				margin-top: 11px;
+			}
+
+			.example > .children
+			{
+				padding-top: 11px;
+				padding-left: 10px;
+			}
+
+			.example > .children > h7
+			{
+				font-size: 13px;
+			}
+
+			h7
+			{
+				font-size: 14px;
+				font-weight: bold;
+				margin-bottom: 2px;
+			}
+
+			pre
+			{
+				margin-top: 0px;
+				padding: 6px 7px;
+				background-color: #D9D9D9;
+				font-weight: normal;
+				font-size: 13px;
+			}
+
+			dl
+			{
+				margin: 5px 0px;
+			}
+
+			dt
+			{
+				font-weight: bold;
+			}
+
+			dd
+			{
+				font-size: 14px;
+				font-weight: normal;
+				margin-left: 8px;
+			}
+			
+			dd > .children
+			{
+				font-size: 95%;
+			}
+			
+			dd > .children > dl > dd
+			{
+				margin-left: 13px;
+			}
+
+			.exclamation
+			{
+				padding: 7px 8px;
+				margin: 11px 0px;
+				background-color: #FFE9AA;
+				border: 1px solid yellow;
+				font-size: 15px;
+				font-weight: normal;
+			}
+
+			.text
+			{
+				font-size: 15px;
+				font-weight: normal;
+				margin-bottom: 14px;
+				margin-top: 10px;
+			}
+
+			.toc
+			{
+				border: 1px solid gray;
+				background-color: #E6E6E6;
+				padding: 8px 9px;
+				font-size: 15px;
+				margin-bottom: 12px;
+			}
+
+			.toc h2
+			{
+				margin: 0px 0px 3px 0px;
+				font-size: 19px;
+			}
+
+			.toc ul
+			{
+				margin-top: 0px;
+				margin-bottom: 0px;
+				padding-left: 25px;
+			}
+
+			.toc li
+			{
+				margin-bottom: 2px;
+			}
+
+			.toc .alternatives
+			{
+				font-size: 12px;
+			}
+
+			.toc a
+			{
+				color: #292722;
+			}
+
+			.toc a:hover
+			{
+				color: black;
+			}
+			
+			.fixed
+			{
+				font-family: monospace;
+				background-color: white;
+				padding: 1px 4px;
+				border: 1px solid silver;
+				border-radius: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="children"><h1>CVM Client API Documentation</h1><div class="toc"><h2>Table of contents</h2><ul><li><a href="#GETapiclientvpslist">GET /api/client/vps/list</a> This call will return a list of VPSes associated with the currently... </li><li><a href="#GETapiclientvpsidstatus">GET /api/client/vps/id/status</a> This returns the current status and metrics for the specified VPS. The response... </li><li><a href="#POSTapiclientvpsidstart">POST /api/client/vps/id/start</a> Starts the specified VPS. Returns either a <span class="fixed">200</span> status code with an empty... </li><li><a href="#POSTapiclientvpsidstop">POST /api/client/vps/id/stop</a> Shuts down the specified VPS. Returns either a <span class="fixed">200</span> status code with an empty... </li><li><a href="#POSTapiclientvpsidrestart">POST /api/client/vps/id/restart</a> Restarts the specified VPS. Returns either a <span class="fixed">200</span> status code with an empty... </li></ul></div><h2>Overview</h2><div class="text">The CVM Client API is a more or less RESTful API. That means it uses the standard HTTP 'verbs' like GET, POST, DELETE, etc. to execute certain commands. Authentication takes place per request (there is no concept of 'sessions') through the use of custom HTTP headers. Each API token pair is linked to a particular user, and can only be used for that user. A user can have multiple token pairs. Token pairs can be revoked at any time via the panel.</div><h2>Authentication</h2><div class="text">The CVM Client API expects two custom HTTP headers as authentication.</div><dl><dt>API-Public-Token</dt><dd>This is the public part of your API token pair. It's used to identify who you are.<div class="children"></div></dd></dl><dl><dt>API-Private-Token</dt><dd>This is the private part of your API token pair. It's used to verify your access.<div class="children"></div></dd></dl><div class="text">If no valid token pair is passed on with your request, the server will return a <span class="fixed">401 Not Authorized</span> status code.</div><div class="text">If your token pair does not have access to the client API, the server will return a <span class="fixed">403 Forbidden</span> status code.</div><h2>Response format</h2><div class="text">The API responses will always be in JSON format. If errors occurred, an <span class="fixed">errors</span> key will be present containing an array of errors. If there is a response, a <span class="fixed">response</span> key will be present containing the response.</div><div class="example">Example: Valid API call <div class="children"><h7>Code:</h7><pre class="code">/api/client/vps/list</pre><h7>Output:</h7><pre class="output">{
+    "response": {
+	"vpses": [{
+	    "id": "1",
+	    "virtualization_type": "1",
+	    "hostname": "test-vz.cryto.net",
+	    "guaranteed_ram": "128",
+	    "burstable_ram": "256",
+	    "disk_space": "5000",
+	    "cpu_count": "1",
+	    "traffic_in_limit": "500000000000",
+	    "traffic_out_limit": "500000000000",
+	    "traffic_in_used": "912727849",
+	    "traffic_out_used": "16923948"
+	}, {
+	    "id": "2",
+	    "virtualization_type": "1",
+	    "hostname": "test2.cryto.net",
+	    "guaranteed_ram": "512",
+	    "burstable_ram": "768",
+	    "disk_space": "40000",
+	    "cpu_count": "240",
+	    "traffic_in_limit": "500000000000",
+	    "traffic_out_limit": "500000000000",
+	    "traffic_in_used": "0",
+	    "traffic_out_used": "0"
+	}]
+    }
+}</pre></div></div><div class="example">Example: API call with invalid token pair <div class="children"><h7>Code:</h7><pre class="code">/api/client/vps/list</pre><h7>Output:</h7><pre class="output">{
+    "errors": ["No valid API token pair was specified."]
+}</pre></div></div><h2>API Calls</h2><div class="definition"><a name="GETapiclientvpslist">GET /api/client/vps/list <div class="children"><div class="text">This call will return a list of VPSes associated with the currently authenticated user. It takes no arguments.</div><h3>Keys in the response objects</h3><dl><dt>id</dt><dd>The numeric ID of this VPS. You will need this in further API calls.<div class="children"></div></dd></dl><dl><dt>node</dt><dd>The host node that this VPS exists on. You will need this in further node-related API calls.<div class="children"></div></dd></dl><dl><dt>virtualization_type</dt><dd>The virtualization platform used for this VPS. Right now the only supported value is <span class="fixed">1</span> (OpenVZ).<div class="children"></div></dd></dl><dl><dt>hostname</dt><dd>The configured hostname of the VPS.<div class="children"></div></dd></dl><dl><dt>guaranteed_ram</dt><dd>The configured amount of guaranteed RAM, in <strong>megabytes</strong>.<div class="children"></div></dd></dl><dl><dt>burstable_ram</dt><dd>The configured amount of burstable RAM, in <strong>megabytes</strong>. <em>This key may not be present if vSwap is used.</em><div class="children"></div></dd></dl><dl><dt>disk_space</dt><dd>The configured amount of disk space, in <strong>megabytes</strong>.<div class="children"></div></dd></dl><dl><dt>cpu_count</dt><dd>The amount of configured CPUs (or rather, CPU units) that this VPS has access to.<div class="children"></div></dd></dl><dl><dt>traffic_limit</dt><dd>The total traffic limit, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring. See the explanation below.</em><div class="children"></div></dd></dl><dl><dt>traffic_used</dt><dd>The total amount of traffic used, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring. See the explanation below.</em><div class="children"></div></dd></dl><dl><dt>traffic_in_limit</dt><dd>The total incoming traffic limit, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring. See the explanation below.</em><div class="children"></div></dd></dl><dl><dt>traffic_in_used</dt><dd>The total amount of incoming traffic used, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring. See the explanation below.</em><div class="children"></div></dd></dl><dl><dt>traffic_out_limit</dt><dd>The total outgoing traffic limit, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring. See the explanation below.</em><div class="children"></div></dd></dl><dl><dt>traffic_out_used</dt><dd>The total amount of outgoing traffic used, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring. See the explanation below.</em><div class="children"></div></dd></dl><div class="exclamation"><strong>Important:</strong> If traffic accounting for the VPS is combined (incoming + outgoing), a <span class="fixed">traffic_limit</span> and <span class="fixed">traffic_used</span> key will be present. If traffic accounting for the VPS is split, the keys <span class="fixed">traffic_in_limit</span>, <span class="fixed">traffic_in_used</span>, <span class="fixed">traffic_out_limit</span>, and <span class="fixed">traffic_out_used</span> will be present. <div class="children"></div></div><div class="example">Example: Valid call to /api/client/vps/list <div class="children"><h7>Output:</h7><pre class="output">{
+    "response": {
+	"vpses": [{
+	    "id": "1",
+	    "node": "1",
+	    "virtualization_type": "1",
+	    "hostname": "test-vz.cryto.net",
+	    "guaranteed_ram": "128",
+	    "burstable_ram": "256",
+	    "disk_space": "5000",
+	    "cpu_count": "1",
+	    "traffic_in_limit": "500000000000",
+	    "traffic_out_limit": "500000000000",
+	    "traffic_in_used": "912727849",
+	    "traffic_out_used": "16923948"
+	}, {
+	    "id": "2",
+	    "node": "1",
+	    "virtualization_type": "1",
+	    "hostname": "test2.cryto.net",
+	    "guaranteed_ram": "512",
+	    "burstable_ram": "768",
+	    "disk_space": "40000",
+	    "cpu_count": "2",
+	    "traffic_in_limit": "500000000000",
+	    "traffic_out_limit": "500000000000",
+	    "traffic_in_used": "0",
+	    "traffic_out_used": "0"
+	}]
+    }
+}</pre></div></div></div></a></div><div class="definition"><a name="GETapiclientvpsidstatus">GET /api/client/vps/<em>id</em>/status <div class="children"><div class="text">This returns the current status and metrics for the specified VPS. The response will be a single object.</div><h3>Arguments</h3><dl><dt>id</dt><dd>The ID of the VPS you wish to retrieve the status for.<div class="children"></div></dd></dl><h3>Keys in the response object</h3><dl><dt>traffic_used</dt><dd>The total amount of traffic used, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring.</em><div class="children"></div></dd></dl><dl><dt>traffic_in_used</dt><dd>The total amount of incoming traffic used, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring.</em><div class="children"></div></dd></dl><dl><dt>traffic_out_used</dt><dd>The total amount of outgoing traffic used, in <strong>bytes</strong>. <em>This may not be present, depending on the method of traffic measuring.</em><div class="children"></div></dd></dl><dl><dt>ram_used</dt><dd>The amount of RAM that is currently in use for the VPS, in <strong>bytes</strong>.<div class="children"></div></dd></dl><dl><dt>disk_used</dt><dd>The amount of disk space currently used by the VPS, in <strong>bytes</strong>.<div class="children"></div></dd></dl><dl><dt>status</dt><dd>The current status of the VPS.<div class="children"><dl><dt>running</dt><dd>The VPS is active and booted.<div class="children"></div></dd></dl><dl><dt>stopped</dt><dd>The VPS is active and shut down.<div class="children"></div></dd></dl><dl><dt>suspended</dt><dd>The VPS is suspended.<div class="children"></div></dd></dl><dl><dt>terminated</dt><dd>The VPS is terminated.<div class="children"></div></dd></dl><dl><dt>unknown</dt><dd>The status of the VPS is unknown. This can happen when, for example, the host node can't be reached.<div class="children"></div></dd></dl></div></dd></dl></div></a></div><div class="definition"><a name="POSTapiclientvpsidstart">POST /api/client/vps/<em>id</em>/start <div class="children"><div class="text">Starts the specified VPS. Returns either a <span class="fixed">200</span> status code with an empty response if successful, a <span class="fixed">500</span> status code with an error message if the VPS fails to start, or a <span class="fixed">503</span> status code with an error message if the host node is unreachable.</div><h3>Arguments</h3><dl><dt>id</dt><dd>The ID of the VPS you wish to start.<div class="children"></div></dd></dl></div></a></div><div class="definition"><a name="POSTapiclientvpsidstop">POST /api/client/vps/<em>id</em>/stop <div class="children"><div class="text">Shuts down the specified VPS. Returns either a <span class="fixed">200</span> status code with an empty response if successful, a <span class="fixed">500</span> status code with an error message if the VPS fails to shut down, or a <span class="fixed">503</span> status code with an error message if the host node is unreachable.</div><h3>Arguments</h3><dl><dt>id</dt><dd>The ID of the VPS you wish to stop.<div class="children"></div></dd></dl></div></a></div><div class="definition"><a name="POSTapiclientvpsidrestart">POST /api/client/vps/<em>id</em>/restart <div class="children"><div class="text">Restarts the specified VPS. Returns either a <span class="fixed">200</span> status code with an empty response if successful, a <span class="fixed">500</span> status code with an error message if the VPS fails to restart, or a <span class="fixed">503</span> status code with an error message if the host node is unreachable.</div><h3>Arguments</h3><dl><dt>id</dt><dd>The ID of the VPS you wish to restart.<div class="children"></div></dd></dl></div></a></div></div>
+	</body>
+</html>
