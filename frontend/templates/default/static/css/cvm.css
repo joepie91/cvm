@@ -269,7 +269,7 @@ tr.clickable:hover
 
 #button_password
 {
-	background-image: url(../images/menu/password.png);
+	background-image: url(../images/menu/lock.png);
 }
 
 .quota-item
