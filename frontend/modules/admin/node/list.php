@@ -15,7 +15,7 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 $sNodeList = array();
 
-if($result = mysql_query_cached("SELECT * FROM nodes"))
+if($result = $database->CachedQuery("SELECT * FROM nodes"))
 {
 	foreach($result->data as $row)
 	{

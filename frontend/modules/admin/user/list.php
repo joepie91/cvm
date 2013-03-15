@@ -13,7 +13,7 @@
 
 if(!isset($_CVM)) { die("Unauthorized."); }
 
-$result = mysql_query_cached("SELECT * FROM users ORDER BY `AccessLevel` DESC");
+$result = $database->CachedQuery("SELECT * FROM users ORDER BY `AccessLevel` DESC");
 
 $sUserList = array();
 

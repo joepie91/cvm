@@ -24,8 +24,7 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 	switch($_GET['action'])
 	{
 		case "verify_user":
-			$sUsername = mysql_real_escape_string($_GET['username']);
-			if($result = mysql_query_cached("SELECT * FROM users WHERE `Username` = '{$sUsername}'"))
+			if($result = $database->CachedQuery("SELECT * FROM users WHERE `Username` = :Username", array(":Username" => $_GET['username'])))
 			{
 				$sUser = new User($result);
 				
@@ -58,15 +57,14 @@ if(isset($_GET['key']) && $_GET['key'] == $settings['local_api_key'])
 		case "list_vps":
 			if(!empty($_GET['userid']))
 			{
-				$sUserId = (is_numeric($_GET['userid'])) ? $_GET['userid'] : 0;
-				$query = "SELECT * FROM containers WHERE `UserId` = '{$sUserId}'";
+				$result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(":UserId" => $_GET['userid']));
 			}
 			else
 			{
-				$query = "SELECT * FROM containers";
+				$result = $database->CachedQuery("SELECT * FROM containers");
 			}
 			
-			if($result = mysql_query_cached($query))
+			if($result)
 			{
 				$sVpses = array();
 				

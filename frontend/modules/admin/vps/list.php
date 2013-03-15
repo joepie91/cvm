@@ -15,7 +15,7 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 $sVpsList = array();
 
-if($result = mysql_query_cached("SELECT * FROM containers"))
+if($result = $database->CachedQuery("SELECT * FROM containers"))
 {
 	foreach($result->data as $row)
 	{

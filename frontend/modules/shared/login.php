@@ -24,10 +24,9 @@ $render_form = true;
 
 if(isset($_POST['submit']))
 {
-	$sUsername = mysql_real_escape_string($_POST['username']);
 	$sFieldUsername = htmlentities($_POST['username']);
 	
-	if($result = mysql_query_cached("SELECT * FROM users WHERE `Username` = '{$sUsername}'"))
+	if($result = $database->CachedQuery("SELECT * FROM users WHERE `Username` = :Username", array(":Username" => $_POST['username'])))
 	{
 		$sLoginUser = new User($result);
 		

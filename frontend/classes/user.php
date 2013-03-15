@@ -52,7 +52,7 @@ class User extends CPHPDatabaseRecordClass
 	
 	public function GetVpsCount()
 	{
-		if($result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$this->sId}'"))
+		if($result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(":UserId" => $this->sId)))
 		{
 			return count($result->data);
 		}

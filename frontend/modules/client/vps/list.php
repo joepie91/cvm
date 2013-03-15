@@ -15,7 +15,7 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 if($sLoggedIn === true)
 {
-	$result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$sUser->sId}'");
+	$result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(":UserId" => $sUser->sId));
 	
 	$sVpsList = array();
 	

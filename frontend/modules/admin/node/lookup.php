@@ -17,7 +17,7 @@ try
 {
 	$sNode = new Node($router->uParameters[1]);
 	
-	if($result = mysql_query_cached("SELECT * FROM containers WHERE `NodeId` = '{$sNode->sId}'"))
+	if($result = $database->CachedQuery("SELECT * FROM containers WHERE `NodeId` = :NodeId", array(":NodeId" => $sNode->sId)))
 	{
 		foreach($result->data as $row)
 		{

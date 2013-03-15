@@ -21,7 +21,7 @@ try
 	
 	$sVpsList = array();
 	
-	if($result = mysql_query_cached("SELECT * FROM containers WHERE `UserId` = '{$sUserEntry->sId}'"))
+	if($result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(":UserId" => $sUserEntry->sId)))
 	{
 		foreach($result->data as $row)
 		{

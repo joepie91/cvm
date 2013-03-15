@@ -99,7 +99,7 @@ if(isset($_POST['submit']))
 
 if($display_form === true)
 {
-	$result = mysql_query_cached("SELECT * FROM templates WHERE `Available` = '1'");
+	$result = $database->CachedQuery("SELECT * FROM templates WHERE `Available` = '1'");
 
 	$sTemplateList = array();
 
