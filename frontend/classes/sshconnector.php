@@ -89,29 +89,12 @@ class SshConnector extends CPHPBaseClass
 		
 		$command = "python /etc/cvm/start_tunnel.py {$sHost} {$sUser} {$sPort} {$sKeyFile} {$sSessionKey}";
 		
-		$steps = array();
-		
-		foreach(debug_backtrace() as $step)
-		{
-			try
-			{
-				$allargs = implode(", ", $step['args']);
-			}
-			catch (Exception $e)
-			{
-				$allargs = "[unserializable]";
-			}
-			
-			$steps[] = "{$step['file']}:{$step['line']} => {$step['class']}{$step['type']}{$step['function']}({$allargs})";
-		}
-		
 		cphp_debug_snapshot(array(
 			"action" => "start tunnel",
 			"db-tunnelkey" => $this->node->sTunnelKey,
 			"db-utunnelkey" => $this->node->uTunnelKey,
 			"ssh-tunnelkey" => $this->tunnel_key,
-			"arg-tunnelkey" => $sSessionKey,
-			"trace" => $steps
+			"arg-tunnelkey" => $sSessionKey
 		));
 		
 		exec($command, $output, $returncode);
