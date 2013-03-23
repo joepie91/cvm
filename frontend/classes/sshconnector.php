@@ -178,6 +178,7 @@ class SshConnector extends CPHPBaseClass
 		{
 			if($current > 65534)
 			{
+				/* TODO: We really need to deal with this properly... */
 				throw new SshConnectException("No free tunnel ports left.");
 			}
 			
