@@ -229,7 +229,7 @@ sys.stdout.write("Lock on /etc/group removed.\n")
 # Create the main CVM data directories
 setuplib.create_directory("/etc/cvm", True, 0, cvm_gid, "u+rwx g+rwx o+rx")
 setuplib.create_directory("/etc/cvm/log", True, 0, 0, "u+rwx")
-setuplib.create_directory("/etc/cvm/command_daemon", True, 0, 0, "u+rwx")
+setuplib.create_directory("/etc/cvm/command_daemon", True, cvm_uid, cvm_gid, "u+rwx")
 sys.stdout.write("Created directories.\n")
 
 # Copy the runhelper
