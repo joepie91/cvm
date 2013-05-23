@@ -17,6 +17,8 @@ try
 {
 	$sNode = new Node($router->uParameters[1]);
 	
+	$sVpsList = array();
+	
 	if($result = $database->CachedQuery("SELECT * FROM containers WHERE `NodeId` = :NodeId", array(":NodeId" => $sNode->sId)))
 	{
 		foreach($result->data as $row)
