@@ -53,5 +53,5 @@ if($sLoggedIn === true)
 }
 else
 {
-	throw new UnauthorizedException("You must be logged in to view this page.");
+	redirect("/login");
 }
