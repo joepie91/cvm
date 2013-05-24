@@ -172,18 +172,23 @@ foreach($result->data as $row)
 	);
 }
 
-$result = $database->CachedQuery("SELECT * FROM templates WHERE `Available` = 1");
-
 $sTemplates = array();
 
-foreach($result->data as $row)
+if($result = $database->CachedQuery("SELECT * FROM templates WHERE `Available` = 1"))
 {
-	$sTemplate = new Template($row);
-	
-	$sTemplates[] = array(
-		'id'		=> $sTemplate->sId,
-		'name'		=> $sTemplate->sName
-	);
+	foreach($result->data as $row)
+	{
+		$sTemplate = new Template($row);
+		
+		$sTemplates[] = array(
+			'id'		=> $sTemplate->sId,
+			'name'		=> $sTemplate->sName
+		);
+	}
+}
+else
+{
+	/* TODO: Show an error when no templates are available. */
 }
 
 $result = $database->CachedQuery("SELECT * FROM users WHERE `AccessLevel` > 0");

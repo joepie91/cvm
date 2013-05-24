@@ -26,10 +26,12 @@ class Node extends CPHPDatabaseRecordClass
 			'PhysicalLocation'	=> "PhysicalLocation",
 			'PrivateKey'		=> "CustomPrivateKey",
 			'PublicKey'		=> "CustomPublicKey",
-			'User'			=> "User"
+			'User'			=> "User",
+			'TunnelKey'		=> "TunnelKey"
 		),
 		'numeric' => array(
-			'Port'			=> "Port"
+			'Port'			=> "Port",
+			'TunnelPort'		=> "TunnelPort"
 		),
 		'boolean' => array(
 			'HasCustomKey'		=> "HasCustomKey"
@@ -47,6 +49,9 @@ class Node extends CPHPDatabaseRecordClass
 		$this->ssh->host = $this->sHostname;
 		$this->ssh->port = $this->sPort;
 		$this->ssh->user = $this->sUser;
+		$this->ssh->tunnel_port = $this->sTunnelPort;
+		$this->ssh->tunnel_key = $this->sTunnelKey;
+		$this->ssh->node = $this;
 		
 		if($this->HasCustomKey === true)
 		{

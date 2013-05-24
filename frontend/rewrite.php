@@ -239,7 +239,7 @@ try
 	
 	if(empty($router->uVariables['raw']))
 	{
-		if($router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
+		if(isset($router->uVariables['menu']) && $router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
 		{
 			$sMainContents .= Templater::AdvancedParse("{$sTheme}/client/vps/main", $locale->strings, array(
 				'error'			=> $sError,
@@ -247,7 +247,7 @@ try
 				'id'			=> $sVps->sId
 			));
 		}
-		elseif($router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
+		elseif(isset($router->uVariables['menu']) && $router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
 		{
 			$sMainContents .= Templater::AdvancedParse("{$sTheme}/admin/main", $locale->strings, array(
 				'error'			=> $sError,

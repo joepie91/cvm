@@ -1,6 +1,7 @@
 cd slave
 echo "Copying needed files for slave SFX..."
 cp ../../runhelper/runhelper .
+cp ../../command_daemon/command_daemon .
 cp ../../console/slave/dropper .
 cp ../../logshell/logshell .
 cp ../../logshell/cvmshell .

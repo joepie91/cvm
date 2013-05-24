@@ -100,7 +100,7 @@ class Vps extends CPHPDatabaseRecordClass
 		{
 			try
 			{
-				$command = array("vzctl", "status", $this->sInternalId);
+				$command = array("sudo", "vzctl", "status", $this->sInternalId);
 				
 				$result = $this->sNode->ssh->RunCommandCached($command, false);
 				
@@ -276,7 +276,7 @@ class Vps extends CPHPDatabaseRecordClass
 	{
 		if(is_array($options))
 		{
-			$command_elements = array("vzctl", "set", $this->sInternalId);
+			$command_elements = array("sudo", "vzctl", "set", $this->sInternalId);
 			
 			foreach($options as $key => $value)
 			{
@@ -296,12 +296,12 @@ class Vps extends CPHPDatabaseRecordClass
 	
 	public function RunCommand($command, $throw_exception = false)
 	{
-		return $this->sNode->ssh->RunCommand(array("vzctl", "exec", $this->sInternalId, $command), $throw_exception);
+		return $this->sNode->ssh->RunCommand(array("sudo", "vzctl", "exec", $this->sInternalId, $command), $throw_exception);
 	}
 	
 	public function RunCommandCached($command, $throw_exception = false)
 	{
-		return $this->sNode->ssh->RunCommandCached(array("vzctl", "exec", $this->sInternalId, $command), $throw_exception);
+		return $this->sNode->ssh->RunCommandCached(array("sudo", "vzctl", "exec", $this->sInternalId, $command), $throw_exception);
 	}
 	
 	public function Deploy($conf = array())
@@ -311,7 +311,7 @@ class Vps extends CPHPDatabaseRecordClass
 		$this->uRootPassword = $sRootPassword;
 		$this->InsertIntoDatabase();
 		
-		$command = array("vzctl", "create", $this->sInternalId, "--ostemplate", $this->sTemplate->sTemplateName);
+		$command = array("sudo", "vzctl", "create", $this->sInternalId, "--ostemplate", $this->sTemplate->sTemplateName);
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		$result->returncode = 0;
@@ -347,7 +347,7 @@ class Vps extends CPHPDatabaseRecordClass
 			$sDCacheLimit = (isset($conf['sDCacheLimit'])) 		? $conf['sDCacheLimit'] : 	(int)($sDCache * 1.1);
 			$sAvgProc = (isset($conf['sAvgProc'])) 			? $conf['sAvgProc'] : 		$dummy_processes / 2;
 			
-			$command = array("vzctl", "set", $this->sInternalId,
+			$command = array("sudo", "vzctl", "set", $this->sInternalId,
 				"--onboot", "yes",
 				"--setmode", "restart",
 				"--hostname", $this->sHostname,
@@ -441,7 +441,7 @@ class Vps extends CPHPDatabaseRecordClass
 			$this->Stop();
 		}
 		
-		$command = array("vzctl", "destroy", $this->sInternalId);
+		$command = array("sudo", "vzctl", "destroy", $this->sInternalId);
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
 		if($result->returncode == 0)
@@ -487,7 +487,7 @@ class Vps extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$command = array("vzctl", "start", $this->sInternalId);
+			$command = array("sudo", "vzctl", "start", $this->sInternalId);
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
 			if($result->returncode == 0)
@@ -515,7 +515,7 @@ class Vps extends CPHPDatabaseRecordClass
 		}
 		else
 		{
-			$command = array("vzctl", "stop", $this->sInternalId);
+			$command = array("sudo", "vzctl", "stop", $this->sInternalId);
 			$result = $this->sNode->ssh->RunCommand($command, false);
 			
 			/* vzctl is retarded enough to return code 0 when the command fails because the container isn't running,
@@ -577,7 +577,7 @@ class Vps extends CPHPDatabaseRecordClass
 	
 	public function AddIp($ip)
 	{
-		$command = array("vzctl", "set", $this->sInternalId, "--ipadd", $ip, "--save");
+		$command = array("sudo", "vzctl", "set", $this->sInternalId, "--ipadd", $ip, "--save");
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
@@ -593,7 +593,7 @@ class Vps extends CPHPDatabaseRecordClass
 	
 	public function RemoveIp($ip)
 	{
-		$command = array("vzctl", "set", $this->sInternalId, "--ipdel", $ip, "--save");
+		$command = array("sudo", "vzctl", "set", $this->sInternalId, "--ipdel", $ip, "--save");
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
 		
@@ -611,7 +611,7 @@ class Vps extends CPHPDatabaseRecordClass
 	{
 		/* TODO: Don't rely on grep, and parse the output in this function itself. Also try to find another way to do this without relying
 		 * on the container at all. */
-		$result = $this->sNode->ssh->RunCommand(array("vzctl", "exec", $this->sInternalId, "cat /proc/net/dev | grep venet0"), false);
+		$result = $this->sNode->ssh->RunCommand(array("sudo", "vzctl", "exec", $this->sInternalId, "cat /proc/net/dev | grep venet0"), false);
 		
 		if($result->returncode == 0)
 		{
@@ -668,6 +668,6 @@ class Vps extends CPHPDatabaseRecordClass
 	public function EnableTunTap()
 	{
 		/* TODO: Finish EnableTunTap function, check whether tun module is available on host */
-		$command = array("vzctl", "set", $this->sInternalId, "--devnodes", "net/tun:rw", "--save");
+		$command = array("sudo", "vzctl", "set", $this->sInternalId, "--devnodes", "net/tun:rw", "--save");
 	}
 }

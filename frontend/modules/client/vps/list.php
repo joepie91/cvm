@@ -15,36 +15,37 @@ if(!isset($_CVM)) { die("Unauthorized."); }
 
 if($sLoggedIn === true)
 {
-	$result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(":UserId" => $sUser->sId));
-	
 	$sVpsList = array();
 	
-	foreach($result->data as $row)
+	if($result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(":UserId" => $sUser->sId)))
 	{
-		$sVps = new Vps($row);
-		
-		try
+		foreach($result->data as $row)
 		{
-			$sStatus = $sVps->sStatusText;
+			$sVps = new Vps($row);
+			
+			try
+			{
+				$sStatus = $sVps->sStatusText;
+			}
+			catch (SshException $e)
+			{
+				$sStatus = "unknown";
+			}
+			
+			$sVpsList[] = array(
+				'id'			=> $sVps->sId,
+				'hostname'		=> $sVps->sHostname,
+				'node'			=> $sVps->sNode->sName,
+				'node-hostname'		=> $sVps->sNode->sHostname,
+				'template'		=> $sVps->sTemplate->sName,
+				'diskspace'		=> number_format($sVps->sDiskSpace / 1024),
+				'diskspace-unit'	=> "GB",
+				'guaranteed-ram'	=> $sVps->sGuaranteedRam,
+				'guaranteed-ram-unit'	=> "MB",
+				'status'		=> $sStatus,
+				'virtualization-type'	=> $sVps->sVirtualizationType
+			);
 		}
-		catch (SshException $e)
-		{
-			$sStatus = "unknown";
-		}
-		
-		$sVpsList[] = array(
-			'id'			=> $sVps->sId,
-			'hostname'		=> $sVps->sHostname,
-			'node'			=> $sVps->sNode->sName,
-			'node-hostname'		=> $sVps->sNode->sHostname,
-			'template'		=> $sVps->sTemplate->sName,
-			'diskspace'		=> number_format($sVps->sDiskSpace / 1024),
-			'diskspace-unit'	=> "GB",
-			'guaranteed-ram'	=> $sVps->sGuaranteedRam,
-			'guaranteed-ram-unit'	=> "MB",
-			'status'		=> $sStatus,
-			'virtualization-type'	=> $sVps->sVirtualizationType
-		);
 	}
 	
 	$sMainContents = Templater::AdvancedParse("{$sTheme}/client/vps/list", $locale->strings, array(
@@ -53,5 +54,5 @@ if($sLoggedIn === true)
 }
 else
 {
-	throw new UnauthorizedException("You must be logged in to view this page.");
+	redirect("/login");
 }
