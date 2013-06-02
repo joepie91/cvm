@@ -13,7 +13,7 @@
 
 /* TODO: Add "create VPS" button. */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 try
 {

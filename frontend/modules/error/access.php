@@ -11,6 +11,6 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 throw new UnauthorizedException("You are not allowed to access this page.");

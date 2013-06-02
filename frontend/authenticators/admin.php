@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 $router->uVariables['display_menu'] = true;
 

@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 define("CVM_VIRTUALIZATION_OPENVZ",			1	);
 

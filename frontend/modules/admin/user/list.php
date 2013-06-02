@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 $result = $database->CachedQuery("SELECT * FROM users ORDER BY `AccessLevel` DESC");
 

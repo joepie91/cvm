@@ -11,7 +11,7 @@
  * licensing text.
  */
  
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 if($result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :UserId", array(':UserId' => $sApiKey->sUser->sId)))
 {

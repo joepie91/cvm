@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-$_CVM = true;
+$_APP = true;
 require("includes/include.base.php");
 
 $return_object = array();

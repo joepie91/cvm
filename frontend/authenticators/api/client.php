@@ -11,7 +11,7 @@
  * licensing text.
  */
  
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 $public_token = $_SERVER['HTTP_API_PUBLIC_TOKEN'];
 $private_token = $_SERVER['HTTP_API_PRIVATE_TOKEN'];

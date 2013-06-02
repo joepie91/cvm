@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 $sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/console", $locale->strings, array(
 	'host'		=> htmlspecialchars($_SERVER['SERVER_NAME']),

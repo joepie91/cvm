@@ -13,7 +13,7 @@
  
 $timing_start = microtime(true);
  
-$_CVM = true;
+$_APP = true;
 require("includes/include.base.php");
 
 $sTheme = "default";

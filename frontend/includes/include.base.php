@@ -11,7 +11,7 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 $_CPHP_CONFIG = "../config.json";
 $_CPHP = true;
@@ -24,7 +24,7 @@ require("include.misc.php");
 
 function __autoload($class_name) 
 {
-	global $_CVM;
+	global $_APP;
 	
 	if(strpos($class_name, "\\") !== false)
 	{

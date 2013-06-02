@@ -11,6 +11,6 @@
  * licensing text.
  */
 
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 $sPageContents = Templater::AdvancedParse("{$sTheme}/admin/overview/index", $locale->strings, array());

@@ -11,7 +11,7 @@
  * licensing text.
  */
  
-if(!isset($_CVM)) { die("Unauthorized."); }
+if(!isset($_APP)) { die("Unauthorized."); }
 
 define("IP_TYPE_NONE", 0);
 define("IP_TYPE_IPV4", 4);
