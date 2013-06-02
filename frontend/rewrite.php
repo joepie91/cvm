@@ -59,7 +59,7 @@ try
 	$router->routes = array(
 		0 => array(
 			'^/?$'				=> "modules/client/vps/list.php",
-			'^/list?$'			=> "modules/client/vps/list.php",
+			'^/list/?$'			=> "modules/client/vps/list.php",
 			'^/account/?$'			=> "modules/client/account/index.php",
 			'^/login/?$'			=> "modules/shared/login.php",
 			'^/logout/?$'			=> "modules/shared/logout.php",
