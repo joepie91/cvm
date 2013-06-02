@@ -11,8 +11,6 @@
  * licensing text.
  */
 
-/* TODO: Switch to PDO here. */
-
 $_CVM = true;
 require("includes/include.base.php");
 
