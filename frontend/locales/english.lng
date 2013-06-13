@@ -70,6 +70,7 @@ menu-admin-overview;							Overview
 menu-admin-users;							Users
 menu-admin-vpses;							VPSes
 menu-admin-nodes;							Nodes
+menu-admin-templates;							Templates
 
 ## Global warnings and errors
 error-form;								One or more problems occurred.
