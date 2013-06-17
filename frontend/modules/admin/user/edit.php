@@ -40,6 +40,23 @@ if($router->uMethod == "post")
 	{
 		$sErrors[] = "You did not specify a valid user type.";
 	}
+	else
+	{
+		if($sUser->sAccessLevel == 30 && $_POST['access'] < 30)
+		{
+			/* This user is a master admin, check if any other master admins exist before lowering
+			 * the permissions of this one, to prevent lock-outs. */
+			 
+			try
+			{
+				User::CreateFromQuery("SELECT * FROM users WHERE `AccessLevel` = 30 AND `Id` != :Id", array(":Id" => $sUser->sId), 0);
+			}
+			catch (NotFoundException $e)
+			{
+				$sErrors[] = "You can't remove your master administrator permissions if no other master administrators exist!";
+			}
+		}
+	}
 	
 	if(empty($sErrors))
 	{
