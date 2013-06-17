@@ -136,6 +136,13 @@ try
 				'auth_error'			=> "modules/error/access.php",
 				'_menu'				=> "admin"
 			),
+			/* Admin - Users - Edit */
+			'^/admin/user/([0-9]+)/edit/?$'	=> array(
+				'target'			=> "modules/admin/user/edit.php",
+				'authenticator'			=> "authenticators/admin.php",
+				'auth_error'			=> "modules/error/access.php",
+				'_menu'				=> "admin"
+			),
 			/* Admin - Users - Create VPS */
 			'^/admin/user/([0-9]+)/add/?$'	=> array(
 				'target'			=> "modules/admin/vps/create.php",

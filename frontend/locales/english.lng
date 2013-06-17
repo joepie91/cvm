@@ -248,6 +248,13 @@ admin-level-nodeadmin;							Node administrator
 admin-level-masteradmin;						Master administrator
 header-admin-user-vpses;						VPSes owned by this user
 
+## User editing
+title-admin-edituser;							Edit user
+edituser-username;							Username
+edituser-email;								Email address
+edituser-access;							Account type
+button-admin-edituser;							Apply changes
+
 ## VPS list
 title-admin-vpslist;							VPS overview
 list-column-hostname;							Hostname
