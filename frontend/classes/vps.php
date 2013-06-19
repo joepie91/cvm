@@ -314,7 +314,6 @@ class Vps extends CPHPDatabaseRecordClass
 		$command = array("sudo", "vzctl", "create", $this->sInternalId, "--ostemplate", $this->sTemplate->sTemplateName);
 		
 		$result = $this->sNode->ssh->RunCommand($command, false);
-		$result->returncode = 0;
 
 		if($result->returncode == 0 && strpos($result->stderr, "ERROR") === false)
 		{
