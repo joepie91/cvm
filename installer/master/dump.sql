@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `containers` (
   `IncomingTrafficLimit` bigint(20) NOT NULL,
   `TotalTrafficLimit` bigint(20) NOT NULL,
   `UserId` bigint(20) NOT NULL,
+  `TerminationDate` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -58,6 +59,15 @@ CREATE TABLE IF NOT EXISTS `nodes` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `settings` (
+  `Id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `Key` varchar(120) NOT NULL,
+  `Value` text NOT NULL,
+  `LastChanged` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `Key` (`Key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 CREATE TABLE IF NOT EXISTS `templates` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(200) NOT NULL,
@@ -78,12 +88,3 @@ CREATE TABLE IF NOT EXISTS `users` (
   `AccessLevel` tinyint(4) NOT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
-
-CREATE TABLE IF NOT EXISTS `settings` (
-  `Id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `Key` varchar(120) NOT NULL,
-  `Value` text NOT NULL,
-  `LastChanged` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  UNIQUE KEY `Key` (`Key`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
