@@ -604,6 +604,27 @@ class Vps extends CPHPDatabaseRecordClass
 		}
 	}
 	
+	public function Unterminate()
+	{
+		if($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			try
+			{
+				$this->Start(true);
+				$this->uStatus = CVM_STATUS_STARTED;
+				$this->InsertIntoDatabase();
+			}
+			catch (VpsStartException $e)
+			{
+				throw new VpsUnterminateException("Untermination failed as the VPS could not be started.", 1, $this->sInternalId, $e);
+			}
+		}
+		else
+		{
+			throw new VpsUnterminateException("The VPS is not terminated.", 1, $this->sInternalId);
+		}
+	}
+	
 	public function AddIp($ip)
 	{
 		$command = array("sudo", "vzctl", "set", $this->sInternalId, "--ipadd", $ip, "--save");
