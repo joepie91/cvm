@@ -46,6 +46,6 @@ if($result = $database->CachedQuery("SELECT * FROM containers"))
 	}
 }
 
-$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/list", $locale->strings, array(
+$sPageContents = NewTemplater::Render("{$sTheme}/admin/vps/list", $locale->strings, array(
 	'vpses'		=> $sVpsList
 ));

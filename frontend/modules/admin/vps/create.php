@@ -205,7 +205,7 @@ foreach($result->data as $row)
 	);
 }
 
-$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/add", $locale->strings, array(
+$sPageContents = NewTemplater::Render("{$sTheme}/admin/vps/add", $locale->strings, array(
 	'errors'	=> $sErrors,
 	'nodes'		=> $sNodes,
 	'users'		=> $sUsers,

@@ -52,7 +52,7 @@ try
 		}
 	}
 	
-	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/user/lookup", $locale->strings, array(
+	$sPageContents = NewTemplater::Render("{$sTheme}/admin/user/lookup", $locale->strings, array(
 		'id'			=> $sUserEntry->sId,
 		'username'		=> $sUserEntry->sUsername,
 		'email'			=> $sUserEntry->sEmailAddress,

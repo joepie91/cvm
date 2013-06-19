@@ -113,7 +113,7 @@ if($display_form === true)
 		);
 	}
 
-	$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/reinstall", $locale->strings, array(
+	$sPageContents .= NewTemplater::Render("{$sTheme}/client/vps/reinstall", $locale->strings, array(
 		'templates'	=> $sTemplateList
 	));
 }

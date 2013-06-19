@@ -47,7 +47,7 @@ try
 	
 	$sSuspended = ($sVps->sStatus == CVM_STATUS_SUSPENDED) ? true : false;
 	
-	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/vps/suspend", $locale->strings, array(
+	$sPageContents = NewTemplater::Render("{$sTheme}/admin/vps/suspend", $locale->strings, array(
 		'id'		=> $sVps->sId,
 		'suspended'	=> $sSuspended
 	));

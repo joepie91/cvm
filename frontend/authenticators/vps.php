@@ -48,7 +48,7 @@ try
 catch(NotFoundException $e)
 {
 	$router->uVariables['display_menu'] = false;
-	$sMainContents = Templater::AdvancedParse("{$sTheme}/client/vps/error/notfound", $locale->strings, array());
+	$sMainContents = NewTemplater::Render("{$sTheme}/client/vps/error/notfound", $locale->strings, array());
 	$sRouterAuthenticated = false;
 }
 catch(UnauthorizedException $e)

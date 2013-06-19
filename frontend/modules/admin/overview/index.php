@@ -13,4 +13,4 @@
 
 if(!isset($_APP)) { die("Unauthorized."); }
 
-$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/overview/index", $locale->strings, array());
+$sPageContents = NewTemplater::Render("{$sTheme}/admin/overview/index", $locale->strings, array());
