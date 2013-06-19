@@ -236,11 +236,13 @@ class SshConnector extends CPHPBaseClass
 		$cmd = urlencode(json_encode($command));
 		$url = "http://localhost:{$this->tunnel_port}/?key={$this->tunnel_key}&command={$cmd}";
 		
+		/* Setting a HTTP timeout is going to break long-running requests.
+		 * What the hell was I thinking?!
 		$context = stream_context_create(array(
 			'http' => array(
 				'timeout' => 2.0
 			)
-		));
+		));*/
 
 		$response = @file($url, 0, $context);
 
