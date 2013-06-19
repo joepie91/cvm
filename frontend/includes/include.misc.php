@@ -61,19 +61,20 @@ function first_unused_ctid()
 	$highest = 101;
 	
 	/* Collect all known CTIDs and keep track of the highest CTID. */
-	$result = $database->CachedQuery("SELECT `InternalId` FROM containers WHERE `VirtualizationType` = 1", array(), 0);
-	
-	foreach($result->data as $row)
+	if($result = $database->CachedQuery("SELECT `InternalId` FROM containers WHERE `VirtualizationType` = 1", array(), 0))
 	{
-		$id = filter_var($row['InternalId'] ,FILTER_VALIDATE_INT);
-		
-		if($id !== false)
+		foreach($result->data as $row)
 		{
-			$id_list[] = $id;
+			$id = filter_var($row['InternalId'] ,FILTER_VALIDATE_INT);
 			
-			if($id > $highest)
+			if($id !== false)
 			{
-				$highest = $id;
+				$id_list[] = $id;
+				
+				if($id > $highest)
+				{
+					$highest = $id;
+				}
 			}
 		}
 	}
