@@ -538,7 +538,15 @@ class Vps extends CPHPDatabaseRecordClass
 	
 	public function Suspend()
 	{
-		if($this->sStatus != CVM_STATUS_SUSPENDED)
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
+		{
+			throw new VpsSuspendException("The VPS is already suspended.", 1, $this->sInternalId);
+		}
+		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			throw new VpsSuspendException("The VPS cannot be suspended because it is already terminated.", 1, $this->sInternalId);
+		}
+		else
 		{
 			try
 			{
@@ -550,10 +558,6 @@ class Vps extends CPHPDatabaseRecordClass
 			{
 				throw new VpsSuspendException("Suspension failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);
 			}
-		}
-		else
-		{
-			throw new VpsSuspendException("The VPS is already suspended.", 1, $this->sInternalId);
 		}
 	}
 	
