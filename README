@@ -24,3 +24,8 @@ repository root
 |  |- locales/			Contains all CPHP locale files
 |  `- templates/		Contains all CPHP template files
 `- runhelper/			This directory contains the runhelper script for the slave nodes
+
+== DEPENDENCIES ==
+
+* autossh
+* ...
