@@ -43,6 +43,9 @@ class Vps extends CPHPDatabaseRecordClass
 			'OutgoingTrafficLimit'	=> "OutgoingTrafficLimit",
 			'TotalTrafficLimit'	=> "TotalTrafficLimit"
 		),
+		'timestamp' => array(
+			"TerminationDate"	=> "TerminationDate"
+		),
 		'node' => array(
 			'Node'			=> "NodeId"
 		),
@@ -572,6 +575,28 @@ class Vps extends CPHPDatabaseRecordClass
 		else
 		{
 			throw new VpsUnsuspendException("The VPS is not suspended.", 1, $this->sInternalId);
+		}
+	}
+	
+	public function Terminate()
+	{
+		if($this->sStatus != CVM_STATUS_TERMINATED)
+		{
+			try
+			{
+				$this->Stop();
+				$this->uStatus = CVM_STATUS_TERMINATED;
+				$this->uTerminationDate = time();
+				$this->InsertIntoDatabase();
+			}
+			catch (VpsStopException $e)
+			{
+				throw new VpsTerminateException("Termination failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);
+			}
+		}
+		else
+		{
+			throw new VpsTerminateException("The VPS is already terminated.", 1, $this->sInternalId);
 		}
 	}
 	
