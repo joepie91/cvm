@@ -249,7 +249,7 @@ try
 	{
 		if(isset($router->uVariables['menu']) && $router->uVariables['menu'] == "vps" && $router->uVariables['display_menu'] === true)
 		{
-			$sMainContents .= Templater::AdvancedParse("{$sTheme}/client/vps/main", $locale->strings, array(
+			$sMainContents .= NewTemplater::Render("{$sTheme}/client/vps/main", $locale->strings, array(
 				'error'			=> $sError,
 				'contents'		=> $sPageContents,
 				'id'			=> $sVps->sId
@@ -257,7 +257,7 @@ try
 		}
 		elseif(isset($router->uVariables['menu']) && $router->uVariables['menu'] == "admin" && $router->uVariables['display_menu'] === true)
 		{
-			$sMainContents .= Templater::AdvancedParse("{$sTheme}/admin/main", $locale->strings, array(
+			$sMainContents .= NewTemplater::Render("{$sTheme}/admin/main", $locale->strings, array(
 				'error'			=> $sError,
 				'contents'		=> $sPageContents
 			));
@@ -284,7 +284,7 @@ if(empty($router->uVariables['raw']))
 		'generation'		=> round(microtime(true) - $timing_start, 6)
 	));
 
-	echo(Templater::AdvancedParse("{$sTheme}/shared/main", $locale->strings, $sTemplateParameters));
+	echo(NewTemplater::Render("{$sTheme}/shared/main", $locale->strings, $sTemplateParameters));
 }
 else
 {

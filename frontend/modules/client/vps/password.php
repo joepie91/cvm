@@ -76,7 +76,7 @@ if($display_form === true)
 		'message'	=> $locale->strings['warning-password-text']
 	));
 	
-	$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/password", $locale->strings, array(
+	$sPageContents .= NewTemplater::Render("{$sTheme}/client/vps/password", $locale->strings, array(
 		'id'	=> $sVps->sId
 	));
 }

@@ -13,7 +13,7 @@
 
 if(!isset($_APP)) { die("Unauthorized."); }
 
-$sPageContents .= Templater::AdvancedParse("{$sTheme}/client/vps/console", $locale->strings, array(
+$sPageContents .= NewTemplater::Render("{$sTheme}/client/vps/console", $locale->strings, array(
 	'host'		=> htmlspecialchars($_SERVER['SERVER_NAME']),
 	'port'		=> 22,
 	'username'	=> "vzshell",

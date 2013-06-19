@@ -50,7 +50,7 @@ try
 		}
 	}
 	
-	$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/node/lookup", $locale->strings, array(
+	$sPageContents = NewTemplater::Render("{$sTheme}/admin/node/lookup", $locale->strings, array(
 		'id'			=> $sNode->sId,
 		'hostname'		=> $sNode->sHostname,
 		'location'		=> $sNode->sPhysicalLocation,

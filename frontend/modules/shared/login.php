@@ -53,7 +53,7 @@ if(isset($_POST['submit']))
 	}
 }
 
-$sMainContents = Templater::AdvancedParse("{$sTheme}/shared/login", $locale->strings, array(
+$sMainContents = NewTemplater::Render("{$sTheme}/shared/login", $locale->strings, array(
 	'error'			=> $sError,
 	'field-username'	=> $sFieldUsername
 ));

@@ -83,6 +83,6 @@ if(isset($_POST['submit']))
 	}
 }
 
-$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/node/add", $locale->strings, array(
+$sPageContents = NewTemplater::Render("{$sTheme}/admin/node/add", $locale->strings, array(
 	'errors'	=> $sErrors
 ));

@@ -29,6 +29,6 @@ if($result = $database->CachedQuery("SELECT * FROM nodes"))
 	}
 }
 
-$sPageContents = Templater::AdvancedParse("{$sTheme}/admin/node/list", $locale->strings, array(
+$sPageContents = NewTemplater::Render("{$sTheme}/admin/node/list", $locale->strings, array(
 	'nodes'		=> $sNodeList
 ));
