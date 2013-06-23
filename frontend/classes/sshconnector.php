@@ -305,6 +305,34 @@ class SshConnector extends CPHPBaseClass
 		else
 		{
 			$response = json_decode(implode("", $response));
+			
+			$json_error = json_last_error();
+			
+			if($json_error !== JSON_ERROR_NONE)
+			{
+				switch($json_last_error)
+				{
+					case JSON_ERROR_DEPTH:
+						$err_msg = "Maximum stack depth exceeded.";
+						break;
+					case JSON_ERROR_STATE_MISMATCH:
+						$err_msg = "Underflow or modes mismatch.";
+						break;
+					case JSON_ERROR_CTRL_CHAR:
+						$err_msg = "Unexpected control character found.";
+						break;
+					case JSON_ERROR_SYNTAX:
+						$err_msg = "Syntax error, malformed JSON.";
+						break;
+					case JSON_ERROR_UTF8:
+						$err_msg = "Malformed UTF-8 characters, possibly incorrectly encoded.";
+						break;
+					default:
+						$err_msg = "Unknown error {$json_error}.";
+				}
+				
+				throw new SshCommandException("An error occurred while decoding the response from the slave: {$err_msg}");
+			}
 		}
 		
 		if($response->returncode != 0 && $throw_exception === true)

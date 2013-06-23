@@ -127,7 +127,7 @@
 	</tr>
 </table>
 
-{%if accesslevel = 20}
+{%if accesslevel >= 20}
 	<h3>{%!header-vps-admin}</h3>
 	<div class="vps-admin">
 		<a href="/admin/vps/{%?id}/suspend/">{%!vps-admin-suspend}</a>
