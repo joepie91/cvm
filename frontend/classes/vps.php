@@ -270,7 +270,7 @@ class Vps extends CPHPDatabaseRecordClass
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			throw new VpsSuspendedException("No operations can be performed on this VPS beacuse it is terminated.", 1, $this->sInternalId);
+			throw new VpsTerminatedException("No operations can be performed on this VPS beacuse it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
