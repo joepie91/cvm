@@ -591,14 +591,16 @@ class Vps extends CPHPDatabaseRecordClass
 			try
 			{
 				$this->Stop();
-				$this->uStatus = CVM_STATUS_TERMINATED;
-				$this->uTerminationDate = time();
-				$this->InsertIntoDatabase();
 			}
 			catch (VpsStopException $e)
 			{
-				throw new VpsTerminateException("Termination failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);
+				/*throw new VpsTerminateException("Termination failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);*/
+				/* TODO: Throw warning about being unable to stop it, after checking VPS status. */
 			}
+			
+			$this->uStatus = CVM_STATUS_TERMINATED;
+			$this->uTerminationDate = time();
+			$this->InsertIntoDatabase();
 		}
 		else
 		{
@@ -613,13 +615,15 @@ class Vps extends CPHPDatabaseRecordClass
 			try
 			{
 				$this->Start(true);
-				$this->uStatus = CVM_STATUS_STARTED;
-				$this->InsertIntoDatabase();
 			}
 			catch (VpsStartException $e)
 			{
-				throw new VpsUnterminateException("Untermination failed as the VPS could not be started.", 1, $this->sInternalId, $e);
+				/*throw new VpsUnterminateException("Untermination failed as the VPS could not be started.", 1, $this->sInternalId, $e);*/
+				/* TODO: Throw warning about being unable to start it, after checking VPS status. */
 			}
+			
+			$this->uStatus = CVM_STATUS_STARTED;
+			$this->InsertIntoDatabase();
 		}
 		else
 		{
