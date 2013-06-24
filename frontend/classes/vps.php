@@ -46,6 +46,9 @@ class Vps extends CPHPDatabaseRecordClass
 		'timestamp' => array(
 			"TerminationDate"	=> "TerminationDate"
 		),
+		'boolean' => array(
+			"IsTerminated"		=> "Terminated"
+		),
 		'node' => array(
 			'Node'			=> "NodeId"
 		),

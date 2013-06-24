@@ -33,8 +33,9 @@ CREATE TABLE IF NOT EXISTS `containers` (
   `TotalTrafficLimit` bigint(20) NOT NULL,
   `UserId` bigint(20) NOT NULL,
   `TerminationDate` timestamp NULL DEFAULT NULL,
+  `Terminated` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `ip_assignments` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -77,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `Available` tinyint(1) NOT NULL,
   `Outdated` tinyint(1) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `users` (
   `Id` bigint(20) NOT NULL AUTO_INCREMENT,
