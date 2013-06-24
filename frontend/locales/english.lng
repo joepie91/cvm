@@ -166,6 +166,24 @@ error-unsuspend-error-title;						Failed to unsuspend VPS
 error-unsuspend-error-text;						The VPS could not be unsuspended.
 button-admin-vps-unsuspend;						Unsuspend VPS
 
+## Terminate VPS
+title-admin-vps-terminate;						Terminate VPS
+vps-admin-terminate-text;						Are you sure you wish to terminate this VPS? The VPS will be suspended immediately, and deleted after several hours. As long as it is not deleted, the termination can be undone.
+error-terminate-success-title;						VPS terminated
+error-terminate-success-text;						The VPS has been terminated and can no longer be used by the owner.
+error-terminate-error-title;						Failed to terminate VPS
+error-terminate-error-text;						The VPS could not be terminated.
+button-admin-vps-terminate;						Terminate VPS
+
+## Unterminate VPS
+title-admin-vps-unterminate;						Unterminate VPS
+vps-admin-unterminate-text;						Are you sure you wish to unterminate this VPS? The owner will be able to use it again.
+error-unterminate-success-title;					VPS unterminated
+error-unterminate-success-text;						The VPS has been unterminated and can now be used by the owner again.
+error-unterminate-error-title;						Failed to unterminate VPS
+error-unterminate-error-text;						The VPS could not be unterminated.
+button-admin-vps-unterminate;						Unterminate VPS
+
 ## Transfer VPS
 title-admin-vps-transfer;						Transfer VPS ownership
 button-admin-vps-transfer;						Transfer VPS

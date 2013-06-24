@@ -44,6 +44,8 @@ class VpsStartException extends VpsException {}
 class VpsStopException extends VpsException {}
 class VpsSuspendException extends VpsException {}
 class VpsUnsuspendException extends VpsException {}
+class VpsTerminateException extends VpsException {}
+class VpsUnterminateException extends VpsException {}
 class VpsSuspendedException extends VpsException {}
 class VpsTerminatedException extends VpsException {}
 class VpsDestroyException extends VpsException {}

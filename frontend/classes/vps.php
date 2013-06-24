@@ -43,6 +43,12 @@ class Vps extends CPHPDatabaseRecordClass
 			'OutgoingTrafficLimit'	=> "OutgoingTrafficLimit",
 			'TotalTrafficLimit'	=> "TotalTrafficLimit"
 		),
+		'timestamp' => array(
+			"TerminationDate"	=> "TerminationDate"
+		),
+		'boolean' => array(
+			"IsTerminated"		=> "Terminated"
+		),
 		'node' => array(
 			'Node'			=> "NodeId"
 		),
@@ -264,7 +270,7 @@ class Vps extends CPHPDatabaseRecordClass
 		}
 		elseif($this->sStatus == CVM_STATUS_TERMINATED)
 		{
-			throw new VpsSuspendedException("No operations can be performed on this VPS beacuse it is terminated.", 1, $this->sInternalId);
+			throw new VpsTerminatedException("No operations can be performed on this VPS beacuse it is terminated.", 1, $this->sInternalId);
 		}
 		else
 		{
@@ -534,7 +540,15 @@ class Vps extends CPHPDatabaseRecordClass
 	
 	public function Suspend()
 	{
-		if($this->sStatus != CVM_STATUS_SUSPENDED)
+		if($this->sStatus == CVM_STATUS_SUSPENDED)
+		{
+			throw new VpsSuspendException("The VPS is already suspended.", 1, $this->sInternalId);
+		}
+		elseif($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			throw new VpsSuspendException("The VPS cannot be suspended because it is already terminated.", 1, $this->sInternalId);
+		}
+		else
 		{
 			try
 			{
@@ -546,10 +560,6 @@ class Vps extends CPHPDatabaseRecordClass
 			{
 				throw new VpsSuspendException("Suspension failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);
 			}
-		}
-		else
-		{
-			throw new VpsSuspendException("The VPS is already suspended.", 1, $this->sInternalId);
 		}
 	}
 	
@@ -571,6 +581,53 @@ class Vps extends CPHPDatabaseRecordClass
 		else
 		{
 			throw new VpsUnsuspendException("The VPS is not suspended.", 1, $this->sInternalId);
+		}
+	}
+	
+	public function Terminate()
+	{
+		if($this->sStatus != CVM_STATUS_TERMINATED)
+		{
+			try
+			{
+				$this->Stop();
+			}
+			catch (VpsStopException $e)
+			{
+				/*throw new VpsTerminateException("Termination failed as the VPS could not be stopped.", 1, $this->sInternalId, $e);*/
+				/* TODO: Throw warning about being unable to stop it, after checking VPS status. */
+			}
+			
+			$this->uStatus = CVM_STATUS_TERMINATED;
+			$this->uTerminationDate = time();
+			$this->InsertIntoDatabase();
+		}
+		else
+		{
+			throw new VpsTerminateException("The VPS is already terminated.", 1, $this->sInternalId);
+		}
+	}
+	
+	public function Unterminate()
+	{
+		if($this->sStatus == CVM_STATUS_TERMINATED)
+		{
+			try
+			{
+				$this->Start(true);
+			}
+			catch (VpsStartException $e)
+			{
+				/*throw new VpsUnterminateException("Untermination failed as the VPS could not be started.", 1, $this->sInternalId, $e);*/
+				/* TODO: Throw warning about being unable to start it, after checking VPS status. */
+			}
+			
+			$this->uStatus = CVM_STATUS_STARTED;
+			$this->InsertIntoDatabase();
+		}
+		else
+		{
+			throw new VpsUnterminateException("The VPS is not terminated.", 1, $this->sInternalId);
 		}
 	}
 	
