@@ -35,8 +35,11 @@ be present containing the response.
 	    "response": {
 		"vpses": [{
 		    "id": "1",
+		    "node": "1",
 		    "virtualization_type": "1",
 		    "hostname": "test-vz.cryto.net",
+		    "location": "Roubaix, France",
+		    "template": "3",
 		    "guaranteed_ram": "128",
 		    "burstable_ram": "256",
 		    "disk_space": "5000",
@@ -47,8 +50,11 @@ be present containing the response.
 		    "traffic_out_used": "16923948"
 		}, {
 		    "id": "2",
+		    "node": "2",
 		    "virtualization_type": "1",
 		    "hostname": "test2.cryto.net",
+		    "location": "Germany",
+		    "template": "5",
 		    "guaranteed_ram": "512",
 		    "burstable_ram": "768",
 		    "disk_space": "40000",
@@ -79,15 +85,22 @@ be present containing the response.
 	
 	id::
 		The numeric ID of this VPS. You will need this in further API calls.
-		
+	
 	node::
-		The host node that this VPS exists on. You will need this in further node-related API calls.
-		
+		The ID of the host node that this VPS exists on. You will need this in further node-related API calls.
+	
 	virtualization_type::
 		The virtualization platform used for this VPS. Right now the only supported value is `1` (OpenVZ).
 		
 	hostname::
 		The configured hostname of the VPS.
+		
+	location::
+		The physical location of the VPS.
+		
+	template::
+		**OpenVZ only.** Specifies the ID of the template that was used to build your VPS. You can retrieve further information about this template
+		by using the template-related API calls.
 		
 	guaranteed_ram::
 		The configured amount of guaranteed RAM, in __megabytes__.
@@ -130,6 +143,8 @@ be present containing the response.
 			    "node": "1",
 			    "virtualization_type": "1",
 			    "hostname": "test-vz.cryto.net",
+			    "location": "Roubaix, France",
+			    "template": "3",
 			    "guaranteed_ram": "128",
 			    "burstable_ram": "256",
 			    "disk_space": "5000",
@@ -140,13 +155,15 @@ be present containing the response.
 			    "traffic_out_used": "16923948"
 			}, {
 			    "id": "2",
-			    "node": "1",
+			    "node": "2",
 			    "virtualization_type": "1",
 			    "hostname": "test2.cryto.net",
+			    "location": "Germany",
+			    "template": "5",
 			    "guaranteed_ram": "512",
 			    "burstable_ram": "768",
 			    "disk_space": "40000",
-			    "cpu_count": "2",
+			    "cpu_count": "240",
 			    "traffic_in_limit": "500000000000",
 			    "traffic_out_limit": "500000000000",
 			    "traffic_in_used": "0",
@@ -155,7 +172,7 @@ be present containing the response.
 		    }
 		}
 
-^ GET /api/client/vps/**id**/status
+^ GET /api/client/vps/`id`
 	
 	This returns the current status and metrics for the specified VPS. The response will be a single object.
 	
@@ -199,7 +216,7 @@ be present containing the response.
 		unknown::
 			The status of the VPS is unknown. This can happen when, for example, the host node can't be reached.
 
-^ POST /api/client/vps/**id**/start
+^ POST /api/client/vps/`id`/start
 
 	Starts the specified VPS. Returns either a `200` status code with an empty response if successful, a `500` status code with an error message if the VPS fails to start, or
 	a `503` status code with an error message if the host node is unreachable.
@@ -209,7 +226,7 @@ be present containing the response.
 	id::
 		The ID of the VPS you wish to start.
 
-^ POST /api/client/vps/**id**/stop
+^ POST /api/client/vps/`id`/stop
 
 	Shuts down the specified VPS. Returns either a `200` status code with an empty response if successful, a `500` status code with an error message if the VPS fails to shut down,
 	or a `503` status code with an error message if the host node is unreachable.
@@ -219,7 +236,7 @@ be present containing the response.
 	id::
 		The ID of the VPS you wish to stop.
 
-^ POST /api/client/vps/**id**/restart
+^ POST /api/client/vps/`id`/restart
 
 	Restarts the specified VPS. Returns either a `200` status code with an empty response if successful, a `500` status code with an error message if the VPS fails to restart, or
 	a `503` status code with an error message if the host node is unreachable.
@@ -228,3 +245,113 @@ be present containing the response.
 	
 	id::
 		The ID of the VPS you wish to restart.
+
+^ POST /api/client/vps/`id`/reinstall
+
+	Reinstalls your VPS with the specified template. Returns a `200` status code with an empty response if successful, a `500` status code with an error message if reinstallation
+	fails, or a `503` status code if the host node is unreachable. If an invalid or uninstallable template is specified, a `422` status code will be returned.
+	
+	! __This will permanently destroy all data on your VPS.__ Your VPS will be wiped with no recourse, and a clean template will be installed.
+	
+	### Arguments
+	
+	id::
+		The ID of the VPS you wish to reinstall.
+		
+	### POST parameters
+	
+	template::
+		The ID of the template you wish to install.
+
+^ GET /api/client/node/list
+
+	Returns a list of all host nodes (that are visible to you). This will always include at least the nodes that you have VPSes on.
+	
+	### Keys in the response objects
+	
+	id::
+		The ID of the node.
+		
+	name::
+		The 'display name' of the node.
+		
+	hostname::
+		The hostname of the node.
+		
+	location::
+		The physical location of the node.
+		
+^ GET /api/client/node/`id`
+
+	Returns information about the specified node.
+	
+	! The API may refuse to serve you information about a node if you do not have any VPSes on it. In this case, it will respond with a `403` status code and an error message.
+	
+	### Arguments
+	
+	id::
+		The ID of the node you wish to look up.
+		
+	### Keys in the response object
+	
+	name::
+		The 'display name' of the node.
+		
+	hostname::
+		The hostname of the node.
+		
+	location::
+		The physical location of the node.
+
+^ GET /api/client/template/list
+
+	Returns a list of all templates (that are visible to you). This includes both installable and non-installable templates. You will need this API call if you wish to show
+	more information about the template used for a particular VPS, or if you wish to offer an end-user a choice of template to reinstall.
+	
+	### Keys in the response objects
+	
+	id::
+		The ID of the template.
+		
+	name::
+		The name of the template (typically the name of the OS or distribution).
+		
+	description::
+		A description of the template. May include introductory text, usage hints, or compatibility notes.
+		
+	supported::
+		**Boolean.** Whether your host offers support for this template.
+	
+	available::
+		**Boolean.** Whether you can install this template.
+		
+	outdated::
+		**Boolean.** Whether this template is considered outdated (because, for example, a newer version of the same distribution is available).
+
+^ GET /api/client/template/`id`
+
+	Returns information for the specified template.
+	
+	! The API may refuse to serve you information about a template if it's not visible to you. In this case, it will respond with a `403` status code and an error message.
+	
+	### Arguments
+	
+	id::
+		The ID of the template you wish to look up.
+		
+	### Keys in the response objects
+		
+	name::
+		The name of the template (typically the name of the OS or distribution).
+		
+	description::
+		A description of the template. May include introductory text, usage hints, or compatibility notes.
+		
+	supported::
+		**Boolean.** Whether your host offers support for this template.
+	
+	available::
+		**Boolean.** Whether you can install this template.
+		
+	outdated::
+		**Boolean.** Whether this template is considered outdated (because, for example, a newer version of the same distribution is available).
