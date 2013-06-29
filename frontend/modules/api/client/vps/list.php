@@ -23,34 +23,34 @@ if($result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :
 		
 		$sVpsData = array(
 			'id'			=> $sVps->sId,
-			'virtualization_type'	=> $sVps->sVirtualizationType,
-			'hostname'		=> $sVps->sHostname,
-			'guaranteed_ram'	=> $sVps->sGuaranteedRam,
-			'burstable_ram'		=> $sVps->sBurstableRam,
-			'disk_space'		=> $sVps->sDiskSpace,
-			'cpu_count'		=> $sVps->sCpuCount,
-			'node'			=> $sVps->sNodeId,
-			'location'		=> $sVps->sNode->sPhysicalLocation
+			'virtualization_type'	=> $sVps->uVirtualizationType,
+			'hostname'		=> $sVps->uHostname,
+			'guaranteed_ram'	=> $sVps->uGuaranteedRam,
+			'burstable_ram'		=> $sVps->uBurstableRam,
+			'disk_space'		=> $sVps->uDiskSpace,
+			'cpu_count'		=> $sVps->uCpuCount,
+			'node'			=> $sVps->uNodeId,
+			'location'		=> $sVps->sNode->uPhysicalLocation
 		);
 		
 		if(true /* TODO: Check if OpenVZ */)
 		{
-			$sVpsData['template'] = sTemplateId;
+			$sVpsData['template'] = $sVps->uTemplateId;
 		}
 		
 		if($sVps->sTotalTrafficLimit == 0)
 		{
 			/* Split traffic accounting */
-			$sVpsData['traffic_in_limit'] = $sVps->sIncomingTrafficLimit;
-			$sVpsData['traffic_out_limit'] = $sVps->sOutgoingTrafficLimit;
-			$sVpsData['traffic_in_used'] = $sVps->sIncomingTrafficUsed;
-			$sVpsData['traffic_out_used'] = $sVps->sOutgoingTrafficUsed;
+			$sVpsData['traffic_in_limit'] = $sVps->uIncomingTrafficLimit;
+			$sVpsData['traffic_out_limit'] = $sVps->uOutgoingTrafficLimit;
+			$sVpsData['traffic_in_used'] = $sVps->uIncomingTrafficUsed;
+			$sVpsData['traffic_out_used'] = $sVps->uOutgoingTrafficUsed;
 		}
 		else
 		{
 			/* Combined traffic accounting */
-			$sVpsData['traffic_limit'] = $sVps->sTotalTrafficLimit;
-			$sVpsData['traffic_used'] = $sVps->sIncomingTrafficUsed + $sVps->sOutgoingTrafficUsed;
+			$sVpsData['traffic_limit'] = $sVps->uTotalTrafficLimit;
+			$sVpsData['traffic_used'] = $sVps->uIncomingTrafficUsed + $sVps->uOutgoingTrafficUsed;
 		}
 		
 		$sVpses[] = $sVpsData;
