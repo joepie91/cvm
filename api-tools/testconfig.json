@@ -1,0 +1,5 @@
+{
+	"endpoint": "http://cvm.local/api/client",
+	"api_public": "test",
+	"api_private": "test"
+}
