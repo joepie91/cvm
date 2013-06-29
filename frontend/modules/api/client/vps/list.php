@@ -29,8 +29,14 @@ if($result = $database->CachedQuery("SELECT * FROM containers WHERE `UserId` = :
 			'burstable_ram'		=> $sVps->sBurstableRam,
 			'disk_space'		=> $sVps->sDiskSpace,
 			'cpu_count'		=> $sVps->sCpuCount,
-			'node'			=> $sVps->sNodeId
+			'node'			=> $sVps->sNodeId,
+			'location'		=> $sVps->sNode->sPhysicalLocation
 		);
+		
+		if(true /* TODO: Check if OpenVZ */)
+		{
+			$sVpsData['template'] = sTemplateId;
+		}
 		
 		if($sVps->sTotalTrafficLimit == 0)
 		{
