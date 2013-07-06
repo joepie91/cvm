@@ -216,8 +216,16 @@ try
 				'_prefilled_node'		=> true
 			),
 			/* API - Client - List VPSes */
+			/* TODO: Fix URI */
 			'^/api/client/list'		=> array(
 				'target'			=> "modules/api/client/vps/list.php",
+				'authenticator'			=> "authenticators/api/client.php",
+				'auth_error'			=> "modules/error/api/access.php",
+				'_raw'				=> true
+			),
+			/* API - Client - Lookup VPS */
+			'^/api/client/vps/([0-9]+)$'	=> array(
+				'target'			=> "modules/api/client/vps/lookup.php",
 				'authenticator'			=> "authenticators/api/client.php",
 				'auth_error'			=> "modules/error/api/access.php",
 				'_raw'				=> true
