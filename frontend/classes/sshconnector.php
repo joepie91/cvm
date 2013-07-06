@@ -335,11 +335,20 @@ class SshConnector extends CPHPBaseClass
 			}
 		}
 		
-		if($response->returncode != 0 && $throw_exception === true)
+		if(is_object($response))
 		{
-			throw new SshExitException("Non-zero exit code returned: {$response->stderr}", $response->returncode);
+			if($response->returncode != 0 && $throw_exception === true)
+			{
+				throw new SshExitException("Non-zero exit code returned: {$response->stderr}", $response->returncode);
+			}
+			
+			return $response;
 		}
-		
-		return $response;
+		else
+		{
+			/* FIXME: This shouldn't go into production. Needs proper logging. */
+			var_dump("Not an object!");
+			var_dump($response);
+		}
 	}
 }
