@@ -174,7 +174,8 @@ be present containing the response.
 
 ^ GET /api/client/vps/`id`
 	
-	This returns the current status and metrics for the specified VPS. The response will be a single object.
+	This returns the current status and metrics for the specified VPS. The response will be a single object. Returns a `404` status code with an error if the specified VPS
+	does not exist (or is not visible to you).
 	
 	### Arguments
 	
@@ -193,10 +194,10 @@ be present containing the response.
 		The total amount of outgoing traffic used, in __bytes__. **This may not be present, depending on the method of traffic measuring.**
 		
 	ram_used::
-		The amount of RAM that is currently in use for the VPS, in __bytes__.
+		The amount of RAM that is currently in use for the VPS, in __megabytes__. May be zero if the VPS is not currently running.
 		
 	disk_used::
-		The amount of disk space currently used by the VPS, in __bytes__.
+		The amount of disk space currently used by the VPS, in __megabytes__. May be zero if the VPS is not currently running.
 	
 	status::
 		The current status of the VPS.
