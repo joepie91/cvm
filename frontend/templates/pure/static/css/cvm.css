@@ -2,7 +2,8 @@
   width: 960px;
   margin: 0px auto; }
   .wrapper h1, .wrapper h2, .wrapper h3, .wrapper h4, .wrapper h5, .wrapper h6 {
-    margin-top: 4px; }
+    margin-top: 4px;
+    margin-bottom: 7px; }
   .wrapper .pure-g > div {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -30,10 +31,10 @@
       font-size: 15px; }
   .wrapper .header .logo {
     margin-bottom: 8px; }
-  .wrapper .menu {
+  .wrapper .pure-menu-horizontal {
     background-color: #F1F1F1;
     margin-bottom: 16px; }
-    .wrapper .menu a:hover {
+    .wrapper .pure-menu-horizontal a:hover {
       background-color: #E6E6E6; }
   .wrapper .contents #form_login {
     background-color: #F1F1F1;
@@ -44,5 +45,12 @@
   .wrapper .contents .narrow-wrapper {
     width: 420px;
     margin: 0px auto; }
-  .wrapper .contents table.vps-list {
+  .wrapper .contents table.stretch {
     width: 100%; }
+  .wrapper .contents .submenu {
+    font-size: 14px;
+    margin-bottom: 4px; }
+    .wrapper .contents .submenu i.fa {
+      margin-right: 0px; }
+    .wrapper .contents .submenu li a {
+      padding: 5px 10px; }

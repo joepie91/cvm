@@ -6,6 +6,7 @@
 	h1, h2, h3, h4, h5, h6
 	{
 		margin-top: 4px;
+		margin-bottom: 7px;
 	}
 	
 	.pure-g > div {
@@ -67,7 +68,7 @@
 		}
 	}
 	
-	.menu
+	.pure-menu-horizontal
 	{
 		background-color: #F1F1F1;
 		margin-bottom: 16px;
@@ -98,9 +99,25 @@
 			margin: 0px auto;
 		}
 		
-		table.vps-list
+		table.stretch
 		{
 			width: 100%;
+		}
+		
+		.submenu
+		{
+			font-size: 14px;
+			margin-bottom: 4px;
+			
+			i.fa
+			{
+				margin-right: 0px;
+			}
+			
+			li a
+			{
+				padding: 5px 10px;
+			}
 		}
 	}
 }

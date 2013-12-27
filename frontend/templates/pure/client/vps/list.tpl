@@ -1,4 +1,4 @@
-<table class="pure-table pure-table-bordered vps-list">
+<table class="pure-table pure-table-bordered stretch vps-list">
 	<thead>
 		<tr>
 			<th></th>
