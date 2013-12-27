@@ -11,9 +11,19 @@
     .wrapper .pure-g > div.padded {
       padding: 8px 10px; }
   .wrapper .pure-menu a {
-    color: #353535; }
+    color: #515151; }
     .wrapper .pure-menu a i.fa {
       margin-right: 9px; }
+  .wrapper .pure-menu .pure-menu-selected a {
+    color: black; }
+  .wrapper .pure-table th.vertical {
+    background: #e0e0e0;
+    color: black;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 1px solid #cbcbcb; }
+  .wrapper section {
+    margin-bottom: 16px; }
   .wrapper .error {
     padding: 8px 10px;
     background-color: #FFD4D4;
@@ -47,6 +57,9 @@
     margin: 0px auto; }
   .wrapper .contents table.stretch {
     width: 100%; }
+  .wrapper .contents .clickable a {
+    color: inherit;
+    text-decoration: inherit; }
   .wrapper .contents .submenu {
     font-size: 14px;
     margin-bottom: 4px; }

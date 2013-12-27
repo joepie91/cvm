@@ -24,13 +24,35 @@
 	{
 		a
 		{
-			color: #353535;
+			color: #515151;
 			
 			i.fa
 			{
 				margin-right: 9px;
 			}
 		}
+		
+		.pure-menu-selected a
+		{
+			color: black;
+		}
+	}
+	
+	.pure-table
+	{
+		th.vertical
+		{
+			background: #e0e0e0;
+			color: black;
+			text-align: left;
+			vertical-align: bottom;
+			border-bottom: 1px solid #cbcbcb;
+		}
+	}
+	
+	section
+	{
+		margin-bottom: 16px;
 	}
 	
 	.error
@@ -102,6 +124,12 @@
 		table.stretch
 		{
 			width: 100%;
+		}
+		
+		.clickable a
+		{
+			color: inherit;
+			text-decoration: inherit;
 		}
 		
 		.submenu
