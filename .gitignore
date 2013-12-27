@@ -3,3 +3,5 @@ installer/master_sfx.py
 *.pyc
 testing
 .geanyprj
+.sass-cache
+sasswatch.*

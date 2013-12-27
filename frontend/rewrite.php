@@ -16,7 +16,7 @@ $timing_start = microtime(true);
 $_APP = true;
 require("includes/include.base.php");
 
-$sTheme = "default";
+$sTheme = $cphp_config->theme;
 
 $sTemplateParameters = array();
 

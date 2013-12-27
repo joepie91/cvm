@@ -32,5 +32,6 @@
 	"authentication": {
 		"salt":				"abcdef",
 		"session_length":		2592000
-	}
+	},
+	"theme": "pure"
 }

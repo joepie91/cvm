@@ -1,0 +1,106 @@
+.wrapper
+{
+	width: 960px;
+	margin: 0px auto;
+	
+	h1, h2, h3, h4, h5, h6
+	{
+		margin-top: 4px;
+	}
+	
+	.pure-g > div {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		
+		&.padded
+		{
+			padding: 8px 10px;
+		}
+	}
+	
+	.pure-menu
+	{
+		a
+		{
+			color: #353535;
+			
+			i.fa
+			{
+				margin-right: 9px;
+			}
+		}
+	}
+	
+	.error
+	{
+		padding:  8px 10px;
+		background-color: #FFD4D4;
+		border: 1px solid #FF8080;
+		border-radius: 6px;
+		margin-bottom: 12px;
+		
+		.title
+		{
+			font-size: 19px;
+			font-weight: bold;
+			margin-bottom: 5px;
+			
+			i
+			{
+				color: #B43636;
+				vertical-align: middle;
+			}
+		}
+		
+		.message
+		{
+			font-size: 15px;
+		}
+	}
+	
+	.header
+	{
+		.logo
+		{
+			margin-bottom: 8px;
+		}
+	}
+	
+	.menu
+	{
+		background-color: #F1F1F1;
+		margin-bottom: 16px;
+		
+		a:hover
+		{
+			background-color: #E6E6E6;
+		}
+	}
+	
+	.contents
+	{
+		#form_login
+		{
+			background-color: #F1F1F1;
+			padding: 12px 16px;
+		}
+	
+		h1
+		{
+			font-size: 25px;
+			margin-top: 2px;
+		}
+		
+		.narrow-wrapper
+		{
+			width: 420px;
+			margin: 0px auto;
+		}
+		
+		table.vps-list
+		{
+			width: 100%;
+		}
+	}
+}
