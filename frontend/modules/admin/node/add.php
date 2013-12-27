@@ -56,12 +56,29 @@ if(isset($_POST['submit']))
 			$sErrors[] = $locale->strings['error-admin-nodes-add-privatekey'];
 		}
 	}
+	else
+	{
+		$sPublicKeyName = "";
+		$sPrivateKeyName = "";
+	}
 	
 	if(empty($sErrors))
 	{
-		if(isset($_POST['customkey']) == false ||
-			(move_uploaded_file($_FILES['publickey']['tmp_name'], "/etc/cvm/keys/{$sPublicKeyName}") &&
-			move_uploaded_file($_FILES['privatekey']['tmp_name'], "/etc/cvm/keys/{$sPrivateKeyName}")))
+		if(isset($_POST['customkey']))
+		{
+			$sSuccess = move_uploaded_file($_FILES['publickey']['tmp_name'], "/etc/cvm/keys/{$sPublicKeyName}") &&
+				move_uploaded_file($_FILES['privatekey']['tmp_name'], "/etc/cvm/keys/{$sPrivateKeyName}");
+			if(!$sSuccess)
+			{
+				$sErrors[] = $locale->strings['error-admin-nodes-add-upload'];
+			}
+		}
+		else
+		{
+			$sSuccess = true;
+		}
+		
+		if($sSuccess)
 		{
 			$sNode = new Node(0);
 			$sNode->uName = $_POST['name'];
@@ -75,10 +92,6 @@ if(isset($_POST['submit']))
 			$sNode->InsertIntoDatabase();
 			
 			redirect("/admin/nodes/");
-		}
-		else
-		{
-			$sErrors[] = $locale->strings['error-admin-nodes-add-upload'];
 		}
 	}
 }
