@@ -186,6 +186,27 @@ try
 				'auth_error'				=> "modules/error/access.php",
 				'_menu'					=> "admin"
 			),
+			/* Admin - Templates - Overview */
+			'^/admin/templates/?$'			=> array(
+				'target'				=> "modules/admin/template/list.php",
+				'authenticator'				=> "authenticators/admin.php",
+				'auth_error'				=> "modules/error/access.php",
+				'_menu'					=> "admin"
+			),
+			/* Admin - Templates - Lookup */
+			'^/admin/templates/([0-9]+)/?$'		=> array(
+				'target'				=> "modules/admin/template/lookup.php",
+				'authenticator'				=> "authenticators/admin.php",
+				'auth_error'				=> "modules/error/access.php",
+				'_menu'					=> "admin"
+			),
+			/* Admin - Templates - Add */
+			'^/admin/templates/add/?$' 		=> array(
+				'target'				=> "modules/admin/template/add.php",
+				'authenticator'				=> "authenticators/admin.php",
+				'auth_error'				=> "modules/error/access.php",
+				'_menu'					=> "admin"
+			),
 			/* Admin - Nodes - Overview */
 			'^/admin/nodes/?$'		=> array(
 				'target'			=> "modules/admin/node/list.php",

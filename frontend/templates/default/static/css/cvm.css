@@ -568,7 +568,12 @@ button.column
 	background-color: #4E4D69;
 }
 
-form.dark
+.darkform
+{
+	margin-bottom: 6px;
+}
+
+form.dark, .darkform
 {
 	background-color: #31305E;
 	color: white;
@@ -578,7 +583,7 @@ form.dark
 	width: 75%;
 }
 
-form.dark label, form .filler
+form.dark label, form .filler, .darkform label
 {
 	display: block;
 	float: left;
@@ -586,7 +591,7 @@ form.dark label, form .filler
 	width: 45.8%;
 }
 
-form.dark input, form.dark select
+form.dark input, form.dark select, .darkform input
 {
 	display: block;
 	float: left;
@@ -597,13 +602,13 @@ form.dark input, form.dark select
 	box-sizing: content-box;
 }
 
-form.dark input[type="checkbox"]
+form.dark input[type="checkbox"], .darkform input[type="checkbox"]
 {
 	width: auto;
 	margin-top: 7px;
 }
 
-form.dark input[type="file"]
+form.dark input[type="file"], .darkform input[type="file"]
 {
 	height: 24px;
 	font-size: 13px;
@@ -612,7 +617,7 @@ form.dark input[type="file"]
 	padding: 0px 0px;
 }
 
-form.dark button[type="submit"]
+form.dark button[type="submit"], .darkform button[type="submit"]
 {
 	float: right;
 	margin: 9px 7px 7px 7px;
@@ -620,18 +625,24 @@ form.dark button[type="submit"]
 	font-weight: bold;
 }
 
-form.dark .field.disabled
+form.dark .field.disabled, .darkform .field.disabled
 {
 	background-color: #444452;
 	color: #B5B5B5;
 }
 
-form.dark .filler a
+form.dark .filler a, .darkform .filler a
 {
 	display: block;
 	color: white;
 	font-size: 13px;
 	margin-top: 12px;
+}
+
+form.dark h3, .darkform h3
+{
+	color: #F1F1F1;
+	margin: 6px 1% 4px 1%;
 }
 
 form.login
