@@ -22,6 +22,8 @@
     text-align: left;
     vertical-align: bottom;
     border-bottom: 1px solid #cbcbcb; }
+  .wrapper .pure-button.add {
+    #background-color: #7ECB9A; }
   .wrapper section {
     margin-bottom: 16px; }
   .wrapper .error {

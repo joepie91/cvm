@@ -50,6 +50,14 @@
 		}
 	}
 	
+	.pure-button
+	{
+		&.add
+		{
+			#background-color: #7ECB9A;
+		}
+	}
+	
 	section
 	{
 		margin-bottom: 16px;

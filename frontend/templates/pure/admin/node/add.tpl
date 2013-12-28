@@ -45,6 +45,6 @@
 	</div>
 	
 	<div class="pure-controls">
-		<button type="submit" name="submit">{%!button-admin-addnode}</button>
+		<button type="submit" name="submit" class="pure-button add">{%!button-admin-addnode}</button>
 	</div>
 </form>
