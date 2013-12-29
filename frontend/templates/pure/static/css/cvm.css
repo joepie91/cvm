@@ -22,8 +22,19 @@
     text-align: left;
     vertical-align: bottom;
     border-bottom: 1px solid #cbcbcb; }
+  .wrapper .pure-table i.fa.ok {
+    color: #208927; }
+  .wrapper .pure-table i.fa.not-ok {
+    color: #C22118; }
+  .wrapper .pure-table td.icon {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 19px; }
   .wrapper .pure-button.add {
     #background-color: #7ECB9A; }
+  .wrapper .clickable:hover {
+    background-color: #F1F1F1;
+    cursor: pointer; }
   .wrapper section {
     margin-bottom: 16px; }
   .wrapper .error {

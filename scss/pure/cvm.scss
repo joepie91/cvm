@@ -48,6 +48,26 @@
 			vertical-align: bottom;
 			border-bottom: 1px solid #cbcbcb;
 		}
+		
+		i.fa
+		{
+			&.ok
+			{
+				color: #208927;
+			}
+			
+			&.not-ok
+			{
+				color: #C22118;
+			}
+		}
+		
+		td.icon
+		{
+			text-align: center;
+			vertical-align: middle;
+			font-size: 19px;
+		}
 	}
 	
 	.pure-button
@@ -56,6 +76,12 @@
 		{
 			#background-color: #7ECB9A;
 		}
+	}
+	
+	.clickable:hover
+	{
+		background-color: #F1F1F1;
+		cursor: pointer;
 	}
 	
 	section

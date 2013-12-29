@@ -13,6 +13,59 @@
 
 if(!isset($_APP)) { die("Unauthorized."); }
 
-$sPageContents = NewTemplater::Render("{$sTheme}/admin/template/add", $locale->strings, array(
-	"templates"	=> array("ubuntu.tar.gz", "fedora.tar.gz", "debian7.tar.gz", "opensuse.tar.gz")
-));
+if($router->uMethod == "post")
+{
+	$handler = new CPHPFormHandler();
+	
+	try
+	{
+		$handler
+			->RequireKey("filename")
+			->RequireKey("name")
+			->RequireKey("description")
+			->RequireNonEmpty("filename")
+			->RequireNonEmpty("name")
+			->ValidateCustom("filename", "The specified template file does not exist.", function($key, $value, $args, $handler){
+				return file_exists("/etc/cvm/templates/{$value}");
+			})
+			->Done();
+	}
+	catch (FormValidationException $e)
+	{
+		/*echo("Errors:<br>");
+		foreach($e->exceptions as $exceptionlist)
+		{
+			foreach($exceptionlist as $exception)
+			{
+				echo("{$exception['key']}[{$exception['index']}] {$exception['error_msg']}<br>");
+			}
+		}*/
+		var_dump($e->GetOffendingKeys());
+		var_dump($e->GetErrors());
+	}
+}
+else
+{
+	$sUnknownTemplates = array();
+
+	$handle = opendir("/etc/cvm/templates");
+	while(($filename = readdir($handle)) !== false)
+	{
+		if($filename != "." && $filename != "..")
+		{
+			try
+			{
+				Template::CreateFromQuery("SELECT * FROM templates WHERE `TemplateName` = :Filename", array("Filename" => $filename), 0);
+			}
+			catch (NotFoundException $e)
+			{
+				$sUnknownTemplates[] = $filename;
+			}
+		}
+	}
+	closedir($handle);
+
+	$sPageContents = NewTemplater::Render("{$sTheme}/admin/template/add", $locale->strings, array(
+		"templates"	=> $sUnknownTemplates
+	));
+}
