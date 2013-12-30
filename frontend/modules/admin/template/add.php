@@ -29,17 +29,23 @@ if($router->uMethod == "post")
 				return file_exists("/etc/cvm/templates/{$value}");
 			})
 			->Done();
+			
+		foreach($handler->GetGroupedValues("filename", "name", "description") as $uTemplateData)
+		{
+			$sTemplate = new Template();
+			$sTemplate->uName = $uTemplateData["name"];
+			$sTemplate->uTemplateName = $uTemplateData["filename"];
+			$sTemplate->uDescription = $uTemplateData["description"];
+			$sTemplate->uIsSupported = true;
+			$sTemplate->uIsOutdated = false;
+			$sTemplate->uIsAvailable = true;
+			$sTemplate->InsertIntoDatabase();
+		}
+		
+		redirect("/admin/templates/");
 	}
 	catch (FormValidationException $e)
 	{
-		/*echo("Errors:<br>");
-		foreach($e->exceptions as $exceptionlist)
-		{
-			foreach($exceptionlist as $exception)
-			{
-				echo("{$exception['key']}[{$exception['index']}] {$exception['error_msg']}<br>");
-			}
-		}*/
 		var_dump($e->GetOffendingKeys());
 		var_dump($e->GetErrors());
 	}
