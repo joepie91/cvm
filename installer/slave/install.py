@@ -1,4 +1,4 @@
-import sys, os, subprocess, stat, shutil, re, urllib
+import sys, os, subprocess, stat, shutil, re, urllib, glob
 import setuplib
 
 BOLD_START = '\033[1m'
@@ -51,6 +51,9 @@ if os.path.exists("/etc/centos-release"):
 		exit(1)
 elif os.path.exists("/etc/debian_version"):
 	distro = "debian"
+	
+	with open("/etc/debian_version", "r") as f:
+		debian_version = int(f.read().split(".")[0])
 else:
 	sys.stderr.write("This installer only supports Debian and CentOS.\n")
 	exit(1)
@@ -304,7 +307,15 @@ else:
 		if architecture == "x86_64":
 			packages.append("linux-image-openvz-amd64")
 		elif architecture == "i386" or architecture == "i686":
-			packages.append("linux-image-openvz-686")
+			packages.append("linux-image-openvz-686") # This might fail on deb7!
+			
+		if debian_version >= 7:
+			with open("/etc/apt/sources.list.d/openvz-rhel6.list", "w") as f:
+				f.write("deb http://download.openvz.org/debian wheezy main")
+			
+			subprocess.call('wget --output-document="-" http://ftp.openvz.org/debian/archive.key | apt-key add -', shell=True, stdout=stfu, stderr=stfu)
+			
+			packages.append("ploop")
 		
 		packages.append("vzdump")
 		subprocess.call(["apt-get", "update", "-y"], stdout=stfu, stderr=stfu)
@@ -329,6 +340,30 @@ else:
 			pass
 		
 		sys.stdout.write("Configuration for sysctl updated.\n")
+		
+		if debian_version >= 7:
+			# Starting from Debian 7, the OpenVZ kernel is no longer set as the default boot option. This
+			# code will copy a GRUB configuration file template, with the appropriate kernel path, and
+			# insert it before the regular boot options. This way, the OpenVZ kernel will be default.
+			try:
+				kernel_name = [fname for fname in glob.glob("/boot/vmlinuz-*") if "openvz" in fname][0].split("/vmlinuz-")[-1]
+			except IndexError, e:
+				# No suitable kernel found! TODO: Error out
+				sys.stderr.write("ERROR: Could not find an OpenVZ kernel image to add to the GRUB\n")
+				sys.stderr.write("configuration! Most likely, installation failed. Aborting...\n")
+				exit(1)
+			
+			setuplib.copy_file("grub_deb7.cfg", "/etc/grub.d/06_CVM_openvz", True, 0, 0, "u+rwx g+rx o+rx")
+					
+			setuplib.set_modes("/etc/grub.d/06_CVM_openvz", "u+rwx g+rx o+rx")
+			
+			result = subprocess.call(["update-grub"], stdout=stfu, stderr=stfu)
+			
+			if result != 0:
+				sys.stderr.write("WARNING: Failed to update GRUB configuration. Please ensure you have a\n")
+				sys.stderr.write("  valid GRUB configuration before rebooting, or you may brick your server.\n")
+			else:	
+				sys.stdout.write("Configured GRUB to automatically boot into OpenVZ.\n")
 		
 		if os.path.exists("/etc/grub.d/06_OVHkernel"):
 			# OVH likes inserting a custom kernel before the standard installed kernels, and this
